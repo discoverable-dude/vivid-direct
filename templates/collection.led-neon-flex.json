@@ -1,0 +1,208 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "spotlight": {
+      "type": "category-spotlight",
+      "blocks": {
+        "diagram_side": {
+          "type": "diagram",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-bend-side.jpg",
+            "heading": "Side bend",
+            "text": "Curves smoothly around corners without kinking."
+          }
+        },
+        "diagram_top": {
+          "type": "diagram",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-bend-top.jpg",
+            "heading": "Top bend",
+            "text": "Bends flat for tight radius runs and signage."
+          }
+        },
+        "diagram_3d": {
+          "type": "diagram",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-bend-3d.jpg",
+            "heading": "3D bend",
+            "text": "Shapes freely in three dimensions for bespoke forms."
+          }
+        },
+        "diagram_cap": {
+          "type": "diagram",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-cap-vs-mould.png",
+            "heading": "Silicone cap vs. injection moulded end",
+            "text": "Choose the end-cap finish that suits your installation."
+          }
+        },
+        "series_linear": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-linear.jpg",
+            "heading": "Linear",
+            "link": ""
+          }
+        },
+        "series_recess": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-recess.jpg",
+            "heading": "Recess",
+            "link": ""
+          }
+        },
+        "series_ultra_run": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-ultra-run.jpg",
+            "heading": "Ultra Run",
+            "link": ""
+          }
+        },
+        "series_submersible": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-submersible.jpg",
+            "heading": "Submersible",
+            "link": ""
+          }
+        },
+        "series_sauna": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-sauna.jpg",
+            "heading": "Sauna",
+            "link": ""
+          }
+        },
+        "series_nano": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-nano.jpg",
+            "heading": "Nano",
+            "link": ""
+          }
+        },
+        "series_360": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-360.jpg",
+            "heading": "360",
+            "link": ""
+          }
+        },
+        "series_free_cut": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-free-cut.jpg",
+            "heading": "Free Cut",
+            "link": ""
+          }
+        },
+        "series_walkover": {
+          "type": "series_tile",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-walkover.jpg",
+            "heading": "Walkover",
+            "link": ""
+          }
+        },
+        "mount_surface": {
+          "type": "mount_method",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-mount-surface.jpg",
+            "heading": "Surface mounting"
+          }
+        },
+        "mount_plaster": {
+          "type": "mount_method",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-mount-plaster-in.jpg",
+            "heading": "Plaster-in mounting"
+          }
+        },
+        "mount_clips": {
+          "type": "mount_method",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-mount-clips.jpg",
+            "heading": "Surface clips"
+          }
+        },
+        "mount_recess_lip": {
+          "type": "mount_method",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-mount-recess-lip.jpg",
+            "heading": "Recess lip mounting"
+          }
+        }
+      },
+      "block_order": [
+        "diagram_side",
+        "diagram_top",
+        "diagram_3d",
+        "diagram_cap",
+        "series_linear",
+        "series_recess",
+        "series_ultra_run",
+        "series_submersible",
+        "series_sauna",
+        "series_nano",
+        "series_360",
+        "series_free_cut",
+        "series_walkover",
+        "mount_surface",
+        "mount_plaster",
+        "mount_clips",
+        "mount_recess_lip"
+      ],
+      "settings": {
+        "hero_image": "shopify://shop_images/vd-neon-hero.jpg",
+        "hero_eyebrow": "Featured category",
+        "hero_heading": "LED NEON Flex",
+        "hero_text": "Flexible, cuttable neon-style lighting for architectural, decorative and signage projects — bends in three dimensions without kinking.",
+        "hero_button_label": "Shop the range",
+        "hero_button_url": "#product-grid",
+        "diagrams_heading": "How it bends",
+        "series_heading": "Choose your series",
+        "mounts_heading": "Mounting options",
+        "badge_image": "shopify://shop_images/vd-neon-mib-logo.png",
+        "badge_alt": "Made in Britain",
+        "badge_text": "Proudly made in Britain"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "bottom-content": {
+      "type": "collection-bottom-content",
+      "settings": {}
+    }
+  },
+  "order": [
+    "spotlight",
+    "product-grid",
+    "bottom-content"
+  ]
+}

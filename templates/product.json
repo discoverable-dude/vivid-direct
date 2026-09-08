@@ -59,8 +59,8 @@
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials",
-            "icon": "leather",
+            "heading": "Specifications",
+            "icon": "ruler",
             "content": "",
             "page": ""
           }
@@ -68,8 +68,8 @@
         "collapsible-row-1": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
+            "heading": "Installation & Wiring",
+            "icon": "lightning_bolt",
             "content": "",
             "page": ""
           }
@@ -77,8 +77,8 @@
         "collapsible-row-2": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Dimensions",
-            "icon": "ruler",
+            "heading": "Warranty",
+            "icon": "check_mark",
             "content": "",
             "page": ""
           }
@@ -86,8 +86,8 @@
         "collapsible-row-3": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Care Instructions",
-            "icon": "heart",
+            "heading": "Shipping & Returns",
+            "icon": "truck",
             "content": "",
             "page": ""
           }

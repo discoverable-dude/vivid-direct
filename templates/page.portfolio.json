@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "gallery": {
+      "type": "portfolio-gallery",
+      "blocks": {
+        "bond_1": { "type": "project", "settings": { "image_filename": "portfolio-bond-1.jpg", "image_width": "1200", "image_height": "1600", "name": "Bond" } },
+        "bond_2": { "type": "project", "settings": { "image_filename": "portfolio-bond-2.jpg", "image_width": "1200", "image_height": "1600", "name": "Bond" } },
+        "bond_3": { "type": "project", "settings": { "image_filename": "portfolio-bond-3.jpg", "image_width": "1200", "image_height": "1600", "name": "Bond" } },
+        "kemsing_1": { "type": "project", "settings": { "image_filename": "portfolio-kemsing-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Kemsing" } },
+        "kemsing_2": { "type": "project", "settings": { "image_filename": "portfolio-kemsing-2.jpg", "image_width": "1409", "image_height": "2048", "name": "Kemsing" } },
+        "kemsing_3": { "type": "project", "settings": { "image_filename": "portfolio-kemsing-3.jpg", "image_width": "2048", "image_height": "1536", "name": "Kemsing" } },
+        "mayfair_1": { "type": "project", "settings": { "image_filename": "portfolio-mayfair-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Mayfair" } },
+        "mayfair_2": { "type": "project", "settings": { "image_filename": "portfolio-mayfair-2.jpg", "image_width": "1024", "image_height": "576", "name": "Mayfair" } },
+        "mayfair_3": { "type": "project", "settings": { "image_filename": "portfolio-mayfair-3.jpg", "image_width": "1024", "image_height": "576", "name": "Mayfair" } },
+        "mercury_1": { "type": "project", "settings": { "image_filename": "portfolio-mercury-1.jpg", "image_width": "1600", "image_height": "991", "name": "Mercury" } },
+        "mercury_2": { "type": "project", "settings": { "image_filename": "portfolio-mercury-2.jpg", "image_width": "1537", "image_height": "1062", "name": "Mercury" } },
+        "mercury_3": { "type": "project", "settings": { "image_filename": "portfolio-mercury-3.jpg", "image_width": "1564", "image_height": "1062", "name": "Mercury" } },
+        "silverstone_1": { "type": "project", "settings": { "image_filename": "portfolio-silverstone-1.jpg", "image_width": "4032", "image_height": "3024", "name": "Silverstone" } },
+        "silverstone_2": { "type": "project", "settings": { "image_filename": "portfolio-silverstone-2.jpg", "image_width": "3024", "image_height": "4032", "name": "Silverstone" } },
+        "silverstone_3": { "type": "project", "settings": { "image_filename": "portfolio-silverstone-3.jpg", "image_width": "4032", "image_height": "3024", "name": "Silverstone" } },
+        "ucl_1": { "type": "project", "settings": { "image_filename": "portfolio-ucl-1.jpg", "image_width": "2000", "image_height": "1429", "name": "UCL" } },
+        "ucl_2": { "type": "project", "settings": { "image_filename": "portfolio-ucl-2.jpg", "image_width": "800", "image_height": "1200", "name": "UCL" } },
+        "ucl_3": { "type": "project", "settings": { "image_filename": "portfolio-ucl-3.jpg", "image_width": "2000", "image_height": "1053", "name": "UCL" } }
+      },
+      "block_order": [
+        "bond_1", "bond_2", "bond_3",
+        "kemsing_1", "kemsing_2", "kemsing_3",
+        "mayfair_1", "mayfair_2", "mayfair_3",
+        "mercury_1", "mercury_2", "mercury_3",
+        "silverstone_1", "silverstone_2", "silverstone_3",
+        "ucl_1", "ucl_2", "ucl_3"
+      ],
+      "settings": {
+        "eyebrow": "Our work",
+        "heading": "Lighting installations",
+        "intro": "<p>Vivid Direct supplies the products — our sister company, <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, brings them to life. Here's a look at some of their recent lighting design and installation projects.</p>",
+        "attribution": "<p>Projects designed and installed by <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, our sister company. Interested in a bespoke lighting design and installation service? <a href=\"https://vividlightworx.co.uk\">Get in touch with the LightWorX team</a>.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gallery"
+  ]
+}
