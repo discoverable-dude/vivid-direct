@@ -5,46 +5,50 @@
 
 /* ======================
    1. DESIGN TOKENS
+   Vivid Direct brand system — mirrors the dark charcoal/navy + amber
+   identity used on vividlightworx (sister company). Token NAMES are kept
+   as-is so every consuming section below needs no further changes; only
+   the VALUES have been re-pointed to the Vivid palette.
    ====================== */
 :root {
   /* Surfaces */
-  --paper:   #F6F0EA;
-  --paper-2: #ECE2D1;
-  --card:    #FBF7EF;
+  --paper:   #14171A;
+  --paper-2: #1E2328;
+  --card:    #1A1F24;
 
   /* Text */
-  --ink:      #281A12;
-  --ink-soft: #6A5A48;
+  --ink:      #F5F5F5;
+  --ink-soft: #9CA3AA;
 
-  /* Warmth */
-  --hessian:      #8A6A3C;
-  --hessian-text: #6E5021;
-  --straw:        #C9A24E;
-  --straw-light:  #E3C57F;
-  --bark:         #3A2415;
+  /* Warmth -> amber accent */
+  --hessian:      #FFB800;
+  --hessian-text: #FFC933;
+  --straw:        #FFB800;
+  --straw-light:  #FFCF4D;
+  --bark:         #0D0F11;
 
   /* Brand */
-  --burgundy:  #A8321F;
-  --field:     #0A5A4C;
-  --footer-bg: #06372C;
+  --burgundy:  #FF4D4D;
+  --field:     #0A1622;
+  --footer-bg: #0A1622;
 
-  /* Commerce CTA — protected, never override for purchase actions */
-  --cta:      #9E3A26;
-  --cta-dark: #822F1F;
+  /* Commerce CTA — Vivid amber */
+  --cta:      #FFB800;
+  --cta-dark: #E6A600;
 
-  /* Earthy accent spectrum — set --ac per component/variety */
-  --clay:    #B43C18;
-  --rust:    #8F3415;
-  --mustard: #C9761C;
-  --wheat:   #A27212;
-  --moss:    #0A5A4C;
-  --sage:    #4E7A5E;
-  --plum:    #5C4763;
-  --soil:    #6B4A2A;
+  /* Accent spectrum — set --ac per component/variety */
+  --clay:    #FFB800;
+  --rust:    #E6A600;
+  --mustard: #FFC933;
+  --wheat:   #FFCF4D;
+  --moss:    #2ECC71;
+  --sage:    #2ECC71;
+  --plum:    #6C7CFF;
+  --soil:    #9CA3AA;
 
   /* Lines */
-  --line:        rgba(40, 26, 18, 0.15);
-  --line-strong: rgba(40, 26, 18, 0.30);
+  --line:        rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.24);
 
   /* Wash tints */
   --wash-wheat: color-mix(in srgb, var(--wheat) 24%, var(--paper));
@@ -53,11 +57,11 @@
   --wash-soil:  color-mix(in srgb, var(--soil)  16%, var(--paper));
 
   /* Typography */
-  --font-head:    "Baloo 2", serif;
-  --font-body:    "Hanken Grotesk", sans-serif;
-  --font-display: "Archivo", sans-serif;
-  --head-weight:   800;
-  --head-tracking: -0.01em;
+  --font-head:    "Montserrat", sans-serif;
+  --font-body:    "Montserrat", sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  --head-weight:   700;
+  --head-tracking: 0.02em;
 
   /* Layout */
   --page:       1280px;
@@ -66,36 +70,35 @@
   --sec-pad-sm: clamp(36px, 4vw, 56px);
   --sec-pad-lg: clamp(72px, 9vw, 130px);
 
-  /* Radius */
-  --radius:      8px;
-  --radius-lg:   12px;
+  /* Radius — sharper, tech-brand corners */
+  --radius:      4px;
+  --radius-lg:   8px;
   --radius-pill: 40px;
 
   /* Shadows */
-  --shadow-card:       0 24px 50px -24px rgba(40, 26, 18, 0.45);
-  --shadow-card-hover: 0 26px 54px -28px rgba(40, 26, 18, 0.50);
-  --shadow-sticky:     0 4px 22px rgba(40, 26, 18, 0.10);
-  --shadow-text:       0 2px 14px rgba(28, 18, 10, 0.55);
+  --shadow-card:       0 24px 50px -24px rgba(0, 0, 0, 0.55);
+  --shadow-card-hover: 0 26px 54px -28px rgba(0, 0, 0, 0.6);
+  --shadow-sticky:     0 4px 22px rgba(0, 0, 0, 0.35);
+  --shadow-text:       0 2px 14px rgba(0, 0, 0, 0.65);
+  --glow-amber:        0 0 40px -10px rgba(255, 184, 0, 0.3);
 
-  /* Texture */
-  --tex: 0.5;
-  --hessian-weave:
-    repeating-linear-gradient( 45deg, rgba(138,111,74,0.03) 0 2px, transparent 2px 6px),
-    repeating-linear-gradient(-45deg, rgba(138,111,74,0.03) 0 2px, transparent 2px 6px);
+  /* Texture — Vivid uses flat dark surfaces, no woven texture */
+  --tex: 0;
+  --hessian-weave: none;
 }
 
 /* ======================
    2. FONT OVERRIDES
    Override Dawn's --font-body-family / --font-heading-family
-   so all existing Dawn components pick up Morghew fonts
+   so all existing Dawn components pick up the Vivid (Montserrat) fonts
    ====================== */
 :root {
-  --font-body-family:    "Hanken Grotesk", sans-serif;
+  --font-body-family:    "Montserrat", sans-serif;
   --font-body-style:     normal;
   --font-body-weight:    400;
-  --font-heading-family: "Baloo 2", serif;
+  --font-heading-family: "Montserrat", sans-serif;
   --font-heading-style:  normal;
-  --font-heading-weight: 800;
+  --font-heading-weight: 700;
 }
 
 /* ======================
@@ -217,7 +220,7 @@ h1, h2, h3, h4, h5, h6,
   border-radius: var(--radius);
   border: 1px solid var(--cta);
   background: var(--cta);
-  color: #fff;
+  color: var(--bark);
   cursor: pointer;
   line-height: 1;
   transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
@@ -227,7 +230,7 @@ h1, h2, h3, h4, h5, h6,
   background: var(--cta-dark);
   border-color: var(--cta-dark);
   transform: translateY(-2px);
-  color: #fff;
+  color: var(--bark);
 }
 
 .btn:disabled,

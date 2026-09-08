@@ -12,9 +12,9 @@
     "logo": "shopify://shop_images/cbdbc5ba-aacb-427e-9d35-b0066483aece.png",
     "logo_width": 170,
     "favicon": "shopify://shop_images/morghew-favicon.png",
-    "type_header_font": "helvetica_n4",
+    "type_header_font": "montserrat_n7",
     "heading_scale": 100,
-    "type_body_font": "helvetica_n4",
+    "type_body_font": "montserrat_n4",
     "body_scale": 100,
     "page_width": 1300,
     "spacing_sections": 0,
@@ -23,7 +23,7 @@
     "animations_reveal_on_scroll": false,
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 0,
-    "buttons_radius": 8,
+    "buttons_radius": 4,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
@@ -37,7 +37,7 @@
     "variant_pills_shadow_blur": 5,
     "inputs_border_thickness": 1,
     "inputs_border_opacity": 55,
-    "inputs_radius": 8,
+    "inputs_radius": 4,
     "inputs_shadow_opacity": 0,
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 0,
@@ -48,7 +48,7 @@
     "card_color_scheme": "scheme-2",
     "card_border_thickness": 0,
     "card_border_opacity": 10,
-    "card_corner_radius": 8,
+    "card_corner_radius": 4,
     "card_shadow_opacity": 0,
     "card_shadow_horizontal_offset": 0,
     "card_shadow_vertical_offset": 4,
@@ -59,7 +59,7 @@
     "collection_card_color_scheme": "scheme-2",
     "collection_card_border_thickness": 0,
     "collection_card_border_opacity": 10,
-    "collection_card_corner_radius": 8,
+    "collection_card_corner_radius": 4,
     "collection_card_shadow_opacity": 0,
     "collection_card_shadow_horizontal_offset": 0,
     "collection_card_shadow_vertical_offset": 4,
@@ -70,7 +70,7 @@
     "blog_card_color_scheme": "scheme-2",
     "blog_card_border_thickness": 0,
     "blog_card_border_opacity": 10,
-    "blog_card_corner_radius": 8,
+    "blog_card_corner_radius": 4,
     "blog_card_shadow_opacity": 0,
     "blog_card_shadow_horizontal_offset": 0,
     "blog_card_shadow_vertical_offset": 4,
@@ -84,7 +84,7 @@
     "text_boxes_shadow_blur": 5,
     "media_border_thickness": 1,
     "media_border_opacity": 5,
-    "media_radius": 8,
+    "media_radius": 4,
     "media_shadow_opacity": 0,
     "media_shadow_horizontal_offset": 0,
     "media_shadow_vertical_offset": 4,
@@ -106,11 +106,11 @@
     "badge_corner_radius": 40,
     "sale_badge_color_scheme": "scheme-5",
     "sold_out_badge_color_scheme": "scheme-3",
-    "social_facebook_link": "https://www.facebook.com/morghewparkestate/",
-    "social_instagram_link": "https://www.instagram.com/potatoshoptenterden/",
+    "social_facebook_link": "",
+    "social_instagram_link": "",
     "social_youtube_link": "",
     "social_tiktok_link": "",
-    "social_twitter_link": "https://twitter.com/ThePotatoShop",
+    "social_twitter_link": "",
     "social_snapchat_link": "",
     "social_pinterest_link": "",
     "social_tumblr_link": "",
@@ -151,57 +151,57 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#f6f0ea",
+          "background": "#14171a",
           "background_gradient": "",
-          "text": "#281a12",
-          "button": "#9e3a26",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#281a12",
-          "shadow": "#281a12"
+          "text": "#f5f5f5",
+          "button": "#ffb800",
+          "button_label": "#0d0f11",
+          "secondary_button_label": "#f5f5f5",
+          "shadow": "#000000"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#ece2d1",
+          "background": "#1e2328",
           "background_gradient": "",
-          "text": "#281a12",
-          "button": "#9e3a26",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#281a12",
-          "shadow": "#281a12"
+          "text": "#f5f5f5",
+          "button": "#ffb800",
+          "button_label": "#0d0f11",
+          "secondary_button_label": "#f5f5f5",
+          "shadow": "#000000"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#3a2415",
+          "background": "#0a1622",
           "background_gradient": "",
-          "text": "#f6f0ea",
-          "button": "#c9a24e",
-          "button_label": "#3a2415",
-          "secondary_button_label": "#f6f0ea",
-          "shadow": "#281a12"
+          "text": "#f5f5f5",
+          "button": "#ffb800",
+          "button_label": "#0d0f11",
+          "secondary_button_label": "#f5f5f5",
+          "shadow": "#000000"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#06372c",
+          "background": "#0d0f11",
           "background_gradient": "",
-          "text": "#f6f0ea",
-          "button": "#e3c57f",
-          "button_label": "#06372c",
-          "secondary_button_label": "#f6f0ea",
-          "shadow": "#281a12"
+          "text": "#f5f5f5",
+          "button": "#ffb800",
+          "button_label": "#0d0f11",
+          "secondary_button_label": "#f5f5f5",
+          "shadow": "#000000"
         }
       },
       "scheme-5": {
         "settings": {
-          "background": "#0a5a4c",
+          "background": "#ffb800",
           "background_gradient": "",
-          "text": "#f6f0ea",
-          "button": "#c9a24e",
-          "button_label": "#3a2415",
-          "secondary_button_label": "#f6f0ea",
-          "shadow": "#281a12"
+          "text": "#0d0f11",
+          "button": "#0d0f11",
+          "secondary_button_label": "#0d0f11",
+          "button_label": "#ffb800",
+          "shadow": "#000000"
         }
       }
     }
@@ -212,63 +212,63 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#F6F0EA",
+            "background": "#14171A",
             "background_gradient": "",
-            "text": "#281A12",
-            "button": "#9E3A26",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#281A12",
-            "shadow": "#281A12"
+            "text": "#F5F5F5",
+            "button": "#FFB800",
+            "button_label": "#0D0F11",
+            "secondary_button_label": "#F5F5F5",
+            "shadow": "#000000"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#ECE2D1",
+            "background": "#1E2328",
             "background_gradient": "",
-            "text": "#281A12",
-            "button": "#9E3A26",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#281A12",
-            "shadow": "#281A12"
+            "text": "#F5F5F5",
+            "button": "#FFB800",
+            "button_label": "#0D0F11",
+            "secondary_button_label": "#F5F5F5",
+            "shadow": "#000000"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#3A2415",
+            "background": "#0A1622",
             "background_gradient": "",
-            "text": "#F6F0EA",
-            "button": "#C9A24E",
-            "button_label": "#3A2415",
-            "secondary_button_label": "#F6F0EA",
-            "shadow": "#281A12"
+            "text": "#F5F5F5",
+            "button": "#FFB800",
+            "button_label": "#0D0F11",
+            "secondary_button_label": "#F5F5F5",
+            "shadow": "#000000"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#06372C",
+            "background": "#0D0F11",
             "background_gradient": "",
-            "text": "#F6F0EA",
-            "button": "#E3C57F",
-            "button_label": "#06372C",
-            "secondary_button_label": "#F6F0EA",
-            "shadow": "#281A12"
+            "text": "#F5F5F5",
+            "button": "#FFB800",
+            "button_label": "#0D0F11",
+            "secondary_button_label": "#F5F5F5",
+            "shadow": "#000000"
           }
         },
         "scheme-5": {
           "settings": {
-            "background": "#0A5A4C",
+            "background": "#FFB800",
             "background_gradient": "",
-            "text": "#F6F0EA",
-            "button": "#C9A24E",
-            "button_label": "#3A2415",
-            "secondary_button_label": "#F6F0EA",
-            "shadow": "#281A12"
+            "text": "#0D0F11",
+            "button": "#0D0F11",
+            "secondary_button_label": "#0D0F11",
+            "button_label": "#FFB800",
+            "shadow": "#000000"
           }
         }
       },
-      "type_header_font": "helvetica_n4",
+      "type_header_font": "montserrat_n7",
       "heading_scale": 100,
-      "type_body_font": "helvetica_n4",
+      "type_body_font": "montserrat_n4",
       "body_scale": 100,
       "page_width": 1200,
       "animations_reveal_on_scroll": false,
@@ -277,7 +277,7 @@
       "spacing_grid_vertical": 8,
       "buttons_border_thickness": 1,
       "buttons_border_opacity": 0,
-      "buttons_radius": 8,
+      "buttons_radius": 4,
       "buttons_shadow_opacity": 0,
       "buttons_shadow_horizontal_offset": 0,
       "buttons_shadow_vertical_offset": 4,
@@ -291,7 +291,7 @@
       "variant_pills_shadow_blur": 5,
       "inputs_border_thickness": 1,
       "inputs_border_opacity": 55,
-      "inputs_radius": 8,
+      "inputs_radius": 4,
       "inputs_shadow_opacity": 0,
       "inputs_shadow_horizontal_offset": 0,
       "inputs_shadow_vertical_offset": 4,
@@ -302,7 +302,7 @@
       "card_color_scheme": "scheme-2",
       "card_border_thickness": 0,
       "card_border_opacity": 10,
-      "card_corner_radius": 8,
+      "card_corner_radius": 4,
       "card_shadow_opacity": 0,
       "card_shadow_horizontal_offset": 0,
       "card_shadow_vertical_offset": 4,
@@ -313,7 +313,7 @@
       "collection_card_color_scheme": "scheme-2",
       "collection_card_border_thickness": 0,
       "collection_card_border_opacity": 10,
-      "collection_card_corner_radius": 8,
+      "collection_card_corner_radius": 4,
       "collection_card_shadow_opacity": 0,
       "collection_card_shadow_horizontal_offset": 0,
       "collection_card_shadow_vertical_offset": 4,
@@ -324,7 +324,7 @@
       "blog_card_color_scheme": "scheme-2",
       "blog_card_border_thickness": 0,
       "blog_card_border_opacity": 10,
-      "blog_card_corner_radius": 8,
+      "blog_card_corner_radius": 4,
       "blog_card_shadow_opacity": 0,
       "blog_card_shadow_horizontal_offset": 0,
       "blog_card_shadow_vertical_offset": 4,
@@ -338,7 +338,7 @@
       "text_boxes_shadow_blur": 5,
       "media_border_thickness": 1,
       "media_border_opacity": 5,
-      "media_radius": 8,
+      "media_radius": 4,
       "media_shadow_opacity": 0,
       "media_shadow_horizontal_offset": 0,
       "media_shadow_vertical_offset": 4,

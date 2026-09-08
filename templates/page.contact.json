@@ -39,24 +39,24 @@
     "contact_details": {
       "type": "morghew-contact-details",
       "settings": {
-        "eyebrow": "The Potato Shop",
+        "eyebrow": "Vivid Direct",
         "heading": "Call in, or come and see us.",
-        "phone_label": "Call the estate office",
-        "phone": "01580 766 866",
-        "phone_note": "If we are out on the farm, leave a message and we will ring you back.",
+        "phone_label": "Have a question?",
+        "phone": "0203 916 6116",
+        "phone_note": "Our team is on hand Monday to Friday, 8am–5pm.",
         "email_label": "Email us",
-        "email": "Potatoshop@morghew.com",
-        "email_note": "Or use the form below and it comes to the same inbox.",
-        "hours_label": "Farm shop hours",
-        "hours": "Staffed 9am to 3pm, every day",
-        "hours_note": "The Honesty Stall is open at all times, whenever you are passing.",
+        "email": "sales@vivid-direct.co.uk",
+        "email_note": "Or use the form below and it'll reach the same inbox.",
+        "hours_label": "Trade counter opening times",
+        "hours": "Monday – Friday, 8am – 5pm",
+        "hours_note": "Saturday – Sunday: Closed",
         "address_label": "Find us",
-        "address": "<p>The Potato Shop, Morghew Park Estate<br/>Smallhythe Road, Tenterden<br/>Kent TN30 7LR</p>",
-        "directions": "Heading down Smallhythe Road (B2082) away from Tenterden High Street, take the second drive on your right after the Tesco entrance. Follow the signs a quarter mile up the private road.",
-        "map_query": "The Potato Shop, Morghew Park Estate, Smallhythe Road, Tenterden TN30 7LR",
+        "address": "<p><strong>Kent:</strong><br/>Ascot Barn, Court Lodge Farm<br/>Hinxhill, Ashford, Kent TN25 5NR</p><p><strong>London:</strong><br/>1 Regent Terrace, Rita Rd<br/>London SW8 1AW</p>",
+        "directions": "",
+        "map_query": "Ascot Barn, Court Lodge Farm, Hinxhill, Ashford, Kent TN25 5NR",
         "map_zoom": 14,
-        "secondary_label": "Plan a visit",
-        "secondary_url": "/pages/visit-us"
+        "secondary_label": "",
+        "secondary_url": ""
       }
     },
     "morghew_form_wPyMjc": {
