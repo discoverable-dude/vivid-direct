@@ -40,6 +40,7 @@
       },
       "block_order": ["heading", "text", "buttons"],
       "settings": {
+        "image": "shopify://shop_images/vd-neon-hero.jpg",
         "image_height": "large",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
@@ -173,6 +174,7 @@
       },
       "block_order": ["heading", "text", "button"],
       "settings": {
+        "image": "shopify://shop_images/PRO50S-Silver-Kitchen-683x1024.jpg",
         "layout": "image_first",
         "height": "medium",
         "desktop_image_width": "medium",
@@ -204,6 +206,7 @@
       },
       "block_order": ["heading", "text"],
       "settings": {
+        "image": "shopify://shop_images/Kitchen-Pantry-Kit-1-e1760645270386-692x1024.jpg",
         "layout": "text_first",
         "height": "medium",
         "desktop_image_width": "medium",
