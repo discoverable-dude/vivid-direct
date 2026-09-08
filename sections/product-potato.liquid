@@ -156,6 +156,8 @@
                       aria-label="Product image {{ forloop.index }}">
                 <img src="{{ img | image_url: width: 280 }}"
                      alt="{{ img.alt | default: product.title | escape }}"
+                     width="280"
+                     height="{{ 280 | divided_by: img.aspect_ratio | default: 280 | round }}"
                      loading="lazy">
               </button>
             {%- endfor -%}
@@ -302,6 +304,8 @@
     <img class="pp-about__bg"
          src="{{ section.settings.about_image | image_url: width: 2400 }}"
          alt=""
+         width="2400"
+         height="{{ 2400 | divided_by: section.settings.about_image.aspect_ratio | default: 2400 | round }}"
          loading="lazy"
          aria-hidden="true"
          style="opacity: {{ section.settings.about_image_opacity | divided_by: 100.0 }}">
@@ -437,7 +441,7 @@
       <a href="{{ art.url }}" class="pp-recipe-card">
         <div class="pp-recipe-card__img">
           {%- if art.image != blank -%}
-            <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" loading="lazy">
+            <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" width="700" height="{{ 700 | divided_by: art.image.aspect_ratio | default: 700 | round }}" loading="lazy">
           {%- else -%}
             <div class="pp-recipe-card__placeholder">
               {%- render 'morghew-icon', icon: 'roast', size: 36 -%}
