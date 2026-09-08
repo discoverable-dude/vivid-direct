@@ -160,7 +160,7 @@
                 }}
               </div>
             {%- else -%}
-              {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'header__heading-logo' }}
+              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="478" height="239" class="header__heading-logo">
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -200,7 +200,7 @@
                 }}
               </div>
             {%- else -%}
-              {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'header__heading-logo' }}
+              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="478" height="239" class="header__heading-logo">
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
