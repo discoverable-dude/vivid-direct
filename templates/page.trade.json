@@ -20,19 +20,19 @@
     "hero": {
       "type": "morghew-hero-editorial",
       "settings": {
-        "image": "shopify://shop_images/colourful-spuds.jpg",
+        "image": "",
         "image_opacity": 30,
         "crumb": "Trade",
         "eyebrow": "Trade & wholesale",
-        "headline": "Potatoes for your kitchen, by the crate.",
-        "lede": "We have been supplying potatoes to local businesses and restaurants across Kent for over 15 years, and wholesale across the South East. Tell us what you need and we will help you find the right varieties."
+        "headline": "Wholesale lighting, by the pallet.",
+        "lede": "We supply electricians, contractors and businesses across the UK with trade pricing on our full range of LED, neon and decorative lighting. Tell us what you need and we'll help you find the right products."
       }
     },
     "lede": {
       "type": "morghew-lede",
       "settings": {
         "kicker": "Trade customers",
-        "body": "Exotic, heritage or conventional: whatever you cook, there is a Morghew variety to suit your menu."
+        "body": "Whatever the job, there's a Vivid Direct product to suit it — from everyday LED essentials to bespoke neon and smart lighting."
       }
     },
     "split_how": {
@@ -41,25 +41,25 @@
         "li1": {
           "type": "item",
           "settings": {
-            "text": "Supplying businesses and restaurants for over 15 years"
+            "text": "Dedicated trade pricing across our full catalogue"
           }
         },
         "li2": {
           "type": "item",
           "settings": {
-            "text": "Wholesale potatoes across the country"
+            "text": "Bulk ordering for LED strip, neon flex and accessories"
           }
         },
         "li3": {
           "type": "item",
           "settings": {
-            "text": "Guidance on choosing the varieties best suited to your business"
+            "text": "Expert guidance on choosing the right products for your project"
           }
         },
         "li4": {
           "type": "item",
           "settings": {
-            "text": "Exotic, heritage and conventional potatoes"
+            "text": "Fast delivery, with next-day options available"
           }
         }
       },
@@ -71,12 +71,12 @@
       ],
       "settings": {
         "flip": false,
-        "image": "shopify://shop_images/grading-team.jpg",
-        "tag": "Graded by hand",
+        "image": "",
+        "tag": "Trusted by trade",
         "ratio": "4 / 5",
         "eyebrow": "How we work with you",
-        "heading": "High quality potatoes, guided by the growers",
-        "body": "<p>If you are looking for high quality potatoes to be supplied to your business, please get in touch and we would be happy to discuss your requirements. We are happy to guide and advise you on our potato varieties to help you select the best products suited to your business and needs.</p><p>We also provide wholesale potatoes across the country. Please contact us for prices or local distributors.</p>",
+        "heading": "Quality lighting, backed by expert advice",
+        "body": "<p>If you're looking for reliable lighting products for your business, get in touch and we'll be happy to discuss your requirements. We can guide you on the right products for your project, from a single room to a full commercial fit-out.</p><p>We also offer wholesale pricing for bulk orders. Contact us for trade rates.</p>",
         "cta_label": "",
         "cta_url": ""
       }
@@ -99,7 +99,7 @@
           "settings": {
             "type": "text",
             "label": "Business name",
-            "placeholder": "The Crown, Tenterden",
+            "placeholder": "Your company name",
             "required": false,
             "width": "half"
           }
@@ -129,7 +129,7 @@
           "settings": {
             "type": "textarea",
             "label": "Tell us what you need",
-            "placeholder": "Varieties you're interested in, volumes, delivery area…",
+            "placeholder": "Products you're interested in, volumes, delivery area…",
             "required": true,
             "width": "half"
           }
@@ -142,11 +142,11 @@
         "field_zxExLW",
         "field_yeVDTC"
       ],
-      "name": "Morghew Custom Form",
+      "name": "Vivid Direct Custom Form",
       "settings": {
         "bg": "paper2",
         "eyebrow": "",
-        "heading": "Get in touch",
+        "heading": "Apply for a trade account",
         "intro": "<p>Fill in the form below and we'll get back to you within one working day.</p>",
         "submit_label": "Send enquiry",
         "success_message": "Thanks, we've got your message and will be in touch shortly."
@@ -155,12 +155,12 @@
     "cta": {
       "type": "morghew-cta",
       "settings": {
-        "image": "shopify://shop_images/sambilldark.jpg",
+        "image": "",
         "eyebrow": "Trade & wholesale",
-        "heading": "Let's talk potatoes",
-        "body": "Call The Potato Shop on (01580) 766 866, or send an enquiry above and we will normally come back to you within two working days.",
-        "button_1_label": "Browse the varieties",
-        "button_1_url": "/collections/potato-shop",
+        "heading": "Let's talk lighting",
+        "body": "Call us on 0203 916 6116, or send an enquiry above and we will normally come back to you within two working days.",
+        "button_1_label": "Shop now",
+        "button_1_url": "/collections/all",
         "button_2_label": "Contact us",
         "button_2_url": "/pages/contact"
       }

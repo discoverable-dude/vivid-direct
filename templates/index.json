@@ -10,375 +10,219 @@
 {
   "sections": {
     "hero": {
-      "type": "hero-bold",
+      "type": "image-banner",
       "blocks": {
-        "word-roast": {
-          "type": "cycle_word",
+        "heading": {
+          "type": "heading",
           "settings": {
-            "word": "a Roast"
+            "heading": "Your Trusted Partner in Lighting",
+            "heading_size": "h1"
           }
         },
-        "word-mash": {
-          "type": "cycle_word",
+        "text": {
+          "type": "text",
           "settings": {
-            "word": "Mash"
+            "text": "Huge range of LED, neon and decorative lighting — our bestsellers are always in stock.",
+            "text_style": "body"
           }
         },
-        "word-chips": {
-          "type": "cycle_word",
+        "buttons": {
+          "type": "buttons",
           "settings": {
-            "word": "Chips"
-          }
-        },
-        "word-jacket": {
-          "type": "cycle_word",
-          "settings": {
-            "word": "Jacket Potato"
-          }
-        },
-        "word-salad": {
-          "type": "cycle_word",
-          "settings": {
-            "word": "a Salad"
-          }
-        },
-        "word-bake": {
-          "type": "cycle_word",
-          "settings": {
-            "word": "a Bake"
+            "button_label_1": "Shop Now",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "Apply for a Trade Account",
+            "button_link_2": "shopify://pages/trade",
+            "button_style_secondary_2": true
           }
         }
       },
-      "block_order": [
-        "word-roast",
-        "word-mash",
-        "word-chips",
-        "word-jacket",
-        "word-salad",
-        "word-bake"
-      ],
+      "block_order": ["heading", "text", "buttons"],
       "settings": {
-        "video": "shopify://files/videos/Potato Field Video (1).mp4",
-        "image": "shopify://shop_images/3WKiVOKvHqI-HD.jpg",
-        "video_url": "https://www.youtube.com/watch?v=3WKiVOKvHqI",
-        "eyebrow": "Morghew Estate · Tenterden, Kent",
-        "headline_prefix": "On the menu this week",
-        "lede": "Thirty heritage varieties grown in the Kent countryside, packed to order. Found in your favourite restaurants and on your doorstep.",
-        "cta_label": "Pick your potato →",
-        "cta_url": "shopify://collections/potato-shop",
-        "secondary_label": "Watch the film",
-        "secondary_url": "",
-        "ticker_text": "Grown in Kent · Packed by hand · 30 heritage varieties · Tracked next-day delivery ·"
+        "image_height": "large",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "image_overlay_opacity": 40,
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left"
       }
     },
-    "cooking-methods": {
-      "type": "cooking-methods",
-      "blocks": {
-        "method-dauphinoise": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "All Rounder",
-            "description": "Varieties that suit every day meals. Perfect for the whole family.",
-            "icon": "dauphinoise",
-            "accent": "plum",
-            "link": "shopify://collections/all-rounder"
-          }
-        },
-        "method-boil": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "Boil",
-            "description": "For salads and sides. Waxy varieties hold their shape best.",
-            "icon": "boil",
-            "accent": "moss",
-            "link": "shopify://collections/boil"
-          }
-        },
-        "method-chips": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "Chips",
-            "description": "Triple-cooked or chunky oven chips - starch is your friend.",
-            "icon": "chip",
-            "accent": "wheat",
-            "link": "shopify://collections/chip"
-          }
-        },
-        "method-jacket": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "Jacket",
-            "description": "Baked whole until the skin blisters. Size and starch matter.",
-            "icon": "jacket",
-            "accent": "rust",
-            "link": "shopify://collections/jacket"
-          }
-        },
-        "method-mash": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "Mash",
-            "description": "Silky and rich when made right. Go floury, never waxy.",
-            "icon": "mash",
-            "accent": "mustard",
-            "link": "shopify://collections/mash"
-          }
-        },
-        "method-roast": {
-          "type": "cooking_method",
-          "settings": {
-            "label": "Roast",
-            "description": "Crispy on the outside and fluffy on the inside. Needs a floury high-starch variety.",
-            "icon": "roast",
-            "accent": "clay",
-            "link": "shopify://collections/potato-shop-roast"
-          }
-        }
-      },
-      "block_order": [
-        "method-dauphinoise",
-        "method-boil",
-        "method-chips",
-        "method-jacket",
-        "method-mash",
-        "method-roast"
-      ],
+    "bestsellers": {
+      "type": "featured-collection",
       "settings": {
-        "eyebrow": "Browse by cooking method",
-        "title_plain": "Start with the plate,",
-        "title_highlight": "not the variety.",
-        "description": "Potatoes behave differently depending on how they're cooked. Pick your cooking method and we'll match you to the right variety."
+        "title": "Our Bestsellers",
+        "description": "<p>These are our hottest sellers and trending products right now.</p>",
+        "show_description": true,
+        "description_style": "body",
+        "heading_size": "h1",
+        "products_to_show": 10,
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "show_view_all": true,
+        "view_all_style": "link",
+        "show_rating": false,
+        "quick_add": "none",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
-    "variety-rail": {
-      "type": "variety-rail",
-      "custom_css": [
-        ".variety-rail.variety-rail {background-image: none;}"
-      ],
+    "brands": {
+      "type": "collection-list",
       "settings": {
-        "eyebrow": "The full table · 30 varieties",
-        "title": "Meet the potatoes",
-        "collection": "potato-shop",
-        "products_to_show": 8,
-        "view_all_label": "See all 30",
-        "view_all_url": ""
+        "title": "We Stock the Best Lighting & Accessory Brands",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
-    "morghew_beyond_GjkaPL": {
-      "type": "morghew-beyond",
-      "blocks": {
-        "product_y4jgmL": {
-          "type": "product",
-          "settings": {
-            "product": "potato-vodka",
-            "subtitle": "A refined spirit made from some pretty special potatoes."
-          }
-        },
-        "product_VR8yLt": {
-          "type": "product",
-          "settings": {
-            "product": "firewood-logs",
-            "subtitle": ""
-          }
-        },
-        "product_rx9atM": {
-          "type": "product",
-          "settings": {
-            "product": "venison-striploin",
-            "subtitle": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_y4jgmL",
-        "product_VR8yLt",
-        "product_rx9atM"
-      ],
-      "name": "Beyond the potato",
+    "help-advice": {
+      "type": "featured-blog",
       "settings": {
-        "image": "shopify://shop_images/SI_RM_PRD_MORGHEW_VODKA-0029.jpg",
-        "caption_eyebrow": "Morghew Estate",
-        "caption_quote": "“Not just potatoes.”",
-        "eyebrow": "More from the estate",
-        "heading": "Beyond the potato",
-        "intro": "<p>The same fields that produce our heritage varieties also yield rapeseed oil, heritage grain, wild game, and a potato vodka unlike anything else in Kent.</p>",
-        "free_threshold": 40,
-        "cta_label": "Browse all estate produce",
-        "cta_url": "shopify://collections/all-estate-produce"
-      }
-    },
-    "season-band": {
-      "type": "season-band",
-      "blocks": {
-        "card-1": {
-          "type": "season_card",
-          "settings": {
-            "image": "shopify://shop_images/IMG_9938.jpg",
-            "name": "Desiree",
-            "note": "Lifting now · Excellent all rounder",
-            "link": "shopify://products/desiree"
-          }
-        },
-        "card-2": {
-          "type": "season_card",
-          "settings": {
-            "image": "shopify://shop_images/SI_RM_PRD_MORGHEW_LA_RATTE-0069_45410c70-adf2-4c14-8788-1cac858f2912.jpg",
-            "name": "La Ratte",
-            "note": "The original Michelin star potato",
-            "link": "shopify://products/la-ratte"
-          }
-        },
-        "card-3": {
-          "type": "season_card",
-          "settings": {
-            "image": "shopify://shop_images/SI_RM_PDR_MORGHEW_DESIREE-0023_8b8cf941-3071-499e-8fe7-f86a7e6662d5.jpg",
-            "name": "Kerr's Pink",
-            "note": "A floury variety ideal for mash and roast.",
-            "link": "shopify://products/kerrs-pink"
-          }
-        }
-      },
-      "block_order": [
-        "card-1",
-        "card-2",
-        "card-3"
-      ],
-      "settings": {
-        "eyebrow": "From the field",
-        "title": "Graded & Packed by Hand",
-        "subtitle": ""
-      }
-    },
-    "shard-moment": {
-      "type": "shard-moment",
-      "blocks": {
-        "stat-varieties": {
-          "type": "stat",
-          "settings": {
-            "number": "30",
-            "label": "Heritage varieties"
-          }
-        },
-        "stat-time": {
-          "type": "stat",
-          "settings": {
-            "number": "2 days",
-            "label": "Farm to table"
-          }
-        }
-      },
-      "block_order": [
-        "stat-varieties",
-        "stat-time"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/SI_RM_FOD_MORGHEW-2553.jpg",
-        "image_opacity": 55,
-        "title": "From Kent farm to your table in under 48 hours."
-      }
-    },
-    "recipe-feature": {
-      "type": "recipe-feature",
-      "blocks": {
-        "recipe-1": {
-          "type": "recipe",
-          "settings": {
-            "article": "recipes/patatas-bravas",
-            "title": "",
-            "best_with_product": "{{ block.settings.article.metafields.custom.recipe_featured_product.value }}",
-            "variety_note": "",
-            "cook_time": "{{ block.settings.article.metafields.custom.recipe_prep_time.value }} Prep | {{ block.settings.article.metafields.custom.recipe_cook_time.value }} Cook",
-            "url": ""
-          }
-        },
-        "recipe-2": {
-          "type": "recipe",
-          "settings": {
-            "article": "recipes/vegan-vitelotte-gnocchi",
-            "title": "",
-            "best_with_product": "{{ block.settings.article.metafields.custom.recipe_featured_product.value }}",
-            "variety_note": "",
-            "cook_time": "{{ block.settings.article.metafields.custom.recipe_prep_time.value }} Prep | {{ block.settings.article.metafields.custom.recipe_cook_time.value }} Cook",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "recipe-1",
-        "recipe-2"
-      ],
-      "settings": {
-        "title": "From the kitchen",
-        "view_all_label": "All recipes",
-        "view_all_url": ""
+        "heading": "Help & Advice",
+        "heading_size": "h1",
+        "blog": "news",
+        "post_limit": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "customer_reviews_yJc9hA": {
       "type": "customer-reviews",
       "blocks": {
-        "review_Q9A4rn": {
+        "review_1": {
           "type": "review",
           "settings": {
-            "quote": "Genuinely the best roasting potatoes I've ever bought. Won't go back to supermarket spuds.",
+            "quote": "Excellent range and knowledgeable advice — they helped us spec the whole project and delivery was quick.",
             "stars": 5,
-            "name": "Catherine B.",
-            "meta": "Heide Red 2kg · Website"
+            "name": "Placeholder review",
+            "meta": "Replace with a real customer quote"
           }
         },
-        "review_HYGQjP": {
+        "review_2": {
           "type": "review",
           "settings": {
-            "quote": "Ordered the mixed heritage box — incredible variety. The Pink Fir Apple is nutty and waxy, perfect with just butter and salt.",
+            "quote": "Great trade pricing and the products arrived well packaged. Will be ordering again for our next job.",
             "stars": 5,
-            "name": "Tom W.",
-            "meta": "Heritage Mixed Box · Website"
+            "name": "Placeholder review",
+            "meta": "Replace with a real customer quote"
           }
         },
-        "review_nHtcDi": {
+        "review_3": {
           "type": "review",
           "settings": {
-            "quote": "Fast delivery, beautifully packed. The potatoes actually taste like potatoes. We've signed up for the seasonal box.",
+            "quote": "Really useful how-to guides on the site — made choosing the right LED strip for our kitchen simple.",
             "stars": 5,
-            "name": "Janet M.",
-            "meta": "Seasonal Box · Facebook"
-          }
-        },
-        "review_jCWHiB": {
-          "type": "review",
-          "settings": {
-            "quote": "Bought a 10kg sack of Kerr's Pink. Brilliant for mash, made the most incredible shepherd's pie.",
-            "stars": 5,
-            "name": "Richard S.",
-            "meta": "Kerr's Pink 10kg · Facebook"
+            "name": "Placeholder review",
+            "meta": "Replace with a real customer quote"
           }
         }
       },
-      "block_order": [
-        "review_Q9A4rn",
-        "review_HYGQjP",
-        "review_nHtcDi",
-        "review_jCWHiB"
-      ],
+      "block_order": ["review_1", "review_2", "review_3"],
       "name": "Customer reviews",
       "settings": {
-        "eyebrow": "Customer reviews",
+        "eyebrow": "Client Testimonials",
         "heading": "What our customers say",
         "aggregate_score": "5.0",
         "aggregate_stars": 5,
-        "aggregate_text": "Based on 120+ reviews",
+        "aggregate_text": "PLACEHOLDER — swap these three reviews for real customer quotes before launch",
         "surface": "paper",
-        "texture": true
+        "texture": false
+      }
+    },
+    "trade": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Wholesale Electrical Solutions for Trade Customers",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We carry everything you need to perform professional installations, no matter how big or small the project. Our LED strips and lighting solutions deliver quality and performance at competitive prices. Order bulk quantities of lights and accessories to complete the aesthetic of any home or business.</p><p>Trade customers in need of parts for installation and electrical products and accessories that offer form and function at affordable prices can shop confidently with Vivid Direct.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Apply for Trade Account Today",
+            "button_link": "shopify://pages/trade",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "layout": "image_first",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "about": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "About Us",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Vivid Direct is your specialist supplier of professional lighting and accessories, trusted by electricians, contractors, and homeowners alike. From everyday essentials to cutting-edge smart lighting, we combine a huge range of quality products with friendly expert support and fast delivery. Whether you're tackling a single room or upgrading a whole home or business, we're here to help you get the right lighting solution, first time.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "layout": "text_first",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
     "hero",
-    "cooking-methods",
-    "variety-rail",
-    "morghew_beyond_GjkaPL",
-    "season-band",
-    "shard-moment",
-    "recipe-feature",
-    "customer_reviews_yJc9hA"
+    "bestsellers",
+    "brands",
+    "help-advice",
+    "customer_reviews_yJc9hA",
+    "trade",
+    "about"
   ]
 }

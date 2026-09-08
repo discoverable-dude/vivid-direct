@@ -160,7 +160,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'header__heading-logo' }}
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -200,7 +200,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'header__heading-logo' }}
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

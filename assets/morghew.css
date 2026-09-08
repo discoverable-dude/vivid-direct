@@ -11,45 +11,51 @@
    the VALUES have been re-pointed to the Vivid palette.
    ====================== */
 :root {
-  /* Surfaces — navy, matching the live vivid-direct.co.uk header/footer
-     (not a desaturated near-black) */
-  --paper:   #0A1622;
-  --paper-2: #122238;
-  --card:    #0E1D2E;
+  /* Surfaces — white body/cards, matching the live vivid-direct.co.uk
+     (header/footer/dropdowns are dark navy — see --footer-bg below and
+     the HEADER/FOOTER sections, which use --ink as their background via
+     the same light/dark inversion the announcement bar already used) */
+  --paper:   #FFFFFF;
+  --paper-2: #F7F9FA;
+  --card:    #FFFFFF;
 
   /* Text */
-  --ink:      #FFFFFF;
-  --ink-soft: #9CB0C2;
+  --ink:      #082A38;
+  --ink-soft: #6B8089;
 
-  /* Warmth -> amber accent */
-  --hessian:      #FFB800;
-  --hessian-text: #FFC933;
-  --straw:        #FFB800;
-  --straw-light:  #FFCF4D;
-  --bark:         #0A1622;
+  /* Amber accent (exact values from the live site's CSS) */
+  --hessian:      #0D4761;
+  --hessian-text: #0D4761;
+  --straw:        #F5B800;
+  --straw-light:  #FFD24D;
+  --bark:         #1A2B30;
 
-  /* Brand */
-  --burgundy:  #FF4D4D;
-  --field:     #0A1622;
-  --footer-bg: #0A1622;
+  /* Navy brand family (exact values from the live site's CSS) */
+  --burgundy:  #CF2E2E;
+  --field:     #0D4761;
+  --footer-bg: #082A38;
 
-  /* Commerce CTA — Vivid amber */
-  --cta:      #FFB800;
-  --cta-dark: #E6A600;
+  /* Commerce CTA — Vivid amber, dark-navy label (matches live buttons) */
+  --cta:      #F5B800;
+  --cta-dark: #D9A200;
 
   /* Accent spectrum — set --ac per component/variety */
-  --clay:    #FFB800;
-  --rust:    #E6A600;
-  --mustard: #FFC933;
-  --wheat:   #FFCF4D;
+  --clay:    #F5B800;
+  --rust:    #D9A200;
+  --mustard: #FFD24D;
+  --wheat:   #FFE499;
   --moss:    #2ECC71;
   --sage:    #2ECC71;
   --plum:    #6C7CFF;
-  --soil:    #9CA3AA;
+  --soil:    #6B8089;
 
-  /* Lines */
-  --line:        rgba(255, 255, 255, 0.12);
-  --line-strong: rgba(255, 255, 255, 0.24);
+  /* Lines — for light (body) surfaces */
+  --line:        rgba(8, 42, 56, 0.12);
+  --line-strong: rgba(8, 42, 56, 0.24);
+
+  /* Lines — for dark (header/footer/dropdown) surfaces */
+  --line-on-dark:        rgba(255, 255, 255, 0.16);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.30);
 
   /* Wash tints */
   --wash-wheat: color-mix(in srgb, var(--wheat) 24%, var(--paper));
@@ -57,12 +63,13 @@
   --wash-clay:  color-mix(in srgb, var(--clay)  13%, var(--paper));
   --wash-soil:  color-mix(in srgb, var(--soil)  16%, var(--paper));
 
-  /* Typography */
-  --font-head:    "Montserrat", sans-serif;
-  --font-body:    "Montserrat", sans-serif;
-  --font-display: "Montserrat", sans-serif;
+  /* Typography — matches fonts loaded on the live site (Outfit headings,
+     Poppins body, Playfair Display for italic accents) */
+  --font-head:    "Outfit", sans-serif;
+  --font-body:    "Poppins", sans-serif;
+  --font-display: "Playfair Display", serif;
   --head-weight:   700;
-  --head-tracking: 0.02em;
+  --head-tracking: 0;
 
   /* Layout */
   --page:       1280px;
@@ -71,19 +78,20 @@
   --sec-pad-sm: clamp(36px, 4vw, 56px);
   --sec-pad-lg: clamp(72px, 9vw, 130px);
 
-  /* Radius — sharper, tech-brand corners */
-  --radius:      4px;
-  --radius-lg:   8px;
+  /* Radius — matches the live site's rounded cards (14px) and pill
+     buttons (40px) */
+  --radius:      10px;
+  --radius-lg:   14px;
   --radius-pill: 40px;
 
   /* Shadows */
-  --shadow-card:       0 24px 50px -24px rgba(0, 0, 0, 0.55);
-  --shadow-card-hover: 0 26px 54px -28px rgba(0, 0, 0, 0.6);
-  --shadow-sticky:     0 4px 22px rgba(0, 0, 0, 0.35);
-  --shadow-text:       0 2px 14px rgba(0, 0, 0, 0.65);
-  --glow-amber:        0 0 40px -10px rgba(255, 184, 0, 0.3);
+  --shadow-card:       0 24px 50px -24px rgba(8, 42, 56, 0.25);
+  --shadow-card-hover: 0 26px 54px -28px rgba(8, 42, 56, 0.32);
+  --shadow-sticky:     0 4px 22px rgba(8, 42, 56, 0.12);
+  --shadow-text:       0 2px 14px rgba(0, 0, 0, 0.45);
+  --glow-amber:        0 0 40px -10px rgba(245, 184, 0, 0.35);
 
-  /* Texture — Vivid uses flat dark surfaces, no woven texture */
+  /* Texture — Vivid uses flat surfaces, no woven texture */
   --tex: 0;
   --hessian-weave: none;
 }
@@ -91,13 +99,13 @@
 /* ======================
    2. FONT OVERRIDES
    Override Dawn's --font-body-family / --font-heading-family
-   so all existing Dawn components pick up the Vivid (Montserrat) fonts
+   so all existing Dawn components pick up the Vivid fonts
    ====================== */
 :root {
-  --font-body-family:    "Montserrat", sans-serif;
+  --font-body-family:    "Poppins", sans-serif;
   --font-body-style:     normal;
   --font-body-weight:    400;
-  --font-heading-family: "Montserrat", sans-serif;
+  --font-heading-family: "Outfit", sans-serif;
   --font-heading-style:  normal;
   --font-heading-weight: 700;
 }
@@ -321,7 +329,7 @@ h1, h2, h3, h4, h5, h6,
   align-items: center;
   gap: 28px;
   padding: 9px 16px;
-  background: var(--ink);
+  background: var(--field);
   color: var(--paper);
   font-family: var(--font-body);
   font-size: 11.5px;
@@ -349,8 +357,8 @@ h1, h2, h3, h4, h5, h6,
 
 /* --- Wrapper & sticky shadow --- */
 .header-wrapper {
-  background: var(--hessian-weave), var(--paper);
-  border-bottom: 1px solid var(--line);
+  background: var(--hessian-weave), var(--footer-bg);
+  border-bottom: 1px solid var(--line-on-dark);
   transition: box-shadow 0.25s ease;
 }
 .shopify-section-header-sticky .header-wrapper {
@@ -414,7 +422,7 @@ h1, h2, h3, h4, h5, h6,
   font-size: 15px;
   font-weight: 700;
   font-family: var(--font-head);
-  color: var(--ink) !important;
+  color: var(--paper) !important;
   padding: 4px 0;
   white-space: nowrap;
   letter-spacing: 0;
@@ -428,7 +436,7 @@ h1, h2, h3, h4, h5, h6,
   right: 100%;
   bottom: -2px;
   height: 1.5px;
-  background: var(--ink);
+  background: var(--straw);
   transition: right 0.25s ease;
 }
 
@@ -454,10 +462,10 @@ h1, h2, h3, h4, h5, h6,
   min-width: 320px;
   max-width: min(720px, 92vw);
   padding: 0;
-  background: var(--hessian-weave), var(--paper);
-  border: 1px solid var(--line);
+  background: var(--hessian-weave), var(--footer-bg);
+  border: 1px solid var(--line-on-dark);
   border-radius: 14px;
-  box-shadow: 0 18px 44px rgba(40, 26, 18, 0.20);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
   overflow: hidden;
 }
 .header__submenu.m-mega--has-feature { max-width: min(880px, 94vw); }
@@ -481,7 +489,7 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 700;
   font-size: 15px;
   line-height: 1.2;
-  color: var(--ink);
+  color: var(--paper);
   text-decoration: none;
   padding: 9px 12px;
   border-radius: 10px;
@@ -495,17 +503,17 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--paper-2);
-  color: var(--footer-bg);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--paper);
   transition: background 0.15s ease, color 0.15s ease;
 }
 .m-mega__ic svg { width: 22px; height: 22px; display: block; }
 .m-mega__link--plain { padding-left: 14px; }
 .m-mega__link-label { min-width: 0; }
 .m-mega__link:hover,
-.m-mega__link:focus-visible { background: var(--footer-bg); color: var(--paper); outline: none; }
+.m-mega__link:focus-visible { background: var(--field); color: var(--paper); outline: none; }
 .m-mega__link:hover .m-mega__ic,
-.m-mega__link:focus-visible .m-mega__ic { background: rgba(246, 240, 234, 0.16); color: var(--straw-light); }
+.m-mega__link:focus-visible .m-mega__ic { background: rgba(255, 255, 255, 0.18); color: var(--straw-light); }
 .m-mega__link.is-current { color: var(--cta); }
 .m-mega__link.is-current .m-mega__ic { color: var(--cta); }
 .m-mega__link.is-current:hover,
@@ -518,14 +526,14 @@ h1, h2, h3, h4, h5, h6,
   display: block;
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--ink-soft);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   padding: 6px 14px;
   border-radius: 8px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 .m-mega__sublink:hover,
-.m-mega__sublink:focus-visible { background: var(--paper-2); color: var(--ink); outline: none; }
+.m-mega__sublink:focus-visible { background: var(--field); color: var(--paper); outline: none; }
 .m-mega__sublink.is-current { color: var(--cta); }
 
 .m-mega__feature {
@@ -580,10 +588,10 @@ h1, h2, h3, h4, h5, h6,
   justify-content: center !important;
   width: 42px !important;
   height: 42px !important;
-  border: 1px solid var(--line-strong) !important;
+  border: 1px solid var(--line-on-dark-strong) !important;
   border-radius: var(--radius) !important;
   background: transparent !important;
-  color: var(--ink) !important;
+  color: var(--paper) !important;
   cursor: pointer !important;
   transition: background 0.2s, border-color 0.2s !important;
   text-decoration: none !important;
@@ -591,8 +599,8 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .header__icon:hover {
-  background: rgba(138, 106, 60, 0.10) !important;
-  color: var(--ink) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: var(--paper) !important;
 }
 
 /* Don't touch .svg-wrapper display — Dawn controls close/open icon toggling via aria-expanded */

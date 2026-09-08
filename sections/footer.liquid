@@ -22,7 +22,7 @@
             height="{{ 400 | divided_by: settings.logo.aspect_ratio | default: 400 | round }}"
             loading="lazy">
         {%- else -%}
-          <span class="mft__shopname">{{ shop.name }}</span>
+          {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'mft__logo' }}
         {%- endif -%}
       </a>
 

@@ -37,6 +37,8 @@
         width="{{ section.settings.logo.width }}"
         height="{{ section.settings.logo.height }}"
       >
+    {%- else -%}
+      {{ 'logo-vivid-direct.png' | asset_url | image_tag: alt: shop.name, class: 'mhold__logo' }}
     {%- endif -%}
 
     {%- if section.settings.eyebrow != blank -%}
