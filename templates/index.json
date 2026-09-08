@@ -50,6 +50,109 @@
         "mobile_content_alignment": "left"
       }
     },
+    "trust-badges": {
+      "type": "multicolumn",
+      "blocks": {
+        "badge_1": {
+          "type": "column",
+          "settings": {
+            "title": "Free Delivery Over £150",
+            "text": "<p>Order by 1pm for next-day delivery</p>"
+          }
+        },
+        "badge_2": {
+          "type": "column",
+          "settings": {
+            "title": "Trade Accounts Available",
+            "text": "<p>Dedicated pricing for electricians and businesses</p>"
+          }
+        },
+        "badge_3": {
+          "type": "column",
+          "settings": {
+            "title": "Expert Advice & Guides",
+            "text": "<p>Real help choosing the right products, first time</p>"
+          }
+        },
+        "badge_4": {
+          "type": "column",
+          "settings": {
+            "title": "Huge Range In Stock",
+            "text": "<p>LED, neon, smart lighting and accessories</p>"
+          }
+        }
+      },
+      "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
+      "settings": {
+        "image_width": "third",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "shop-by-category": {
+      "type": "multicolumn",
+      "blocks": {
+        "cat_neon": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/vd-neon-series-linear.jpg",
+            "title": "LED Neon Flex",
+            "text": "<p>Flexible neon-style lighting for any project</p>",
+            "link_label": "Shop Neon Flex",
+            "link": "shopify://collections/led-neon-flex"
+          }
+        },
+        "cat_downlights": {
+          "type": "column",
+          "settings": {
+            "title": "Downlights",
+            "text": "<p>Recessed and surface downlights for every room</p>",
+            "link_label": "Shop Downlights",
+            "link": "shopify://collections/downlights"
+          }
+        },
+        "cat_smart": {
+          "type": "column",
+          "settings": {
+            "title": "Smart Lighting",
+            "text": "<p>App and voice-controlled lighting solutions</p>",
+            "link_label": "Shop Smart Lighting",
+            "link": "shopify://collections/smart-lighting"
+          }
+        },
+        "cat_outdoor": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/shutterstock_1828178429-600x400.jpg",
+            "title": "Outdoor & Garden",
+            "text": "<p>Weatherproof lighting for outside spaces</p>",
+            "link_label": "Shop Outdoor Lighting",
+            "link": "shopify://collections/outdoor-garden-lighting"
+          }
+        }
+      },
+      "block_order": ["cat_neon", "cat_downlights", "cat_smart", "cat_outdoor"],
+      "settings": {
+        "title": "Shop by Category",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
@@ -186,6 +289,41 @@
         "padding_bottom": 52
       }
     },
+    "portfolio-cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "See It In Action",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Want to see what's possible? Our sister company, Vivid LightWorX, designs and installs bespoke lighting schemes using the products we supply.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "View Our Portfolio",
+            "button_link": "shopify://pages/portfolio",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "about": {
       "type": "image-with-text",
       "blocks": {
@@ -221,11 +359,14 @@
   },
   "order": [
     "hero",
+    "trust-badges",
+    "shop-by-category",
     "bestsellers",
     "brands",
     "help-advice",
     "customer_reviews_yJc9hA",
     "trade",
+    "portfolio-cta",
     "about"
   ]
 }

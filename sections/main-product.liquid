@@ -485,6 +485,11 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {%- render 'product-trust',
+                  t1: 'Free UK delivery over £150',
+                  t2: 'Trade accounts available',
+                  t3: 'Expert advice & guidance'
+                -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">

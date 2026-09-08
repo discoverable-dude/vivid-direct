@@ -1,0 +1,312 @@
+{%- comment -%}
+  Category Spotlight — reusable marketing feature for a product category
+  (hero, feature comparison, product series grid, mounting/install methods,
+  trust badge). Modelled on the LED Neon Flex landing page. Drop above
+  main-collection-product-grid in a collection template, or use standalone
+  on a page.
+{%- endcomment -%}
+
+<section class="cat-spot" id="cat-spot-{{ section.id }}">
+
+  {%- if section.settings.hero_heading != blank or section.settings.hero_image != blank -%}
+    <div class="cat-spot__hero">
+      {%- if section.settings.hero_image != blank -%}
+        <img
+          class="cat-spot__hero-img"
+          src="{{ section.settings.hero_image | image_url: width: 2400 }}"
+          alt=""
+          width="{{ section.settings.hero_image.width }}"
+          height="{{ section.settings.hero_image.height }}"
+          loading="eager">
+        <div class="cat-spot__hero-scrim"></div>
+      {%- endif -%}
+      <div class="wrap cat-spot__hero-inner">
+        {%- if section.settings.hero_eyebrow != blank -%}
+          <p class="eyebrow eyebrow--light">{{ section.settings.hero_eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.hero_heading != blank -%}
+          <h1 class="cat-spot__hero-h">{{ section.settings.hero_heading }}</h1>
+        {%- endif -%}
+        {%- if section.settings.hero_text != blank -%}
+          <p class="cat-spot__hero-p">{{ section.settings.hero_text }}</p>
+        {%- endif -%}
+        {%- if section.settings.hero_button_label != blank -%}
+          <a href="{{ section.settings.hero_button_url }}" class="btn">{{ section.settings.hero_button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- assign diagrams = section.blocks | where: "type", "diagram" -%}
+  {%- if diagrams.size > 0 -%}
+    <div class="wrap sec">
+      {%- if section.settings.diagrams_heading != blank -%}
+        <h2 class="t-h2 cat-spot__section-h">{{ section.settings.diagrams_heading }}</h2>
+      {%- endif -%}
+      <div class="cat-spot__diagrams">
+        {%- for block in diagrams -%}
+          <div class="cat-spot__diagram" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                alt="{{ block.settings.heading | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy">
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}<h3 class="cat-spot__diagram-h">{{ block.settings.heading }}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="cat-spot__diagram-p">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- assign series_blocks = section.blocks | where: "type", "series_tile" -%}
+  {%- if series_blocks.size > 0 -%}
+    <div class="wrap sec cat-spot__series-wrap">
+      {%- if section.settings.series_heading != blank -%}
+        <h2 class="t-h2 cat-spot__section-h">{{ section.settings.series_heading }}</h2>
+      {%- endif -%}
+      <div class="cat-spot__series">
+        {%- for block in series_blocks -%}
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="cat-spot__series-tile"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 500 }}"
+                alt="{{ block.settings.heading | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy">
+            {%- endif -%}
+            <span class="cat-spot__series-label">{{ block.settings.heading }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- assign mount_blocks = section.blocks | where: "type", "mount_method" -%}
+  {%- if mount_blocks.size > 0 -%}
+    <div class="wrap sec cat-spot__mounts-wrap">
+      {%- if section.settings.mounts_heading != blank -%}
+        <h2 class="t-h2 cat-spot__section-h">{{ section.settings.mounts_heading }}</h2>
+      {%- endif -%}
+      <div class="cat-spot__mounts">
+        {%- for block in mount_blocks -%}
+          <div class="cat-spot__mount" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                alt="{{ block.settings.heading | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy">
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}<h3 class="cat-spot__mount-h">{{ block.settings.heading }}</h3>{%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.badge_image != blank -%}
+    <div class="wrap cat-spot__badge-wrap">
+      <img
+        class="cat-spot__badge"
+        src="{{ section.settings.badge_image | image_url: width: 300 }}"
+        alt="{{ section.settings.badge_alt | escape }}"
+        width="{{ section.settings.badge_image.width }}"
+        height="{{ section.settings.badge_image.height }}"
+        loading="lazy">
+      {%- if section.settings.badge_text != blank -%}
+        <p class="cat-spot__badge-text">{{ section.settings.badge_text }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% style %}
+  .cat-spot__hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--footer-bg);
+  }
+  .cat-spot__hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cat-spot__hero-scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,42,56,0.55) 0%, rgba(8,42,56,0.75) 100%);
+  }
+  .cat-spot__hero-inner {
+    position: relative; z-index: 1;
+    padding-top: 72px; padding-bottom: 72px;
+    max-width: 640px;
+  }
+  .cat-spot__hero-h {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    color: #fff;
+    margin: 10px 0 16px;
+  }
+  .cat-spot__hero-p {
+    color: rgba(255,255,255,0.85);
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 48ch;
+    margin: 0 0 28px;
+  }
+
+  .cat-spot__section-h {
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+
+  .cat-spot__diagrams {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .cat-spot__diagram { text-align: center; }
+  .cat-spot__diagram img {
+    width: 100%; height: auto;
+    border-radius: var(--radius-lg);
+    margin-bottom: 14px;
+  }
+  .cat-spot__diagram-h { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--ink); margin: 0 0 6px; }
+  .cat-spot__diagram-p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  .cat-spot__series-wrap { background: var(--paper-2); }
+  .cat-spot__series {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 18px;
+  }
+  .cat-spot__series-tile {
+    display: flex; flex-direction: column;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cat-spot__series-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .cat-spot__series-tile img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  }
+  .cat-spot__series-label {
+    padding: 12px 14px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .cat-spot__mounts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+  }
+  .cat-spot__mount { text-align: center; }
+  .cat-spot__mount img {
+    width: 100%; height: auto;
+    border-radius: var(--radius-lg);
+    margin-bottom: 12px;
+  }
+  .cat-spot__mount-h { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--ink); margin: 0; }
+
+  .cat-spot__badge-wrap {
+    display: flex; align-items: center; gap: 16px;
+    padding-top: 12px; padding-bottom: 52px;
+  }
+  .cat-spot__badge { width: 72px; height: auto; flex-shrink: 0; }
+  .cat-spot__badge-text { font-size: 14px; color: var(--ink-soft); margin: 0; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Category spotlight",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero background image" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Featured category" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "LED NEON Flex" },
+    { "type": "textarea", "id": "hero_text", "label": "Text", "default": "Flexible, cuttable neon-style lighting for architectural and decorative projects." },
+    { "type": "text", "id": "hero_button_label", "label": "Button label", "default": "Shop the range" },
+    { "type": "url", "id": "hero_button_url", "label": "Button link" },
+    { "type": "header", "content": "Feature diagrams" },
+    { "type": "text", "id": "diagrams_heading", "label": "Heading", "default": "How it works" },
+    { "type": "header", "content": "Product series" },
+    { "type": "text", "id": "series_heading", "label": "Heading", "default": "Choose your series" },
+    { "type": "header", "content": "Mounting methods" },
+    { "type": "text", "id": "mounts_heading", "label": "Heading", "default": "Mounting options" },
+    { "type": "header", "content": "Trust badge" },
+    { "type": "image_picker", "id": "badge_image", "label": "Badge image" },
+    { "type": "text", "id": "badge_alt", "label": "Badge alt text", "default": "Made in Britain" },
+    { "type": "text", "id": "badge_text", "label": "Badge caption", "default": "Proudly made in Britain" }
+  ],
+  "blocks": [
+    {
+      "type": "diagram",
+      "name": "Feature diagram",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "text", "id": "text", "label": "Caption" }
+      ]
+    },
+    {
+      "type": "series_tile",
+      "name": "Product series tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "mount_method",
+      "name": "Mounting method",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category spotlight",
+      "blocks": [
+        { "type": "diagram" },
+        { "type": "diagram" },
+        { "type": "diagram" },
+        { "type": "series_tile" },
+        { "type": "series_tile" },
+        { "type": "series_tile" },
+        { "type": "mount_method" },
+        { "type": "mount_method" }
+      ]
+    }
+  ]
+}
+{% endschema %}
