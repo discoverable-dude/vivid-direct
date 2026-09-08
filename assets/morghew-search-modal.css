@@ -1,0 +1,127 @@
+/* ================================================
+   MORGHEW SEARCH MODAL
+   Restyles Dawn's header predictive-search modal to
+   match the estate. Loaded after component-search.css
+   and component-predictive-search.css so these win.
+   Scoped under .search-modal / .predictive-search.
+   ================================================ */
+
+/* ── Overlay + box ── */
+.search-modal .modal-overlay { background: rgba(20, 16, 12, 0.42); }
+
+.search-modal__content {
+  background: var(--hessian-weave), var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 44px rgba(20, 16, 12, 0.16);
+  padding: 14px;
+  gap: 12px;
+}
+
+/* ── Input field ── */
+.search-modal .search .field {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  box-shadow: none;
+  overflow: hidden;
+}
+.search-modal .search .field::before,
+.search-modal .search .field::after { display: none; }
+.search-modal .search .field:focus-within { border-color: var(--cta); }
+
+.search-modal .search__input.field__input {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 24px 96px 10px 18px;
+}
+.search-modal .search__input.field__input::placeholder { color: var(--ink-soft); }
+.search-modal .search .field__label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  top: 10px;
+  left: 18px;
+}
+.search-modal .search__input::selection { background: color-mix(in srgb, var(--straw-light) 55%, transparent); }
+
+/* Reset (×) + search (magnifier) buttons inside the field */
+.search-modal .search .field__button {
+  width: 44px;
+  color: var(--ink-soft);
+  transition: color 0.18s;
+}
+.search-modal .search .field__button:hover { color: var(--cta); }
+.search-modal .search .field__button .svg-wrapper { width: 18px; height: 18px; }
+.search-modal .reset__button { right: 44px; }
+
+/* Close (×) button */
+.search-modal__close-button {
+  color: var(--ink-soft);
+  transition: color 0.18s;
+}
+.search-modal__close-button:hover { color: var(--ink); }
+.search-modal__close-button .svg-wrapper { width: 20px; height: 20px; }
+
+/* ── Predictive results ── */
+.search-modal .predictive-search {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 16px 40px rgba(20, 16, 12, 0.12);
+  margin-top: -2px;
+}
+
+.predictive-search__heading {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--straw-light);
+  border: 0;
+  padding: 16px 18px 8px;
+}
+
+.predictive-search__result-group + .predictive-search__result-group { border-top: 1px solid var(--line); }
+
+.predictive-search__item {
+  font-family: var(--font-body);
+  color: var(--ink);
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.predictive-search__item:hover,
+.predictive-search__item[aria-selected='true'],
+.predictive-search__item:focus { background: var(--paper-2); }
+
+.predictive-search__item-heading {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.predictive-search__item-vendor { color: var(--ink-soft); font-size: 12px; }
+
+.predictive-search__image { border-radius: 6px; border: 1px solid var(--line); }
+
+/* "Search for <term>" row */
+.predictive-search__item--term {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  padding: 16px 18px;
+}
+.predictive-search__item--term:hover { background: var(--paper-2); color: var(--cta); }
+.predictive-search__item--term .icon-arrow { color: var(--cta); }
+
+/* Product price inside results, if shown */
+.predictive-search .price { color: var(--ink-soft); font-weight: 600; }

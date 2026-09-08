@@ -1,0 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "recipe-hub",
+      "settings": {
+        "hero_image": "shopify://shop_images/SI_JB_HR_MORG_POTV_-0002.jpg",
+        "hero_overlay": 55,
+        "hero_eyebrow": "From the estate kitchen",
+        "hero_title": "Recipes",
+        "hero_sub": "Heritage varieties deserve good cooking. Here's how we use them.",
+        "chefs_eyebrow": "Our chefs",
+        "chefs_heading": "Recipes from great kitchens",
+        "chefs_intro": "<p>We work with Michelin-starred chefs and food writers who cook with our varieties, bringing heritage potatoes to life in their own kitchens.</p>",
+        "submit_eyebrow": "",
+        "submit_heading": "",
+        "submit_text": "",
+        "submit_btn_label": "",
+        "submit_btn_url": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,98 @@
+{%- comment -%}
+  cart-upsell.liquid — basket add-ons strip + log delivery-charge reconcile.
+  Rendered inside the cart drawer (above the footer) and on the basket page.
+  Upsell products come from Theme settings → Basket upsells; products already
+  in the basket are hidden. The hidden delivery-charge markers are read by
+  morghew-postcode.js, which adds/removes the charge product so it always
+  matches whether any postcode-gated (log) items are in the basket.
+{%- endcomment -%}
+
+{{ 'morghew-extras.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'morghew-card.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'morghew-postcode.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  # Distance-priced log delivery. The saved postcode (cart attribute, written
+  # by the PDP gate) maps to a district in settings.log_gate_districts
+  # ("TN30=3, TN17=8" = road miles). The charge follows the tiered rate
+  # (£1.50/mile to 8, £3/mile miles 9-16, £6/mile beyond) and the variant of
+  # the charge product whose price equals that amount is auto-added. A wrong
+  # variant is removed first; the next drawer render adds the right one.
+  assign _charge = settings.log_charge_product
+  assign _gate_tag = settings.log_gate_tag | strip
+  assign _has_gated = false
+  assign _cvic = 0
+  assign _cqty = 0
+  if _charge != blank and _gate_tag != blank
+    for item in cart.items
+      if item.product_id == _charge.id
+        assign _cvic = item.variant_id
+        assign _cqty = item.quantity
+      elsif item.product.tags contains _gate_tag
+        assign _has_gated = true
+      endif
+    endfor
+  endif
+
+  # The PDP gate measured the driving miles and saved the charge (pence) as a
+  # cart attribute. Every tier charge is an exact multiple of £1.50, so the
+  # charge product is ONE variant priced £1.50 added at quantity charge/1.50.
+  # A wrong quantity/variant is removed first; the next render re-adds it
+  # correctly (with the distance as a line-item property).
+  assign _want_qty = 0
+  assign _cv = blank
+  if _has_gated
+    assign _pence = cart.attributes['Log delivery charge'] | default: '0' | times: 1
+    if _pence > 0
+      assign _want_qty = _pence | divided_by: 150
+      assign _cv = _charge.selected_or_first_available_variant
+    endif
+  endif
+  assign _miles_note = cart.attributes['Log delivery miles'] | default: ''
+-%}
+{%- if _charge != blank and _gate_tag != blank -%}
+  {%- if _has_gated and _want_qty > 0 and _cv != blank -%}
+    {%- if _cvic == 0 -%}
+      <div data-charge-add="{{ _cv.id }}" data-charge-qty="{{ _want_qty }}" data-charge-miles="{{ _miles_note | escape }}" hidden></div>
+    {%- elsif _cvic != _cv.id or _cqty != _want_qty -%}
+      <div data-charge-remove="{{ _cvic }}" hidden></div>
+    {%- endif -%}
+  {%- elsif _has_gated == false and _cvic > 0 -%}
+    <div data-charge-remove="{{ _cvic }}" hidden></div>
+  {%- endif -%}
+{%- endif -%}
+
+{%- if cart != empty and settings.upsell_products.count > 0 -%}
+  <div class="mup">
+    <p class="mup__head">{{ settings.upsell_heading | default: 'Add a little extra' }}</p>
+    <div class="mup__list">
+      {%- for _p in settings.upsell_products -%}
+        {%- assign _v = _p.selected_or_first_available_variant -%}
+        {%- assign _in = false -%}
+        {%- for item in cart.items -%}
+          {%- if item.product_id == _p.id -%}{%- assign _in = true -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- unless _in or _v == blank -%}
+          <div class="mup__row">
+            <a href="{{ _p.url }}" class="mup__thumb" tabindex="-1" aria-hidden="true">
+              {%- if _p.featured_image -%}
+                <img src="{{ _p.featured_image | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">
+              {%- endif -%}
+            </a>
+            <div class="mup__info">
+              <a href="{{ _p.url }}" class="mup__name">{{ _p.title }}</a>
+              <span class="mup__price">{{ _v.price | money }}</span>
+            </div>
+            {%- if _v.available -%}
+              <button type="button" class="mup__add" data-card-add="{{ _v.id }}" aria-label="Add {{ _p.title | escape }} to basket">
+                <span class="mcard__btn-label"><span aria-hidden="true">+</span> Add</span>
+              </button>
+            {%- else -%}
+              <span class="mup__add mup__add--sold">Sold out</span>
+            {%- endif -%}
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

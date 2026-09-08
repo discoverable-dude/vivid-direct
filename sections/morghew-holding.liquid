@@ -1,0 +1,283 @@
+{%- comment -%}
+  Morghew Holding — full-viewport "coming soon" page for the password
+  template. Homepage-style video/image hero, countdown to launch, email
+  signup. Self-contained: loads the brand fonts + morghew.css itself
+  because layout/password.liquid doesn't. The "Enter using password"
+  link stays available via Dawn's main-password-header, which this
+  section restyles to float transparently over the hero.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
+{{ 'morghew.css' | asset_url | stylesheet_tag }}
+
+<section class="mhold" id="mhold-{{ section.id }}">
+  {%- if section.settings.video != blank -%}
+    {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mhold__media' }}
+  {%- elsif section.settings.image != blank -%}
+    <img
+      class="mhold__media"
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+    >
+  {%- endif -%}
+  <div class="mhold__scrim"></div>
+
+  <div class="mhold__inner">
+    {%- if section.settings.logo != blank -%}
+      <img
+        class="mhold__logo"
+        src="{{ section.settings.logo | image_url: width: 480 }}"
+        alt="{{ shop.name | escape }}"
+        width="{{ section.settings.logo.width }}"
+        height="{{ section.settings.logo.height }}"
+      >
+    {%- endif -%}
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="mhold__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1 class="mhold__h">{{ section.settings.headline }}</h1>
+
+    {%- if section.settings.countdown_target != blank -%}
+      <div class="mhold__count" data-countdown="{{ section.settings.countdown_target | escape }}">
+        <div class="mhold__cell"><span class="mhold__num" data-cd-days>--</span><span class="mhold__lbl">Days</span></div>
+        <span class="mhold__sep">:</span>
+        <div class="mhold__cell"><span class="mhold__num" data-cd-hours>--</span><span class="mhold__lbl">Hours</span></div>
+        <span class="mhold__sep">:</span>
+        <div class="mhold__cell"><span class="mhold__num" data-cd-mins>--</span><span class="mhold__lbl">Minutes</span></div>
+        <span class="mhold__sep">:</span>
+        <div class="mhold__cell"><span class="mhold__num" data-cd-secs>--</span><span class="mhold__lbl">Seconds</span></div>
+      </div>
+      <p class="mhold__live" hidden>{{ section.settings.live_message | default: "We're opening the gates. Refresh in a moment." }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.lede != blank -%}
+      <p class="mhold__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.show_signup -%}
+      <div class="mhold__signup">
+        {%- form 'customer', class: 'mhold__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter,holding-page">
+          {%- if form.posted_successfully? -%}
+            <p class="mhold__form-ok">{{ section.settings.signup_success | default: "You're on the list. See you at launch." }}</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="mhold__form-err">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+            <label class="visually-hidden" for="mhold-email-{{ section.id }}">Email</label>
+            <div class="mhold__form-row">
+              <input
+                id="mhold-email-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="mhold__input"
+                placeholder="{{ section.settings.signup_placeholder | default: 'your@email.com' }}"
+                required
+                autocomplete="email"
+              >
+              <button type="submit" class="mhold__btn">{{ section.settings.signup_button | default: 'Notify me' }}</button>
+            </div>
+            {%- if section.settings.signup_note != blank -%}
+              <p class="mhold__form-note">{{ section.settings.signup_note }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.trust_line != blank -%}
+    <p class="mhold__trust">{{ section.settings.trust_line }}</p>
+  {%- endif -%}
+</section>
+
+{% style %}
+  html, body.password { height: 100%; }
+  body.password { margin: 0; background: var(--bark, #3A2415); }
+  .password-main { padding: 0 !important; }
+
+  /* float Dawn's password header (shop name + enter-password link) over the hero */
+  body.password .gradient:has(.password-header) { background: transparent !important; background-image: none !important; }
+  .password-header { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 16px 22px; }
+  .password-header .h2,
+  .password-header img,
+  .password-header .password-heading { display: none; }
+  .password-header .password-link,
+  .password-header .password-link .svg-wrapper svg { color: rgba(255, 255, 255, 0.85); }
+  .password-header .password-link:hover { color: #fff; }
+
+  .mhold {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bark, #3A2415);
+    font-family: var(--font-body, "Hanken Grotesk", sans-serif);
+  }
+  .mhold__media {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .mhold__scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(20, 12, 6, 0.55) 0%, rgba(20, 12, 6, 0.35) 45%, rgba(20, 12, 6, 0.72) 100%);
+  }
+  .mhold__inner {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    padding: 96px 24px;
+    max-width: 720px;
+  }
+  .mhold__logo { width: min(220px, 60vw); height: auto; margin-bottom: 34px; }
+  .mhold__eyebrow {
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--straw-light, #E3C57F);
+    margin: 0 0 14px;
+  }
+  .mhold__h {
+    font-family: var(--font-head, "Baloo 2", sans-serif);
+    font-weight: 800;
+    font-size: clamp(34px, 6vw, 64px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    color: #fff; margin: 0;
+    text-wrap: balance;
+  }
+  .mhold__count {
+    display: flex; align-items: flex-start; gap: clamp(10px, 2.5vw, 22px);
+    margin-top: 34px;
+  }
+  .mhold__cell { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 58px; }
+  .mhold__num {
+    font-family: var(--font-head, "Baloo 2", sans-serif);
+    font-weight: 800;
+    font-size: clamp(34px, 6vw, 56px);
+    line-height: 1; color: var(--straw-light, #E3C57F);
+    font-variant-numeric: tabular-nums;
+  }
+  .mhold__sep {
+    font-family: var(--font-head, "Baloo 2", sans-serif);
+    font-weight: 800; font-size: clamp(26px, 4.5vw, 42px);
+    color: rgba(255, 255, 255, 0.4); line-height: 1.2;
+  }
+  .mhold__lbl {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .mhold__live { margin: 30px 0 0; font-size: 17px; color: var(--straw-light, #E3C57F); font-weight: 600; }
+  .mhold__lede {
+    font-size: clamp(15.5px, 1.8vw, 18px); line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 52ch; margin: 26px 0 0;
+  }
+  .mhold__signup { margin-top: 32px; width: 100%; max-width: 430px; }
+  .mhold__form-row { display: flex; gap: 10px; }
+  .mhold__input {
+    flex: 1; min-width: 0;
+    padding: 14px 16px;
+    font-family: inherit; font-size: 15px;
+    color: #fff; background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+  }
+  .mhold__input::placeholder { color: rgba(255, 255, 255, 0.55); }
+  .mhold__input:focus { outline: 2px solid var(--straw-light, #E3C57F); outline-offset: 1px; }
+  .mhold__btn {
+    flex: 0 0 auto;
+    padding: 14px 22px;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+    color: #fff; background: var(--cta, #9E3A26);
+    border: 1px solid var(--cta, #9E3A26); border-radius: 8px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .mhold__btn:hover { background: var(--cta-dark, #822F1F); }
+  .mhold__form-note { margin: 10px 0 0; font-size: 12.5px; color: rgba(255, 255, 255, 0.6); }
+  .mhold__form-ok { margin: 0; font-size: 16px; font-weight: 600; color: var(--straw-light, #E3C57F); }
+  .mhold__form-err { margin: 0 0 10px; font-size: 13.5px; color: #F2B8A2; }
+  .mhold__trust {
+    position: absolute; left: 0; right: 0; bottom: 18px; z-index: 2;
+    margin: 0; text-align: center;
+    font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 0 20px;
+  }
+  @media (max-width: 560px) {
+    .mhold__inner { padding: 80px 20px; }
+    .mhold__cell { min-width: 48px; }
+  }
+{% endstyle %}
+
+<script>
+  (function () {
+    var root = document.getElementById('mhold-{{ section.id }}');
+    if (!root) return;
+    var box = root.querySelector('[data-countdown]');
+    if (!box) return;
+    var target = new Date(box.dataset.countdown).getTime();
+    if (isNaN(target)) return;
+    var d = box.querySelector('[data-cd-days]'),
+        h = box.querySelector('[data-cd-hours]'),
+        m = box.querySelector('[data-cd-mins]'),
+        s = box.querySelector('[data-cd-secs]'),
+        live = root.querySelector('.mhold__live');
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        box.hidden = true;
+        if (live) live.hidden = false;
+        clearInterval(t);
+        return;
+      }
+      var secs = Math.floor(diff / 1000);
+      d.textContent = pad(Math.floor(secs / 86400));
+      h.textContent = pad(Math.floor(secs % 86400 / 3600));
+      m.textContent = pad(Math.floor(secs % 3600 / 60));
+      s.textContent = pad(secs % 60);
+    }
+    tick();
+    var t = setInterval(tick, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Morghew Holding",
+  "tag": "section",
+  "settings": [
+    { "type": "video", "id": "video", "label": "Background video" },
+    { "type": "image_picker", "id": "image", "label": "Background image (fallback)" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (white version)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Coming soon" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "The Potato Shop is on its way." },
+    { "type": "text", "id": "countdown_target", "label": "Countdown target", "info": "ISO format with timezone, e.g. 2026-08-26T09:00:00+01:00. Leave empty for no countdown." },
+    { "type": "text", "id": "live_message", "label": "Message once the countdown ends", "default": "We're opening the gates. Refresh in a moment." },
+    { "type": "textarea", "id": "lede", "label": "Supporting line" },
+    { "type": "header", "content": "Email signup" },
+    { "type": "checkbox", "id": "show_signup", "label": "Show email signup", "default": true },
+    { "type": "text", "id": "signup_placeholder", "label": "Placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "signup_button", "label": "Button label", "default": "Notify me" },
+    { "type": "text", "id": "signup_note", "label": "Small print under the form" },
+    { "type": "text", "id": "signup_success", "label": "Success message", "default": "You're on the list. See you at launch." },
+    { "type": "header", "content": "Footer line" },
+    { "type": "text", "id": "trust_line", "label": "Trust line", "default": "Free UK delivery over £40 · Grown in Tenterden, Kent · Packed by hand" }
+  ],
+  "presets": [ { "name": "Morghew Holding" } ]
+}
+{% endschema %}

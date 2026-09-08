@@ -1,0 +1,57 @@
+{%- comment -%}
+  LEGACY WORDPRESS URL SAFETY NET
+  ---------------------------------
+  Catches old morghew.com /shop/* URLs that should redirect but currently 404
+  in Shopify's own redirect engine, despite correct records existing in
+  Settings > URL Redirects. This is a STOPGAP, not a replacement: keep the
+  real Admin redirects in place (most fire correctly) and escalate any that
+  still 404 after this to Shopify Support - a true 301 is stronger for SEO
+  than this page-level catch. Once a path's real redirect is confirmed
+  working (test with curl -I), delete both its lines below (with and
+  without the trailing slash).
+
+  IMPORTANT - why this matches in JavaScript, not Liquid: inside the 404
+  template's render context, {{ request.path }} is always "/404" - Shopify
+  does not expose the originally-requested URL to Liquid here. The real URL
+  only exists client-side as window.location.pathname. An earlier version of
+  this file compared against request.path and therefore could never fire,
+  on any path, regardless of how correct the target list was - it silently
+  did nothing. Do not "simplify" this back to a Liquid comparison.
+
+  2026-08-27: rebuilt on that basis, and the path list was trimmed from the
+  original 168 entries down to 68, keeping ONLY targets confirmed live on
+  the storefront (verified by curl against every target on the launch
+  catalogue). The other 100 old WP URLs point at products that were not
+  carried into the new store's ~48-SKU launch range (hampers, hay/straw,
+  sweet potatoes, wild game selections, seasonal mixes, decorative lines,
+  etc) - redirecting those would have bounced visitors from one dead page
+  straight into another. See George/Craig for whether any of those should
+  be re-added (pointing at a live substitute or a collection page) once
+  decided.
+
+  TO ADD A PATH NOT ALREADY LISTED: add TWO entries to legacy_pairs - one
+  without a trailing slash, one with - format from-path>to-path,
+  comma-separated. Case-sensitive exact match. Verify the target resolves
+  (not a 404) before adding it - don't reintroduce a broken redirect.
+{%- endcomment -%}
+
+{%- assign legacy_pairs = "/shop/01venison-striploin>/products/venison-striploin,/shop/01venison-striploin/>/products/venison-striploin,/shop/02venison-steak>/products/venison-steak,/shop/02venison-steak/>/products/venison-steak,/shop/03diced-venison>/products/diced-venison,/shop/03diced-venison/>/products/diced-venison,/shop/04venison-mince>/products/venison-mince,/shop/04venison-mince/>/products/venison-mince,/shop/05venison-sausages>/products/venison-sausages,/shop/05venison-sausages/>/products/venison-sausages,/shop/06venison-burgers>/products/venison-burgers,/shop/06venison-burgers/>/products/venison-burgers,/shop/07oven-ready-pheasant>/products/oven-ready-pheasant-x-2,/shop/07oven-ready-pheasant/>/products/oven-ready-pheasant-x-2,/shop/08oven-ready-duck>/products/oven-ready-duck,/shop/08oven-ready-duck/>/products/oven-ready-duck,/shop/1celebration>/products/celebration,/shop/1celebration/>/products/celebration,/shop/1golden-wonder>/products/golden-wonder,/shop/1golden-wonder/>/products/golden-wonder,/shop/1heide-red>/products/heide-red,/shop/1heide-red/>/products/heide-red,/shop/1kerrs-pink>/products/kerrs-pink,/shop/1kerrs-pink/>/products/kerrs-pink,/shop/1la-ratte>/products/la-ratte,/shop/1la-ratte/>/products/la-ratte,/shop/1red-duke-of-york>/products/red-duke-of-york,/shop/1red-duke-of-york/>/products/red-duke-of-york,/shop/1sarpo-kifli>/products/sarpo-kifli,/shop/1sarpo-kifli/>/products/sarpo-kifli,/shop/1vitanoire>/products/vitanoire,/shop/1vitanoire/>/products/vitanoire,/shop/1vitelotte>/products/vitelotte,/shop/1vitelotte/>/products/vitelotte,/shop/1wilja>/products/wilja,/shop/1wilja/>/products/wilja,/shop/3rapeseed-oil-250ml>/products/rapeseed-oil-250ml,/shop/3rapeseed-oil-250ml/>/products/rapeseed-oil-250ml,/shop/3rapeseed-oil-500ml>/products/rapeseed-oil-500ml,/shop/3rapeseed-oil-500ml/>/products/rapeseed-oil-500ml,/shop/3rapeseed-oil-5l>/products/rapeseed-oil-5l,/shop/3rapeseed-oil-5l/>/products/rapeseed-oil-5l,/shop/3rapeseed-oil-trio-hamper>/products/rapeseed-oil-gift-set,/shop/3rapeseed-oil-trio-hamper/>/products/rapeseed-oil-gift-set,/shop/4wild-garlic-leaf>/products/wild-garlic-leaf,/shop/4wild-garlic-leaf/>/products/wild-garlic-leaf,/shop/arja>/products/arja,/shop/arja/>/products/arja,/shop/arran-victory>/products/arran-victory,/shop/arran-victory/>/products/arran-victory,/shop/bags-of-kindling>/products/bags-of-kindling,/shop/bags-of-kindling/>/products/bags-of-kindling,/shop/british-queen>/products/british-queen,/shop/british-queen/>/products/british-queen,/shop/cara>/products/cara,/shop/cara/>/products/cara,/shop/casablanca>/products/casablanca,/shop/casablanca/>/products/casablanca,/shop/cchoney>/products/morghew-honey,/shop/cchoney/>/products/morghew-honey,/shop/celebration>/products/celebration,/shop/celebration/>/products/celebration,/shop/charlotte>/products/charlotte,/shop/charlotte/>/products/charlotte,/shop/cherie-red>/products/cherie-red,/shop/cherie-red/>/products/cherie-red,/shop/chestnut-firewood-8-foot-long-copy>/products/chestnut-firewood-up-to-8-long,/shop/chestnut-firewood-8-foot-long-copy/>/products/chestnut-firewood-up-to-8-long,/shop/chestnut-logs>/products/chestnut-10-logs,/shop/chestnut-logs/>/products/chestnut-10-logs,/shop/desiree>/products/desiree,/shop/desiree/>/products/desiree,/shop/estima>/products/estima,/shop/estima/>/products/estima,/shop/estima-bakers>/products/estima,/shop/estima-bakers/>/products/estima,/shop/firewood-8ft-lengths>/products/general-firewood-up-to-8-long,/shop/firewood-8ft-lengths/>/products/general-firewood-up-to-8-long,/shop/firewood-logs-delivered>/products/firewood-logs,/shop/firewood-logs-delivered/>/products/firewood-logs,/shop/golden-wonder>/products/golden-wonder,/shop/golden-wonder/>/products/golden-wonder,/shop/heide-red>/products/heide-red,/shop/heide-red/>/products/heide-red,/shop/honey>/products/morghew-honey,/shop/honey/>/products/morghew-honey,/shop/kerrs-pink>/products/kerrs-pink,/shop/kerrs-pink/>/products/kerrs-pink,/shop/king-edward>/products/king-edward,/shop/king-edward/>/products/king-edward,/shop/king-edward-1kg>/products/king-edward,/shop/king-edward-1kg/>/products/king-edward,/shop/la-ratte>/products/la-ratte,/shop/la-ratte/>/products/la-ratte,/shop/la-ratte-1kg>/products/la-ratte,/shop/la-ratte-1kg/>/products/la-ratte,/shop/nicola>/products/nicola,/shop/nicola/>/products/nicola,/shop/nicola-1kg>/products/nicola,/shop/nicola-1kg/>/products/nicola,/shop/pink-fir-apple>/products/pink-fir-apple,/shop/pink-fir-apple/>/products/pink-fir-apple,/shop/potato-vodka>/products/potato-vodka,/shop/potato-vodka/>/products/potato-vodka,/shop/rapeseed-oil-500ml>/products/rapeseed-oil-500ml,/shop/rapeseed-oil-500ml/>/products/rapeseed-oil-500ml,/shop/red-duke-of-york>/products/red-duke-of-york,/shop/red-duke-of-york/>/products/red-duke-of-york,/shop/red-duke-of-york-1kg>/products/red-duke-of-york,/shop/red-duke-of-york-1kg/>/products/red-duke-of-york,/shop/russet-burbank>/products/russet-burbank,/shop/russet-burbank/>/products/russet-burbank,/shop/setanta>/products/setanta,/shop/setanta/>/products/setanta,/shop/stoneground-wholemeal-flour>/products/stoneground-wholemeal-wheat-flour,/shop/stoneground-wholemeal-flour/>/products/stoneground-wholemeal-wheat-flour,/shop/stoneground-wholemeal-rye-flour>/products/stoneground-wholemeal-rye-flour,/shop/stoneground-wholemeal-rye-flour/>/products/stoneground-wholemeal-rye-flour,/shop/stoneground-wholemeal-spelt-flour>/products/stoneground-wholemeal-spelt-flour,/shop/stoneground-wholemeal-spelt-flour/>/products/stoneground-wholemeal-spelt-flour,/shop/venison-burgers>/products/venison-burgers,/shop/venison-burgers/>/products/venison-burgers,/shop/venison-sausages>/products/venison-sausages,/shop/venison-sausages/>/products/venison-sausages,/shop/vitanoire>/products/vitanoire,/shop/vitanoire/>/products/vitanoire,/shop/vitelotte>/products/vitelotte,/shop/vitelotte/>/products/vitelotte,/shop/vitelotte-1kg>/products/vitelotte,/shop/vitelotte-1kg/>/products/vitelotte,/shop/wild-garlic-leaf>/products/wild-garlic-leaf,/shop/wild-garlic-leaf/>/products/wild-garlic-leaf,/shop/wilja>/products/wilja,/shop/wilja/>/products/wilja,/shop/bargain-box>/products/desiree,/shop/bargain-box/>/products/desiree" -%}
+
+<script>
+  (function () {
+    var pairs = {{ legacy_pairs | json }}.split(',');
+    var map = {};
+    for (var i = 0; i < pairs.length; i++) {
+      var idx = pairs[i].indexOf('>');
+      if (idx === -1) continue;
+      map[pairs[i].slice(0, idx)] = pairs[i].slice(idx + 1);
+    }
+    var target = map[window.location.pathname];
+    if (!target) return;
+    var canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = {{ shop.url | json }} + target;
+    document.head.appendChild(canonical);
+    window.location.replace(target);
+  })();
+</script>

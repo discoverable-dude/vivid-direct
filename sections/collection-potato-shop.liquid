@@ -1,0 +1,294 @@
+{{ 'morghew-sections.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  collection-potato-shop.liquid
+  Variety tabs: customizer-editable link blocks (label, sub-label, icon, destination URL).
+  Flesh filter: client-side JS, data-flesh attribute on cards
+  First product in collection renders as the featured (wide) card.
+{%- endcomment -%}
+
+{%- comment -%} ─── HERO ─────────────────────────────────── {%- endcomment -%}
+<div class="pshop-hero">
+  <div class="wrap">
+
+    <nav class="pshop-crumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="pshop-crumb__sep">›</span>
+      <span>{{ collection.title }}</span>
+    </nav>
+
+    <h1 class="pshop-heading">{{ section.settings.heading | escape }}</h1>
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="pshop-sub">{{ section.settings.subtext | escape }}</p>
+    {%- endif -%}
+
+    {%- comment -%} Variety tabs — customizer link blocks (label / sub-label / icon / destination). {%- endcomment -%}
+    {%- assign variety_tabs = section.blocks | where: "type", "variety_tab" -%}
+    {%- if variety_tabs.size > 0 -%}
+      <div class="pshop-tabs" role="list" aria-label="Shop by variety">
+
+        <a href="{{ collection.url }}"
+           class="pshop-tab{% if request.path == collection.url %} pshop-tab--active{% endif %}"
+           role="listitem">
+          <div class="pshop-tab__icon">{%- render 'morghew-icon', icon: 'leaf', size: 24 -%}</div>
+          <span class="pshop-tab__label">All</span>
+          <span class="pshop-tab__sub">All {{ collection.products_count }} varieties</span>
+        </a>
+
+        {%- for block in variety_tabs -%}
+          <a href="{{ block.settings.link | default: '#' }}"
+             class="pshop-tab{% if block.settings.link != blank and block.settings.link == request.path %} pshop-tab--active{% endif %}"
+             role="listitem" {{ block.shopify_attributes }}>
+            <div class="pshop-tab__icon">{%- render 'morghew-icon', icon: block.settings.icon, size: 24 -%}</div>
+            <span class="pshop-tab__label">{{ block.settings.label | escape }}</span>
+            {%- if block.settings.sublabel != blank -%}<span class="pshop-tab__sub">{{ block.settings.sublabel | escape }}</span>{%- endif -%}
+          </a>
+        {%- endfor -%}
+
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+
+{%- comment -%} ─── RESULTS ──────────────────────────────── {%- endcomment -%}
+<div class="pshop-results">
+  <div class="wrap">
+
+    {%- comment -%} Count + flesh filter bar {%- endcomment -%}
+    <div class="pshop-bar">
+      <div class="pshop-count">
+        <span class="pshop-count__n" id="pshop-count-n">{{ collection.products.size }}</span>
+        <span class="pshop-count__label">options to explore</span>
+      </div>
+      <div class="pshop-flesh" role="group" aria-label="Filter by flesh colour">
+        <span class="pshop-flesh__label">Flesh</span>
+        {%- assign flesh_opts = "all||All,white|white|White,cream|cream|Cream,yellow|yellow|Yellow,red|red|Red,blue|blue|Blue" | split: "," -%}
+        {%- for opt_str in flesh_opts -%}
+          {%- assign opt = opt_str | split: "|" -%}
+          <button class="pshop-flesh__opt{% if opt[0] == 'all' %} is-active{% endif %}"
+                  data-flesh="{{ opt[0] }}"
+                  type="button">
+            {%- if opt[0] != 'all' -%}
+              <span class="pshop-flesh-dot pshop-flesh-dot--{{ opt[1] }}"></span>
+            {%- endif -%}
+            {{ opt[2] }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Product grid {%- endcomment -%}
+    <div class="pshop-grid" id="pshop-grid">
+
+      {%- for product in collection.products -%}
+
+        {%- comment -%} Season + cook still read from tags; flesh now comes from the
+            custom.flesh_colour metafield (tags were retired in the taxonomy migration) {%- endcomment -%}
+        {%- assign is_season = false -%}
+        {%- assign cook_methods = "" -%}
+        {%- for tag in product.tags -%}
+          {%- if tag == "in-season" -%}
+            {%- assign is_season = true -%}
+          {%- endif -%}
+          {%- if tag == "roast" or tag == "mash" or tag == "chip" or tag == "jacket" or tag == "boil" or tag == "steam" -%}
+            {%- if cook_methods == "" -%}
+              {%- assign cook_methods = tag | capitalize -%}
+            {%- else -%}
+              {%- assign cook_methods = cook_methods | append: " / " | append: tag | capitalize -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%} data-flesh drives the client-side flesh filter. Read the SAME
+            custom.flesh_colour metafield the badge uses (list-aware), downcased to match
+            the pill values (white/cream/yellow/red/blue). {%- endcomment -%}
+        {%- assign _flesh_mf = product.metafields.custom.flesh_colour -%}
+        {%- assign _flesh_val = _flesh_mf.value -%}
+        {%- if _flesh_mf.type contains 'list' -%}{%- assign _flesh_val = _flesh_mf.value | first -%}{%- endif -%}
+        {%- assign flesh_colour = _flesh_val | downcase -%}
+
+        {%- capture card_badges -%}
+          {%- if is_season -%}<span class="pshop-card__season">In season</span>{%- endif -%}
+        {%- endcapture -%}
+
+        {%- if forloop.first -%}
+
+          {%- comment -%} Featured card (first product — wide + tall). Div wrapper so add-buttons aren't nested in a link. {%- endcomment -%}
+          <div class="pshop-card pshop-card--featured" data-flesh="{{ flesh_colour }}">
+            <a href="{{ product.url }}" class="pshop-card__img-wrap" aria-label="{{ product.title | escape }}">
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 900 }}"
+                     alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                     loading="eager"
+                     width="900" height="900">
+              {%- endif -%}
+              {{ card_badges }}
+              {%- render 'card-flesh', product: product -%}
+            </a>
+            <div class="pshop-card__info">
+              <div class="pshop-card__row">
+                <h3 class="pshop-card__title"><a href="{{ product.url }}" class="pshop-card__name">{{ product.title }}</a></h3>
+                <span class="pshop-card__price">{{ product.price | money }}</span>
+              </div>
+              {%- if cook_methods != "" -%}
+                <p class="pshop-card__best">Best for {{ cook_methods }}</p>
+              {%- endif -%}
+              {%- if product.description != blank -%}
+                <p class="pshop-card__desc">{{ product.description | strip_html | truncate: 250 }}</p>
+              {%- endif -%}
+              {%- render 'card-add-buttons', product: product -%}
+            </div>
+          </div>
+
+        {%- else -%}
+
+          {%- comment -%} Standard card — unified card-potato, wrapped for the flesh filter {%- endcomment -%}
+          <div class="pshop-item" data-flesh="{{ flesh_colour }}">{%- render 'card-potato', product: product -%}</div>
+
+        {%- endif -%}
+
+      {%- else -%}
+        <p class="pshop-empty">No varieties found. <a href="{{ collection.url }}">View all</a></p>
+      {%- endfor -%}
+
+    </div>
+  </div>
+</div>
+
+
+{%- comment -%} ─── TRUST STRIP ───────────────────────────── {%- endcomment -%}
+<div class="pshop-trust">
+  <div class="wrap pshop-trust__inner">
+    <div class="pshop-trust__item">
+      <div class="pshop-trust__icon">{%- render 'morghew-icon', icon: 'leaf', size: 28 -%}</div>
+      <div>
+        <p class="pshop-trust__title">{{ section.settings.trust_1_title }}</p>
+        <p class="pshop-trust__sub">{{ section.settings.trust_1_sub }}</p>
+      </div>
+    </div>
+    <div class="pshop-trust__item">
+      <div class="pshop-trust__icon">{%- render 'morghew-icon', icon: 'truck', size: 28 -%}</div>
+      <div>
+        <p class="pshop-trust__title">{{ section.settings.trust_2_title }}</p>
+        <p class="pshop-trust__sub">{{ section.settings.trust_2_sub }}</p>
+      </div>
+    </div>
+    <div class="pshop-trust__item">
+      <div class="pshop-trust__icon">{%- render 'morghew-icon', icon: 'pin', size: 28 -%}</div>
+      <div>
+        <p class="pshop-trust__title">{{ section.settings.trust_3_title }}</p>
+        <p class="pshop-trust__sub">{{ section.settings.trust_3_sub }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var opts = document.querySelectorAll('.pshop-flesh__opt');
+  var cards = document.querySelectorAll('#pshop-grid [data-flesh]');
+  var countEl = document.getElementById('pshop-count-n');
+  opts.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var flesh = btn.dataset.flesh;
+      opts.forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var visible = 0;
+      cards.forEach(function (card) {
+        var match = flesh === 'all' || card.dataset.flesh === flesh;
+        card.hidden = !match;
+        if (match) visible++;
+      });
+      if (countEl) countEl.textContent = visible;
+    });
+  });
+}());
+</script>
+
+{% schema %}
+{
+  "name": "Potato Shop",
+  "tag": "div",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Hero heading",
+      "default": "What are you cooking tonight?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Hero subtext",
+      "default": "Thirty heritage varieties, each bred for a job. Pick the plate and we’ll show you the potatoes that do it best."
+    },
+    {
+      "type": "header",
+      "content": "Trust strip"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_title",
+      "label": "Item 1 title",
+      "default": "Grown by hand"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_sub",
+      "label": "Item 1 subtitle",
+      "default": "Lifted the day before packing"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_title",
+      "label": "Item 2 title",
+      "default": "Free over £40"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_sub",
+      "label": "Item 2 subtitle",
+      "default": "Tracked UK delivery"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_title",
+      "label": "Item 3 title",
+      "default": "Tenterden, Kent"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_sub",
+      "label": "Item 3 subtitle",
+      "default": "A working farming estate"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "variety_tab",
+      "name": "Variety tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Roast" },
+        { "type": "text", "id": "sublabel", "label": "Sub-label", "default": "Crisp & fluffy" },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "roast",
+          "options": [
+            { "value": "roast", "label": "Roast" }, { "value": "mash", "label": "Mash" },
+            { "value": "chip", "label": "Chip" }, { "value": "jacket", "label": "Jacket" },
+            { "value": "boil", "label": "Boil" }, { "value": "steam", "label": "Steam" },
+            { "value": "salad", "label": "Salad" }, { "value": "wedge", "label": "Wedge" },
+            { "value": "dauphinoise", "label": "Dauphinoise" }, { "value": "leaf", "label": "Leaf" }
+          ]
+        },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ]
+}
+{% endschema %}

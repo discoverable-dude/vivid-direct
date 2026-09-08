@@ -1,0 +1,121 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {}
+    },
+    "image_with_text_7bGRcp": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_K3W37x": {
+          "type": "caption",
+          "settings": {
+            "caption": "404",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading_JipbGg": {
+          "type": "heading",
+          "settings": {
+            "heading": "Oops, we can't find that right now",
+            "heading_size": "h1"
+          }
+        },
+        "text_tGh47y": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sorry, we can't find that right now. Check below to try and find what you're looking for.<br/></p>",
+            "text_style": "body"
+          }
+        },
+        "button_9t4xng": {
+          "type": "button",
+          "settings": {
+            "button_label": "Find Our Bestsellers Here",
+            "button_link": "shopify://collections/potato-shop",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "caption_K3W37x",
+        "heading_JipbGg",
+        "text_tGh47y",
+        "button_9t4xng"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/IMG_1107.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_P6MTKj": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_q7qTQj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "all-estate-produce"
+          }
+        },
+        "featured_collection_ghrCXA": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "potato-shop"
+          }
+        },
+        "featured_collection_VniFQC": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "firewood"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_q7qTQj",
+        "featured_collection_ghrCXA",
+        "featured_collection_VniFQC"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_7bGRcp",
+    "collection_list_P6MTKj"
+  ]
+}

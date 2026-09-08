@@ -1,0 +1,44 @@
+{%- comment -%}
+  Variant quick-add buttons. Usage: {% render 'card-add-buttons', product: product %}
+  Handled by the delegated listener in assets/morghew-card.js.
+
+  Gated products (postcode-required delivery, e.g. firewood/kindling) get a
+  real link to the product page instead of an instant add-to-basket button:
+  quick-add calls /cart/add.js directly with no postcode, so an item that
+  can only ship once a deliverable postcode is confirmed would otherwise
+  land in the basket unpriced-for-delivery and fail at checkout with a
+  generic shipping error. Keep this tag check identical to product-estate.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign _gated = false
+  assign _gate_tags = settings.log_gate_tag | split: ","
+  for _gt in _gate_tags
+    assign _gt = _gt | strip
+    if _gt != blank and product.tags contains _gt
+      assign _gated = true
+    endif
+  endfor
+  if settings.log_mapbox_token == blank and settings.log_gate_districts == blank
+    assign _gated = false
+  endif
+  assign _vc = product.variants.size
+-%}
+<div class="mcard__add{% if _vc > 1 %} mcard__add--multi{% endif %}">
+  {%- if _gated -%}
+    <a href="{{ product.url }}?check_postcode=1" class="mcard__btn mcard__btn--gated" aria-label="Check delivery to your postcode for {{ product.title | escape }}">
+      {%- render 'morghew-icon', icon: 'truck', size: 15 -%}
+      <span class="mcard__btn-label">Check delivery</span>
+    </a>
+  {%- else -%}
+    {%- for v in product.variants -%}
+      {%- if v.available -%}
+        <button type="button" class="mcard__btn" data-card-add="{{ v.id }}" aria-label="Add {{ product.title | escape }} {{ v.title | escape }} to cart">
+          <span class="mcard__btn-label">{%- if _vc > 1 -%}{{ v.title }} &middot; {{ v.price | money }}{%- else -%}Add &middot; {{ v.price | money }}{%- endif -%}</span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      {%- else -%}
+        <button type="button" class="mcard__btn mcard__btn--sold" disabled>{% if _vc > 1 %}{{ v.title }} &middot; {% endif %}Sold out</button>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+</div>

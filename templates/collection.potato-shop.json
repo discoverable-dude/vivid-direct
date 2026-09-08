@@ -1,0 +1,121 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "potato-shop": {
+      "type": "collection-potato-shop",
+      "blocks": {
+        "variety_tab_BXdpnM": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "All Rounder",
+            "sublabel": "Soft & Creamy",
+            "icon": "dauphinoise",
+            "link": "shopify://collections/all-rounder"
+          }
+        },
+        "tab-boil": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Boil",
+            "sublabel": "Holds shape",
+            "icon": "boil",
+            "link": "shopify://collections/boil"
+          }
+        },
+        "tab-chip": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Chip",
+            "sublabel": "Friday night",
+            "icon": "chip",
+            "link": "shopify://collections/chip"
+          }
+        },
+        "tab-jacket": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Jacket",
+            "sublabel": "Crinkly skin",
+            "icon": "jacket",
+            "link": "shopify://collections/jacket"
+          }
+        },
+        "tab-mash": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Mash",
+            "sublabel": "Smooth & buttery",
+            "icon": "mash",
+            "link": "shopify://collections/mash"
+          }
+        },
+        "tab-roast": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Roast",
+            "sublabel": "Crisp & fluffy",
+            "icon": "roast",
+            "link": "shopify://collections/potato-shop-roast"
+          }
+        },
+        "tab-steam": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Steam",
+            "sublabel": "Delicate",
+            "icon": "steam",
+            "link": "shopify://collections/steam"
+          }
+        },
+        "variety_tab_hNJkGW": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Wedge",
+            "sublabel": "Wedgy",
+            "icon": "roast",
+            "link": "shopify://collections/wedge"
+          }
+        }
+      },
+      "block_order": [
+        "variety_tab_BXdpnM",
+        "tab-boil",
+        "tab-chip",
+        "tab-jacket",
+        "tab-mash",
+        "tab-roast",
+        "tab-steam",
+        "variety_tab_hNJkGW"
+      ],
+      "settings": {
+        "heading": "What are you cooking tonight?",
+        "subtext": "Thirty heritage varieties, each bred for a job. Pick the plate and we’ll show you the potatoes that do it best.",
+        "trust_1_title": "Grown by hand",
+        "trust_1_sub": "Packed to order",
+        "trust_2_title": "Free over £40",
+        "trust_2_sub": "Tracked UK delivery",
+        "trust_3_title": "Tenterden, Kent",
+        "trust_3_sub": "A working farming estate"
+      }
+    },
+    "bottom-content": {
+      "type": "collection-bottom-content",
+      "settings": {
+        "heading": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "potato-shop",
+    "bottom-content"
+  ]
+}

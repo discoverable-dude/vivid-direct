@@ -1,0 +1,77 @@
+{%- comment -%}
+  Morghew Seasonal Chart — 12-month availability grid for a potato product.
+  Reads per-product metafields:
+    custom.season_lifting    → gold  "Lifting now"
+    custom.season_in_season  → green "In season"
+    everything else          → grey  "Out of season"
+  Month values may be full ("January") or short ("Jan") — matched on first 3 letters.
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign _months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec' | split: ','
+  assign _lift_keys = ''
+  for m in product.metafields.custom.season_lifting.value
+    assign _mk = m | slice: 0, 3 | downcase
+    assign _lift_keys = _lift_keys | append: _mk | append: ','
+  endfor
+  assign _in_keys = ''
+  for m in product.metafields.custom.season_in_season.value
+    assign _mk = m | slice: 0, 3 | downcase
+    assign _in_keys = _in_keys | append: _mk | append: ','
+  endfor
+-%}
+
+<section class="m-sec m-season m-sec--{{ section.settings.bg }}">
+  <div class="m-sec__wrap m-season__grid-wrap">
+    <div class="m-season__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="m-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="m-heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.intro != blank -%}<div class="m-intro">{{ section.settings.intro }}</div>{%- endif -%}
+    </div>
+
+    <div class="m-season__chart">
+      <div class="m-season__months">
+        {%- for mon in _months -%}
+          {%- liquid
+            assign _mabbr = mon | downcase
+            assign _status = 'out'
+            if _in_keys contains _mabbr
+              assign _status = 'in'
+            endif
+            if _lift_keys contains _mabbr
+              assign _status = 'lifting'
+            endif
+          -%}
+          <div class="m-season__cell">
+            <span class="m-season__dot m-season__dot--{{ _status }}"></span>
+            <span class="m-season__mon{% unless _status == 'out' %} is-on{% endunless %}">{{ mon }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="m-season__legend">
+        <span class="m-season__key"><span class="m-season__dot m-season__dot--lifting"></span>Lifting now</span>
+        <span class="m-season__key"><span class="m-season__dot m-season__dot--in"></span>In season</span>
+        <span class="m-season__key"><span class="m-season__dot m-season__dot--out"></span>Out of season</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Seasonal Chart",
+  "tag": "section",
+  "class": "m-section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" } ], "default": "paper2" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Availability" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "When it's in the ground" },
+    { "type": "richtext", "id": "intro", "label": "Intro text", "default": "<p>Main season August to December. Some stock held in cool storage through spring.</p>" }
+  ],
+  "presets": [ { "name": "Morghew Seasonal Chart" } ]
+}
+{% endschema %}

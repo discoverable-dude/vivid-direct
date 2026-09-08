@@ -1,0 +1,150 @@
+{% comment %}
+  Renders a standard dropdown style menu for the header.
+
+  Usage:
+  {% render 'header-dropdown-menu' %}
+{% endcomment %}
+
+<nav class="header__inline-menu">
+  <ul class="list-menu list-menu--inline" role="list">
+    {%- for link in section.settings.menu.links -%}
+      <li>
+        {%- if link.links != blank -%}
+          {%- comment -%} Optional featured tile: a 'menu_feature' header block whose
+              menu_handle matches this top-level item's handle {%- endcomment -%}
+          {%- assign _feat = blank -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu_feature' and block.settings.menu_handle != blank and block.settings.menu_handle == link.handle -%}
+              {%- assign _feat = block -%}
+            {%- endif -%}
+          {%- endfor -%}
+          <header-menu>
+            <details id="Details-HeaderMenu-{{ forloop.index }}">
+              <summary
+                id="HeaderMenu-{{ link.handle }}"
+                class="header__menu-item list-menu__item link focus-inset"
+              >
+                <span
+                  {%- if link.child_active %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </summary>
+              <div
+                id="HeaderMenu-MenuList-{{ forloop.index }}"
+                class="header__submenu m-mega{% if _feat != blank %} m-mega--has-feature{% endif %} motion-reduce"
+                tabindex="-1"
+              >
+                <ul class="m-mega__links" role="list">
+                  {%- for childlink in link.links -%}
+                    {%- comment -%} Icon: a 'menu_icon' header block (matched on name or handle) wins; otherwise auto-match the label {%- endcomment -%}
+                    {%- assign _t = childlink.title | downcase -%}
+                    {%- assign _icon = '' -%}
+                    {%- assign _forced = false -%}
+                    {%- for iblock in section.blocks -%}
+                      {%- if iblock.type == 'menu_icon' and iblock.settings.match != blank -%}
+                        {%- assign _m = iblock.settings.match | strip | downcase -%}
+                        {%- if _m == _t or _m == childlink.handle -%}
+                          {%- assign _forced = true -%}
+                          {%- unless iblock.settings.icon == 'none' -%}{%- assign _icon = iblock.settings.icon -%}{%- endunless -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- if _forced -%}
+                    {%- elsif _t contains 'roast' -%}{%- assign _icon = 'roast' -%}
+                    {%- elsif _t contains 'mash' -%}{%- assign _icon = 'mash' -%}
+                    {%- elsif _t contains 'chip' or _t contains 'fries' -%}{%- assign _icon = 'chip' -%}
+                    {%- elsif _t contains 'jacket' or _t contains 'bake' -%}{%- assign _icon = 'jacket' -%}
+                    {%- elsif _t contains 'boil' -%}{%- assign _icon = 'boil' -%}
+                    {%- elsif _t contains 'steam' -%}{%- assign _icon = 'steam' -%}
+                    {%- elsif _t contains 'salad' -%}{%- assign _icon = 'salad' -%}
+                    {%- elsif _t contains 'wedge' -%}{%- assign _icon = 'wedge' -%}
+                    {%- elsif _t contains 'dauphinoise' or _t contains 'gratin' -%}{%- assign _icon = 'dauphinoise' -%}
+                    {%- elsif _t contains 'recipe' -%}{%- assign _icon = 'book' -%}
+                    {%- elsif _t contains 'rapeseed' or _t contains 'oil' -%}{%- assign _icon = 'rapeseed-oil' -%}
+                    {%- elsif _t contains 'flour' -%}{%- assign _icon = 'flour' -%}
+                    {%- elsif _t contains 'game' or _t contains 'venison' or _t contains 'pheasant' -%}{%- assign _icon = 'wild-game' -%}
+                    {%- elsif _t contains 'firewood' or _t contains 'log' or _t contains 'wood' -%}{%- assign _icon = 'firewood' -%}
+                    {%- elsif _t contains 'charcoal' or _t contains 'kindling' or _t contains 'bbq' or _t contains 'barbecue' -%}{%- assign _icon = 'flame' -%}
+                    {%- elsif _t contains 'seed' -%}{%- assign _icon = 'potato-seeds' -%}
+                    {%- elsif _t contains 'honey' -%}{%- assign _icon = 'honey' -%}
+                    {%- elsif _t contains 'vodka' or _t contains 'bottle' -%}{%- assign _icon = 'bottle' -%}
+                    {%- comment -%} About-the-estate pages. 'film/photo' must precede 'shoot': "Photoshoot" contains "shoot" {%- endcomment -%}
+                    {%- elsif _t contains 'film' or _t contains 'photo' -%}{%- assign _icon = 'camera' -%}
+                    {%- elsif _t contains 'shoot' -%}{%- assign _icon = 'pheasant' -%}
+                    {%- elsif _t contains 'angling' or _t contains 'fish' -%}{%- assign _icon = 'fish' -%}
+                    {%- elsif _t contains 'wheat' or _t contains 'grain' -%}{%- assign _icon = 'wheat' -%}
+                    {%- elsif _t contains 'flora' or _t contains 'fauna' or _t contains 'wildlife' -%}{%- assign _icon = 'bird' -%}
+                    {%- elsif _t contains 'market' -%}{%- assign _icon = 'stall' -%}
+                    {%- elsif _t contains 'potato shop' or _t contains 'our story' or _t contains 'about' -%}{%- assign _icon = 'potato' -%}
+                    {%- elsif _t contains 'estate' -%}{%- assign _icon = 'tree' -%}
+                    {%- elsif _t contains 'visit' or _t contains 'find us' -%}{%- assign _icon = 'pin' -%}
+                    {%- elsif _t contains 'all' or _t contains 'variet' or _t contains 'everything' -%}{%- assign _icon = 'leaf' -%}
+                    {%- endif -%}
+                    <li class="m-mega__col">
+                      <a
+                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                        href="{{ childlink.url }}"
+                        class="m-mega__link{% unless _icon != blank %} m-mega__link--plain{% endunless %}{% if childlink.current %} is-current{% endif %}"
+                        {% if childlink.current %}aria-current="page"{% endif %}
+                      >
+                        {%- if _icon != blank -%}<span class="m-mega__ic">{%- render 'morghew-icon', icon: _icon, size: 22 -%}</span>{%- endif -%}
+                        <span class="m-mega__link-label">{{ childlink.title | escape }}</span>
+                      </a>
+                      {%- if childlink.links != blank -%}
+                        <ul class="m-mega__sublist" role="list">
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              <a
+                                href="{{ grandchildlink.url }}"
+                                class="m-mega__sublink{% if grandchildlink.current %} is-current{% endif %}"
+                                {% if grandchildlink.current %}aria-current="page"{% endif %}
+                              >{{ grandchildlink.title | escape }}</a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                {%- if _feat != blank -%}
+                  <a class="m-mega__feature" href="{{ _feat.settings.button_url | default: '#' }}" {{ _feat.shopify_attributes }}>
+                    {%- if _feat.settings.image != blank -%}
+                      <img class="m-mega__feature-img" src="{{ _feat.settings.image | image_url: width: 600 }}" alt="{{ _feat.settings.heading | default: _feat.settings.image.alt | escape }}" loading="lazy" width="{{ _feat.settings.image.width }}" height="{{ _feat.settings.image.height }}">
+                    {%- endif -%}
+                    <span class="m-mega__feature-body">
+                      {%- if _feat.settings.eyebrow != blank -%}<span class="m-mega__feature-eyebrow">{{ _feat.settings.eyebrow | escape }}</span>{%- endif -%}
+                      {%- if _feat.settings.heading != blank -%}<span class="m-mega__feature-heading">{{ _feat.settings.heading | escape }}</span>{%- endif -%}
+                      {%- if _feat.settings.subtext != blank -%}<span class="m-mega__feature-sub">{{ _feat.settings.subtext | escape }}</span>{%- endif -%}
+                      {%- if _feat.settings.button_label != blank -%}<span class="m-mega__feature-cta">{{ _feat.settings.button_label | escape }} &rarr;</span>{%- endif -%}
+                    </span>
+                  </a>
+                {%- endif -%}
+              </div>
+            </details>
+          </header-menu>
+        {%- else -%}
+          <a
+            id="HeaderMenu-{{ link.handle }}"
+            href="{{ link.url }}"
+            class="header__menu-item list-menu__item link link--text focus-inset"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span
+              {%- if link.current %}
+                class="header__active-menu-item"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </span>
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

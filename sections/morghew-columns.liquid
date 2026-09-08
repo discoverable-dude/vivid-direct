@@ -1,0 +1,65 @@
+{%- comment -%}
+  Morghew Two-Column Text — optional heading, then 2–3 text columns (blocks).
+  Each column supports a heading + rich text (paragraphs and bullet lists).
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+
+{%- assign col_count = section.blocks.size -%}
+
+<section class="m-sec m-cols m-sec--{{ section.settings.bg }}">
+  <div class="m-sec__wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank -%}
+      <div class="m-cols__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="m-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="m-heading">{{ section.settings.heading }}</h2>{%- endif -%}
+        {%- if section.settings.intro != blank -%}<div class="m-intro">{{ section.settings.intro }}</div>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="m-cols__grid{% if col_count >= 3 %} m-cols__grid--3{% endif %}">
+      {%- for block in section.blocks -%}
+        <div class="m-cols__col" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <h3 class="m-cols__col-head">{{ block.settings.heading }}</h3>
+          {%- endif -%}
+          {%- if block.settings.body != blank -%}
+            <div class="m-cols__col-body">{{ block.settings.body }}</div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Two-Column Text",
+  "tag": "section",
+  "class": "m-section",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" }, { "value": "dark", "label": "Estate green" } ], "default": "paper" },
+    { "type": "header", "content": "Section header (optional)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What we offer" },
+    { "type": "richtext", "id": "intro", "label": "Intro text" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Column heading", "default": "Column heading" },
+        { "type": "richtext", "id": "body", "label": "Column text", "info": "Use the list button for bullet points.", "default": "<ul><li>First point</li><li>Second point</li><li>Third point</li></ul>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morghew Two-Column Text",
+      "blocks": [ { "type": "column" }, { "type": "column" } ]
+    }
+  ]
+}
+{% endschema %}

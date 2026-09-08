@@ -1,0 +1,106 @@
+/* Estate produce product template */
+.est { position: relative; background: var(--hessian-weave), var(--paper); padding: clamp(32px, 4vw, 52px) 0 72px; }
+.est__wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--page-pad); }
+
+.est__hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(36px, 5vw, 64px); align-items: start; }
+.est-gallery__main { position: relative; aspect-ratio: 1 / 1; border-radius: var(--radius); overflow: hidden; background: var(--hessian-weave), var(--paper-2); }
+.est-gallery__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.est-gallery__thumbs { display: flex; gap: 10px; margin-top: 12px; }
+.est-gallery__thumb { flex: 0 0 auto; width: 88px; height: 88px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; background: var(--hessian-weave), var(--paper-2); cursor: pointer; padding: 0; transition: border-color 0.18s; }
+.est-gallery__thumb.is-active { border-color: var(--ink); }
+.est-gallery__thumb:hover:not(.is-active) { border-color: var(--line-strong); }
+.est-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.est-info { position: sticky; top: 24px; }
+.est-crumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-bottom: 20px; flex-wrap: wrap; }
+.est-crumb a { color: var(--ink-soft); text-decoration: none; }
+.est-crumb a:hover { color: var(--ink); }
+.est-title { font-family: var(--font-head); font-weight: 800; font-size: clamp(40px, 5vw, 64px); line-height: 0.97; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 14px; }
+.est-sub { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin: -6px 0 14px; }
+.est-price { font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 18px; }
+/* Lead intro paragraph, above the buy box */
+.est-intro { font-size: 15px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 28px; }
+.est-intro p { margin: 0 0 12px; }
+.est-intro p:last-child { margin-bottom: 0; }
+@media (max-width: 860px) { .est__hero { grid-template-columns: 1fr; gap: 32px; } .est-info { position: static; } }
+
+/* Buy box in a white card, mirroring the potato page's .pp-buy-box */
+.est-form { display: block; margin-top: 24px; padding: 24px; background: #fff; border: 1.5px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+.est-opt { margin-bottom: 26px; }
+.est-opt__label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hessian-text); margin: 0 0 10px; }
+.est-opt__tiles { display: flex; flex-wrap: wrap; gap: 10px; }
+.est-opt__tile { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; font-size: 15px; font-weight: 700; color: var(--ink); background: transparent; border: 1.5px solid var(--line); border-radius: var(--radius); padding: 12px 18px; min-width: 90px; cursor: pointer; text-align: left; transition: border-color 0.18s, background 0.18s, color 0.18s; }
+.est-opt__tile:hover { border-color: var(--ink); }
+.est-opt__tile.is-active { border-color: var(--footer-bg); background: var(--footer-bg); color: var(--paper); }
+.est-opt__tile.is-sold { opacity: 0.45; cursor: not-allowed; }
+.est-opt__tile-name { font-size: 15px; font-weight: 700; line-height: 1; }
+.est-opt__tile-price { font-size: 13px; font-weight: 600; color: inherit; opacity: 0.8; }
+.est-opt__tile.is-active .est-opt__tile-price { opacity: 0.85; }
+.est-opt__tile-note { font-size: 11.5px; font-weight: 400; color: inherit; opacity: 0.65; }
+.est-atc-row { display: flex; gap: 12px; align-items: stretch; margin-bottom: 18px; }
+.est-qty { display: flex; align-items: center; border: 1.5px solid var(--line); border-radius: var(--radius); overflow: hidden; flex-shrink: 0; }
+.est-qty__btn { width: 44px; height: 52px; border: none; background: transparent; font-size: 20px; cursor: pointer; color: var(--ink); display: flex; align-items: center; justify-content: center; transition: background 0.15s; line-height: 1; }
+.est-qty__btn:hover { background: var(--hessian-weave), var(--paper-2); }
+.est-qty__n { width: 48px; height: 52px; text-align: center; border: none; border-left: 1.5px solid var(--line); border-right: 1.5px solid var(--line); background: transparent; font-size: 15px; font-weight: 600; color: var(--ink); -moz-appearance: textfield; appearance: textfield; }
+.est-qty__n::-webkit-inner-spin-button, .est-qty__n::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.est-atc { position: relative; flex: 1; min-width: 0; background: var(--cta); color: var(--paper); border: none; border-radius: var(--radius); font-family: var(--font-body); font-size: 15px; font-weight: 700; letter-spacing: 0.03em; cursor: pointer; padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; transition: background 0.2s; }
+.est-atc:hover:not(:disabled) { background: var(--cta-dark); }
+.est-atc:disabled { background: var(--ink-soft); cursor: not-allowed; }
+.est-atc.loading .est-atc__label { visibility: hidden; }
+.est-atc .loading__spinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.est-atc .loading__spinner .path { stroke: var(--paper); }
+.est-delivery { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); margin: 18px 0 0; }
+.est-delivery svg { flex-shrink: 0; }
+@media (max-width: 560px) {
+  .est-atc-row { flex-direction: column; align-items: flex-start; }
+  .est-qty { align-self: flex-start; }
+  .est-atc { width: 100%; flex: 0 0 auto; }
+}
+
+/* Designed story block — mirrors the potato page's "About this variety" (.pp-about) pattern:
+   eyebrow kicker + large Baloo-2 heading + body copy, but on-page (not full-bleed image) since
+   estate products don't have a dedicated farm background image setting. */
+.est-story { margin-top: clamp(56px, 7vw, 96px); padding-top: clamp(56px, 7vw, 96px); border-top: 1px solid var(--line); display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(40px, 6vw, 88px); align-items: start; }
+.est-story__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--hessian-text); margin: 0 0 16px; }
+.est-story__heading { font-family: var(--font-head); font-weight: 800; font-size: clamp(30px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+.est-story__body { max-width: 680px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.est-story__body p { margin: 0 0 1em; }
+.est-story__body p:last-child { margin-bottom: 0; }
+
+.est-facts { margin-top: clamp(56px, 7vw, 96px); padding-top: clamp(56px, 7vw, 96px); border-top: 1px solid var(--line); display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(40px, 6vw, 88px); align-items: start; }
+.est-facts__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--hessian-text); margin: 0 0 16px; }
+.est-facts__heading { font-family: var(--font-head); font-weight: 800; font-size: clamp(30px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.02em; margin: 0; color: var(--ink); }
+.est-facts__chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; padding: 0; }
+.est-facts__chips:last-child { margin-bottom: 0; }
+.est-facts__chip { font-size: 14px; font-weight: 600; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 100px; padding: 8px 16px; }
+.est-facts__spec { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0; font-size: 14px; }
+.est-facts__spec dt { color: var(--ink-soft); }
+.est-facts__spec dd { color: var(--ink); margin: 0; }
+/* Stack heading over content on mobile (mirrors potato's .pp-about__inner) */
+@media (max-width: 860px) { .est-story, .est-facts { grid-template-columns: 1fr; gap: 18px; } }
+
+.est-recipes { margin-top: clamp(56px, 7vw, 96px); }
+.est-recipes__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hessian-text); margin: 0 0 10px; }
+.est-recipes__head { font-family: var(--font-head); font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -0.02em; color: var(--ink); margin: 0 0 36px; }
+.est-recipes__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.est-recipe-card { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); }
+.est-recipe-card__img { display: block; aspect-ratio: 3 / 2; border-radius: var(--radius); overflow: hidden; background: var(--hessian-weave), var(--paper-2); margin-bottom: 14px; }
+.est-recipe-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
+.est-recipe-card:hover .est-recipe-card__img img { transform: scale(1.04); }
+.est-recipe-card__body { display: block; }
+.est-recipe-card__title { display: block; font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--ink); margin: 0 0 4px; }
+.est-recipe-card__link { font-size: 14px; font-weight: 600; color: var(--ink-soft); font-style: italic; font-family: var(--font-head); }
+@media (max-width: 860px) { .est-recipes__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .est-recipes__grid { grid-template-columns: 1fr; } }
+
+.est-related { margin-top: clamp(56px, 7vw, 96px); }
+.est-related__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--hessian-text); margin: 0 0 10px; }
+.est-related__head { font-family: var(--font-head); font-weight: 800; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -0.02em; color: var(--ink); margin: 0 0 32px; }
+.est-related__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; }
+@media (max-width: 860px) { .est-related__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .est-related__grid { grid-template-columns: 1fr; } }
+
+/* Focus-visible on custom buy-box controls (a11y) */
+.est-opt__tile:focus-visible,
+.est-gallery__thumb:focus-visible,
+.est-qty__btn:focus-visible,
+.est-atc:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }

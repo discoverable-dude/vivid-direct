@@ -1,0 +1,427 @@
+{%- comment -%}
+  Estate produce product template — generic product page for non-potato estate
+  products (flour, game, oil, firewood, honey, seeds). Buy box is option-driven.
+{%- endcomment -%}
+{{ 'morghew-estate.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'morghew-lightbox.js' | asset_url }}" defer="defer"></script>
+
+<div class="est color-{{ section.settings.color_scheme }}">
+  <div class="est__wrap">
+    <div class="est__hero">
+      <div class="est-gallery">
+        <div class="est-gallery__main">
+          <img id="est-main-{{ section.id }}"
+               src="{{ product.featured_image | image_url: width: 1400 }}"
+               alt="{{ product.featured_image.alt | default: product.title | escape }}"
+               loading="eager"
+               fetchpriority="high"
+               width="{{ product.featured_image.width }}"
+               height="{{ product.featured_image.height }}"
+               data-zoomable>
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="est-gallery__thumbs">
+            {%- for img in product.images limit: 5 -%}
+              <button class="est-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                      data-src="{{ img | image_url: width: 1400 }}"
+                      data-alt="{{ img.alt | default: product.title | escape }}"
+                      type="button" aria-label="Product image {{ forloop.index }}">
+                <img src="{{ img | image_url: width: 280 }}" alt="{{ img.alt | default: product.title | escape }}" loading="lazy" width="68" height="68">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="est-info">
+        <nav class="est-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span aria-hidden="true">&rsaquo;</span>
+          {%- if product.collections.size > 0 -%}
+            <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+            <span aria-hidden="true">&rsaquo;</span>
+          {%- endif -%}
+          <span>{{ product.title }}</span>
+        </nav>
+        <h1 class="est-title">{{ product.title }}</h1>
+        {%- assign est_sub = product.metafields.descriptors.subtitle.value -%}
+        {%- if est_sub != blank -%}<p class="est-sub">{{ est_sub }}</p>{%- endif -%}
+        <div class="est-price" id="est-price-{{ section.id }}">
+          {%- if product.price_varies -%}{{ product.price_min | money }} &ndash; {{ product.price_max | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
+        </div>
+        {%- comment -%} Split the description: first paragraph = hero intro, the rest = the designed story block below {%- endcomment -%}
+        {%- liquid
+          assign _para_parts = product.description | split: '</p>'
+          assign _intro_html = ''
+          assign _story_html = ''
+          for _pp in _para_parts
+            assign _ppt = _pp | strip
+            unless _ppt == blank
+              if _intro_html == blank
+                assign _intro_html = _ppt | append: '</p>'
+              else
+                assign _story_html = _story_html | append: _ppt | append: '</p>'
+              endif
+            endunless
+          endfor
+        -%}
+        {%- if _intro_html != blank -%}<div class="est-intro">{{ _intro_html }}</div>{%- endif -%}
+        <product-form class="product-form est-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+          <div class="product-form__error-message-wrapper est-atc-error" role="alert" hidden>
+            <span class="product-form__error-message"></span>
+          </div>
+          <form action="{{ routes.cart_add_url }}" method="post" id="est-form-{{ section.id }}">
+            <input type="hidden" name="id" id="est-vid-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+
+            {%- unless product.has_only_default_variant -%}
+              {%- for option in product.options_with_values -%}
+                <div class="est-opt" data-opt-index="{{ forloop.index0 }}">
+                  <span class="est-opt__label">{{ option.name }}</span>
+                  <div class="est-opt__tiles">
+                    {%- for value in option.values -%}
+                      {%- comment -%} Single-option products: resolve the variant so the tile can show price + note like the potato page. Multi-option (e.g. firewood logs) stays name-only. {%- endcomment -%}
+                      {%- assign _tv = false -%}
+                      {%- if product.options_with_values.size == 1 -%}
+                        {%- for variant in product.variants -%}
+                          {%- if variant.option1 == value -%}{%- assign _tv = variant -%}{%- break -%}{%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                      <button type="button" class="est-opt__tile{% if option.selected_value == value %} is-active{% endif %}{% if _tv %}{% unless _tv.available %} is-sold{% endunless %}{% endif %}"
+                              data-opt="{{ option.position | minus: 1 }}" data-value="{{ value | escape }}"
+                              aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">
+                        <span class="est-opt__tile-name">{{ value }}</span>
+                        {%- if _tv -%}
+                          <span class="est-opt__tile-price">{{ _tv.price | money }}</span>
+                          {%- if _tv.metafields.custom.note != blank -%}<span class="est-opt__tile-note">{{ _tv.metafields.custom.note }}</span>{%- endif -%}
+                        {%- endif -%}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+
+            {%- comment -%}
+              Gate tag(s): settings.log_gate_tag is comma-separated (e.g.
+              "postcode-check, shipping-firewood-local") - product needs ANY
+              one of them. Keep this block identical to the copy in
+              card-add-buttons.liquid, which needs to know the same thing
+              before deciding whether a card's quick-add is safe.
+            {%- endcomment -%}
+            {%- liquid
+              assign _gate_on = false
+              assign _gate_tags = settings.log_gate_tag | split: ","
+              for _gt in _gate_tags
+                assign _gt = _gt | strip
+                if _gt != blank and product.tags contains _gt
+                  assign _gate_on = true
+                endif
+              endfor
+              if settings.log_mapbox_token == blank and settings.log_gate_districts == blank
+                assign _gate_on = false
+              endif
+            -%}
+            {%- if _gate_on -%}
+              {{ 'morghew-extras.css' | asset_url | stylesheet_tag }}
+              <script src="{{ 'morghew-postcode.js' | asset_url }}" defer="defer"></script>
+              <div
+                class="mgate"
+                data-postcode-gate
+                data-mapbox-token="{{ settings.log_mapbox_token | strip | escape }}"
+                data-farm="{{ settings.log_farm_postcode | default: 'TN30 7LR' | escape }}"
+                data-max-miles="{{ settings.log_max_miles | default: 20 }}"
+                data-districts="{{ settings.log_gate_districts | strip_newlines | escape }}"
+              >
+                <label class="mgate__label" for="mgate-input-{{ section.id }}">
+                  {%- render 'morghew-icon', icon: 'truck', size: 16 -%}
+                  Check we deliver to you
+                </label>
+                <div class="mgate__row">
+                  <input
+                    class="mgate__input"
+                    id="mgate-input-{{ section.id }}"
+                    data-gate-input
+                    type="text"
+                    autocomplete="postal-code"
+                    placeholder="Your postcode"
+                    aria-describedby="mgate-msg-{{ section.id }}"
+                  >
+                </div>
+                <p class="mgate__msg mgate__msg--checking">Checking your postcode&hellip;</p>
+                <p class="mgate__msg mgate__msg--ok" id="mgate-msg-{{ section.id }}">{{ settings.log_gate_ok_message }} <strong>Delivery to your postcode is <span data-gate-price></span>.</strong></p>
+                <p class="mgate__msg mgate__msg--bad">{{ settings.log_gate_fail_message }}</p>
+                <p class="mgate__msg mgate__msg--error">We couldn't check your postcode just now. Please try again in a moment.</p>
+              </div>
+            {%- endif -%}
+
+            <div class="est-atc-row">
+              <div class="est-qty" aria-label="Quantity">
+                <button type="button" class="est-qty__btn est-qty__btn--minus" aria-label="Decrease">&minus;</button>
+                <input class="est-qty__n" type="number" name="quantity" id="est-qty-{{ section.id }}" value="1" min="1" inputmode="numeric" aria-label="Quantity">
+                <button type="button" class="est-qty__btn est-qty__btn--plus" aria-label="Increase">+</button>
+              </div>
+              <button type="submit" name="add" class="est-atc" id="est-atc-{{ section.id }}">
+                <span class="est-atc__label">Add to Basket &middot; {{ product.selected_or_first_available_variant.price | money }}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            </div>
+            {%- if section.settings.delivery_note != blank -%}
+              <p class="est-delivery">{%- render 'morghew-icon', icon: 'truck', size: 16 -%}{{ section.settings.delivery_note }}</p>
+            {%- endif -%}
+            {%- liquid
+              # Trust ticks: a custom.trust_1/2/3 metafield (per-product exception)
+              # beats everything. Otherwise, gated products (the postcode-check
+              # tag) always show the shared "priced by distance" copy from Theme
+              # settings, regardless of which template the product happens to be
+              # on - two nearly-identical templates each carrying their own copy
+              # is what caused every estate-produce product to show firewood's
+              # per-mile message. Non-gated products keep the template's own text.
+              # A value of "-" hides that line.
+              if _gate_on
+                assign _d1 = settings.log_gate_trust_1
+                assign _d2 = settings.log_gate_trust_2
+                assign _d3 = settings.log_gate_trust_3
+              else
+                assign _d1 = section.settings.trust_1
+                assign _d2 = section.settings.trust_2
+                assign _d3 = section.settings.trust_3
+              endif
+              assign _t1 = product.metafields.custom.trust_1.value | default: _d1
+              assign _t2 = product.metafields.custom.trust_2.value | default: _d2
+              assign _t3 = product.metafields.custom.trust_3.value | default: _d3
+              if _t1 == '-'
+                assign _t1 = ''
+              endif
+              if _t2 == '-'
+                assign _t2 = ''
+              endif
+              if _t3 == '-'
+                assign _t3 = ''
+              endif
+            -%}
+            {%- render 'product-trust', t1: _t1, t2: _t2, t3: _t3 -%}
+          </form>
+        </product-form>
+        <script type="application/json" id="est-variants-{{ section.id }}">
+          {{ product.variants | json }}
+        </script>
+        <script type="application/json" id="est-prices-{{ section.id }}">{ {%- for v in product.variants -%}"{{ v.id }}": {{ v.price | money | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%} }</script>
+        <script type="application/json" id="est-varimg-{{ section.id }}">{ {%- for v in product.variants -%}"{{ v.id }}": {% if v.featured_image %}{{ v.featured_image | image_url: width: 1400 | json }}{% else %}null{% endif %}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%} }</script>
+      </div>
+    </div>
+
+      {%- if _story_html != blank -%}
+        <div class="est-story">
+          <div class="est-story__head">
+            <p class="est-story__eyebrow">{{ section.settings.story_eyebrow | default: 'About' }}</p>
+            <h2 class="est-story__heading">{{ section.settings.story_heading | default: 'The story' }}</h2>
+          </div>
+          <div class="est-story__body">{{ _story_html }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- liquid
+        assign attrs = product.metafields.custom.product_attributes_1
+        assign has_attrs = false
+        if attrs != blank
+          assign has_attrs = true
+        endif
+        assign floral = product.metafields.custom.floral_source
+        assign harvest = product.metafields.custom.harvest
+        assign cut = product.metafields.custom.cut
+        assign wood = product.metafields.custom.wood_type
+      -%}
+      {%- if has_attrs or floral != blank or harvest != blank or cut != blank or wood != blank -%}
+        <div class="est-facts">
+          <div class="est-facts__head">
+            <p class="est-facts__eyebrow">{{ section.settings.facts_eyebrow | default: 'Details' }}</p>
+            <h2 class="est-facts__heading">{{ section.settings.facts_heading | default: 'Good to know' }}</h2>
+          </div>
+          <div class="est-facts__body">
+            {%- if has_attrs -%}
+              <ul class="est-facts__chips">
+                {%- if attrs.type contains 'list' -%}
+                  {%- for a in attrs.value -%}<li class="est-facts__chip">{{ a }}</li>{%- endfor -%}
+                {%- else -%}
+                  <li class="est-facts__chip">{{ attrs.value }}</li>
+                {%- endif -%}
+              </ul>
+            {%- endif -%}
+            {%- if floral != blank or harvest != blank or cut != blank or wood != blank -%}
+              <dl class="est-facts__spec">
+                {%- if cut != blank -%}<dt>Cut</dt><dd>{{ cut.value | default: cut }}</dd>{%- endif -%}
+                {%- if wood != blank -%}<dt>Wood</dt><dd>{{ wood.value | default: wood }}</dd>{%- endif -%}
+                {%- if floral != blank -%}<dt>Floral source</dt><dd>{{ floral.value | default: floral }}</dd>{%- endif -%}
+                {%- if harvest != blank -%}<dt>Harvest</dt><dd>{{ harvest.value | default: harvest }}</dd>{%- endif -%}
+              </dl>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} "Recipes that use this product" — reverse-lookup the recipes blog (recipe_featured_product / recipe_shop_items). Link once on the recipe; appears here automatically. Max 3. {%- endcomment -%}
+      {%- capture est_recipe_cards -%}
+        {%- assign _rc = 0 -%}
+        {%- for art in blogs.recipes.articles -%}
+          {%- if _rc >= 3 -%}{%- break -%}{%- endif -%}
+          {%- assign _match = false -%}
+          {%- assign _feat = art.metafields.custom.recipe_featured_product.value -%}
+          {%- if _feat and _feat.id == product.id -%}{%- assign _match = true -%}{%- endif -%}
+          {%- unless _match -%}
+            {%- for _v in art.metafields.custom.recipe_shop_items.value -%}
+              {%- if _v.product.id == product.id -%}{%- assign _match = true -%}{%- break -%}{%- endif -%}
+            {%- endfor -%}
+          {%- endunless -%}
+          {%- if _match -%}
+            {%- assign _rc = _rc | plus: 1 -%}
+            <a class="est-recipe-card" href="{{ art.url }}">
+              {%- if art.image != blank -%}
+                <span class="est-recipe-card__img"><img src="{{ art.image | image_url: width: 600 }}" alt="{{ art.title | escape }}" loading="lazy" width="600" height="400"></span>
+              {%- endif -%}
+              <span class="est-recipe-card__body">
+                <span class="est-recipe-card__title">{{ art.title }}</span>
+                <span class="est-recipe-card__link">Read the recipe &rarr;</span>
+              </span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if est_recipe_cards != blank -%}
+        <div class="est-recipes">
+          <p class="est-recipes__eyebrow">{{ section.settings.recipes_eyebrow | default: 'Cook it well' }}</p>
+          <h2 class="est-recipes__head">{{ section.settings.recipes_heading | default: 'Cook it up' }}</h2>
+          <div class="est-recipes__grid">{{ est_recipe_cards }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- assign rel = product.collections.first -%}
+      {%- if rel != blank and rel.products.size > 1 -%}
+        <div class="est-related">
+          <p class="est-related__eyebrow">{{ section.settings.related_eyebrow | default: 'You may also like' }}</p>
+          {%- assign _rel_head = section.settings.related_heading -%}
+          {%- if _rel_head == blank -%}{%- assign _rel_head = 'More from the ' | append: rel.title | downcase -%}{%- endif -%}
+          <h2 class="est-related__head">{{ _rel_head }}</h2>
+          <div class="est-related__grid">
+            {%- assign shown = 0 -%}
+            {%- for rp in rel.products limit: 8 -%}
+              {%- if rp.id != product.id and shown < 4 -%}
+                {%- render 'card-potato', product: rp -%}
+                {%- assign shown = shown | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function () {
+  var sid = '{{ section.id }}';
+  var mainImg = document.getElementById('est-main-' + sid);
+  document.querySelectorAll('.est-gallery__thumb').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.est-gallery__thumb').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt || ''; }
+    });
+  });
+
+  /* ── Option-driven variant picker ── */
+  var variants = JSON.parse((document.getElementById('est-variants-' + sid) || {}).textContent || '[]');
+  var prices   = JSON.parse((document.getElementById('est-prices-' + sid) || {}).textContent || '{}');
+  var varimg   = JSON.parse((document.getElementById('est-varimg-' + sid) || {}).textContent || '{}');
+  var vidInput = document.getElementById('est-vid-' + sid);
+  var atcBtn   = document.getElementById('est-atc-' + sid);
+  var atcLabel = atcBtn ? atcBtn.querySelector('.est-atc__label') : null;
+  var optGroups = Array.prototype.slice.call(document.querySelectorAll('#est-form-' + sid + ' .est-opt'));
+
+  var selected = [];
+  optGroups.forEach(function (g) {
+    var t = g.querySelector('.est-opt__tile.is-active') || g.querySelector('.est-opt__tile');
+    if (t) selected[parseInt(t.dataset.opt, 10)] = t.dataset.value;
+  });
+
+  function matchVariant() {
+    return variants.find(function (v) {
+      return selected.every(function (val, i) { return v['option' + (i + 1)] === val; });
+    });
+  }
+  function refresh() {
+    var v = matchVariant();
+    if (v) {
+      if (vidInput) vidInput.value = v.id;
+      if (atcBtn) atcBtn.disabled = !v.available;
+      if (atcLabel) atcLabel.textContent = v.available ? ('Add to Basket · ' + (prices[v.id] || '')) : 'Sold out';
+      var priceLine = document.getElementById('est-price-' + sid);
+      if (priceLine && prices[v.id]) priceLine.textContent = prices[v.id];
+      if (mainImg && varimg[v.id]) {
+        mainImg.src = varimg[v.id];
+        document.querySelectorAll('.est-gallery__thumb').forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.src === varimg[v.id]);
+        });
+      }
+    } else if (atcBtn) {
+      atcBtn.disabled = true;
+      if (atcLabel) atcLabel.textContent = 'Unavailable';
+    }
+  }
+  optGroups.forEach(function (g) {
+    g.querySelectorAll('.est-opt__tile').forEach(function (tile) {
+      tile.addEventListener('click', function () {
+        var idx = parseInt(tile.dataset.opt, 10);
+        g.querySelectorAll('.est-opt__tile').forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-pressed', 'false'); });
+        tile.classList.add('is-active');
+        tile.setAttribute('aria-pressed', 'true');
+        selected[idx] = tile.dataset.value;
+        refresh();
+      });
+    });
+  });
+  refresh();
+
+  /* ── Quantity stepper ── */
+  var qtyInput = document.getElementById('est-qty-' + sid);
+  if (qtyInput) {
+    document.querySelectorAll('#est-form-' + sid + ' .est-qty__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var q = parseInt(qtyInput.value, 10) || 1;
+        qtyInput.value = btn.classList.contains('est-qty__btn--minus') ? Math.max(1, q - 1) : q + 1;
+      });
+    });
+    qtyInput.addEventListener('change', function () { qtyInput.value = Math.max(1, parseInt(qtyInput.value, 10) || 1); });
+  }
+}());
+</script>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Estate produce product",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "delivery_note", "label": "Delivery note", "default": "Free UK delivery over £40 · packed and shipped in 1 working day" },
+    { "type": "header", "content": "Buy-box trust row" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Freshly made on the estate" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free UK delivery over £40" },
+    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" },
+    { "type": "header", "content": "Section headings", "info": "Shared across all products on this template. Leave a field blank to use its default." },
+    { "type": "text", "id": "story_eyebrow", "label": "Story eyebrow", "default": "About" },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "The story" },
+    { "type": "text", "id": "facts_eyebrow", "label": "Good to know eyebrow", "default": "Details" },
+    { "type": "text", "id": "facts_heading", "label": "Good to know heading", "default": "Good to know" },
+    { "type": "text", "id": "recipes_eyebrow", "label": "Recipes eyebrow", "default": "Cook it well" },
+    { "type": "text", "id": "recipes_heading", "label": "Recipes heading", "default": "Cook it up" },
+    { "type": "text", "id": "related_eyebrow", "label": "Related eyebrow", "default": "You may also like" },
+    { "type": "text", "id": "related_heading", "label": "Related heading", "info": "Blank = \"More from the [collection]\"" }
+  ],
+  "presets": [{ "name": "Estate produce product" }]
+}
+{% endschema %}

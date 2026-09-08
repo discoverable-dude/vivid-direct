@@ -1,0 +1,9 @@
+{%- comment -%}
+  Flesh-colour badge from custom.flesh_colour. Usage: {% render 'card-flesh', product: product %}
+{%- endcomment -%}
+{%- assign _f = product.metafields.custom.flesh_colour -%}
+{%- assign _fv = _f.value -%}
+{%- if _f.type contains 'list' -%}{%- assign _fv = _f.value | first -%}{%- endif -%}
+{%- if _fv != blank -%}
+  <span class="mcard__flesh"><span class="mcard__dot mcard__dot--{{ _fv | downcase }}"></span>{{ _fv | capitalize }} flesh</span>
+{%- endif -%}

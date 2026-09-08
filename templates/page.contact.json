@@ -1,0 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "morghew_hero_EwMPR4": {
+      "type": "morghew-hero",
+      "name": "Morghew Hero",
+      "settings": {
+        "bg_image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0019.jpg",
+        "image_opacity": 40,
+        "show_overlay": true,
+        "bg_color": "#141a16",
+        "eyebrow": "Get in touch",
+        "headline": "Contact Us",
+        "text": "<p>No enquiry is too big or too small.</p>",
+        "height": "md",
+        "alignment": "left",
+        "button_1_label": "",
+        "button_1_url": "",
+        "button_2_label": "",
+        "button_2_url": ""
+      }
+    },
+    "contact_details": {
+      "type": "morghew-contact-details",
+      "settings": {
+        "eyebrow": "The Potato Shop",
+        "heading": "Call in, or come and see us.",
+        "phone_label": "Call the estate office",
+        "phone": "01580 766 866",
+        "phone_note": "If we are out on the farm, leave a message and we will ring you back.",
+        "email_label": "Email us",
+        "email": "Potatoshop@morghew.com",
+        "email_note": "Or use the form below and it comes to the same inbox.",
+        "hours_label": "Farm shop hours",
+        "hours": "Staffed 9am to 3pm, every day",
+        "hours_note": "The Honesty Stall is open at all times, whenever you are passing.",
+        "address_label": "Find us",
+        "address": "<p>The Potato Shop, Morghew Park Estate<br/>Smallhythe Road, Tenterden<br/>Kent TN30 7LR</p>",
+        "directions": "Heading down Smallhythe Road (B2082) away from Tenterden High Street, take the second drive on your right after the Tesco entrance. Follow the signs a quarter mile up the private road.",
+        "map_query": "The Potato Shop, Morghew Park Estate, Smallhythe Road, Tenterden TN30 7LR",
+        "map_zoom": 14,
+        "secondary_label": "Plan a visit",
+        "secondary_url": "/pages/visit-us"
+      }
+    },
+    "morghew_form_wPyMjc": {
+      "type": "morghew-form",
+      "blocks": {
+        "field_KMEqTe": {
+          "type": "field",
+          "settings": {
+            "type": "text",
+            "label": "Your name",
+            "placeholder": "Jane Smith",
+            "required": true,
+            "width": "half"
+          }
+        },
+        "field_WVVeFr": {
+          "type": "field",
+          "settings": {
+            "type": "text",
+            "label": "Business name",
+            "placeholder": "The Crown, Tenterden",
+            "required": false,
+            "width": "half"
+          }
+        },
+        "field_tM3XQz": {
+          "type": "field",
+          "settings": {
+            "type": "email",
+            "label": "Email address",
+            "placeholder": "jane@example.com",
+            "required": true,
+            "width": "half"
+          }
+        },
+        "field_epA6yW": {
+          "type": "field",
+          "settings": {
+            "type": "tel",
+            "label": "Phone (optional)",
+            "placeholder": "+44 7700 000000",
+            "required": false,
+            "width": "half"
+          }
+        },
+        "field_H8nQ3n": {
+          "type": "field",
+          "settings": {
+            "type": "textarea",
+            "label": "Tell us what you need",
+            "placeholder": "Varieties you're interested in, volumes, delivery area…",
+            "required": true,
+            "width": "half"
+          }
+        }
+      },
+      "block_order": [
+        "field_KMEqTe",
+        "field_WVVeFr",
+        "field_tM3XQz",
+        "field_epA6yW",
+        "field_H8nQ3n"
+      ],
+      "name": "Morghew Custom Form",
+      "settings": {
+        "bg": "paper",
+        "eyebrow": "",
+        "heading": "Get in touch",
+        "intro": "<p>Fill in the form below and we'll normally get back to you within two working days.</p>",
+        "submit_label": "Send enquiry",
+        "success_message": "Thanks — we've got your message and will be in touch shortly."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "morghew_hero_EwMPR4",
+    "contact_details",
+    "morghew_form_wPyMjc"
+  ]
+}

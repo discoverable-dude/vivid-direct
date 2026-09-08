@@ -1,0 +1,569 @@
+/* morghew-crate.css — cart page (the Crate) styles.
+   Extracted from morghew-sections.css so ~13KB no longer render-blocks non-cart pages.
+   Loaded by sections/cart-crate.liquid. */
+
+/* ================================================
+   CART — THE CRATE
+   ================================================ */
+
+.crate-page {
+  padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 7vw, 104px);
+  background: var(--hessian-weave), var(--paper);
+  min-height: 60vh;
+}
+.crate-loading { opacity: 0.55; pointer-events: none; transition: opacity 0.2s; }
+
+/* Header */
+.crate-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.crate-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.crate-title {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--ink);
+}
+.crate-continue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.crate-continue:hover { color: var(--ink); }
+
+/* Empty state */
+.crate-empty {
+  padding: clamp(48px, 8vw, 100px) 0;
+  text-align: center;
+}
+
+/* Two-column grid */
+.crate-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Items container */
+.crate-items {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  overflow: hidden;
+}
+
+/* Single cart row */
+.crate-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  padding: 22px 52px 22px 22px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.crate-row:last-child { border-bottom: none; }
+
+.crate-row__img {
+  display: block;
+  width: 90px;
+  height: 90px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--hessian-weave), var(--paper-2);
+  flex-shrink: 0;
+}
+.crate-row__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.crate-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.crate-row__meta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.crate-row__name {
+  font-family: var(--font-head);
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ink);
+  text-decoration: none;
+  margin: 0;
+}
+.crate-row__name:hover { color: var(--hessian-text); }
+
+/* Variant pills in cart */
+.crate-vtiles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.crate-vtile {
+  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--line);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  line-height: 1;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+.crate-vtile:hover:not(:disabled) { border-color: var(--ink); }
+.crate-vtile.is-active {
+  background: var(--footer-bg);
+  border-color: var(--footer-bg);
+  color: var(--paper);
+}
+.crate-vtile.is-sold-out { opacity: 0.38; cursor: not-allowed; }
+
+/* Qty + price row */
+.crate-row__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.crate-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.crate-qty__btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s;
+}
+.crate-qty__btn:hover { border-color: var(--ink); background: var(--paper-2); }
+.crate-qty__val {
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+}
+.crate-row__price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* Remove × */
+.crate-row__remove {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+  padding: 0;
+}
+.crate-row__remove:hover { color: var(--ink); background: var(--paper-2); }
+
+/* Order note */
+.crate-note {
+  display: block;
+  padding: 20px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  margin-top: 14px;
+}
+.crate-note__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 10px;
+}
+.crate-note__ta {
+  width: 100%;
+  min-height: 86px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  padding: 11px 14px;
+  resize: vertical;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.crate-note__ta:focus { outline: none; border-color: var(--ink); }
+.crate-note__ta::placeholder { color: var(--ink-soft); opacity: 0.55; }
+
+/* Summary panel */
+.crate-summary { position: sticky; top: 24px; }
+.crate-summary__inner {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px 28px;
+}
+.crate-summary__heading {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 18px;
+  color: var(--ink);
+}
+
+/* Delivery progress */
+.crate-deliv { margin-bottom: 18px; }
+.crate-deliv__msg {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 0 0 7px;
+}
+.crate-deliv__msg.is-free { color: var(--moss); }
+.crate-deliv__track {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.crate-deliv__fill {
+  height: 100%;
+  background: var(--moss);
+  border-radius: 2px;
+}
+
+/* Totals */
+.crate-totals {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.crate-totals__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+.crate-totals__row .is-free { color: var(--moss); font-weight: 600; }
+.crate-totals__row--total { font-weight: 700; font-size: 17px; padding-top: 5px; }
+
+/* Checkout button */
+.crate-checkout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px 22px;
+  background: var(--cta);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s;
+  margin-bottom: 14px;
+}
+.crate-checkout-btn:hover { background: var(--cta-dark); }
+
+/* Trust copy */
+.crate-trust-copy {
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 0 0 5px;
+  line-height: 1.5;
+}
+
+/* Trust icon list */
+.crate-trust-list {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.crate-trust-list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.crate-trust-list svg { flex-shrink: 0; color: var(--hessian); }
+
+/* Pairs Well With */
+.crate-recs {
+  padding: clamp(48px, 6vw, 80px) 0;
+  background: var(--hessian-weave), var(--paper-2);
+}
+.crate-recs__eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.crate-recs__heading {
+  font-family: var(--font-head);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0 0 34px;
+  color: var(--ink);
+}
+.crate-recs__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+/* Rec product card */
+.crate-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s;
+}
+.crate-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.crate-card__img-wrap {
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--hessian-weave), var(--paper-2);
+}
+.crate-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+.crate-card:hover .crate-card__img-wrap img { transform: scale(1.04); }
+.crate-card__info {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.crate-card__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.1;
+  margin: 0 0 4px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.crate-card__name:hover { color: var(--hessian-text); }
+.crate-card__sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 auto;
+  padding-bottom: 12px;
+}
+.crate-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+.crate-card__price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.crate-card__add {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  background: var(--clay);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.crate-card__add:hover { background: var(--rust); }
+.crate-card__sold {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* Cart responsive */
+@media (max-width: 960px) {
+  .crate-grid { grid-template-columns: 1fr; }
+  .crate-summary { position: static; }
+  .crate-recs__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .crate-row { grid-template-columns: 72px 1fr; padding: 18px 44px 18px 18px; gap: 14px; }
+  .crate-row__img { width: 72px; height: 72px; }
+  .crate-recs__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  /* Enlarge touch targets on mobile */
+  .crate-qty__btn { width: 40px; height: 40px; font-size: 20px; }
+  .crate-row__remove { width: 40px; height: 40px; top: 8px; right: 8px; }
+  .crate-vtile { padding: 9px 14px; }
+}
+
+/* ================================================
+   CART — LOADING & FEEDBACK
+   ================================================ */
+@keyframes crate-spin { to { transform: rotate(360deg); } }
+
+/* While any cart mutation is in flight, block further clicks. */
+body.crate-busy { cursor: progress; }
+body.crate-busy .crate-qty__btn,
+body.crate-busy .crate-vtile,
+body.crate-busy .crate-row__remove,
+body.crate-busy .crate-card__add,
+body.crate-busy .crate-checkout-btn { pointer-events: none; }
+
+/* Row being updated: dim its contents, spin an overlay on top. */
+.crate-row.is-loading { pointer-events: none; }
+.crate-row.is-loading > * { opacity: 0.3; transition: opacity 0.15s ease; }
+.crate-row.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border: 3px solid color-mix(in srgb, var(--footer-bg) 25%, transparent);
+  border-top-color: var(--footer-bg);
+  border-radius: 50%;
+  animation: crate-spin 0.7s linear infinite;
+  z-index: 2;
+}
+
+/* Order summary recalculating. */
+.crate-summary.is-loading .crate-summary__inner { opacity: 0.45; transition: opacity 0.15s ease; }
+.crate-summary.is-loading { position: sticky; }
+.crate-summary.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border: 3px solid color-mix(in srgb, var(--footer-bg) 25%, transparent);
+  border-top-color: var(--footer-bg);
+  border-radius: 50%;
+  animation: crate-spin 0.7s linear infinite;
+  z-index: 2;
+}
+
+/* Quick-add button spinner (Pairs Well With). */
+.crate-card__add.is-loading { position: relative; color: transparent; pointer-events: none; }
+.crate-card__add.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid color-mix(in srgb, var(--paper) 40%, transparent);
+  border-top-color: var(--paper);
+  border-radius: 50%;
+  animation: crate-spin 0.7s linear infinite;
+}
+
+/* Toast — graceful error surface (e.g. "sold out"). */
+.crate-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 16px);
+  max-width: min(90vw, 420px);
+  padding: 14px 20px;
+  background: var(--footer-bg);
+  color: var(--paper);
+  font-size: 14px;
+  line-height: 1.4;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+.crate-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }

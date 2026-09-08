@@ -1,0 +1,293 @@
+<footer class="mft" id="footer-{{ section.id }}">
+
+  <div class="wrap mft__top">
+
+    {%- comment -%} LEFT — Logo, blurb, newsletter {%- endcomment -%}
+    <div class="mft__brand">
+
+      <a href="{{ routes.root_url }}" class="mft__logo" aria-label="{{ shop.name }}">
+        {%- if section.settings.footer_logo != blank -%}
+          <img
+            src="{{ section.settings.footer_logo | image_url: width: 400 }}"
+            alt="{{ section.settings.footer_logo.alt | default: shop.name | escape }}"
+            loading="lazy">
+        {%- elsif settings.logo != blank -%}
+          <img
+            src="{{ settings.logo | image_url: width: 400 }}"
+            alt="{{ settings.logo.alt | default: shop.name | escape }}"
+            class="mft__logo-fallback"
+            loading="lazy">
+        {%- else -%}
+          <span class="mft__shopname">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      {%- if section.settings.blurb != blank -%}
+        <p class="mft__blurb">{{ section.settings.blurb }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.phone != blank -%}
+        {%- assign _tel = section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
+        {%- assign _first = _tel | slice: 0 -%}
+        {%- if _first == '0' -%}
+          {%- assign _tel = _tel | slice: 1, 19 | prepend: '+44' -%}
+        {%- endif -%}
+        <a class="mft__phone" href="tel:{{ _tel }}">
+          {% render 'morghew-icon', icon: 'phone', size: 17 %}
+          <span>{{ section.settings.phone | escape }}</span>
+        </a>
+      {%- endif -%}
+
+      <div class="mft__news">
+        {%- if section.settings.newsletter_label != blank -%}
+          <label class="mft__news-label" for="mft-email-{{ section.id }}">
+            {{ section.settings.newsletter_label | escape }}
+          </label>
+        {%- endif -%}
+        {%- form 'customer', id: "mft-newsletter-{{ section.id }}" -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="mft__news-row">
+            <input
+              type="email"
+              id="mft-email-{{ section.id }}"
+              name="contact[email]"
+              placeholder="{{ section.settings.email_placeholder | default: 'your@email.com' | escape }}"
+              autocomplete="email"
+              required>
+            <button type="submit" class="mft__join">
+              {{ section.settings.newsletter_button | default: 'Join' | escape }}
+            </button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="mft__success">{{ 'newsletter.success' | t }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+      {%- if section.settings.show_social -%}
+        {%- render 'social-icons', class: 'mft__social' -%}
+      {%- endif -%}
+
+    </div>
+
+    {%- comment -%} RIGHT — Three link columns {%- endcomment -%}
+    <div class="mft__cols">
+
+      {%- for i in (1..3) -%}
+        {%- liquid
+          case i
+            when 1
+              assign col_heading = section.settings.col1_heading
+              assign col_menu = section.settings.col1_menu
+            when 2
+              assign col_heading = section.settings.col2_heading
+              assign col_menu = section.settings.col2_menu
+            when 3
+              assign col_heading = section.settings.col3_heading
+              assign col_menu = section.settings.col3_menu
+          endcase
+          assign col_linklist = linklists[col_menu]
+        -%}
+        <div class="mft__col">
+          {%- if col_heading != blank -%}
+            <h2 class="mft__col-h">{{ col_heading | escape }}</h2>
+          {%- endif -%}
+          {%- if col_linklist != blank and col_linklist.links.size > 0 -%}
+            {%- for link in col_linklist.links -%}
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+    </div>
+
+  </div>
+
+  <div class="wrap mft__bot">
+    <span>{{ section.settings.bottom_left | default: '© Morghew Park Estate' }}</span>
+    <span>{{ section.settings.bottom_mid | default: 'Tenterden · Kent' }}</span>
+    <span>{{ section.settings.bottom_right | default: 'Please drink responsibly' }}</span>
+  </div>
+
+</footer>
+
+{% style %}
+  .mft__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 14px 0 4px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .mft__phone svg { flex: 0 0 auto; color: var(--straw); }
+  .mft__phone:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .mft .list-social.mft__social {
+    display: flex;
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .mft .mft__social .list-social__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1.5px solid rgba(246, 240, 234, 0.35);
+    border-radius: 50%;
+    color: var(--paper);
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .mft .mft__social .list-social__link:hover {
+    border-color: var(--straw);
+    background: var(--straw);
+    color: var(--footer-bg);
+  }
+  .mft .mft__social .svg-wrapper {
+    display: flex;
+    width: 17px;
+    height: 17px;
+  }
+  .mft .mft__social .svg-wrapper svg { width: 100%; height: 100%; }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer logo",
+      "info": "Upload the white version of the logo. Falls back to the theme logo if not set."
+    },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Estate description",
+      "default": "A working farming estate near Tenterden, Kent. Heritage potatoes, estate produce, and a few good things besides."
+    },
+    {
+      "type": "header",
+      "content": "Contact & social"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "01580 763 158"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true,
+      "info": "The links come from Theme settings → Social media. Only filled-in networks appear."
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_label",
+      "label": "Label",
+      "default": "Estate news & what’s in season"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "your@email.com"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Button label",
+      "default": "Join"
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Heading",
+      "default": "The estate"
+    },
+    {
+      "type": "link_list",
+      "id": "col1_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Heading",
+      "default": "Visit & find us"
+    },
+    {
+      "type": "link_list",
+      "id": "col3_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "bottom_left",
+      "label": "Left text",
+      "default": "© Morghew Park Estate"
+    },
+    {
+      "type": "text",
+      "id": "bottom_mid",
+      "label": "Centre text",
+      "default": "Tenterden · Kent"
+    },
+    {
+      "type": "text",
+      "id": "bottom_right",
+      "label": "Right text",
+      "default": "Please drink responsibly"
+    }
+  ]
+}
+{% endschema %}

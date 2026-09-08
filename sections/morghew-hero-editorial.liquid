@@ -1,0 +1,85 @@
+{%- comment -%}
+  Morghew Editorial Hero — tall, bottom-aligned page hero for the editorial
+  pages (About / The Estate / The Shoot): breadcrumb strip, eyebrow, h1,
+  lede, optional stats row. Standalone variation — morghew-hero (used on
+  trade/contact) is deliberately left untouched.
+{%- endcomment -%}
+
+{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+
+{%- assign has_image = false -%}
+{%- if section.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}
+
+<section class="ehero{% if has_image %} ehero--img{% endif %}">
+  {%- if section.settings.crumb != blank -%}
+    <div class="wrap ehero-crumb-strip">
+      <nav class="ehero-crumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span aria-hidden="true">&rsaquo;</span>
+        <span>{{ section.settings.crumb }}</span>
+      </nav>
+    </div>
+  {%- endif -%}
+  {%- if has_image -%}
+    <img
+      class="ehero__bg"
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 2400 }} 2400w"
+      sizes="100vw"
+      alt="{{ section.settings.image.alt | escape }}"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+      style="opacity: {{ section.settings.image_opacity | default: 100 | divided_by: 100.0 }};"
+    >
+    <div class="ehero__scrim"></div>
+  {%- endif -%}
+  <div class="wrap ehero__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow{% if has_image %} eyebrow--light{% endif %}">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="ehero__h{% if has_image %} ehero__h--light{% endif %}">{{ section.settings.headline }}</h1>
+    {%- if section.settings.lede != blank -%}
+      <p class="ehero__lede{% if has_image %} ehero__lede--light{% endif %}">{{ section.settings.lede }}</p>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="ehero__stats">
+        {%- for block in section.blocks -%}
+          <div class="ehero__stat" {{ block.shopify_attributes }}>
+            <span class="ehero__stat-n">{{ block.settings.number }}</span>
+            <span class="ehero__stat-l">{{ block.settings.label }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Editorial Hero",
+  "tag": "section",
+  "class": "m-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Optional. Without an image the hero is a paper band with dark text." },
+    { "type": "range", "id": "image_opacity", "label": "Image opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 100, "info": "Lower it to dim a bright photo — the dark base shows through, keeping text readable." },
+    { "type": "text", "id": "crumb", "label": "Breadcrumb label", "info": "Optional. Shows Home › {label} above the hero." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About Morghew" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "A headline worth talking about." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "One or two sentences that set the scene for the page." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "30+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Heritage varieties" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Morghew Editorial Hero" } ]
+}
+{% endschema %}

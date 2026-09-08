@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "padding_top": 28, "padding_bottom": 28 }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "settings": {
+        "image": "shopify://shop_images/bluebell-view.jpg",
+        "crumb": "Flora & Fauna",
+        "eyebrow": "Wildlife on the Estate",
+        "headline": "The wild residents of Morghew Park.",
+        "lede": "Morghew Park Estate is home to a wide variety of plants and animals, both common and uncommon. From traditional Wealden upland down to classic marshland, with around 200 acres of mature and ancient woodland between, the Estate's habitats provide perfect conditions for some of our favourite creatures."
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Meet the residents",
+        "body": "Browse below to meet a few of the creatures that call the Estate home, from reed buntings in the dykes to jays burying acorns in the woods."
+      }
+    },
+    "split_reed_bunting": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/reed-bunting.png",
+        "tag": "Photographed on the Estate",
+        "ratio": "4 / 3",
+        "eyebrow": "Emberiza schoeniclus",
+        "heading": "Reed Bunting",
+        "body": "<p>'Sparrow-sized but slim with a long, deeply notched tail, the male has a black head, white collar and a drooping moustache. Females and winter males have a streaked head. In flight the tail looks black with broad, white edges.</p><p>Reed buntings are predominantly a farmland and wetland bird. Typically found in wet vegetation but has recently spread into farmland and, in winter, into gardens. When singing the male is usually perched on top of a bush, or reed' (RSPB, 2021).</p>"
+      }
+    },
+    "split_marsh_harrier": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "shopify://shop_images/marsh-harrier.png",
+        "tag": "Photographed on the Estate",
+        "ratio": "4 / 3",
+        "eyebrow": "Circus aeruginosus",
+        "heading": "Marsh Harrier",
+        "body": "<p>'The largest of the harriers, the marsh harrier can be recognised by its long tail and light flight with wings held in a shallow V. It is distinguishable from other harriers by its larger size, heavier build, broader wings and absence of white on the rump. Females are larger than males and have obvious creamy heads.</p><p>Its future in the UK is now more secure than at any time during the last century, but historical declines and subsequent recovery means it is an Amber List species. Marsh harriers are a Schedule 1 listed bird on The Wildlife and Countryside Act.</p><p>They are mainly found in eastern and south-east England, with some in the north-west, south-west and Scotland. They can be seen over reedbeds and marshes, as well as farmland near wetlands' (RSPB, 2021).</p>"
+      }
+    },
+    "split_jay": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/jay.png",
+        "tag": "Photographed on the Estate",
+        "ratio": "4 / 3",
+        "eyebrow": "Garrulus glandarius",
+        "heading": "Jay",
+        "body": "<p>'Although they are the most colourful of the crow family, jays are actually quite difficult to see. They are shy woodland birds, rarely moving far from cover. The screaming call usually lets you know a jay is nearby and it is usually given when a bird is on the move, so watch for a bird flying between the trees with its distinctive flash of white on the rump. Jays are famous for their acorn feeding habits and in the autumn you may see them burying acorns for retrieving later in the winter.</p><p>You can find Jays across most of the UK, except northern Scotland. Lives in both deciduous and coniferous woodland, parks and mature gardens. Often seen flying across a woodland glade giving its screeching call, it becomes more obvious in autumn when it may fly some distance in the open in search of acorns' (RSPB, 2021).</p>"
+      }
+    },
+    "split_orchid": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "shopify://shop_images/early-purple-orchid.png",
+        "tag": "Photographed on the Estate",
+        "ratio": "4 / 3",
+        "eyebrow": "Orchis mascula",
+        "heading": "Early Purple Orchid",
+        "body": "<p>The Early Purple Orchid 'adapts to a variety of habitats and can be found in hay meadows, woodland and often on roadside verges. It occurs mostly on non-acidic soils, and is also found in ancient woodland (especially coppice), chalk downland, grassy banks, limestone pavements and cliff-top grassland. It is widely distributed across the UK and Ireland.</p><p>The Early Purple Orchid was once a common plant, found in a variety of habitats. Sadly, these have also been places where urban development and modern farming methods have taken their toll. Although it is still found at sites throughout the UK it is by no means as abundant as it once was' (Plantlife, 2021).</p>"
+      }
+    },
+    "split_wagtail": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/yellow-wagtail.png",
+        "tag": "Photographed on the Estate",
+        "ratio": "4 / 3",
+        "eyebrow": "Motacilla flava",
+        "heading": "Yellow Wagtail",
+        "body": "<p>'The yellow wagtail is a small, graceful, yellow and green bird, with a medium-length tail and slender black legs. It spends much time walking or running in the ground. As its name implies, it wags its tail from time to time.</p><p>It is a summer visitor, migrating to winter in Africa. It breeds in a variety of habitats in the UK, including arable farmland, wet pastures and upland hay meadows. Serious declines in breeding numbers across all of these habitats place the yellow wagtail on the red list of birds of conservation concern' (RSPB, 2021).</p>"
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "eyebrow": "See it for yourself",
+        "heading": "Walk the footpaths, visit the farm",
+        "body": "Public footpaths cross parts of the Estate, and the Honesty Stall is open whenever you are passing. Header photo courtesy of Joyce Holland-Gladwish.",
+        "button_1_label": "Visit us",
+        "button_1_url": "/pages/visit-us",
+        "button_2_label": "About the Estate",
+        "button_2_url": "/pages/the-estate"
+      }
+    }
+  },
+  "order": ["main", "hero", "lede", "split_reed_bunting", "split_marsh_harrier", "split_jay", "split_orchid", "split_wagtail", "cta"]
+}

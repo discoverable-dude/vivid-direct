@@ -1,0 +1,384 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-bold",
+      "blocks": {
+        "word-roast": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "a Roast"
+          }
+        },
+        "word-mash": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "Mash"
+          }
+        },
+        "word-chips": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "Chips"
+          }
+        },
+        "word-jacket": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "Jacket Potato"
+          }
+        },
+        "word-salad": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "a Salad"
+          }
+        },
+        "word-bake": {
+          "type": "cycle_word",
+          "settings": {
+            "word": "a Bake"
+          }
+        }
+      },
+      "block_order": [
+        "word-roast",
+        "word-mash",
+        "word-chips",
+        "word-jacket",
+        "word-salad",
+        "word-bake"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/Potato Field Video (1).mp4",
+        "image": "shopify://shop_images/3WKiVOKvHqI-HD.jpg",
+        "video_url": "https://www.youtube.com/watch?v=3WKiVOKvHqI",
+        "eyebrow": "Morghew Estate · Tenterden, Kent",
+        "headline_prefix": "On the menu this week",
+        "lede": "Thirty heritage varieties grown in the Kent countryside, packed to order. Found in your favourite restaurants and on your doorstep.",
+        "cta_label": "Pick your potato →",
+        "cta_url": "shopify://collections/potato-shop",
+        "secondary_label": "Watch the film",
+        "secondary_url": "",
+        "ticker_text": "Grown in Kent · Packed by hand · 30 heritage varieties · Tracked next-day delivery ·"
+      }
+    },
+    "cooking-methods": {
+      "type": "cooking-methods",
+      "blocks": {
+        "method-dauphinoise": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "All Rounder",
+            "description": "Varieties that suit every day meals. Perfect for the whole family.",
+            "icon": "dauphinoise",
+            "accent": "plum",
+            "link": "shopify://collections/all-rounder"
+          }
+        },
+        "method-boil": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Boil",
+            "description": "For salads and sides. Waxy varieties hold their shape best.",
+            "icon": "boil",
+            "accent": "moss",
+            "link": "shopify://collections/boil"
+          }
+        },
+        "method-chips": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Chips",
+            "description": "Triple-cooked or chunky oven chips - starch is your friend.",
+            "icon": "chip",
+            "accent": "wheat",
+            "link": "shopify://collections/chip"
+          }
+        },
+        "method-jacket": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Jacket",
+            "description": "Baked whole until the skin blisters. Size and starch matter.",
+            "icon": "jacket",
+            "accent": "rust",
+            "link": "shopify://collections/jacket"
+          }
+        },
+        "method-mash": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Mash",
+            "description": "Silky and rich when made right. Go floury, never waxy.",
+            "icon": "mash",
+            "accent": "mustard",
+            "link": "shopify://collections/mash"
+          }
+        },
+        "method-roast": {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Roast",
+            "description": "Crispy on the outside and fluffy on the inside. Needs a floury high-starch variety.",
+            "icon": "roast",
+            "accent": "clay",
+            "link": "shopify://collections/potato-shop-roast"
+          }
+        }
+      },
+      "block_order": [
+        "method-dauphinoise",
+        "method-boil",
+        "method-chips",
+        "method-jacket",
+        "method-mash",
+        "method-roast"
+      ],
+      "settings": {
+        "eyebrow": "Browse by cooking method",
+        "title_plain": "Start with the plate,",
+        "title_highlight": "not the variety.",
+        "description": "Potatoes behave differently depending on how they're cooked. Pick your cooking method and we'll match you to the right variety."
+      }
+    },
+    "variety-rail": {
+      "type": "variety-rail",
+      "custom_css": [
+        ".variety-rail.variety-rail {background-image: none;}"
+      ],
+      "settings": {
+        "eyebrow": "The full table · 30 varieties",
+        "title": "Meet the potatoes",
+        "collection": "potato-shop",
+        "products_to_show": 8,
+        "view_all_label": "See all 30",
+        "view_all_url": ""
+      }
+    },
+    "morghew_beyond_GjkaPL": {
+      "type": "morghew-beyond",
+      "blocks": {
+        "product_y4jgmL": {
+          "type": "product",
+          "settings": {
+            "product": "potato-vodka",
+            "subtitle": "A refined spirit made from some pretty special potatoes."
+          }
+        },
+        "product_VR8yLt": {
+          "type": "product",
+          "settings": {
+            "product": "firewood-logs",
+            "subtitle": ""
+          }
+        },
+        "product_rx9atM": {
+          "type": "product",
+          "settings": {
+            "product": "venison-striploin",
+            "subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_y4jgmL",
+        "product_VR8yLt",
+        "product_rx9atM"
+      ],
+      "name": "Beyond the potato",
+      "settings": {
+        "image": "shopify://shop_images/SI_RM_PRD_MORGHEW_VODKA-0029.jpg",
+        "caption_eyebrow": "Morghew Estate",
+        "caption_quote": "“Not just potatoes.”",
+        "eyebrow": "More from the estate",
+        "heading": "Beyond the potato",
+        "intro": "<p>The same fields that produce our heritage varieties also yield rapeseed oil, heritage grain, wild game, and a potato vodka unlike anything else in Kent.</p>",
+        "free_threshold": 40,
+        "cta_label": "Browse all estate produce",
+        "cta_url": "shopify://collections/all-estate-produce"
+      }
+    },
+    "season-band": {
+      "type": "season-band",
+      "blocks": {
+        "card-1": {
+          "type": "season_card",
+          "settings": {
+            "image": "shopify://shop_images/IMG_9938.jpg",
+            "name": "Desiree",
+            "note": "Lifting now · Excellent all rounder",
+            "link": "shopify://products/desiree"
+          }
+        },
+        "card-2": {
+          "type": "season_card",
+          "settings": {
+            "image": "shopify://shop_images/SI_RM_PRD_MORGHEW_LA_RATTE-0069_45410c70-adf2-4c14-8788-1cac858f2912.jpg",
+            "name": "La Ratte",
+            "note": "The original Michelin star potato",
+            "link": "shopify://products/la-ratte"
+          }
+        },
+        "card-3": {
+          "type": "season_card",
+          "settings": {
+            "image": "shopify://shop_images/SI_RM_PDR_MORGHEW_DESIREE-0023_8b8cf941-3071-499e-8fe7-f86a7e6662d5.jpg",
+            "name": "Kerr's Pink",
+            "note": "A floury variety ideal for mash and roast.",
+            "link": "shopify://products/kerrs-pink"
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "eyebrow": "From the field",
+        "title": "Graded & Packed by Hand",
+        "subtitle": ""
+      }
+    },
+    "shard-moment": {
+      "type": "shard-moment",
+      "blocks": {
+        "stat-varieties": {
+          "type": "stat",
+          "settings": {
+            "number": "30",
+            "label": "Heritage varieties"
+          }
+        },
+        "stat-time": {
+          "type": "stat",
+          "settings": {
+            "number": "2 days",
+            "label": "Farm to table"
+          }
+        }
+      },
+      "block_order": [
+        "stat-varieties",
+        "stat-time"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/SI_RM_FOD_MORGHEW-2553.jpg",
+        "image_opacity": 55,
+        "title": "From Kent farm to your table in under 48 hours."
+      }
+    },
+    "recipe-feature": {
+      "type": "recipe-feature",
+      "blocks": {
+        "recipe-1": {
+          "type": "recipe",
+          "settings": {
+            "article": "recipes/patatas-bravas",
+            "title": "",
+            "best_with_product": "{{ block.settings.article.metafields.custom.recipe_featured_product.value }}",
+            "variety_note": "",
+            "cook_time": "{{ block.settings.article.metafields.custom.recipe_prep_time.value }} Prep | {{ block.settings.article.metafields.custom.recipe_cook_time.value }} Cook",
+            "url": ""
+          }
+        },
+        "recipe-2": {
+          "type": "recipe",
+          "settings": {
+            "article": "recipes/vegan-vitelotte-gnocchi",
+            "title": "",
+            "best_with_product": "{{ block.settings.article.metafields.custom.recipe_featured_product.value }}",
+            "variety_note": "",
+            "cook_time": "{{ block.settings.article.metafields.custom.recipe_prep_time.value }} Prep | {{ block.settings.article.metafields.custom.recipe_cook_time.value }} Cook",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "recipe-1",
+        "recipe-2"
+      ],
+      "settings": {
+        "title": "From the kitchen",
+        "view_all_label": "All recipes",
+        "view_all_url": ""
+      }
+    },
+    "customer_reviews_yJc9hA": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review_Q9A4rn": {
+          "type": "review",
+          "settings": {
+            "quote": "Genuinely the best roasting potatoes I've ever bought. Won't go back to supermarket spuds.",
+            "stars": 5,
+            "name": "Catherine B.",
+            "meta": "Heide Red 2kg · Website"
+          }
+        },
+        "review_HYGQjP": {
+          "type": "review",
+          "settings": {
+            "quote": "Ordered the mixed heritage box — incredible variety. The Pink Fir Apple is nutty and waxy, perfect with just butter and salt.",
+            "stars": 5,
+            "name": "Tom W.",
+            "meta": "Heritage Mixed Box · Website"
+          }
+        },
+        "review_nHtcDi": {
+          "type": "review",
+          "settings": {
+            "quote": "Fast delivery, beautifully packed. The potatoes actually taste like potatoes. We've signed up for the seasonal box.",
+            "stars": 5,
+            "name": "Janet M.",
+            "meta": "Seasonal Box · Facebook"
+          }
+        },
+        "review_jCWHiB": {
+          "type": "review",
+          "settings": {
+            "quote": "Bought a 10kg sack of Kerr's Pink. Brilliant for mash, made the most incredible shepherd's pie.",
+            "stars": 5,
+            "name": "Richard S.",
+            "meta": "Kerr's Pink 10kg · Facebook"
+          }
+        }
+      },
+      "block_order": [
+        "review_Q9A4rn",
+        "review_HYGQjP",
+        "review_nHtcDi",
+        "review_jCWHiB"
+      ],
+      "name": "Customer reviews",
+      "settings": {
+        "eyebrow": "Customer reviews",
+        "heading": "What our customers say",
+        "aggregate_score": "5.0",
+        "aggregate_stars": 5,
+        "aggregate_text": "Based on 120+ reviews",
+        "surface": "paper",
+        "texture": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "cooking-methods",
+    "variety-rail",
+    "morghew_beyond_GjkaPL",
+    "season-band",
+    "shard-moment",
+    "recipe-feature",
+    "customer_reviews_yJc9hA"
+  ]
+}

@@ -1,0 +1,71 @@
+/* morghew-social-proof.css — shared styles for the three social-proof sections
+   (customer-reviews, chef-testimonials, people-we-supply). Loaded per-section.
+   [data-surface] maps to the theme's existing tokens; text colour auto-flips on dark surfaces. */
+
+.msp { padding-block: var(--sec-pad); background: var(--msp-bg); color: var(--sec-ink); }
+.msp__wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--page-pad); }
+
+/* Surface mapping — light surfaces keep ink text; dark surfaces flip to paper. */
+.msp[data-surface="paper"] { --msp-bg: var(--paper);   --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="cream"] { --msp-bg: var(--paper-2); --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="wheat"] { --msp-bg: var(--wash-wheat); --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="sage"]  { --msp-bg: var(--wash-sage);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="clay"]  { --msp-bg: var(--wash-clay);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="soil"]  { --msp-bg: var(--wash-soil);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
+.msp[data-surface="bark"]  { --msp-bg: var(--bark); --sec-ink: var(--paper); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
+.msp[data-surface="ink"]   { --msp-bg: var(--ink);  --sec-ink: var(--paper); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
+
+/* Gold accent — darker gold on light surfaces (AA-safe for text), bright wheat on dark surfaces. */
+.msp { --msp-accent: var(--hessian-text); }
+.msp[data-surface="bark"], .msp[data-surface="ink"] { --msp-accent: var(--straw); }
+
+/* Texture overlay — layer the existing hessian weave on top of the surface colour. */
+.msp[data-texture="true"] { background: var(--hessian-weave), var(--msp-bg); }
+
+/* Shared header */
+.msp__eyebrow { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; font-weight: 700; color: var(--msp-accent); margin: 0 0 12px; }
+.msp__heading { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.01em; font-size: clamp(30px, 4vw, 44px); line-height: 1.05; margin: 0; color: var(--sec-ink); }
+
+/* Gold star row */
+.msp-stars { display: inline-flex; gap: 3px; color: var(--msp-accent); line-height: 0; }
+
+/* ── Customer reviews ── */
+.msp-reviews__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 40px; }
+.msp-reviews__agg { display: flex; align-items: center; gap: 14px; }
+.msp-reviews__score { font-family: var(--font-head); font-weight: 800; font-size: 48px; line-height: 1; color: var(--sec-ink); }
+.msp-reviews__agg-meta { display: flex; flex-direction: column; gap: 4px; }
+.msp-reviews__agg-text { font-family: var(--font-body); font-size: 13px; color: var(--sec-ink-soft); }
+.msp-reviews__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.msp-review { background: color-mix(in srgb, var(--sec-ink) 4%, transparent); border: 1px solid var(--sec-line); border-radius: var(--radius); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
+.msp[data-surface="paper"] .msp-review,
+.msp[data-surface="cream"] .msp-review { background: #fff; }
+.msp-review__quote { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--sec-ink); margin: 0; flex: 1; }
+.msp-review__foot { border-top: 1px solid var(--sec-line); padding-top: 14px; }
+.msp-review__name { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--sec-ink); margin: 0 0 2px; }
+.msp-review__meta { font-family: var(--font-body); font-size: 12px; color: var(--sec-ink-soft); margin: 0; }
+@media (max-width: 990px) { .msp-reviews__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 749px) { .msp-reviews__head { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 560px) { .msp-reviews__grid { grid-template-columns: 1fr; } }
+
+/* ── Chef testimonials ── */
+.msp-chefs__head { margin-bottom: 40px; }
+.msp-chefs__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--sec-line); }
+.msp-chef { margin: 0; padding: 40px 36px; display: flex; flex-direction: column; gap: 22px; border-right: 1px solid var(--sec-line); }
+.msp-chef:last-child { border-right: none; }
+.msp-chef__mark { font-family: var(--font-head); font-size: 44px; line-height: 0.5; color: var(--msp-accent); height: 22px; }
+.msp-chef__quote { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--sec-ink); margin: 0; flex: 1; }
+.msp-chef__foot { border-top: 1px solid var(--sec-line); padding-top: 18px; }
+.msp-chef__name { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--msp-accent); margin: 0 0 2px; }
+.msp-chef__role { font-family: var(--font-body); font-size: 12.5px; color: var(--sec-ink-soft); margin: 0; }
+@media (max-width: 990px) { .msp-chefs__grid { grid-template-columns: 1fr; } .msp-chef { border-right: none; border-bottom: 1px solid var(--sec-line); } .msp-chef:last-child { border-bottom: none; } }
+
+/* ── People we supply ── */
+.msp-supply__head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: end; margin-bottom: 40px; }
+.msp-supply__lede { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: var(--sec-ink-soft); text-align: right; }
+.msp-supply__lede p { margin: 0; }
+.msp-supply__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--sec-line); border-left: 1px solid var(--sec-line); }
+.msp-supply__cell { padding: 26px 28px; border-right: 1px solid var(--sec-line); border-bottom: 1px solid var(--sec-line); }
+.msp-supply__name { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--sec-ink); margin: 0 0 4px; }
+.msp-supply__loc { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; color: var(--sec-ink-soft); margin: 0; }
+@media (max-width: 749px) { .msp-supply__head { grid-template-columns: 1fr; } .msp-supply__lede { text-align: left; } .msp-supply__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .msp-supply__grid { grid-template-columns: 1fr; } }

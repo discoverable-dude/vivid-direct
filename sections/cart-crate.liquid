@@ -1,0 +1,302 @@
+{{ 'morghew-sections.css' | asset_url | stylesheet_tag }}
+{{ 'morghew-crate.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'morghew-cart.js' | asset_url }}" defer="defer"></script>
+
+{%- assign _free_threshold = 4000 -%}
+{%- assign _cart_total = cart.total_price -%}
+{%- assign _delivery_free = false -%}
+{%- if _cart_total >= _free_threshold -%}{%- assign _delivery_free = true -%}{%- endif -%}
+{%- assign _pct = _cart_total | times: 100 | divided_by: _free_threshold -%}
+{%- if _pct > 100 -%}{%- assign _pct = 100 -%}{%- endif -%}
+
+<div class="crate-page">
+  <div class="page-width">
+
+    {%- if cart == empty -%}
+      <div class="crate-empty">
+        <p class="crate-eyebrow">Your basket</p>
+        <h1 class="crate-title">Your basket is empty</h1>
+        <a href="{{ routes.all_products_collection_url }}" class="mpg-btn mpg-btn--primary" style="display:inline-block;margin-top:28px;">Shop the harvest</a>
+      </div>
+
+    {%- else -%}
+
+      <div class="crate-header">
+        <div>
+          <p class="crate-eyebrow">Your basket</p>
+          <h1 class="crate-title">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} from the estate</h1>
+        </div>
+        <a href="{{ routes.all_products_collection_url }}" class="crate-continue">← Continue shopping</a>
+      </div>
+
+      <div class="crate-grid">
+
+        <!-- ── LEFT: items + note ── -->
+        <div>
+          <div class="crate-items">
+            <form action="{{ routes.cart_url }}" method="post" id="cart">
+              <button type="submit" name="checkout" class="visually-hidden" aria-hidden="true" tabindex="-1">Checkout</button>
+
+              {%- for item in cart.items -%}
+
+                {%- comment -%} Cook methods string {%- endcomment -%}
+                {%- assign _tax_cooking = item.product.metafields.shopify.cooking-method.value -%}
+                {%- assign _cook_str = "" -%}
+                {%- for _m in _tax_cooking -%}
+                  {%- assign _m_str = _m.label | default: _m | downcase -%}
+                  {%- assign _m_label = "" -%}
+                  {%- case _m_str -%}
+                    {%- when "boiling"          -%}{%- assign _m_label = "Boil"   -%}
+                    {%- when "steaming"         -%}{%- assign _m_label = "Steam"  -%}
+                    {%- when "roasting"         -%}{%- assign _m_label = "Roast"  -%}
+                    {%- when "mashing"          -%}{%- assign _m_label = "Mash"   -%}
+                    {%- when "chips", "frying"  -%}{%- assign _m_label = "Chip"   -%}
+                    {%- when "jacket", "baking" -%}{%- assign _m_label = "Jacket" -%}
+                  {%- endcase -%}
+                  {%- if _m_label != "" -%}
+                    {%- if _cook_str != "" -%}{%- assign _cook_str = _cook_str | append: " / " -%}{%- endif -%}
+                    {%- assign _cook_str = _cook_str | append: _m_label -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- comment -%} Flesh variety label {%- endcomment -%}
+                {%- assign _tax_variety = item.product.metafields.shopify.potato-variety.value -%}
+                {%- assign _flesh_label = "" -%}
+                {%- if _tax_variety != blank -%}
+                  {%- assign _v = _tax_variety | first -%}
+                  {%- assign _flesh_label = _v.label | default: _v -%}
+                {%- endif -%}
+
+                <div class="crate-row" id="CartItem-{{ item.index | plus: 1 }}">
+
+                  <a href="{{ item.url }}" class="crate-row__img" aria-hidden="true" tabindex="-1">
+                    {%- if item.image -%}
+                      <img
+                        src="{{ item.image | image_url: width: 200 }}"
+                        alt="{{ item.image.alt | escape }}"
+                        width="90" height="90"
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+                  </a>
+
+                  <div class="crate-row__body">
+                    {%- if _cook_str != "" or _flesh_label != "" -%}
+                      <p class="crate-row__meta">
+                        {{- _cook_str | upcase -}}
+                        {%- if _cook_str != "" and _flesh_label != "" %} · {% endif -%}
+                        {{- _flesh_label | upcase -}}
+                        {%- if _flesh_label != "" %} FLESH{% endif -%}
+                      </p>
+                    {%- endif -%}
+
+                    <a href="{{ item.url }}" class="crate-row__name">{{ item.product.title }}</a>
+
+                    {%- if item.product.has_only_default_variant == false -%}
+                      <div class="crate-vtiles"
+                        data-vid="{{ item.variant.id }}"
+                        data-qty="{{ item.quantity }}"
+                      >
+                        {%- for v in item.product.variants -%}
+                          <button
+                            type="button"
+                            class="crate-vtile{% if v.id == item.variant.id %} is-active{% endif %}{% unless v.available %} is-sold-out{% endunless %}"
+                            data-vid="{{ v.id }}"
+                            {% unless v.available %}disabled{% endunless %}
+                          >{{ v.title }}</button>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- liquid
+                      # The distance-priced delivery line: quantity encodes the
+                      # charge (£1.50 units), so hide the stepper and show the
+                      # distance instead. Line price still shows the full charge.
+                      assign _is_charge = false
+                      if settings.log_charge_product != blank and item.product_id == settings.log_charge_product.id
+                        assign _is_charge = true
+                      endif
+                      assign _dist = ''
+                      if _is_charge
+                        for p in item.properties
+                          if p.first == 'Distance'
+                            assign _dist = p.last
+                          endif
+                        endfor
+                      endif
+                    -%}
+                    <div class="crate-row__foot">
+                      {%- if _is_charge -%}
+                        <span class="crate-row__deliv-note">
+                          {%- if _dist != blank -%}{{ _dist }} from the farm{%- else -%}Priced by distance{%- endif -%}
+                        </span>
+                      {%- else -%}
+                      <div class="crate-qty" data-vid="{{ item.variant.id }}">
+                        <button type="button" class="crate-qty__btn" data-action="minus" aria-label="Decrease quantity">
+                          <svg width="12" height="2" viewBox="0 0 12 2" fill="none" aria-hidden="true"><line x1="0" y1="1" x2="12" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </button>
+                        <span class="crate-qty__val">{{ item.quantity }}</span>
+                        <button type="button" class="crate-qty__btn" data-action="plus" aria-label="Increase quantity">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </button>
+                      </div>
+                      {%- endif -%}
+                      <span class="crate-row__price">{{ item.original_line_price | money }}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="crate-row__remove"
+                    data-vid="{{ item.variant.id }}"
+                    aria-label="Remove {{ item.product.title | escape }}"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <line x1="1" y1="1" x2="11" y2="11"/>
+                      <line x1="11" y1="1" x2="1" y2="11"/>
+                    </svg>
+                  </button>
+
+                </div>
+              {%- endfor -%}
+            </form>
+          </div>
+
+          <div class="crate-note">
+            <label class="crate-note__label" for="Cart-note">Order note</label>
+            <textarea
+              class="crate-note__ta"
+              name="note"
+              form="cart"
+              id="Cart-note"
+              placeholder="Any delivery instructions or special requests..."
+            >{{ cart.note }}</textarea>
+          </div>
+        </div>
+
+        <!-- ── RIGHT: order summary ── -->
+        <div class="crate-summary">
+          <div class="crate-summary__inner">
+            <h2 class="crate-summary__heading">Order summary</h2>
+
+            <div class="crate-deliv">
+              {%- if _delivery_free -%}
+                <p class="crate-deliv__msg is-free">Free delivery unlocked</p>
+              {%- else -%}
+                {%- assign _remaining = _free_threshold | minus: _cart_total -%}
+                <p class="crate-deliv__msg">{{ _remaining | money }} away from free delivery</p>
+              {%- endif -%}
+              <div class="crate-deliv__track">
+                <div class="crate-deliv__fill" style="width:{{ _pct }}%"></div>
+              </div>
+            </div>
+
+            <div class="crate-totals">
+              <div class="crate-totals__row">
+                <span>Subtotal</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              <div class="crate-totals__row">
+                <span>Delivery</span>
+                {%- if _delivery_free -%}
+                  <span class="is-free">Free</span>
+                {%- else -%}
+                  <span>Calculated at checkout</span>
+                {%- endif -%}
+              </div>
+              <div class="crate-totals__row crate-totals__row--total">
+                <span>Total</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+
+            <button type="submit" name="checkout" form="cart" class="crate-checkout-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              CHECKOUT &middot; {{ cart.total_price | money }}
+            </button>
+
+            <p class="crate-trust-copy">Free returns &middot; 48hr tracked delivery</p>
+            <p class="crate-trust-copy">We harvest to order, expect freshness</p>
+
+            <ul class="crate-trust-list">
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Grown on our estate
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Harvested to order
+              </li>
+              <li>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                Direct to your door
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%} ── Basket add-ons (Theme settings → Basket upsells) ── {%- endcomment -%}
+{%- if cart != empty -%}
+  <div class="wrap crate-upsell-host">
+    {%- render 'cart-upsell' -%}
+  </div>
+{%- endif -%}
+
+{%- comment -%} ── Pairs Well With ── {%- endcomment -%}
+{%- if section.settings.rec_collection != blank -%}
+  {%- assign _rec_col = collections[section.settings.rec_collection] -%}
+  {%- if _rec_col != blank and _rec_col.products.size > 0 -%}
+    {%- assign _cart_pids = cart.items | map: 'product_id' -%}
+    {%- assign _shown = 0 -%}
+    {%- capture _rec_cards -%}
+      {%- for _p in _rec_col.products -%}
+        {%- if _shown >= 4 -%}{%- break -%}{%- endif -%}
+        {%- unless _cart_pids contains _p.id -%}
+          {%- assign _shown = _shown | plus: 1 -%}
+          {%- render 'card-potato', product: _p -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if _shown > 0 -%}
+      <div class="crate-recs">
+        <div class="page-width">
+          <p class="crate-recs__eyebrow">Pairs well with</p>
+          <h2 class="crate-recs__heading">{{ section.settings.rec_heading | default: 'Add to your basket' }}</h2>
+          <div class="crate-recs__grid">
+            {{ _rec_cards }}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+<p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+
+{% schema %}
+{
+  "name": "Cart — The Crate",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "rec_collection",
+      "label": "Pairs Well With — collection"
+    },
+    {
+      "type": "text",
+      "id": "rec_heading",
+      "label": "Recommendations heading",
+      "default": "Add to your basket"
+    }
+  ]
+}
+{% endschema %}

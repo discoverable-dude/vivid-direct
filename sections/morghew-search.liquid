@@ -1,0 +1,203 @@
+{%- comment -%}
+  Morghew Search — custom search page.
+  Landing state (no query): hero + search bar, popular searches, browse-by cards.
+  Results state (query): result grid across products, recipes/articles and pages.
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+
+<div class="m-search">
+
+  <!-- ── Hero + search bar ── -->
+  <div class="m-search__hero m-sec--paper2">
+    <div class="m-search__hero-inner">
+      <h1 class="m-search__title">{{ section.settings.heading }}</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="m-search__form">
+        <input type="hidden" name="options[prefix]" value="last">
+        <div class="m-search__bar">
+          <span class="m-search__bar-icon">{%- render 'morghew-icon', icon: 'search', size: 20 -%}</span>
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ section.settings.placeholder | escape }}"
+            class="m-search__input"
+            aria-label="{{ section.settings.placeholder | escape }}"
+            autocomplete="off"
+          >
+          <button type="submit" class="m-btn m-btn--primary m-search__submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {%- if search.performed -%}
+    <!-- ── Results ── -->
+    {%- paginate search.results by 24 -%}
+      <div class="m-sec m-sec--paper m-search__results-sec">
+        <div class="m-sec__wrap">
+          <p class="m-eyebrow m-search__count">
+            {{ search.results_count }} result{% unless search.results_count == 1 %}s{% endunless %} for &ldquo;{{ search.terms }}&rdquo;
+          </p>
+
+          {%- if search.results_count > 0 -%}
+            <div class="m-search__results">
+              {%- for item in search.results -%}
+                <a href="{{ item.url }}" class="m-search__card">
+                  <div class="m-search__card-media">
+                    {%- liquid
+                      assign img = null
+                      if item.object_type == 'product'
+                        assign img = item.featured_media.preview_image
+                      elsif item.object_type == 'article'
+                        assign img = item.image
+                      endif
+                    -%}
+                    {%- if img -%}
+                      <img src="{{ img | image_url: width: 300 }}" alt="{{ img.alt | escape }}" loading="lazy" width="120" height="120">
+                    {%- else -%}
+                      <span class="m-search__card-noimg">{%- render 'morghew-icon', icon: 'leaf', size: 26 -%}</span>
+                    {%- endif -%}
+                  </div>
+                  <div class="m-search__card-body">
+                    <span class="m-search__card-type">
+                      {%- case item.object_type -%}
+                        {%- when 'product' -%}Potato Shop
+                        {%- when 'article' -%}Recipe
+                        {%- when 'page' -%}Page
+                        {%- else -%}{{ item.object_type }}
+                      {%- endcase -%}
+                    </span>
+                    <p class="m-search__card-title">{{ item.title | truncate: 70 }}</p>
+                    {%- if item.object_type == 'product' -%}
+                      <p class="m-search__card-meta">{{ item.price | money }}</p>
+                    {%- elsif item.content != blank -%}
+                      <p class="m-search__card-meta">{{ item.content | strip_html | truncate: 90 }}</p>
+                    {%- endif -%}
+                  </div>
+                </a>
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="m-search__pagination" role="navigation">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" class="m-search__page-link">← Previous</a>
+                {%- endif -%}
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" class="m-search__page-link">{{ part.title }}</a>
+                  {%- else -%}
+                    <span class="m-search__page-link is-current">{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" class="m-search__page-link">Next →</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+
+          {%- else -%}
+            <div class="m-search__noresults">
+              <p class="m-search__noresults-title">No matches for &ldquo;{{ search.terms }}&rdquo;.</p>
+              <p class="m-search__noresults-text">Try a different spelling, or browse below.</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endpaginate -%}
+  {%- endif -%}
+
+  {%- unless search.performed and search.results_count > 0 -%}
+    <!-- ── Landing: popular searches + browse by ── -->
+    <div class="m-sec m-sec--paper m-search__landing">
+      <div class="m-sec__wrap">
+        {%- assign popular_blocks = section.blocks | where: 'type', 'popular' -%}
+        {%- assign browse_blocks = section.blocks | where: 'type', 'browse' -%}
+
+        {%- if popular_blocks.size > 0 -%}
+          <div class="m-search__group">
+            <p class="m-eyebrow">{{ section.settings.popular_heading }}</p>
+            <div class="m-search__pills">
+              {%- for block in popular_blocks -%}
+                {%- assign term = block.settings.term | default: block.settings.label -%}
+                <a href="{{ routes.search_url }}?q={{ term | url_encode }}&options[prefix]=last" class="m-search__pill" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != 'none' -%}
+                    <span class="m-search__pill-icon">{%- render 'morghew-icon', icon: block.settings.icon, size: 18 -%}</span>
+                  {%- endif -%}
+                  {{ block.settings.label }}
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if browse_blocks.size > 0 -%}
+          <div class="m-search__group">
+            <p class="m-eyebrow">{{ section.settings.browse_heading }}</p>
+            <div class="m-search__cards">
+              {%- for block in browse_blocks -%}
+                <a href="{{ block.settings.link | default: '#' }}" class="m-search__browse-card" {{ block.shopify_attributes }}>
+                  <span class="m-search__browse-title">{{ block.settings.title }}</span>
+                  {%- if block.settings.subtitle != blank -%}
+                    <span class="m-search__browse-sub">{{ block.settings.subtitle }}</span>
+                  {%- endif -%}
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endunless -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Morghew Search",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What are you looking for?" },
+    { "type": "text", "id": "placeholder", "label": "Search placeholder", "default": "Search varieties, recipes, estate produce…" },
+    { "type": "header", "content": "Popular searches" },
+    { "type": "text", "id": "popular_heading", "label": "Heading", "default": "Popular searches" },
+    { "type": "header", "content": "Browse by" },
+    { "type": "text", "id": "browse_heading", "label": "Heading", "default": "Browse by" }
+  ],
+  "blocks": [
+    {
+      "type": "popular",
+      "name": "Popular search",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Roasting potatoes" },
+        { "type": "text", "id": "term", "label": "Search term", "info": "Optional. Defaults to the label." },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "roast", "options": [ { "value": "none", "label": "None" }, { "value": "roast", "label": "Roast" }, { "value": "mash", "label": "Mash" }, { "value": "chip", "label": "Chip" }, { "value": "jacket", "label": "Jacket" }, { "value": "boil", "label": "Boil" }, { "value": "salad", "label": "Salad" }, { "value": "leaf", "label": "Leaf" }, { "value": "bottle", "label": "Bottle" }, { "value": "book", "label": "Recipe book" }, { "value": "search", "label": "Search" } ] }
+      ]
+    },
+    {
+      "type": "browse",
+      "name": "Browse card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Potato Shop" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "30 heritage varieties" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morghew Search",
+      "blocks": [
+        { "type": "popular", "settings": { "label": "Roasting potatoes", "icon": "roast" } },
+        { "type": "popular", "settings": { "label": "Red flesh varieties", "icon": "leaf" } },
+        { "type": "popular", "settings": { "label": "Potato vodka", "icon": "bottle" } },
+        { "type": "popular", "settings": { "label": "Recipes", "icon": "book" } },
+        { "type": "browse", "settings": { "title": "Potato Shop", "subtitle": "30 heritage varieties" } },
+        { "type": "browse", "settings": { "title": "Estate Produce", "subtitle": "Vodka, oils, flour & more" } },
+        { "type": "browse", "settings": { "title": "Recipes", "subtitle": "Chef-written guides" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

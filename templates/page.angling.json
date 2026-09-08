@@ -1,0 +1,168 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "3 miles",
+            "label": "Of syndicate riverbank"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "25lb+",
+            "label": "Carp in the water"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "30lb",
+            "label": "Pike, and possibly more"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "968 AD",
+            "label": "First recorded sale of the Estate"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/angling-water.jpg",
+        "image_opacity": 30,
+        "crumb": "Angling",
+        "eyebrow": "The Morghew Park Angling Syndicate",
+        "headline": "The Morghew Water.",
+        "lede": "A little over three miles of quiet Kentish riverbank on the Reading and Newmill channels, fished by an exclusive members-only private syndicate. No day tickets, no competitions, no affiliated angling clubs."
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "An ancient estate",
+        "body": "Morghew Park is one of the ancient estates of Kent, its boundaries broadly unchanged since its first recorded sale in 968 AD, a century before the Norman Conquest, for the sum of 1450 pence."
+      }
+    },
+    "split_water": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/estate-fishing.jpg",
+        "tag": "The syndicate water",
+        "ratio": "4 / 3",
+        "eyebrow": "The water",
+        "heading": "Two channels and a quiet lake",
+        "body": "<p>The 1900-acre Estate is bounded on parts of its southern and western boundaries by the Reading and Newmill channels, and it is these watercourses that the Estate has made available to subscribers to The Morghew Park Angling Syndicate.</p><p>The Syndicate water comprises a little over three miles of riverbank on the northern side of the Reading Channel and the eastern side of the Newmill Channel, both of which form part of the tributary system feeding water into the River Rother at Potmans Heath. The opposite banks are not fished, with the exception of a half-mile section of the Newmill Channel, which is very lightly used by a local angling club. Also included in the water is an established three-quarter acre lake.</p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "split_fish": {
+      "type": "morghew-split",
+      "blocks": {
+        "li1": {
+          "type": "item",
+          "settings": {
+            "text": "Common carp to 25lbs and possibly more, with a few Mirrors"
+          }
+        },
+        "li2": {
+          "type": "item",
+          "settings": {
+            "text": "Pike to 30lbs, including a 27lb fish from the Newmill Channel in 2009"
+          }
+        },
+        "li3": {
+          "type": "item",
+          "settings": {
+            "text": "Tench to 8lbs and Bream to 6lbs"
+          }
+        },
+        "li4": {
+          "type": "item",
+          "settings": {
+            "text": "Roach, Rudd, Perch and a few Chub"
+          }
+        }
+      },
+      "block_order": [
+        "li1",
+        "li2",
+        "li3",
+        "li4"
+      ],
+      "settings": {
+        "flip": true,
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "The fishing",
+        "heading": "Carp, pike, and plenty besides",
+        "body": "<p>The water contains a good head of fish, and the established lake holds good-sized Roach, Rudd and Perch of its own.</p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "split_access": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "Members' luxuries",
+        "heading": "Drive to your swim",
+        "body": "<p>There are two points of access off public roads, one at each end of the syndicate water. During dry conditions, subscribers are allowed to drive carefully along the riverbank and park adjacent to their chosen swim for the day. This little piece of luxury removes the need for the tiresome business of carrying your tackle for miles at the beginning and end of each day.</p><p>Night fishing is permitted, and caravans and motorhomes may be brought onto the Estate under certain circumstances.</p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "eyebrow": "Join the syndicate",
+        "heading": "Enquire about a place on the water",
+        "body": "Membership is limited. Call the Estate office on (01580) 763 158 to ask about availability.",
+        "button_1_label": "Contact us",
+        "button_1_url": "/pages/contact",
+        "button_2_label": "About the Estate",
+        "button_2_url": "/pages/the-estate"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "lede",
+    "split_water",
+    "split_fish",
+    "split_access",
+    "cta"
+  ]
+}

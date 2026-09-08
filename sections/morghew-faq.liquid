@@ -1,0 +1,61 @@
+{%- comment -%}
+  Morghew FAQ — accordion of question/answer blocks.
+  Uses native <details>/<summary> (no JS, fully accessible).
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+
+<section class="m-sec m-faq m-sec--{{ section.settings.bg }}">
+  <div class="m-sec__wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="m-faq__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="m-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="m-heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="m-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="m-faq__item"{% if block.settings.open_by_default %} open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="m-faq__q">
+            {{ block.settings.question }}
+            <svg class="m-faq__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="m-faq__a">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew FAQ",
+  "tag": "section",
+  "class": "m-section",
+  "settings": [
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" }, { "value": "dark", "label": "Estate green" } ], "default": "paper" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "A common question?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>A helpful, concise answer goes here.</p>" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Morghew FAQ",
+      "blocks": [ { "type": "faq" }, { "type": "faq" }, { "type": "faq" } ]
+    }
+  ]
+}
+{% endschema %}

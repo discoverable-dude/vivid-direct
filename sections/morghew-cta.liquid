@@ -1,0 +1,58 @@
+{%- comment -%}
+  Morghew CTA — full-bleed closing banner: image + scrim, centered copy,
+  primary + ghost buttons. Uses h2 (the hero owns the page h1).
+{%- endcomment -%}
+
+{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+
+<section class="esec ecta" data-reveal>
+  {%- if section.settings.image != blank -%}
+    <img
+      class="ecta__bg"
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+    >
+  {%- endif -%}
+  <div class="ecta__scrim"></div>
+  <div class="wrap ecta__inner">
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow eyebrow--light">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2 class="ecta__h">{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.body != blank -%}<p class="ecta__body">{{ section.settings.body }}</p>{%- endif -%}
+    <div class="ecta__btns">
+      {%- if section.settings.button_1_label != blank -%}
+        {%- assign _ext1 = false -%}
+        {%- if section.settings.button_1_url contains '://' -%}{%- assign _ext1 = true -%}{%- endif -%}
+        <a href="{{ section.settings.button_1_url | default: '#' }}" class="e-btn e-btn--lg"{% if _ext1 %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_1_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_2_label != blank -%}
+        {%- assign _ext2 = false -%}
+        {%- if section.settings.button_2_url contains '://' -%}{%- assign _ext2 = true -%}{%- endif -%}
+        <a href="{{ section.settings.button_2_url | default: '#' }}" class="e-btn e-btn--ghost-light e-btn--lg"{% if _ext2 %} target="_blank" rel="noopener"{% endif %}>{{ section.settings.button_2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew CTA",
+  "tag": "section",
+  "class": "m-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From our field to your kitchen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Taste the difference the ground makes" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_1_label", "label": "Primary button label", "default": "Shop the Potato Shop" },
+    { "type": "url", "id": "button_1_url", "label": "Primary button link" },
+    { "type": "text", "id": "button_2_label", "label": "Ghost button label" },
+    { "type": "url", "id": "button_2_url", "label": "Ghost button link" }
+  ],
+  "presets": [ { "name": "Morghew CTA" } ]
+}
+{% endschema %}

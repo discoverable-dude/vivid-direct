@@ -1,0 +1,46 @@
+{%- comment -%}
+  Morghew Stats — dark bark band of up to four large numbers with hairline dividers.
+{%- endcomment -%}
+
+{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+
+<section class="esec estats" data-reveal>
+  <div class="wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="estats__h">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="estats__row">
+      {%- for block in section.blocks -%}
+        <div class="estats__cell" {{ block.shopify_attributes }}>
+          <span class="estats__n">{{ block.settings.number }}</span>
+          <span class="estats__l">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Stats",
+  "tag": "section",
+  "class": "m-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What that adds up to" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "30+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Heritage varieties grown" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Morghew Stats", "blocks": [ { "type": "stat" }, { "type": "stat" }, { "type": "stat" }, { "type": "stat" } ] }
+  ]
+}
+{% endschema %}

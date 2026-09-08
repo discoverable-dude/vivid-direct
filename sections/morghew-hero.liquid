@@ -1,0 +1,92 @@
+{%- comment -%}
+  Morghew Hero — reusable page hero.
+  Optional background image + opacity, eyebrow, headline, body text, up to 2 buttons.
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign has_image = false
+  if section.settings.bg_image != blank
+    assign has_image = true
+  endif
+  assign opacity = section.settings.image_opacity | divided_by: 100.0
+-%}
+
+<section
+  class="m-hero m-hero--{{ section.settings.height }} m-hero--{{ section.settings.alignment }}{% unless has_image %} m-hero--no-image{% endunless %}"
+  {% if section.settings.bg_color != blank %}style="--hero-bg: {{ section.settings.bg_color }};"{% endif %}
+>
+  {%- if has_image -%}
+    <img
+      class="m-hero__bg"
+      src="{{ section.settings.bg_image | image_url: width: 2400 }}"
+      srcset="{{ section.settings.bg_image | image_url: width: 1200 }} 1200w, {{ section.settings.bg_image | image_url: width: 2400 }} 2400w"
+      sizes="100vw"
+      alt="{{ section.settings.bg_image.alt | escape }}"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ section.settings.bg_image.width }}"
+      height="{{ section.settings.bg_image.height }}"
+      style="opacity: {{ opacity }};"
+    >
+    {%- if section.settings.show_overlay -%}
+      <div class="m-hero__overlay"></div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="m-hero__inner">
+    <div class="m-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.headline != blank -%}
+        <h1 class="m-hero__headline">{{ section.settings.headline }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="m-hero__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_1_label != blank or section.settings.button_2_label != blank -%}
+        <div class="m-hero__ctas">
+          {%- if section.settings.button_1_label != blank -%}
+            <a href="{{ section.settings.button_1_url | default: '#' }}" class="m-btn m-btn--primary">{{ section.settings.button_1_label }}</a>
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            <a href="{{ section.settings.button_2_url | default: '#' }}" class="m-btn m-btn--ghost">{{ section.settings.button_2_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Hero",
+  "tag": "section",
+  "class": "m-section",
+  "settings": [
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image", "info": "Optional. Leave empty for a solid colour background." },
+    { "type": "range", "id": "image_opacity", "label": "Image opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "checkbox", "id": "show_overlay", "label": "Dark overlay (improves text legibility over image)", "default": true },
+    { "type": "text", "id": "bg_color", "label": "Solid background colour (CSS value)", "info": "Used when no image, or shows through image opacity. e.g. #141a16", "default": "#141a16" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Section eyebrow" },
+    { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "A bold headline goes here" },
+    { "type": "richtext", "id": "text", "label": "Body text", "default": "<p>A short supporting paragraph that sets the scene for the page.</p>" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "height", "label": "Height", "options": [ { "value": "sm", "label": "Small" }, { "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" } ], "default": "md" },
+    { "type": "select", "id": "alignment", "label": "Text alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Centered" } ], "default": "left" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_1_label", "label": "Primary button label" },
+    { "type": "url", "id": "button_1_url", "label": "Primary button link" },
+    { "type": "text", "id": "button_2_label", "label": "Secondary button label" },
+    { "type": "url", "id": "button_2_url", "label": "Secondary button link" }
+  ],
+  "presets": [ { "name": "Morghew Hero" } ]
+}
+{% endschema %}

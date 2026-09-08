@@ -1,0 +1,599 @@
+<title>Morghew Canva Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@600;700;800&display=swap">
+<style>
+  /* Morghew brand tokens, lifted 1:1 from assets/morghew.css.
+     Single-theme by design: this sheet shows the brand's true colours,
+     so it commits to the paper world on any host theme. */
+  :root {
+    --paper: #F6F0EA;
+    --paper-2: #ECE2D1;
+    --card: #FBF7EF;
+    --ink: #281A12;
+    --ink-soft: #6A5A48;
+    --hessian: #8A6A3C;
+    --hessian-text: #6E5021;
+    --straw: #C9A24E;
+    --straw-light: #E3C57F;
+    --bark: #3A2415;
+    --burgundy: #A8321F;
+    --field: #0A5A4C;
+    --footer: #06372C;
+    --cta: #9E3A26;
+    --cta-dark: #822F1F;
+    --clay: #B43C18;
+    --rust: #8F3415;
+    --mustard: #C9761C;
+    --wheat: #A27212;
+    --moss: #0A5A4C;
+    --sage: #4E7A5E;
+    --plum: #5C4763;
+    --soil: #6B4A2A;
+    --line: rgba(40,26,18,0.15);
+    --line-strong: rgba(40,26,18,0.30);
+    --head: "Baloo 2", "Trebuchet MS", sans-serif;
+    --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --display: "Archivo", "Arial Narrow", sans-serif;
+    --weave:
+      repeating-linear-gradient(45deg, rgba(138,111,74,0.03) 0 2px, transparent 2px 6px),
+      repeating-linear-gradient(-45deg, rgba(138,111,74,0.03) 0 2px, transparent 2px 6px);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--weave), var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(22px, 4vw, 40px); }
+
+  /* ── Masthead ── */
+  .mast {
+    background: var(--footer);
+    color: var(--paper);
+    padding: clamp(48px, 7vw, 84px) 0 clamp(44px, 6vw, 72px);
+  }
+  .mast .eyebrow { color: var(--straw); }
+  .mast h1 {
+    font-family: var(--head);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 14px 0 18px;
+    text-wrap: balance;
+  }
+  .mast p { max-width: 62ch; margin: 0; color: rgba(255,255,255,0.82); }
+  .mast .fontline { margin-top: 26px; font-size: 13px; letter-spacing: 0.06em; color: rgba(255,255,255,0.55); }
+
+  /* ── Section chrome ── */
+  section { padding: clamp(48px, 6vw, 84px) 0 0; }
+  section:last-of-type { padding-bottom: clamp(60px, 7vw, 100px); }
+  .eyebrow {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--hessian-text);
+    margin: 0;
+  }
+  h2 {
+    font-family: var(--head);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.1;
+    margin: 10px 0 12px;
+    text-wrap: balance;
+  }
+  .intro { max-width: 66ch; color: var(--ink-soft); margin: 0 0 34px; }
+
+  /* ── Swatches ── */
+  .swgroup { margin-bottom: 30px; }
+  .swgroup h3 {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .swrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 14px; }
+  .sw {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .sw__chip { height: 74px; }
+  .sw__chip--outlined { box-shadow: inset 0 0 0 1px var(--line); }
+  .sw__meta { padding: 10px 12px 12px; }
+  .sw__name { font-weight: 700; font-size: 14px; }
+  .sw__hex {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .sw__use { font-size: 12.5px; color: var(--ink-soft); line-height: 1.45; margin-top: 5px; }
+
+  .rulecard {
+    margin-top: 26px;
+    background: var(--card);
+    border-left: 4px solid var(--cta);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    max-width: 760px;
+    font-size: 15px;
+  }
+  .rulecard strong { color: var(--cta); }
+
+  /* ── Type specimens ── */
+  .spec {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(22px, 3vw, 34px);
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+  @media (max-width: 720px) { .spec { grid-template-columns: minmax(0, 1fr); } }
+  .spec__sample { min-width: 0; overflow-wrap: break-word; }
+  .spec__notes { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; border-left: 1px solid var(--line); padding-left: 22px; }
+  @media (max-width: 720px) { .spec__notes { border-left: 0; padding-left: 0; } }
+  .spec__notes b { color: var(--ink); }
+  .t-head { font-family: var(--head); font-weight: 800; letter-spacing: -0.01em; font-size: clamp(30px, 4vw, 46px); line-height: 1.08; }
+  .t-body { font-size: 17px; max-width: 52ch; }
+  .t-num { font-family: var(--display); font-weight: 800; font-size: clamp(34px, 4.4vw, 52px); line-height: 1; color: var(--straw); font-variant-numeric: tabular-nums; }
+  .t-label { font-weight: 600; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hessian-text); }
+
+  /* ── Component cards ── */
+  .comps { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; }
+  .comp {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .comp__stage {
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+    min-height: 130px;
+    background: var(--weave), var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .comp__stage--dark { background: var(--weave), var(--footer); }
+  .comp__stage--photo {
+    background:
+      linear-gradient(180deg, rgba(20,14,8,0.14) 0%, rgba(20,14,8,0.62) 100%),
+      radial-gradient(120% 90% at 20% 0%, #4E7A5E 0%, #0A5A4C 46%, #06372C 100%);
+  }
+  .comp__body { padding: 16px 20px 20px; }
+  .comp__title { font-weight: 700; font-size: 15.5px; margin: 0 0 6px; }
+  .comp__spec { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
+  .comp__spec b { color: var(--ink); font-weight: 600; }
+
+  /* live components */
+  .c-eyebrow { font-weight: 600; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hessian-text); }
+  .c-eyebrow--straw { color: var(--straw); }
+  .c-tag {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #fff; background: rgba(26,20,12,0.62);
+    padding: 6px 11px; border: 1px solid rgba(255,255,255,0.28);
+  }
+  .c-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--body); font-weight: 600; font-size: 14px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 15px 26px; border-radius: 8px; white-space: nowrap;
+  }
+  .c-btn--cta { background: var(--cta); color: var(--paper); }
+  .c-btn--ink { background: var(--ink); color: var(--paper); }
+  .c-btn--ghost { border: 1.5px solid var(--ink); color: var(--ink); }
+  .c-btn--ghost-light { border: 1.5px solid rgba(255,255,255,0.75); color: #fff; }
+  .c-stat { display: flex; flex-direction: column; gap: 4px; }
+  .c-stat__n { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1; color: var(--straw); font-variant-numeric: tabular-nums; }
+  .c-stat__l { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.78); }
+  .c-quote { font-family: var(--head); font-weight: 700; font-size: 21px; line-height: 1.3; color: #fff; margin: 0; }
+  .c-quote-role { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--straw); }
+  .c-rule { width: 56px; height: 3px; background: var(--straw); border-radius: 2px; }
+  .c-trust { font-size: 13.5px; color: var(--ink-soft); }
+  .c-trust span { color: var(--straw); padding: 0 7px; }
+  .c-chip {
+    display: inline-block; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--straw); color: var(--ink);
+    padding: 7px 14px; border-radius: 40px;
+  }
+  .c-chip--field { background: var(--field); color: #fff; }
+  .c-price { font-family: var(--head); font-weight: 800; font-size: 34px; color: var(--ink); line-height: 1; }
+  .c-price small { font-family: var(--body); font-weight: 600; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; }
+
+  /* ── Mock canvases ── */
+  .mocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; align-items: start; }
+  .mock { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .mock__label { font-size: 13px; font-weight: 600; color: var(--ink-soft); letter-spacing: 0.04em; }
+  .mock__label b { color: var(--ink); }
+  .canvas {
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 24px 50px -24px rgba(40,26,18,0.45);
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .canvas--post { aspect-ratio: 1 / 1; }
+  .canvas--story { aspect-ratio: 9 / 16; max-width: 300px; }
+  .canvas--card { aspect-ratio: 4 / 5; }
+  .canvas--photo {
+    background:
+      linear-gradient(180deg, rgba(20,14,8,0.10) 0%, rgba(20,14,8,0.30) 55%, rgba(20,14,8,0.78) 100%),
+      radial-gradient(130% 100% at 25% 10%, #A27212 0%, #6B4A2A 45%, #3A2415 100%);
+    justify-content: flex-end;
+    padding: 22px;
+    color: #fff;
+  }
+  .canvas--paper { background: var(--weave), var(--paper); padding: 22px; }
+  .canvas__eyebrow { font-weight: 600; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--straw); }
+  .canvas__head { font-family: var(--head); font-weight: 800; letter-spacing: -0.01em; font-size: 24px; line-height: 1.08; margin: 6px 0 8px; text-wrap: balance; }
+  .canvas__sub { font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.85); margin: 0; }
+  .canvas__trust { font-size: 9.5px; letter-spacing: 0.02em; color: rgba(255,255,255,0.7); margin-top: 12px; }
+  .canvas__trust span { color: var(--straw); padding: 0 5px; }
+  .canvas__logo { font-family: var(--head); font-weight: 800; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: #fff; position: absolute; top: 18px; left: 22px; }
+  .canvas__tag { position: absolute; top: 16px; right: 16px; font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; background: rgba(26,20,12,0.62); padding: 5px 9px; border: 1px solid rgba(255,255,255,0.28); }
+  .canvas__btn { display: inline-block; margin-top: 12px; background: var(--cta); color: var(--paper); font-weight: 600; font-size: 10.5px; letter-spacing: 0.04em; text-transform: uppercase; padding: 10px 16px; border-radius: 6px; }
+  .canvas--paper .canvas__eyebrow { color: var(--hessian-text); }
+  .canvas--paper .canvas__head { color: var(--ink); font-size: 22px; }
+  .canvas__photo-band {
+    border-radius: 6px; height: 44%;
+    background:
+      linear-gradient(180deg, rgba(20,14,8,0.05), rgba(20,14,8,0.22)),
+      radial-gradient(120% 100% at 30% 20%, #C9761C 0%, #8F3415 60%, #3A2415 100%);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .canvas__body-sm { font-size: 11.5px; color: var(--ink-soft); line-height: 1.5; margin: 0; }
+  .canvas__price-row { display: flex; align-items: baseline; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+  .canvas--card { display: flex; }
+  .canvas--paper.canvas--card { flex-direction: column; }
+
+  /* ── Recipes table ── */
+  .recipes { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--card); }
+  .recipe { display: grid; grid-template-columns: 220px minmax(0,1fr); gap: 18px; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+  .recipe:last-child { border-bottom: 0; }
+  @media (max-width: 640px) { .recipe { grid-template-columns: minmax(0,1fr); gap: 4px; } }
+  .recipe__name { font-weight: 700; font-size: 15.5px; }
+  .recipe__size { display: block; font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: 0.06em; color: var(--ink-soft); margin-top: 3px; }
+  .recipe__how { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .recipe__how b { color: var(--ink); font-weight: 600; }
+
+  /* ── Checklist ── */
+  .check {
+    background: var(--footer); color: rgba(255,255,255,0.85);
+    border-radius: 12px; padding: clamp(26px, 4vw, 42px);
+  }
+  .check h2 { color: #fff; margin-top: 0; }
+  .check .eyebrow { color: var(--straw); }
+  .check ol { margin: 18px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 12px; font-size: 15.5px; line-height: 1.6; }
+  .check li::marker { color: var(--straw); font-weight: 700; }
+  .check b { color: #fff; }
+  .check code {
+    font-family: var(--display); font-size: 13px; letter-spacing: 0.04em;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    padding: 2px 7px; border-radius: 5px; color: var(--straw-light);
+    overflow-wrap: anywhere;
+  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--straw); outline-offset: 2px; }
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Morghew Park Estate · The Potato Shop</p>
+    <h1>The Morghew Canva Kit</h1>
+    <p>Every colour, font and component below is lifted straight from the live site, so anything built with this kit will sit next to the website and look like the same hand made it. Work through the setup checklist at the bottom once, then build templates from the components.</p>
+    <p class="fontline">BALOO 2 · HANKEN GROTESK · ARCHIVO, all free Google Fonts, all available in Canva</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Foundations</p>
+    <h2>The palette</h2>
+    <p class="intro">Add these to the Canva Brand Kit exactly as written. The site is warm paper and dark ink with straw and field green doing the character work. Most designs need only four or five of these.</p>
+
+    <div class="swgroup">
+      <h3>Surfaces</h3>
+      <div class="swrow">
+        <div class="sw"><div class="sw__chip sw__chip--outlined" style="background:#F6F0EA"></div><div class="sw__meta"><div class="sw__name">Paper</div><div class="sw__hex">#F6F0EA</div><div class="sw__use">Default background for everything</div></div></div>
+        <div class="sw"><div class="sw__chip sw__chip--outlined" style="background:#ECE2D1"></div><div class="sw__meta"><div class="sw__name">Paper 2</div><div class="sw__hex">#ECE2D1</div><div class="sw__use">Panels and bands that need to sit back</div></div></div>
+        <div class="sw"><div class="sw__chip sw__chip--outlined" style="background:#FBF7EF"></div><div class="sw__meta"><div class="sw__name">Card</div><div class="sw__hex">#FBF7EF</div><div class="sw__use">Cards and boxes on top of Paper</div></div></div>
+      </div>
+    </div>
+
+    <div class="swgroup">
+      <h3>Ink</h3>
+      <div class="swrow">
+        <div class="sw"><div class="sw__chip" style="background:#281A12"></div><div class="sw__meta"><div class="sw__name">Ink</div><div class="sw__hex">#281A12</div><div class="sw__use">Headlines and body text. Never pure black</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#6A5A48"></div><div class="sw__meta"><div class="sw__name">Soft ink</div><div class="sw__hex">#6A5A48</div><div class="sw__use">Captions, secondary lines, small print</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#3A2415"></div><div class="sw__meta"><div class="sw__name">Bark</div><div class="sw__hex">#3A2415</div><div class="sw__use">Deep brown for dark photo overlays</div></div></div>
+      </div>
+    </div>
+
+    <div class="swgroup">
+      <h3>Brand colours</h3>
+      <div class="swrow">
+        <div class="sw"><div class="sw__chip" style="background:#C9A24E"></div><div class="sw__meta"><div class="sw__name">Straw</div><div class="sw__hex">#C9A24E</div><div class="sw__use">The signature accent. Labels on dark, rules, stat numbers</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#E3C57F"></div><div class="sw__meta"><div class="sw__name">Straw light</div><div class="sw__hex">#E3C57F</div><div class="sw__use">Straw on very dark grounds</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#0A5A4C"></div><div class="sw__meta"><div class="sw__name">Field green</div><div class="sw__hex">#0A5A4C</div><div class="sw__use">Rich green for panels and chips</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#06372C"></div><div class="sw__meta"><div class="sw__name">Deep field</div><div class="sw__hex">#06372C</div><div class="sw__use">Dark backgrounds, the site footer green</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#9E3A26"></div><div class="sw__meta"><div class="sw__name">Harvest red</div><div class="sw__hex">#9E3A26</div><div class="sw__use">Buttons and calls to action only</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#6E5021"></div><div class="sw__meta"><div class="sw__name">Hessian text</div><div class="sw__hex">#6E5021</div><div class="sw__use">Uppercase eyebrow labels on paper</div></div></div>
+      </div>
+    </div>
+
+    <div class="swgroup">
+      <h3>Earthy accents, one per design</h3>
+      <div class="swrow">
+        <div class="sw"><div class="sw__chip" style="background:#B43C18"></div><div class="sw__meta"><div class="sw__name">Clay</div><div class="sw__hex">#B43C18</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#8F3415"></div><div class="sw__meta"><div class="sw__name">Rust</div><div class="sw__hex">#8F3415</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#C9761C"></div><div class="sw__meta"><div class="sw__name">Mustard</div><div class="sw__hex">#C9761C</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#A27212"></div><div class="sw__meta"><div class="sw__name">Wheat</div><div class="sw__hex">#A27212</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#4E7A5E"></div><div class="sw__meta"><div class="sw__name">Sage</div><div class="sw__hex">#4E7A5E</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#5C4763"></div><div class="sw__meta"><div class="sw__name">Plum</div><div class="sw__hex">#5C4763</div></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#6B4A2A"></div><div class="sw__meta"><div class="sw__name">Soil</div><div class="sw__hex">#6B4A2A</div></div></div>
+      </div>
+      <div class="sw__use" style="margin-top:10px; max-width:66ch;">On the site each potato variety owns one of these. In Canva, pick one accent per design and stick to it. Two accents in one graphic starts to look like a fruit stall.</div>
+    </div>
+
+    <div class="rulecard">
+      <strong>One protected colour.</strong> Harvest red #9E3A26 means "buy" on the website. Keep it for Shop Now and Order buttons in social graphics too, and never use it decoratively, so it keeps its meaning.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Foundations</p>
+    <h2>The type system</h2>
+    <p class="intro">Three faces, three jobs. All are on Google Fonts. Search each by name in Canva's font menu; if one is missing, download it free from fonts.google.com and upload it to the Brand Kit. Canva's letter spacing slider uses thousandths of an em, so 0.16em on the website becomes 160 in Canva.</p>
+
+    <div class="spec">
+      <div class="spec__sample t-head">Grown slowly, dug daily, packed by hand.</div>
+      <div class="spec__notes"><b>Headlines · Baloo 2 ExtraBold</b><br>Weight 800, letter spacing −10, line height 1.05 to 1.1. Sentence case, never all caps. Big and confident: on a 1080px square post, 80 to 120px.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec__sample t-body">Thirty heritage potato varieties, estate produce and wild game, grown and packed by hand at Morghew Park Estate in Tenterden, Kent.</div>
+      <div class="spec__notes"><b>Body · Hanken Grotesk Regular</b><br>Weight 400 (600 for emphasis), line height 1.5 to 1.6, spacing 0. Keep lines short, around 60 characters. On a 1080px post, 30 to 36px.</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec__sample"><span class="t-num">30</span><br><span class="t-label" style="color:var(--ink-soft)">Heritage varieties</span></div>
+      <div class="spec__notes"><b>Numbers · Archivo ExtraBold</b><br>Big stats and prices get Archivo 800 in Straw, with a Hanken Grotesk uppercase label underneath (size roughly a quarter of the number, spacing 140).</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec__sample"><span class="t-label">New season · Dug this week</span></div>
+      <div class="spec__notes"><b>Eyebrow labels · Hanken Grotesk SemiBold</b><br>The most recognisable Morghew device. Uppercase, weight 600, spacing 160, small (13px web, about 28px on a 1080 post). Hessian #6E5021 on paper, Straw #C9A24E on dark or photos. It sits above almost every headline.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The parts</p>
+    <h2>Components to rebuild in Canva</h2>
+    <p class="intro">Each of these exists on the live site. Build each one once in a scratch Canva design, group it, and save the design as your components page to copy from. Specs are given for a 1080 × 1080 canvas; scale proportionally for other sizes.</p>
+
+    <div class="comps">
+      <div class="comp">
+        <div class="comp__stage">
+          <span class="c-eyebrow">From the fields</span>
+          <span style="font-family:var(--head); font-weight:800; font-size:26px; line-height:1.1;">Eyebrow plus headline</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Eyebrow + headline stack</p>
+          <p class="comp__spec">Hanken Grotesk SemiBold uppercase, <b>28px, spacing 160</b>, Hessian #6E5021. Then Baloo 2 ExtraBold headline in Ink, gap of about 20px between them.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage comp__stage--photo">
+          <span class="c-tag">Photographed on the Estate</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Photo credit tag</p>
+          <p class="comp__spec">Hanken Grotesk uppercase <b>22px, spacing 160</b>, white text on a black rectangle at <b>62% opacity</b> with a 1px white border at 28%. Sits in a photo corner. Square corners, no rounding.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage">
+          <span class="c-btn c-btn--cta">Shop the harvest</span>
+          <span class="c-btn c-btn--ghost">Visit the farm</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Buttons</p>
+          <p class="comp__spec">Hanken Grotesk SemiBold uppercase <b>28px, spacing 40</b>, corner radius <b>16</b>, generous padding (30px top and bottom, 52px sides). Primary: Harvest red fill, Paper text. Secondary: no fill, 3px Ink border. On photos use a white border version.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage comp__stage--dark">
+          <div class="c-stat"><span class="c-stat__n">2000</span><span class="c-stat__l">Acres of Kentish countryside</span></div>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Stat tile</p>
+          <p class="comp__spec">Archivo ExtraBold number in <b>Straw #C9A24E</b>, Hanken Grotesk uppercase label below at 24px, spacing 140, white at 78% on dark. Run three or four in a row along the bottom of a graphic.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage comp__stage--dark">
+          <span class="c-rule"></span>
+          <p class="c-quote">"You can taste the difference a slow-grown potato makes."</p>
+          <span class="c-quote-role">A Tenterden regular</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Quote block</p>
+          <p class="comp__spec">A short <b>Straw rule</b> (110 × 6px, slight rounding), quote in Baloo 2 Bold, attribution in the uppercase label style, Straw. Works on Deep field green or over a darkened photo.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage">
+          <span class="c-chip">New season</span>
+          <span class="c-chip c-chip--field">Grown in Kent</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Pill chips</p>
+          <p class="comp__spec">Hanken Grotesk Bold uppercase <b>24px, spacing 100</b>, full pill corners. Straw fill with Ink text, or Field green with white. Use for New season, Back in stock, Market day.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage">
+          <span class="c-price">£3.50 <small>/ 2kg paper sack</small></span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Price lockup</p>
+          <p class="comp__spec">Price in <b>Baloo 2 ExtraBold</b>, unit in Hanken Grotesk SemiBold Soft ink at about a third of the size. Never let the unit line compete with the price.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage">
+          <span class="c-trust">Free UK delivery over £40<span>·</span>Grown in Tenterden<span>·</span>Packed by hand</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Trust line</p>
+          <p class="comp__spec">Hanken Grotesk <b>26px</b> in Soft ink (white at 70% on photos), separated by <b>Straw middle dots</b>. Always one line, always near the bottom edge.</p>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp__stage comp__stage--photo" style="justify-content:flex-end; min-height:150px;">
+          <span class="c-eyebrow c-eyebrow--straw">Coming soon</span>
+          <span style="font-family:var(--head); font-weight:800; font-size:24px; line-height:1.1; color:#fff;">Text over photography</span>
+        </div>
+        <div class="comp__body">
+          <p class="comp__title">Photo scrim</p>
+          <p class="comp__spec">Never put type on a raw photo. Add a rectangle with a <b>transparent-to-Bark #3A2415 vertical gradient</b> (0% at top, about 75% at bottom), then white headline and Straw eyebrow on top. This is the website hero treatment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Put together</p>
+    <h2>How they compose</h2>
+    <p class="intro">Three worked examples using only the components above. The brown and green blocks stand in for estate photography, which does the heavy lifting in every real design.</p>
+
+    <div class="mocks">
+      <div class="mock">
+        <div class="mock__label"><b>Social post</b> · photo-led announcement</div>
+        <div class="canvas canvas--post canvas--photo">
+          <span class="canvas__logo">Morghew</span>
+          <span class="canvas__eyebrow">New season · Dug this week</span>
+          <h3 class="canvas__head" style="color:#fff; margin-top:6px;">The first Jersey Royals are out of the ground.</h3>
+          <span class="canvas__btn">Shop the harvest</span>
+          <p class="canvas__trust">Free UK delivery over £40<span>·</span>Packed by hand</p>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock__label"><b>Story</b> · quote or stat moment</div>
+        <div class="canvas canvas--story canvas--photo" style="justify-content:center; gap:10px;">
+          <span class="c-rule"></span>
+          <p class="c-quote" style="font-size:18px;">"Three square miles of Kent, thirty varieties of potato."</p>
+          <div class="c-stat" style="margin-top:10px;"><span class="c-stat__n" style="font-size:30px;">1746</span><span class="c-stat__l" style="font-size:9px;">The year our barn was raised</span></div>
+          <p class="canvas__trust" style="margin-top:16px;">morghew.com</p>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock__label"><b>Product card</b> · paper ground, price lockup</div>
+        <div class="canvas canvas--card canvas--paper">
+          <div class="canvas__photo-band"><span class="canvas__tag">Grown at Morghew</span></div>
+          <span class="canvas__eyebrow">Heritage variety</span>
+          <h3 class="canvas__head">Pink Fir Apple</h3>
+          <p class="canvas__body-sm">Nutty, waxy and knobbly in all the right ways. A Victorian salad potato at its best simply boiled.</p>
+          <div class="canvas__price-row">
+            <span class="c-price" style="font-size:24px;">£4.20 <small>/ 1.5kg</small></span>
+            <span class="c-chip" style="font-size:9px; padding:5px 10px;">New season</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The library</p>
+    <h2>Templates worth building</h2>
+    <p class="intro">Build these once as Canva templates and the shop can self-serve all season. Sizes are Canva presets.</p>
+
+    <div class="recipes">
+      <div class="recipe">
+        <div><div class="recipe__name">New season announcement</div><span class="recipe__size">Instagram post · 1080 × 1080</span></div>
+        <div class="recipe__how">Full-bleed photo with the <b>scrim</b>, eyebrow "New season", Baloo headline, <b>Harvest red button</b>, trust line at the foot. The workhorse.</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Variety spotlight</div><span class="recipe__size">Instagram post · 1080 × 1080</span></div>
+        <div class="recipe__how">Paper ground, photo in a rounded rectangle top half, <b>one accent colour for the variety</b>, price lockup and a pill chip. Mirrors the product card above.</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Market day reminder</div><span class="recipe__size">Story · 1080 × 1920</span></div>
+        <div class="recipe__how">Deep field green ground, big Archivo <b>date as a stat tile</b> (SAT / 30 AUG), location in the label style, pill chip "Farmers' market".</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Recipe share</div><span class="recipe__size">Portrait post · 1080 × 1350</span></div>
+        <div class="recipe__how">Dish photo top two-thirds with the <b>photo credit tag</b>, recipe name in Baloo, "Best with: Pink Fir Apple" as an eyebrow, serves and time as two small stats.</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Estate story</div><span class="recipe__size">Story · 1080 × 1920</span></div>
+        <div class="recipe__how">The quote block or a single stat over photography. No button, no price. This is the brand-building slot; let the land speak.</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Honesty stall poster</div><span class="recipe__size">A4 print · 210 × 297mm</span></div>
+        <div class="recipe__how">Paper ground so it prints cheaply, Baloo headline, price list in Hanken Grotesk with <b>Straw dot separators</b>, footer strip in Deep field green with the web address in Straw.</div>
+      </div>
+      <div class="recipe">
+        <div><div class="recipe__name">Email header</div><span class="recipe__size">1200 × 500</span></div>
+        <div class="recipe__how">Photo with scrim, white lockup left, eyebrow plus short headline. Keep type clear of the outer 60px so nothing clips in mail clients.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="check">
+      <p class="eyebrow">One-time setup</p>
+      <h2>Canva Brand Kit checklist</h2>
+      <ol>
+        <li><b>Add the colours.</b> In Canva go to Brand Kit and paste the palette: <code>#F6F0EA #ECE2D1 #FBF7EF #281A12 #6A5A48 #C9A24E #E3C57F #0A5A4C #06372C #9E3A26 #6E5021 #B43C18 #C9761C #A27212 #4E7A5E #6B4A2A</code></li>
+        <li><b>Set the fonts.</b> Headings: Baloo 2 ExtraBold. Subheadings: Hanken Grotesk SemiBold. Body: Hanken Grotesk Regular. If any is missing from Canva's menu, download it free at fonts.google.com and upload to the Brand Kit.</li>
+        <li><b>Upload the logos.</b> Both lockups are already in Shopify under Content, then Files: <code>Morghew_logo_white.png</code> for photos and dark grounds, and the colour lockup for paper grounds. Download them from there and add to the Brand Kit logo slot.</li>
+        <li><b>Pull real photography.</b> The best assets are already in Shopify Files: the potato fields, the steam train, the woodland, the varieties. Download a starter set of 15 to 20 into a Canva folder called Estate Photography.</li>
+        <li><b>Build the components page.</b> Recreate each component above once in a scratch design, group each one, and keep it as your copy-from library.</li>
+        <li><b>Remember the two rules.</b> Harvest red is only for buy buttons, and one earthy accent per design.</li>
+      </ol>
+    </div>
+  </div>
+</section>

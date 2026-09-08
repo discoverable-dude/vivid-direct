@@ -1,0 +1,115 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "collection-estate",
+      "blocks": {
+        "variety_tab_ygjrYC": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "All Estate Produce",
+            "sublabel": "",
+            "icon": "book",
+            "link": "shopify://collections/all-estate-produce"
+          }
+        },
+        "variety_tab_tBgnHC": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Rapeseed Oil",
+            "sublabel": "",
+            "icon": "rapeseed-oil",
+            "link": "shopify://collections/rapeseed-oil"
+          }
+        },
+        "variety_tab_gFpUrp": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Wild Game",
+            "sublabel": "",
+            "icon": "pheasant",
+            "link": "shopify://collections/wild-game"
+          }
+        },
+        "variety_tab_WVbxkB": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Potato Vodka",
+            "sublabel": "",
+            "icon": "bottle",
+            "link": "shopify://collections/potato-vodka"
+          }
+        },
+        "variety_tab_tC8dPR": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Firewood",
+            "sublabel": "",
+            "icon": "flame",
+            "link": "shopify://collections/firewood"
+          }
+        },
+        "variety_tab_am6Dbf": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Stoneground Flour",
+            "sublabel": "",
+            "icon": "flour",
+            "link": "shopify://collections/stoneground-flour"
+          }
+        },
+        "variety_tab_wEYRp6": {
+          "type": "variety_tab",
+          "settings": {
+            "label": "Honey",
+            "sublabel": "",
+            "icon": "honey",
+            "link": "shopify://collections/morghew-honey"
+          }
+        }
+      },
+      "block_order": [
+        "variety_tab_ygjrYC",
+        "variety_tab_tBgnHC",
+        "variety_tab_gFpUrp",
+        "variety_tab_WVbxkB",
+        "variety_tab_tC8dPR",
+        "variety_tab_am6Dbf",
+        "variety_tab_wEYRp6"
+      ],
+      "settings": {
+        "use_collection_image": true,
+        "image_opacity": 45,
+        "heading": "",
+        "subtext": "Sub text goes in here",
+        "subtext_limit": 240,
+        "count_label": "products",
+        "trust_1_title": "Grown & made by hand",
+        "trust_1_sub": "On the estate in Kent",
+        "trust_2_title": "",
+        "trust_2_sub": "",
+        "trust_3_title": "Tenterden, Kent",
+        "trust_3_sub": "A working farming estate"
+      }
+    },
+    "bottom-content": {
+      "type": "collection-bottom-content",
+      "settings": {
+        "heading": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bottom-content"
+  ]
+}

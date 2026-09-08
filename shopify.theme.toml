@@ -1,0 +1,17 @@
+# Pins the Shopify CLI to the Morghew stores so `shopify theme ...` commands
+# never fall back to another store remembered from a different project.
+# Usage: shopify theme push -e production   (or -e for pull/dev/list)
+#
+# production = the CLIENT store morghew-estate, theme morghew/main (LIVE).
+# The GitHub sync on `main` also deploys there but silently drops code-file
+# commits when both sides edit (same flakiness deploy.sh documented on the
+# old store) — for assets/sections/snippets prefer a direct CLI push.
+# old-store = the original dev store, kept until fully retired.
+
+[environments.production]
+store = "morghew-estate.myshopify.com"
+theme = "202167845205"
+
+[environments.old-store]
+store = "morghew.myshopify.com"
+theme = "186167787815"

@@ -1,0 +1,184 @@
+{{ 'morghew-home.css' | asset_url | stylesheet_tag }}
+<section class="variety-rail" id="variety-rail-{{ section.id }}">
+  <div class="wrap">
+
+    <div class="variety-rail__head" data-reveal>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="variety-rail__title">{{ section.settings.title | escape }}</h2>
+      </div>
+      <div class="variety-rail__controls" aria-label="Scroll varieties">
+        <button class="variety-rail__btn variety-rail__btn--prev" id="rail-prev-{{ section.id }}" aria-label="Previous">
+          {% render 'morghew-icon', icon: 'nav-arrow' %}
+        </button>
+        <button class="variety-rail__btn variety-rail__btn--next" id="rail-next-{{ section.id }}" aria-label="Next">
+          {% render 'morghew-icon', icon: 'nav-arrow' %}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wrap">
+    <div class="variety-rail__scroller" id="rail-scroller-{{ section.id }}" role="list">
+
+      {%- if section.settings.collection != blank -%}
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- assign product_limit = section.settings.products_to_show | default: 8 -%}
+
+        {%- comment -%}
+          In-stock varieties first: without this, `limit` can fill the whole
+          rail with sold-out potatoes and hide everything actually buyable
+          behind the "view all" link, which is exactly what was happening
+          while only some varieties were out of the ground.
+        {%- endcomment -%}
+        {%- assign _rail_available = collection.products | where: 'available' -%}
+        {%- assign _rail_sold_out = collection.products | where: 'available', false -%}
+        {%- assign _rail_products = _rail_available | concat: _rail_sold_out -%}
+
+        {%- for product in _rail_products limit: product_limit -%}
+          {%- comment -%} Accent colour from metafield, fallback to cycle {%- endcomment -%}
+          {%- assign accent_meta = product.metafields.morghew.earthy_accent.value -%}
+          {%- if accent_meta == blank -%}
+            {%- assign accent_index = forloop.index0 | modulo: 6 -%}
+            {%- case accent_index -%}
+              {%- when 0 -%}{%- assign accent_meta = '--clay' -%}
+              {%- when 1 -%}{%- assign accent_meta = '--mustard' -%}
+              {%- when 2 -%}{%- assign accent_meta = '--wheat' -%}
+              {%- when 3 -%}{%- assign accent_meta = '--plum' -%}
+              {%- when 4 -%}{%- assign accent_meta = '--moss' -%}
+              {%- when 5 -%}{%- assign accent_meta = '--soil' -%}
+            {%- endcase -%}
+          {%- endif -%}
+
+          {%- assign flesh = product.metafields.morghew.flesh_colour.value | default: 'Heritage' -%}
+          {%- assign best_for = product.metafields.morghew.best_for.value -%}
+
+          <div class="variety-rail__item" role="listitem">{%- render 'card-potato', product: product -%}</div>
+        {%- endfor -%}
+
+      {%- else -%}
+        {%- comment -%} Placeholder cards when no collection is set {%- endcomment -%}
+        {%- assign placeholder_accents = '--clay,--mustard,--wheat,--plum,--moss,--soil' | split: ',' -%}
+        {%- for i in (1..6) -%}
+          {%- assign acc = placeholder_accents[forloop.index0] -%}
+          <div class="vcard" style="--ac: var({{ acc }})">
+            <div class="vcard__media">
+              <div class="vcard__photo">
+                {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <span class="vcard__flesh">Heritage</span>
+            </div>
+            <div class="vcard__body">
+              <p class="vcard__n">Variety Name</p>
+              <p class="vcard__best">Best for: Roast</p>
+              <span class="vcard__price">£4.95</span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="vcard__all">
+          <span class="vcard__all-circ">{% render 'morghew-icon', icon: 'view-all-arrow' %}</span>
+          {{ section.settings.view_all_label | default: 'See all 30' }}
+        </a>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var scroller = document.getElementById('rail-scroller-{{ section.id }}');
+  var prev = document.getElementById('rail-prev-{{ section.id }}');
+  var next = document.getElementById('rail-next-{{ section.id }}');
+  if (!scroller) return;
+
+  var cardW = 322;
+
+  if (prev) prev.addEventListener('click', function() {
+    scroller.scrollBy({ left: -cardW, behavior: 'smooth' });
+  });
+  if (next) next.addEventListener('click', function() {
+    scroller.scrollBy({ left: cardW, behavior: 'smooth' });
+  });
+
+  var isDragging = false, startX, scrollLeft;
+  scroller.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    startX = e.pageX - scroller.offsetLeft;
+    scrollLeft = scroller.scrollLeft;
+    scroller.classList.add('is-grabbing');
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    scroller.classList.remove('is-grabbing');
+  });
+  scroller.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    var x = e.pageX - scroller.offsetLeft;
+    var walk = (x - startX) * 1.4;
+    scroller.scrollLeft = scrollLeft - walk;
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Variety rail",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The full table · 30 varieties"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Meet the potatoes"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "See all 30"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View all URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Variety rail"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "padding_top": 28, "padding_bottom": 28 }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "settings": {
+        "crumb": "Farmers' Markets",
+        "eyebrow": "Find us out and about",
+        "headline": "Morghew at the farmers' market.",
+        "lede": "When we are not at the farm gate, we take the Estate's potatoes and produce to farmers' markets around Kent and the South East."
+      }
+    },
+    "split_stall": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/market-stall.png",
+        "tag": "On the stall",
+        "ratio": "4 / 3",
+        "eyebrow": "Say hello",
+        "heading": "The Potato Shop, on tour",
+        "body": "<p>Look out for the Morghew stall piled high with our conventional, heritage and exotic varieties, along with estate produce through the seasons.</p><p>Market dates vary through the year, so follow The Potato Shop on social media or get in touch to find out where we will be next.</p>",
+        "cta_label": "Ask where we'll be next",
+        "cta_url": "/pages/contact"
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "image": "shopify://shop_images/crate-store-dark.jpg",
+        "eyebrow": "Can't wait for market day?",
+        "heading": "Order direct from the Estate",
+        "body": "Shop the full range online for delivery across the UK, or visit the Honesty Stall in Tenterden.",
+        "button_1_label": "Shop online",
+        "button_1_url": "/collections/potato-shop",
+        "button_2_label": "Visit the farm",
+        "button_2_url": "/pages/visit-us"
+      }
+    }
+  },
+  "order": ["main", "hero", "split_stall", "cta"]
+}

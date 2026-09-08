@@ -1,0 +1,124 @@
+{%- comment -%}
+  Morghew "Beyond the potato" — homepage promo for estate produce.
+  Left: lifestyle image + caption. Right: dark panel with curated product rows
+  (quick-add), a free-delivery progress bar, and a CTA.
+  Product rows are blocks; quick-add reuses assets/morghew-card.js.
+{%- endcomment -%}
+
+{{ 'morghew-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'morghew-card.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign _thresh = section.settings.free_threshold | times: 100
+  assign _remaining = _thresh | minus: cart.total_price
+  assign _pct = 0
+  if _thresh > 0
+    assign _pct = cart.total_price | times: 100 | divided_by: _thresh
+  endif
+  if _pct > 100
+    assign _pct = 100
+  endif
+-%}
+
+<section class="m-beyond">
+  <div class="m-beyond__media">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1600 }}" alt="{{ section.settings.image.alt | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="eager" fetchpriority="high">
+    {%- endif -%}
+    {%- if section.settings.caption_eyebrow != blank or section.settings.caption_quote != blank -%}
+      <div class="m-beyond__caption">
+        {%- if section.settings.caption_eyebrow != blank -%}<p class="m-beyond__cap-eyebrow">{{ section.settings.caption_eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.caption_quote != blank -%}<p class="m-beyond__cap-quote">{{ section.settings.caption_quote }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="m-beyond__panel">
+    <div class="m-beyond__inner">
+      {%- if section.settings.eyebrow != blank -%}<p class="m-beyond__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="m-beyond__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.intro != blank -%}<div class="m-beyond__intro">{{ section.settings.intro }}</div>{%- endif -%}
+
+      <div class="m-beyond__list">
+        {%- for block in section.blocks -%}
+          {%- assign _p = block.settings.product -%}
+          {%- if _p != blank -%}
+            {%- assign _sub = block.settings.subtitle | default: _p.metafields.descriptors.subtitle.value -%}
+            {%- assign _v = _p.selected_or_first_available_variant -%}
+            <div class="m-beyond__row" {{ block.shopify_attributes }}>
+              <a href="{{ _p.url }}" class="m-beyond__thumb" aria-hidden="true" tabindex="-1">
+                {%- if _p.featured_image -%}<img src="{{ _p.featured_image | image_url: width: 120 }}" alt="" width="56" height="56" loading="lazy">{%- endif -%}
+              </a>
+              <div class="m-beyond__info">
+                <a href="{{ _p.url }}" class="m-beyond__name">{{ _p.title }} <span aria-hidden="true">&rarr;</span></a>
+                {%- if _sub != blank -%}<p class="m-beyond__sub">{{ _sub }}</p>{%- endif -%}
+              </div>
+              {%- if _v.available -%}
+                <button type="button" class="m-beyond__add" data-card-add="{{ _v.id }}" aria-label="Add {{ _p.title | escape }} to cart">
+                  <span class="mcard__btn-label"><span aria-hidden="true">+</span> Add &middot; {{ _v.price | money }}</span>
+                </button>
+              {%- else -%}
+                <span class="m-beyond__add m-beyond__add--sold">Sold out</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.free_threshold > 0 -%}
+        <div class="m-beyond__deliv">
+          <div class="m-beyond__deliv-track"><span class="m-beyond__deliv-fill" style="width: {{ _pct }}%;"></span></div>
+          {%- if _remaining > 0 -%}
+            <p class="m-beyond__deliv-txt">Add <strong>{{ _remaining | money }}</strong> more for free delivery</p>
+          {%- else -%}
+            <p class="m-beyond__deliv-txt">You&rsquo;ve unlocked free delivery</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="m-beyond__cta">{{ section.settings.cta_label }} <span aria-hidden="true">&rarr;</span></a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Beyond the potato",
+  "tag": "section",
+  "class": "m-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Left image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "caption_eyebrow", "label": "Caption eyebrow", "default": "Morghew Estate" },
+    { "type": "text", "id": "caption_quote", "label": "Caption quote", "default": "“Not just potatoes.”" },
+    { "type": "header", "content": "Panel" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "More from the estate" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Beyond the potato" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>The same fields that produce our heritage varieties also yield rapeseed oil, heritage grain, wild game, and a potato vodka unlike anything else in Kent.</p>" },
+    { "type": "header", "content": "Free delivery bar" },
+    { "type": "number", "id": "free_threshold", "label": "Free delivery threshold (£)", "default": 40, "info": "Set to 0 to hide the bar." },
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Browse all estate produce" },
+    { "type": "url", "id": "cta_url", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "info": "Optional. Falls back to the product's descriptors.subtitle metafield." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beyond the potato",
+      "blocks": [ { "type": "product" }, { "type": "product" }, { "type": "product" }, { "type": "product" } ]
+    }
+  ]
+}
+{% endschema %}

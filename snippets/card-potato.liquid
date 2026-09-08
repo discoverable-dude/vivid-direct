@@ -1,0 +1,43 @@
+{%- comment -%}
+  Unified product card. Usage: {% render 'card-potato', product: product %}
+  Content is auto-derived — no per-card data entry.
+{%- endcomment -%}
+{{ 'morghew-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'morghew-card.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign _vcount = product.variants.size
+  assign _min = product.price_min | default: product.price
+  # Products with multiple options (firewood: Load × Log Size) OR many variants (>4) can't be
+  # quick-added cleanly from a card — one button per variant overflows. Send them to the PDP to
+  # choose. Single-option products with a few variants (potatoes by weight) keep quick-add.
+  assign _multi = false
+  if product.options_with_values.size > 1 or product.variants.size > 4
+    assign _multi = true
+  endif
+-%}
+
+<div class="mcard">
+  <a href="{{ product.url }}" class="mcard__media" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        width="300" height="300" loading="lazy">
+    {%- endif -%}
+    {%- render 'card-flesh', product: product -%}
+  </a>
+
+  <div class="mcard__body">
+    <h3 class="mcard__title"><a href="{{ product.url }}" class="mcard__name">{{ product.title }}</a></h3>
+    <p class="mcard__sub">
+      {%- if _multi -%}From {{ _min | money }}{%- elsif _vcount > 1 -%}{{ _vcount }} options from {{ _min | money }}{%- else -%}{{ _min | money }}{%- endif -%}
+    </p>
+
+    {%- if _multi -%}
+      <a href="{{ product.url }}" class="mcard__choose">Choose options <span aria-hidden="true">&rarr;</span></a>
+    {%- else -%}
+      {%- render 'card-add-buttons', product: product -%}
+    {%- endif -%}
+  </div>
+</div>

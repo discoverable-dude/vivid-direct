@@ -1,0 +1,233 @@
+{%- comment -%}
+  morghew-contact-details.liquid — phone / email / hours / address + embedded map.
+  Built for the Contact page (sits between the hero and the form) but works on
+  any page. Map is a keyless Google embed driven by the "Map search" setting.
+{%- endcomment -%}
+
+{%- assign _tel = section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' -%}
+{%- assign _first = _tel | slice: 0 -%}
+{%- if _first == '0' -%}
+  {%- assign _tel = _tel | slice: 1, 19 | prepend: '+44' -%}
+{%- endif -%}
+
+<section class="mcd">
+  <div class="wrap">
+    <div class="mcd__grid">
+
+      <div class="mcd__info">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="mcd__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="mcd__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.phone != blank -%}
+          <div class="mcd__row">
+            <span class="mcd__ic">{% render 'morghew-icon', icon: 'phone', size: 22 %}</span>
+            <div>
+              <span class="mcd__label">{{ section.settings.phone_label | default: 'Call the estate office' | escape }}</span>
+              <a class="mcd__big" href="tel:{{ _tel }}">{{ section.settings.phone | escape }}</a>
+              {%- if section.settings.phone_note != blank -%}<span class="mcd__note">{{ section.settings.phone_note | escape }}</span>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.email != blank -%}
+          <div class="mcd__row">
+            <span class="mcd__ic">{% render 'morghew-icon', icon: 'mail', size: 22 %}</span>
+            <div>
+              <span class="mcd__label">{{ section.settings.email_label | default: 'Email us' | escape }}</span>
+              <a class="mcd__big mcd__big--email" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+              {%- if section.settings.email_note != blank -%}<span class="mcd__note">{{ section.settings.email_note | escape }}</span>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.hours != blank -%}
+          <div class="mcd__row">
+            <span class="mcd__ic">{% render 'morghew-icon', icon: 'clock', size: 22 %}</span>
+            <div>
+              <span class="mcd__label">{{ section.settings.hours_label | default: 'Farm shop hours' | escape }}</span>
+              <span class="mcd__strong">{{ section.settings.hours | escape }}</span>
+              {%- if section.settings.hours_note != blank -%}<span class="mcd__note">{{ section.settings.hours_note | escape }}</span>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.address != blank -%}
+          <div class="mcd__row">
+            <span class="mcd__ic">{% render 'morghew-icon', icon: 'pin', size: 22 %}</span>
+            <div>
+              <span class="mcd__label">{{ section.settings.address_label | default: 'Find us' | escape }}</span>
+              <address class="mcd__address">{{ section.settings.address }}</address>
+              {%- if section.settings.directions != blank -%}<span class="mcd__note">{{ section.settings.directions | escape }}</span>{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="mcd__mapcol">
+        {%- if section.settings.map_query != blank -%}
+          <div class="mcd__map">
+            <iframe
+              src="https://maps.google.com/maps?q={{ section.settings.map_query | url_encode }}&z={{ section.settings.map_zoom | default: 14 }}&output=embed"
+              title="Map showing {{ section.settings.map_query | escape }}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        {%- endif -%}
+        <div class="mcd__actions">
+          {%- if section.settings.map_query != blank -%}
+            <a class="mcd__btn mcd__btn--solid" href="https://www.google.com/maps/dir/?api=1&destination={{ section.settings.map_query | url_encode }}" target="_blank" rel="noopener">
+              {% render 'morghew-icon', icon: 'truck', size: 18 %} Get directions
+            </a>
+          {%- endif -%}
+          {%- if section.settings.secondary_label != blank and section.settings.secondary_url != blank -%}
+            <a class="mcd__btn mcd__btn--ghost" href="{{ section.settings.secondary_url }}">{{ section.settings.secondary_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .mcd { background: var(--hessian-weave), var(--paper); padding: var(--sec-pad-sm) 0; }
+  .mcd__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .mcd__eyebrow {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--hessian-text);
+    margin: 0 0 10px;
+  }
+  .mcd__heading {
+    font-family: var(--font-head);
+    font-weight: var(--head-weight);
+    letter-spacing: var(--head-tracking);
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 26px;
+  }
+  .mcd__row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .mcd__row > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .mcd__ic {
+    flex: 0 0 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--hessian-text);
+    background: var(--card);
+  }
+  .mcd__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .mcd__big {
+    font-family: var(--font-head);
+    font-weight: var(--head-weight);
+    font-size: clamp(24px, 2.8vw, 32px);
+    line-height: 1.15;
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .mcd__big:hover { color: var(--field); text-decoration: underline; text-underline-offset: 4px; }
+  .mcd__big--email { font-size: clamp(19px, 2.2vw, 24px); }
+  .mcd__strong { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .mcd__address { font-style: normal; font-size: 16px; line-height: 1.55; color: var(--ink); }
+  .mcd__address p { margin: 0; }
+  .mcd__note { font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+  .mcd__map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow-card);
+    aspect-ratio: 4 / 3;
+    background: var(--paper-2);
+  }
+  .mcd__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .mcd__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+  .mcd__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .mcd__btn--solid { background: var(--field); color: var(--paper); }
+  .mcd__btn--solid:hover { background: var(--footer-bg); }
+  .mcd__btn--ghost { border: 1.5px solid var(--ink); color: var(--ink); }
+  .mcd__btn--ghost:hover { background: var(--ink); color: var(--paper); }
+  .mcd__btn:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }
+  @media (max-width: 899px) {
+    .mcd__grid { grid-template-columns: minmax(0, 1fr); }
+    .mcd__map { aspect-ratio: 16 / 11; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Contact details + map",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Potato Shop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Call in, or come and see us." },
+    { "type": "header", "content": "Phone" },
+    { "type": "text", "id": "phone_label", "label": "Label", "default": "Call the estate office" },
+    { "type": "text", "id": "phone", "label": "Phone number", "default": "01580 763 158" },
+    { "type": "text", "id": "phone_note", "label": "Note", "default": "If we are out on the farm, leave a message and we will ring you back." },
+    { "type": "header", "content": "Email" },
+    { "type": "text", "id": "email_label", "label": "Label", "default": "Email us" },
+    { "type": "text", "id": "email", "label": "Email address", "default": "Potatoshop@morghew.com" },
+    { "type": "text", "id": "email_note", "label": "Note", "default": "Or use the form below and it comes to the same inbox." },
+    { "type": "header", "content": "Hours" },
+    { "type": "text", "id": "hours_label", "label": "Label", "default": "Farm shop hours" },
+    { "type": "text", "id": "hours", "label": "Hours", "default": "Staffed 9am to 3pm, every day" },
+    { "type": "text", "id": "hours_note", "label": "Note", "default": "The Honesty Stall is open at all times, whenever you are passing." },
+    { "type": "header", "content": "Address" },
+    { "type": "text", "id": "address_label", "label": "Label", "default": "Find us" },
+    { "type": "richtext", "id": "address", "label": "Address", "default": "<p>The Potato Shop, Morghew Park Estate<br>Smallhythe Road, Tenterden<br>Kent TN30 7LR</p>" },
+    { "type": "textarea", "id": "directions", "label": "Directions note", "default": "Heading down Smallhythe Road (B2082) away from Tenterden High Street, take the second drive on your right after the Tesco entrance. Follow the signs a quarter mile up the private road." },
+    { "type": "header", "content": "Map" },
+    { "type": "text", "id": "map_query", "label": "Map search", "default": "The Potato Shop, Morghew Park Estate, Smallhythe Road, Tenterden TN30 7LR", "info": "What the embedded map and the Get directions button search for" },
+    { "type": "range", "id": "map_zoom", "label": "Map zoom", "min": 10, "max": 18, "step": 1, "default": 14 },
+    { "type": "header", "content": "Second button (optional)" },
+    { "type": "text", "id": "secondary_label", "label": "Label", "default": "Plan a visit" },
+    { "type": "url", "id": "secondary_url", "label": "Link" }
+  ],
+  "presets": [{ "name": "Contact details + map" }]
+}
+{% endschema %}

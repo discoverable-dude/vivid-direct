@@ -1,0 +1,301 @@
+{%- comment -%}
+  Usage: {% render 'morghew-icon', icon: 'roast', size: 40 %}
+  Icons: roast, mash, chip, jacket, boil, steam, salad, arrow, play, clock, chevron
+{%- endcomment -%}
+
+{%- assign icon_size = size | default: 40 -%}
+
+{%- case icon -%}
+
+  {%- when 'roast' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M7 30h26M11 30c0-5.5 2-9 9-9s9 3.5 9 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 21c0-2.5 1.5-4 5-4s5 1.5 5 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 17V12M17 12a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'mash' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 8v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M13 18h14l-1 4.5a5 5 0 0 1-4.9 3.5h-2.2a5 5 0 0 1-4.9-3.5z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16 22v4M20 22v4.5M24 22v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'chip' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="7" y="14" width="8" height="18" rx="2" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <rect x="16" y="9" width="8" height="23" rx="2" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <rect x="25" y="14" width="8" height="18" rx="2" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'jacket' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="20" cy="24" rx="11" ry="8" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M14 18c2.5-4 5-5 6-5s3.5 1 6 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 13V9M17 24h6M20 21v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'boil' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M9 28h22l-2.5 5H11.5z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="15" cy="23" r="2" fill="currentColor"/>
+    <circle cx="21" cy="20" r="2" fill="currentColor"/>
+    <circle cx="27" cy="23" r="2" fill="currentColor"/>
+    <path d="M14 16c0-2.5 2-2.5 2-5M21 16c0-2.5 2-2.5 2-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'steam' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 26h24l-3 7H11z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M14 21c0-2.5 1.5-2.5 1.5-5M20 21c0-2.5 1.5-2.5 1.5-5M26 21c0-2.5 1.5-2.5 1.5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'salad' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M11 26c0-6 4-12 9-12s9 6 9 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7 26h26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M14 20c1.5-2.5 4-3.5 6-2.5M20 19c1.5-2.5 4-3.5 6-2.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M11 29c1.5 2 5 4 9 4s7.5-2 9-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'wedge' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 32L20 8l12 24H8z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M14 20h12M11 26h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'dauphinoise' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="8" y="24" width="24" height="9" rx="2" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M11 24v-3M15 24v-5M20 24v-6M25 24v-5M29 24v-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M8 18h24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'arrow' -%}
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'chevron' -%}
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'play' -%}
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M7 5l16 9-16 9V5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15"/>
+  </svg>
+
+  {%- when 'clock' -%}
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M7 4.5V7l2 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'nav-arrow' -%}
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 11h12M12 6l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'view-all-arrow' -%}
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 12h14M13 7l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'leaf' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 19c0-8 6-13 14-13 0 8-6 13-14 13z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5 19C9 14 13 11 17 9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'truck' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M2 7h11v9H2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="6" cy="18" r="1.5" stroke="currentColor" stroke-width="1.75"/>
+    <circle cx="17" cy="18" r="1.5" stroke="currentColor" stroke-width="1.75"/>
+  </svg>
+
+  {%- when 'pin' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.75"/>
+  </svg>
+
+  {%- when 'bottle' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 2h4M10.5 2v3.2c0 .8-.3 1.5-.9 2.1L8.2 8.9c-.6.6-.9 1.4-.9 2.2V20a2 2 0 0 0 2 2h5.4a2 2 0 0 0 2-2v-8.9c0-.8-.3-1.6-.9-2.2l-1.4-1.6c-.6-.6-.9-1.3-.9-2.1V2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.3 13h9.4" stroke="currentColor" stroke-width="1.75"/>
+  </svg>
+
+  {%- when 'book' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H12v16H5.5A1.5 1.5 0 0 0 4 20.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+    <path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H12v16h6.5a1.5 1.5 0 0 1 1.5 1.5z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'search' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.75"/>
+    <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+  </svg>
+
+  {%- comment -%} ── Estate produce ── {%- endcomment -%}
+
+  {%- when 'rapeseed-oil' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M16.5 13h7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M18 13v2.4c0 .7-.3 1.4-.8 1.9l-1.4 1.4c-.5.5-.8 1.2-.8 1.9V31a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V20.6c0-.7-.3-1.4-.8-1.9l-1.4-1.4c-.5-.5-.8-1.2-.8-1.9V13" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M14.5 23h11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 26c1.6 1.8 1.6 3.4 0 5-1.6-1.6-1.6-3.2 0-5z" fill="currentColor"/>
+  </svg>
+
+  {%- comment -%} flour → wheat sheaf {%- endcomment -%}
+  {%- when 'flour' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 34V22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 21c1.4-1.6 1.4-4.3 0-6-1.4 1.7-1.4 4.4 0 6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 24c-2.4-.7-3.9-3-3.7-5.7 2.5.5 4 2.9 3.7 5.7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 24c2.4-.7 3.9-3 3.7-5.7-2.5.5-4 2.9-3.7 5.7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 29c-2.4-.7-3.9-3-3.7-5.7 2.5.5 4 2.9 3.7 5.7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 29c2.4-.7 3.9-3 3.7-5.7-2.5.5-4 2.9-3.7 5.7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>
+
+  {%- comment -%} wild game → pheasant feather {%- endcomment -%}
+  {%- when 'wild-game' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M13 32.5C14 24 18.3 14.2 28 10c1.4 9.3-2.6 18.6-12.4 21.7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M13 32.5C16.4 24.3 21.7 15.5 28 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M12 35l1.8-2.9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M16.6 25.2l-2.6-.8M19.6 19.4l-2.7-.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M17.8 26l2.6.8M20.8 20.2l2.7.8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'firewood' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="15" cy="26.5" r="5.5" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="25" cy="26.5" r="5.5" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="20" cy="17.5" r="5.5" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="15" cy="26.5" r="1.5" fill="currentColor"/>
+    <circle cx="25" cy="26.5" r="1.5" fill="currentColor"/>
+    <circle cx="20" cy="17.5" r="1.5" fill="currentColor"/>
+  </svg>
+
+  {%- comment -%} potato seeds → sapling / seedling {%- endcomment -%}
+  {%- when 'potato-seeds' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 33V19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 24c-1.3-3.9-4.4-6.1-8.8-6.4.3 4.4 3.5 6.9 8.8 6.4Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 20.5c1.3-3.9 4.4-6.1 8.8-6.4-.3 4.4-3.5 6.9-8.8 6.4Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M13 33h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- comment -%} honey → honeycomb {%- endcomment -%}
+  {%- when 'honey' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 9L25.2 12V18L20 21L14.8 18V12Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M14.8 18L20 21V27L14.8 30L9.6 27V21Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M25.2 18L30.4 21V27L25.2 30L20 27V21Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>
+
+  {%- comment -%} About-the-estate set: same line-art rules as the produce icons {%- endcomment -%}
+  {%- when 'fish' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 20c4-5.5 12-5.5 16 0-4 5.5-12 5.5-16 0Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M24 20l7-5.5v11L24 20Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="12.8" cy="19.2" r="1.4" fill="currentColor"/>
+  </svg>
+
+  {%- comment -%} game bird rising — the shoot {%- endcomment -%}
+  {%- when 'pheasant' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M11 29c8 .8 14.5-3.4 17.5-11.5-8-.8-14.9 3.7-17.5 11.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M19 20c-.4-4.6-3-7.4-7.6-8.2.5 4.6 3.1 7.5 7.6 8.2Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M28.5 17.5l3.2-1.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'wheat' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 34V12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 19c-1.2-3.4-3.8-5.3-7.6-5.6.3 3.8 3 6 7.6 5.6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 19c1.2-3.4 3.8-5.3 7.6-5.6-.3 3.8-3 6-7.6 5.6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 26c-1.2-3.4-3.8-5.3-7.6-5.6.3 3.8 3 6 7.6 5.6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 26c1.2-3.4 3.8-5.3 7.6-5.6-.3 3.8-3 6-7.6 5.6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 12c-1.5-1.2-1.5-3.8 0-5 1.5 1.2 1.5 3.8 0 5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  </svg>
+
+  {%- comment -%} birds over the marsh — flora & fauna {%- endcomment -%}
+  {%- when 'bird' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8.5 23.5c3.4-4.4 7.2-4.4 10.6 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M21 15.5c2.6-3.4 5.6-3.4 8.2 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M23.5 26c2-2.6 4.4-2.6 6.4 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'camera' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="7.5" y="13.5" width="25" height="17" rx="3" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="20" cy="22" r="5" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M15 13.5l2-3.5h6l2 3.5" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="28.3" cy="18" r="1.3" fill="currentColor"/>
+  </svg>
+
+  {%- comment -%} striped awning — farmers' market {%- endcomment -%}
+  {%- when 'stall' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M8 10.5h24l1 5H7l1-5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M7 15.5c0 2.7 1.9 4.3 4.3 4.3s4.4-1.6 4.4-4.3" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M15.7 15.5c0 2.7 1.9 4.3 4.3 4.3s4.3-1.6 4.3-4.3" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M24.3 15.5c0 2.7 2 4.3 4.4 4.3 2.3 0 4.3-1.6 4.3-4.3" stroke="currentColor" stroke-width="2.2"/>
+    <path d="M10 21v10.5M30 21v10.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M10 26.5h20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- comment -%} broadleaf oak — the estate {%- endcomment -%}
+  {%- when 'tree' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M13.5 23.5c-3.3 0-5.5-2.2-5.5-4.9 0-2.4 1.7-4.4 4.1-4.8.6-3.2 3.4-5.6 6.9-5.6 3.4 0 6.2 2.3 6.9 5.5 2.5.3 4.3 2.3 4.3 4.8 0 2.8-2.2 5-5.5 5H13.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M20 23.5V33" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20 28.5l-3.5-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M13 33h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'potato' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 22.4c-1.1-5 2.2-9.9 7.5-10.9 5.3-1 10.3 2.1 11.4 7 1 4.7-2.1 9.4-7.4 10.4-5.4 1-10.4-1.7-11.5-6.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="16.8" cy="18.5" r="1.3" fill="currentColor"/>
+    <circle cx="23.2" cy="16.4" r="1.3" fill="currentColor"/>
+    <circle cx="21.2" cy="23.4" r="1.3" fill="currentColor"/>
+  </svg>
+
+  {%- when 'flame' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 7c5 5 8.5 9.3 8.5 14.4C28.5 26.7 24.7 30.5 20 30.5s-8.5-3.8-8.5-9.1c0-2.5.8-4.7 2.2-6.8.8 1.6 1.8 2.8 3.1 3.6C17.3 14.6 18.6 10.8 20 7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M23.3 23.2c.2 2.6-1.3 4.5-3.6 4.9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+
+  {%- when 'phone' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'mail' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="2.5" y="4.8" width="19" height="14.4" rx="2" stroke="currentColor" stroke-width="1.5"/>
+    <path d="m3.5 7.2 8.5 6 8.5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  {%- when 'star' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="currentColor" d="M12 2.5l2.9 5.88 6.49.94-4.69 4.57 1.1 6.46L12 16.9l-5.8 3.05 1.1-6.46L2.6 9.32l6.49-.94L12 2.5z"/>
+  </svg>
+  {%- when 'check' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  {%- when 'plus' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+  </svg>
+
+{%- endcase -%}

@@ -1,0 +1,315 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "2200",
+            "label": "Acres looked after"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "label": "miles of hedgerows"
+          }
+        },
+        "stat_U4JhHm": {
+          "type": "stat",
+          "settings": {
+            "number": "20+",
+            "label": "Employees"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "1",
+            "label": "Family, for generations to come"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "label": "Supermarket middlemen"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "stat_U4JhHm",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DJI_0176.jpg",
+        "image_opacity": 65,
+        "crumb": "The Estate",
+        "eyebrow": "Morghew Park Estate · Tenterden, Kent",
+        "headline": "A working estate, first and foremost.",
+        "lede": "A little over two thousand acres of Kentish weald. A thriving trade in potatoes, arable land farmed regeneratively and sustainably. Ancient woodland responsibly managed for habitat, firewood, and game. Cold-pressed oils, small-batch vodka, venison and game from our own shoot. This is where it all comes from."
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Farmed for the long term",
+        "body": "Morghew is farmed the way we'd want to hand it on — soil built up rather than stripped out, land given time to recover, and decisions made for the next twenty years rather than the next harvest."
+      }
+    },
+    "split_land": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/wheatrows.jpg",
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "The approach",
+        "heading": "No-till, and no shortcuts",
+        "body": "<p><br/>We stopped ploughing years ago. Direct-drilling into standing stubble keeps the soil structure intact, holds carbon where it belongs, and means fewer passes with heavy machinery across the fields with less diesel burnt. Cover crops and herbal leys go in between cash crops, feeding the soil rather than leaving it bare. </p><p>Where we can, we spread muck instead of bagged fertiliser — cutting artificial inputs and putting back what the land's already given us. It's all backed by an SFI agreement and a Countryside Stewardship Mid Tier scheme, which reward the things we were already trying to do.<br/><br/></p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "split_growing": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "shopify://shop_images/DJI_0027.jpg",
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "The land",
+        "heading": "A hundred small fields, not ten big ones",
+        "body": "<p></p><p>Morghew is farmed across around a hundred fields, most of them small — the kind of patchwork you get when land's been worked the same way for generations rather than squared off for bigger machinery. That shape comes with ten miles of hedgerow stitching it all together, doing the job they've always done: shelter, wildlife corridors, and boundaries nobody quite remembers agreeing to. Beyond the fields sits sixty-five hectares of ancient semi-natural woodland — ground that's been trees, more or less continuously, since before records began. We manage it on its own long timeline: thinning for timber and firewood, leaving deadwood and glades for the wildlife that depends on them, and keeping it healthy enough to still be standing in another few hundred years.<br/><br/></p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "morghew_split_XWqr7G": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/marsh-harrier.png",
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "The wildlife",
+        "heading": "What we left, and what came back",
+        "body": "<p></p><p>Turtle doves. Red kites. Marsh harriers. All recorded over the old crayfish lagoons, left almost untouched for years and now the richest habitat on the estate. We work with the RSPB on supplementary feeding for the turtle doves, and run cameras and song recorders to see what else turns up.</p><p></p><p></p><p></p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "morghew_split_yUKp4y": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "shopify://shop_images/SI_RM_FOD_MORGHEW-2872.jpg",
+        "tag": "",
+        "ratio": "4 / 5",
+        "eyebrow": "The people",
+        "heading": "The same faces, season after season",
+        "body": "<p><br/>Some of the people working this land have been doing it for years, through wet harvests and good ones. Two brothers on the team started at fifteen and are still here — between them, the best part of a century. They know which fields flood first, which land drains block up, and where the water sits longest after a storm.<br/><br/></p><p></p><p></p><p></p><p></p>",
+        "cta_label": "",
+        "cta_url": ""
+      }
+    },
+    "quote": {
+      "type": "morghew-quote",
+      "settings": {
+        "quote": "We enjoy eating the varieties we grow and love to share them with our customers.",
+        "author": "The Morghew growing team",
+        "role": "Tenterden, Kent"
+      }
+    },
+    "strands": {
+      "type": "morghew-strands",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/oil-field-single.jpg",
+            "title": "Cold-pressed rapeseed oil",
+            "text": "Pressed from estate-grown seed, unrefined and golden. A high smoke point and a nutty, grassy finish.",
+            "link_label": "Shop the oil",
+            "link_url": "shopify://collections/rapeseed-oil"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/vodka.jpg",
+            "title": "Yukon Gold potato vodka",
+            "text": "Distilled from our own potatoes into a soft, clean spirit. Small batches, estate to bottle. A true Kentish product.",
+            "link_label": "Shop the spirit",
+            "link_url": "shopify://products/potato-vodka"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/spelt-flour.png",
+            "title": "Stoneground wholemeal flour",
+            "text": "Ancient grain, milled slowly, for bakers who want flavour and a flour with a past.",
+            "link_label": "Shop the flour",
+            "link_url": "shopify://collections/stoneground-flour"
+          }
+        },
+        "c4": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/venison.jpg",
+            "title": "Wild game",
+            "text": "Venison and game managed and taken on the estate, sold online and through the farm shop.",
+            "link_label": "About the shoot",
+            "link_url": "shopify://collections/wild-game"
+          }
+        },
+        "c5": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/crate-branded-store.jpg",
+            "title": "The Potato Shop",
+            "text": "Our online farm shop. Order any variety by the kilo or the crate, delivered nationwide.",
+            "link_label": "Shop potatoes",
+            "link_url": "/collections/potato-shop"
+          }
+        },
+        "c6": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/variety-wheel.jpg",
+            "title": "Visit & farmers' markets",
+            "text": "Find us at the farm gate and at Marylebone and Parliament Hill farmers market. Come and see thirty varieties in one place.",
+            "link_label": "Where to find us",
+            "link_url": "shopify://pages/farmers-markets"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "settings": {
+        "eyebrow": "Beyond the potato",
+        "heading": "One estate, diversified",
+        "intro": "The potatoes are the heart of it, but a working estate does more than one thing. Everything below comes off the same land."
+      }
+    },
+    "gallery": {
+      "type": "morghew-gallery",
+      "blocks": {
+        "g1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/grading-team.jpg",
+            "tag": "The grading shed",
+            "wide": true
+          }
+        },
+        "g2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/la-ratte-harvest.jpg",
+            "tag": "La Ratte",
+            "wide": false
+          }
+        },
+        "g3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/russet-wedges.jpg",
+            "tag": "Sorting",
+            "wide": false
+          }
+        },
+        "g4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/field-rover-standing.jpg",
+            "tag": "The home field",
+            "wide": false
+          }
+        },
+        "g5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/variety-wheel.jpg",
+            "tag": "Thirty varieties",
+            "wide": false
+          }
+        },
+        "g6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/crate-store-flare.jpg",
+            "tag": "Packed by hand",
+            "wide": true
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "settings": {
+        "heading": "A year on the estate"
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0094.jpg",
+        "eyebrow": "From our field to your kitchen",
+        "heading": "Taste the difference the ground makes",
+        "body": "Order heritage varieties you will not find in any supermarket, lifted to order and delivered across the UK.",
+        "button_1_label": "Shop the Potato Shop",
+        "button_1_url": "/collections/potato-shop",
+        "button_2_label": "Trade enquiries",
+        "button_2_url": "/pages/trade"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "lede",
+    "split_land",
+    "split_growing",
+    "morghew_split_XWqr7G",
+    "morghew_split_yUKp4y",
+    "quote",
+    "strands",
+    "gallery",
+    "cta"
+  ]
+}

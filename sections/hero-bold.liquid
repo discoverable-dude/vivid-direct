@@ -1,0 +1,231 @@
+{{ 'morghew-home.css' | asset_url | stylesheet_tag }}
+<section class="bhero" id="hero-{{ section.id }}">
+
+  {%- comment -%} LEFT: Media panel {%- endcomment -%}
+  <div class="bhero__media">
+
+    {%- if section.settings.video != blank -%}
+      {{- section.settings.video | video_tag:
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true -}}
+    {%- elsif section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="eager"
+        fetchpriority="high">
+    {%- endif -%}
+
+    <div class="bhero__grain"></div>
+
+    {%- comment -%} Play button — only shown when using a YouTube/external link and no native video {%- endcomment -%}
+    {%- if section.settings.video_url != blank and section.settings.video == blank -%}
+      <a href="{{ section.settings.video_url }}" class="bhero__playbtn" aria-label="Watch the film" target="_blank" rel="noopener">
+        {% render 'morghew-icon', icon: 'play' %}
+      </a>
+    {%- endif -%}
+
+  </div>
+
+  {%- comment -%} RIGHT: Text panel {%- endcomment -%}
+  <div class="bhero__panel">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="bhero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    <h1 class="bhero__h">
+      {{ section.settings.headline_prefix | newline_to_br }}<br>
+      <span class="bhero__cycler">
+        <span class="bhero__word" id="bhero-word-{{ section.id }}">
+          {%- if section.blocks.size > 0 -%}
+            {{ section.blocks[0].settings.word | escape }}
+          {%- else -%}
+            a Roast
+          {%- endif -%}
+        </span>
+      </span>
+    </h1>
+
+    {%- if section.settings.lede != blank -%}
+      <p class="bhero__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    <div class="bhero__cta">
+      {%- if section.settings.cta_url != blank and section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="btn btn--lg">
+          {{ section.settings.cta_label | escape }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.secondary_url != blank and section.settings.secondary_label != blank -%}
+        <a href="{{ section.settings.secondary_url }}" class="bhero__secondary">
+          {% render 'morghew-icon', icon: 'play', size: 18 %}
+          {{ section.settings.secondary_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  {%- comment -%} TICKER — direct child of .bhero so grid-column: 1/-1 spans full width {%- endcomment -%}
+  <div class="bhero__ticker" aria-hidden="true">
+    <div class="bhero__track">
+      {%- assign ticker_text = section.settings.ticker_text | default: 'Grown by hand · Lifted the day before · 30 heritage varieties · As served at The Shard · Tracked UK delivery ·' -%}
+      <span class="bhero__tickrow">&nbsp;&nbsp;{{ ticker_text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ ticker_text }}&nbsp;&nbsp;</span>
+      <span class="bhero__tickrow" aria-hidden="true">&nbsp;&nbsp;{{ ticker_text }}&nbsp;&nbsp;&nbsp;&nbsp;{{ ticker_text }}&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+</section>
+
+{%- if section.blocks.size > 1 -%}
+<script>
+(function() {
+  var words = [
+    {%- for block in section.blocks -%}
+      {{ block.settings.word | json }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ];
+  var el = document.getElementById('bhero-word-{{ section.id }}');
+  if (!el || words.length < 2) return;
+  var idx = 0;
+  setInterval(function() {
+    idx = (idx + 1) % words.length;
+    el.classList.remove('is-entering');
+    void el.offsetWidth;
+    el.textContent = words[idx];
+    el.classList.add('is-entering');
+  }, 2400);
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero (Bold)",
+  "tag": "section",
+  "class": "section",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (upload)",
+      "info": "Uploaded video takes priority over image. Autoplays muted and looped."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Used when no video is uploaded."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "YouTube / external video link",
+      "info": "Shows a play button over the image. Only used when no video is uploaded."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Morghew Estate · Tenterden, Kent"
+    },
+    {
+      "type": "text",
+      "id": "headline_prefix",
+      "label": "Headline prefix",
+      "default": "Tonight\nI'm making"
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lead paragraph",
+      "default": "Thirty heritage varieties grown in the Kent countryside, lifted the day before delivery. Found at The Shard, and on your doorstep."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Pick your potato →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary CTA label",
+      "default": "Watch the film"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "header",
+      "content": "Ticker tape"
+    },
+    {
+      "type": "text",
+      "id": "ticker_text",
+      "label": "Ticker text",
+      "default": "Grown by hand · Lifted the day before · 30 heritage varieties · As served at The Shard · Tracked UK delivery ·"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cycle_word",
+      "name": "Cycling word",
+      "settings": [
+        {
+          "type": "text",
+          "id": "word",
+          "label": "Word",
+          "default": "a Roast"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero (Bold)",
+      "blocks": [
+        { "type": "cycle_word", "settings": { "word": "a Roast" } },
+        { "type": "cycle_word", "settings": { "word": "Mash" } },
+        { "type": "cycle_word", "settings": { "word": "Chips" } },
+        { "type": "cycle_word", "settings": { "word": "a Jacket" } },
+        { "type": "cycle_word", "settings": { "word": "a Salad" } },
+        { "type": "cycle_word", "settings": { "word": "a Bake" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

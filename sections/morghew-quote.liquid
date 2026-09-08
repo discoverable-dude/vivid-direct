@@ -1,0 +1,32 @@
+{%- comment -%}
+  Morghew Quote — full-width field-green pull-quote band with leaf mark + attribution.
+{%- endcomment -%}
+
+{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+
+<section class="esec equote" data-reveal>
+  <div class="wrap equote__wrap">
+    {% render 'morghew-icon', icon: 'leaf', size: 30 %}
+    <blockquote class="equote__q">{{ section.settings.quote }}</blockquote>
+    {%- if section.settings.author != blank -%}
+      <p class="equote__by">
+        {{ section.settings.author }}
+        {%- if section.settings.role != blank -%}<span class="equote__role">{{ section.settings.role }}</span>{%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Quote",
+  "tag": "section",
+  "class": "m-section",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "A potato is not a commodity. It is an ingredient." },
+    { "type": "text", "id": "author", "label": "Attribution", "default": "The Morghew family" },
+    { "type": "text", "id": "role", "label": "Role / place", "default": "Tenterden, Kent" }
+  ],
+  "presets": [ { "name": "Morghew Quote" } ]
+}
+{% endschema %}

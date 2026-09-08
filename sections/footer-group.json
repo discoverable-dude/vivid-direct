@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "footer_logo": "shopify://shop_images/Morghew_logo_white.png",
+        "blurb": "A working farming estate near Tenterden, Kent. Heritage potatoes, estate produce, and a few good things besides.",
+        "phone": "01580 766 866",
+        "show_social": true,
+        "newsletter_label": "Estate news & what's in season",
+        "email_placeholder": "your@email.com",
+        "newsletter_button": "Join",
+        "col1_heading": "The estate",
+        "col1_menu": "the-estate",
+        "col2_heading": "Shop",
+        "col2_menu": "shop",
+        "col3_heading": "Visit & find us",
+        "col3_menu": "visit-us",
+        "bottom_left": "© Morghew Park Estate",
+        "bottom_mid": "Tenterden · Kent",
+        "bottom_right": "Please drink responsibly"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

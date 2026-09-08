@@ -1,0 +1,29 @@
+{%- comment -%}
+  Morghew Lede — kicker + oversized display paragraph that opens an editorial page.
+{%- endcomment -%}
+
+{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+
+<section class="esec elede" data-reveal>
+  <div class="wrap elede__wrap">
+    {%- if section.settings.kicker != blank -%}
+      <p class="elede__kicker">{{ section.settings.kicker }}</p>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <p class="elede__body">{{ section.settings.body }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Morghew Lede",
+  "tag": "section",
+  "class": "m-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why we do this" },
+    { "type": "textarea", "id": "body", "label": "Lede paragraph", "default": "A short, confident paragraph set large, that frames the whole page." }
+  ],
+  "presets": [ { "name": "Morghew Lede" } ]
+}
+{% endschema %}

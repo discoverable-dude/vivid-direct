@@ -1,0 +1,55 @@
+{%- comment -%}
+  collection-bottom-content.liquid — rich content BELOW the product grid on any collection.
+  Source order:
+    1. Per-collection: the collection's `custom.bottom_content` rich-text metafield (unique per
+       collection — set in admin → Collections → [name] → Metafields).
+    2. Fallback: the section's "Fallback content" setting (shared across collections on this template).
+  Renders nothing when both are empty, so collections without extra copy show nothing.
+{%- endcomment -%}
+{%- assign _mf = collection.metafields.custom.bottom_content -%}
+{%- assign _fallback = section.settings.content -%}
+{%- if _mf != blank or _fallback != blank -%}
+  <section class="coll-bottom">
+    <div class="wrap">
+      <div class="coll-bottom__inner">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="coll-bottom__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        <div class="coll-bottom__body">
+          {%- if _mf != blank -%}{{ _mf | metafield_tag }}{%- else -%}{{ _fallback }}{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% style %}
+  .coll-bottom { background: var(--hessian-weave), var(--paper); padding-block: var(--sec-pad, 64px); }
+  .coll-bottom__inner { max-width: 820px; margin-inline: auto; }
+  .coll-bottom__heading { font-family: var(--font-head); font-weight: 800; font-size: clamp(26px, 3.5vw, 40px); line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 22px; }
+  .coll-bottom__body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+  .coll-bottom__body > :first-child { margin-top: 0; }
+  .coll-bottom__body > :last-child { margin-bottom: 0; }
+  .coll-bottom__body p { margin: 0 0 1em; }
+  .coll-bottom__body h2, .coll-bottom__body h3, .coll-bottom__body h4 { font-family: var(--font-head); font-weight: 700; color: var(--ink); line-height: 1.2; margin: 1.5em 0 0.5em; }
+  .coll-bottom__body ul, .coll-bottom__body ol { margin: 0 0 1em; padding-left: 1.4em; }
+  .coll-bottom__body li { margin: 0 0 0.4em; }
+  .coll-bottom__body a { color: var(--cta); text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
+  .coll-bottom__body a:hover { color: var(--cta-dark); }
+  .coll-bottom__body img { max-width: 100%; height: auto; border-radius: var(--radius); }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Collection bottom content",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "paragraph", "content": "Shows content BELOW the products. For unique copy per collection, add a rich-text metafield with namespace/key custom.bottom_content to each collection (admin → Settings → Custom data → Collections, then edit each collection's metafield). The Fallback content below is shared across all collections using this template." },
+    { "type": "text", "id": "heading", "label": "Heading (optional)" },
+    { "type": "richtext", "id": "content", "label": "Fallback content" }
+  ],
+  "presets": [{ "name": "Collection bottom content" }]
+}
+{% endschema %}

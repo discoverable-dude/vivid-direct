@@ -1,0 +1,125 @@
+/* Morghew — basket upsells (cart drawer + basket page) and the log
+   postcode gate on delivery-restricted product pages. */
+
+/* ── upsell strip ── */
+.mup { border-top: 1px solid var(--line); padding: 18px 0 10px; margin-top: 10px; }
+/* the drawer renders the strip edge-to-edge, so give it its own gutters */
+cart-drawer .mup {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 14px;
+  margin-top: 0;
+}
+.mup__head {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hessian-text);
+  margin: 0 0 14px;
+}
+.mup__list { display: flex; flex-direction: column; gap: 12px; }
+.mup__row { display: flex; align-items: center; gap: 12px; min-height: 48px; }
+.mup__thumb { flex: 0 0 48px; width: 48px; }
+.mup__thumb img {
+  width: 48px !important;
+  height: 48px !important;
+  max-width: none;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  display: block;
+}
+.mup__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.mup__name {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mup__name:hover { color: var(--cta); }
+.mup__price { font-size: 12.5px; color: var(--ink-soft); }
+.mup__add {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--cta);
+  background: var(--cta);
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.mup__add:hover { background: var(--cta-dark); border-color: var(--cta-dark); }
+.mup__add.is-loading { opacity: 0.6; pointer-events: none; }
+.mup__add.is-added { background: var(--field); border-color: var(--field); }
+.mup__add--sold { background: transparent; color: var(--ink-soft); border-color: var(--line); cursor: default; }
+
+/* basket page host keeps the strip a comfortable reading width */
+.crate-upsell-host .mup { max-width: 560px; }
+
+/* ── postcode gate ── */
+.mgate {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 14px;
+  background: var(--card);
+}
+.mgate__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.mgate__label svg { color: var(--field); }
+.mgate__input {
+  width: 100%;
+  max-width: 220px;
+  padding: 11px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.mgate__input:focus { outline: 2px solid var(--field); outline-offset: 1px; }
+.mgate__msg { display: none; font-size: 13px; line-height: 1.4; margin: 8px 0 0; }
+.mgate.is-ok .mgate__msg--ok { display: block; color: var(--field); }
+.mgate.is-bad .mgate__msg--bad { display: block; color: var(--cta-dark); }
+.mgate.is-checking .mgate__msg--checking { display: block; color: var(--ink-soft); }
+.mgate.is-error .mgate__msg--error { display: block; color: var(--cta-dark); }
+
+/* delivery-charge cart line: quantity is hidden, distance note shows instead */
+.crate-row__deliv-note,
+.cart-item__deliv-note {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.mgate.is-ok .mgate__input { border-color: var(--field); }
+.mgate.is-bad .mgate__input { border-color: var(--cta); }

@@ -1,0 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "morghew-search",
+      "blocks": {
+        "popular_1": { "type": "popular", "settings": { "label": "Roasting potatoes", "icon": "roast" } },
+        "popular_2": { "type": "popular", "settings": { "label": "Red flesh varieties", "icon": "leaf" } },
+        "popular_3": { "type": "popular", "settings": { "label": "Potato vodka", "icon": "bottle" } },
+        "popular_4": { "type": "popular", "settings": { "label": "Recipes", "icon": "book" } },
+        "browse_1": { "type": "browse", "settings": { "title": "Potato Shop", "subtitle": "30 heritage varieties" } },
+        "browse_2": { "type": "browse", "settings": { "title": "Estate Produce", "subtitle": "Vodka, oils, flour & more" } },
+        "browse_3": { "type": "browse", "settings": { "title": "Recipes", "subtitle": "Chef-written guides" } }
+      },
+      "block_order": ["popular_1", "popular_2", "popular_3", "popular_4", "browse_1", "browse_2", "browse_3"],
+      "settings": {
+        "heading": "What are you looking for?",
+        "placeholder": "Search varieties, recipes, estate produce…"
+      }
+    }
+  },
+  "order": ["main"]
+}

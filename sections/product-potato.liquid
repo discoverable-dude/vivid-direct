@@ -1,0 +1,623 @@
+{{ 'morghew-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'morghew-lightbox.js' | asset_url }}" defer="defer"></script>
+{%- comment -%}
+  product-potato.liquid
+  Heritage potato product page.
+
+  Per-product metafields (set in Shopify admin → product → metafields):
+    custom.origin_headline  — e.g. "Bred on a German heath, grown in Kent."
+    custom.origin_copy      — multi-line body paragraphs for About section
+    (variant) custom.note   — serving note per variant, e.g. "serves 2–4"
+
+  Category (Shopify taxonomy) + custom metafields drive everything — no tags:
+    custom.flesh_colour         → flesh badge + gallery label (fallback: shopify.potato-variety if a valid colour)
+    shopify.cooking-method      → "How to cook it" cards
+    shopify.dietary-preferences → "Good to know" cards
+    custom.product_attributes_1 → "Good to know" cards (bespoke, see lookup below)
+
+  Section blocks (configure per product in Online Store customizer):
+    recipe           → "Cook it well" cards
+    related_product  → "Pairs well with" product cards
+{%- endcomment -%}
+
+{%- comment -%}
+  "Good to know" descriptions — lowercased label | description.
+  Covers dietary taxonomy values + custom.product_attributes_1 values.
+  Add rows to give any attribute a description; unmatched labels still show as a bare card.
+{%- endcomment -%}
+{%- assign pp_attr_meta = "floury|Light and fluffy — perfect for roasting,waxy|Holds its shape when boiled or steamed,waxy texture|Holds its shape when boiled or steamed,holds its colour|Flesh stays true when cooked,anthocyanin-rich|The antioxidant behind the red,high in vitamin c|A naturally nutritious variety,low gi|Slower to digest — steady energy,heritage variety|Centuries-old genetics still worth growing,in season|At their peak right now,gluten-free|Naturally gluten-free,vegan|Suitable for a vegan diet,organic|Certified organic,low fat|Very low in sugar & salt" | split: "," -%}
+
+{%- comment -%}
+  ── Data sources (category + custom metafields — no tags) ──────────────
+  Cook methods    → shopify.cooking-method
+  Flesh / variety → shopify.potato-variety
+  Dietary         → shopify.dietary-preferences
+  Bespoke attrs   → custom.product_attributes_1 (list of text)
+{%- endcomment -%}
+
+{%- comment -%}
+  Flesh colour — dedicated custom.flesh_colour field (choices: White/Cream/Yellow/Red/Blue).
+  Falls back to shopify.potato-variety ONLY when that value is itself a valid flesh colour,
+  so inconsistent variety data (e.g. "Golden Wonder") never produces a broken label/dot.
+{%- endcomment -%}
+{%- assign pp_flesh = "" -%}
+{%- assign pp_flesh_label = "" -%}
+{%- assign _fc = product.metafields.custom.flesh_colour -%}
+{%- assign _flesh_raw = _fc.value -%}
+{%- if _fc.type contains "list" -%}{%- assign _flesh_raw = _fc.value | first -%}{%- endif -%}
+{%- if _flesh_raw == blank -%}
+  {%- assign _tax_variety = product.metafields.shopify.potato-variety.value -%}
+  {%- if _tax_variety != blank -%}
+    {%- assign _v = _tax_variety | first -%}
+    {%- assign _v_label = _v.label | default: _v -%}
+    {%- assign _v_low = _v_label | downcase -%}
+    {%- if _v_low == "white" or _v_low == "cream" or _v_low == "yellow" or _v_low == "red" or _v_low == "blue" -%}
+      {%- assign _flesh_raw = _v_label -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if _flesh_raw != blank -%}
+  {%- assign pp_flesh = _flesh_raw | downcase -%}
+  {%- assign pp_flesh_label = _flesh_raw | capitalize | append: " Flesh" -%}
+{%- endif -%}
+
+{%- comment -%} Variety type (e.g. "Heritage Variety") — per-product via custom.variety_type, not hardcoded {%- endcomment -%}
+{%- assign _vt = product.metafields.custom.variety_type -%}
+{%- assign pp_variety_label = _vt.value -%}
+{%- if _vt.type contains "list" -%}{%- assign pp_variety_label = _vt.value | first -%}{%- endif -%}
+
+{%- comment -%} Badge text: flesh + variety type, joined by " · " when both present {%- endcomment -%}
+{%- assign pp_badge_txt = "" -%}
+{%- if pp_flesh_label != "" -%}{%- assign pp_badge_txt = pp_flesh_label -%}{%- endif -%}
+{%- if pp_variety_label != blank -%}
+  {%- if pp_badge_txt != "" -%}{%- assign pp_badge_txt = pp_badge_txt | append: " · " -%}{%- endif -%}
+  {%- assign pp_badge_txt = pp_badge_txt | append: pp_variety_label -%}
+{%- endif -%}
+
+{%- comment -%} Cook methods from "Cooking method" category metafield {%- endcomment -%}
+{%- assign pp_cook_raw = "" -%}
+{%- assign _tax_cooking = product.metafields.shopify.cooking-method.value -%}
+{%- for _m in _tax_cooking -%}
+  {%- assign _m_str = _m.label | default: _m | downcase -%}
+  {%- case _m_str -%}
+    {%- when "boiling"          -%}{%- assign pp_cook_raw = pp_cook_raw | append: "boil,"   -%}
+    {%- when "steaming"         -%}{%- assign pp_cook_raw = pp_cook_raw | append: "steam,"  -%}
+    {%- when "roasting"         -%}{%- assign pp_cook_raw = pp_cook_raw | append: "roast,"  -%}
+    {%- when "mashing"          -%}{%- assign pp_cook_raw = pp_cook_raw | append: "mash,"   -%}
+    {%- when "chips", "frying"  -%}{%- assign pp_cook_raw = pp_cook_raw | append: "chip,"   -%}
+    {%- when "jacket", "baking" -%}{%- assign pp_cook_raw = pp_cook_raw | append: "jacket," -%}
+  {%- endcase -%}
+{%- endfor -%}
+
+{%- comment -%} "Good to know": dietary preferences (taxonomy) + bespoke custom attributes {%- endcomment -%}
+{%- assign pp_attr_raw = "" -%}
+{%- assign _tax_dietary = product.metafields.shopify.dietary-preferences.value -%}
+{%- for _d in _tax_dietary -%}
+  {%- assign _d_label = _d.label | default: _d -%}
+  {%- assign pp_attr_raw = pp_attr_raw | append: _d_label | append: "~" -%}
+{%- endfor -%}
+{%- assign _custom_attrs = product.metafields.custom.product_attributes_1.value -%}
+{%- if _custom_attrs != blank -%}
+  {%- if _custom_attrs.first -%}
+    {%- comment -%} list of values {%- endcomment -%}
+    {%- for _a in _custom_attrs -%}
+      {%- assign pp_attr_raw = pp_attr_raw | append: _a | append: "~" -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- comment -%} single value (metafield created as single-line text) {%- endcomment -%}
+    {%- assign pp_attr_raw = pp_attr_raw | append: _custom_attrs | append: "~" -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign pp_cook_list = pp_cook_raw | split: "," -%}
+{%- assign pp_attr_list = pp_attr_raw | split: "~" -%}
+{%- assign pp_variant = product.selected_or_first_available_variant -%}
+
+{%- comment -%} Cook method lookup: tag|description|css-colour {%- endcomment -%}
+{%- assign pp_cook_meta = "roast|Drama on the plate|#B43C18,mash|Vivid & buttery|#C9761C,chip|Friday night chip|#C9761C,jacket|Crinkly skin|#8F3415,boil|Holds its shape|#0A5A4C,steam|Keeps its colour|#4E7A5E" | split: "," -%}
+
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<!-- ═══════════════════════════════════════════════
+     HERO — gallery + info
+     ═══════════════════════════════════════════════ -->
+<div class="pp-hero">
+  <div class="wrap">
+
+    <div class="pp-hero__grid">
+
+      <!-- Gallery -->
+      <div class="pp-gallery">
+        <div class="pp-gallery__main">
+          <img id="pp-main-img-{{ section.id }}"
+               src="{{ product.featured_image | image_url: width: 1400 }}"
+               alt="{{ product.featured_image.alt | default: product.title | escape }}"
+               loading="eager"
+               fetchpriority="high"
+               width="{{ product.featured_image.width }}"
+               height="{{ product.featured_image.height }}"
+               data-zoomable>
+          {%- if pp_badge_txt != "" -%}
+            <span class="pp-gallery__badge">
+              {%- if pp_flesh != "" -%}<span class="pshop-flesh-dot pshop-flesh-dot--{{ pp_flesh }}"></span>{%- endif -%}
+              {{ pp_badge_txt }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="pp-gallery__thumbs">
+            {%- for img in product.images limit: 5 -%}
+              <button class="pp-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                      data-src="{{ img | image_url: width: 1400 }}"
+                      data-alt="{{ img.alt | default: product.title | escape }}"
+                      type="button"
+                      aria-label="Product image {{ forloop.index }}">
+                <img src="{{ img | image_url: width: 280 }}"
+                     alt="{{ img.alt | default: product.title | escape }}"
+                     loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info panel -->
+      <div class="pp-info">
+
+        {%- comment -%} Breadcrumb — inside info panel, right-column position matches design {%- endcomment -%}
+        {%- assign crumb_coll = collection -%}
+        {%- if crumb_coll == blank and product.collections.size > 0 -%}
+          {%- assign crumb_coll = product.collections.first -%}
+        {%- endif -%}
+        <nav class="pp-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span aria-hidden="true">›</span>
+          {%- if crumb_coll != blank -%}
+            <a href="{{ crumb_coll.url }}">{{ crumb_coll.title }}</a>
+            <span aria-hidden="true">›</span>
+          {%- endif -%}
+          <span>{{ product.title }}</span>
+        </nav>
+
+        {%- if pp_badge_txt != "" -%}
+          <div class="pp-badge-strip">
+            {%- if pp_flesh != "" -%}<span class="pp-badge-dot pp-badge-dot--{{ pp_flesh }}"></span>{%- endif -%}
+            <span class="pp-badge-txt">{{ pp_badge_txt }}</span>
+          </div>
+        {%- endif -%}
+
+        <h1 class="pp-title">{{ product.title }}</h1>
+
+        <div class="pp-price" id="pp-price-{{ section.id }}">
+          {%- if product.price_varies -%}
+            {{ product.price_min | money }} – {{ product.price_max | money }}
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="pp-desc">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- comment -%} Buy box — variants + ATC + delivery {%- endcomment -%}
+        <div class="pp-buy-box">
+
+          {%- comment -%} Weight/variant tiles {%- endcomment -%}
+          {%- if product.variants.size > 1 -%}
+            <div class="pp-variants" role="group" aria-label="Select weight">
+              {%- for v in product.variants -%}
+                <button class="pp-vtile{% if v == pp_variant %} is-active{% endif %}{% unless v.available %} is-sold{% endunless %}"
+                        data-variant-id="{{ v.id }}"
+                        data-price="{{ v.price | money }}"
+                        type="button"
+                        {% unless v.available %}disabled aria-disabled="true"{% endunless %}>
+                  <span class="pp-vtile__size">{{ v.title }}</span>
+                  <span class="pp-vtile__price">{{ v.price | money }}</span>
+                  {%- if v.metafields.custom.note != blank -%}
+                    <span class="pp-vtile__note">{{ v.metafields.custom.note }}</span>
+                  {%- endif -%}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} ATC form — wrapped in <product-form> so add-to-cart is AJAX and opens the drawer {%- endcomment -%}
+          <product-form class="product-form pp-product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+            <div class="product-form__error-message-wrapper pp-atc-error" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+
+            <form action="{{ routes.cart_add_url }}" method="post" id="pp-form-{{ section.id }}">
+              <input type="hidden" name="id" id="pp-vid-{{ section.id }}" value="{{ pp_variant.id }}">
+
+              <div class="pp-atc-row">
+                <div class="pp-qty" aria-label="Quantity">
+                  <button type="button" class="pp-qty__btn pp-qty__btn--minus" aria-label="Decrease">−</button>
+                  <input class="pp-qty__n" type="number" name="quantity" id="pp-qty-{{ section.id }}"
+                         value="1" min="1" aria-label="Quantity">
+                  <button type="button" class="pp-qty__btn pp-qty__btn--plus" aria-label="Increase">+</button>
+                </div>
+
+                <button type="submit"
+                        name="add"
+                        class="pp-atc{% unless pp_variant.available %} pp-atc--sold{% endunless %}"
+                        id="pp-atc-{{ section.id }}"
+                        {% unless pp_variant.available %}disabled{% endunless %}>
+                  <span>
+                    {%- if pp_variant.available -%}
+                      Add to Basket · <span class="pp-atc__price">{{ pp_variant.price | money }}</span>
+                    {%- else -%}
+                      Sold Out
+                    {%- endif -%}
+                  </span>
+                  {%- render 'loading-spinner' -%}
+                </button>
+              </div>
+            </form>
+          </product-form>
+
+          <p class="pp-delivery">
+            {%- render 'morghew-icon', icon: 'truck', size: 16 -%}
+            {{ section.settings.delivery_note }}
+          </p>
+
+          {%- liquid
+            # Per-product override: custom.trust_1/2/3 metafields beat the
+            # template-wide settings; a value of "-" hides that line.
+            assign _t1 = product.metafields.custom.trust_1.value | default: section.settings.trust_1
+            assign _t2 = product.metafields.custom.trust_2.value | default: section.settings.trust_2
+            assign _t3 = product.metafields.custom.trust_3.value | default: section.settings.trust_3
+            if _t1 == '-'
+              assign _t1 = ''
+            endif
+            if _t2 == '-'
+              assign _t2 = ''
+            endif
+            if _t3 == '-'
+              assign _t3 = ''
+            endif
+          -%}
+          {%- render 'product-trust', t1: _t1, t2: _t2, t3: _t3 -%}
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT — farm image + origin story
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_headline = product.metafields.custom.origin_headline -%}
+{%- assign pp_copy = product.metafields.custom.origin_copy -%}
+{%- assign pp_faqs = section.blocks | where: "type", "faq" -%}
+{%- if pp_headline != blank or pp_copy != blank or pp_faqs.size > 0 -%}
+<div class="pp-about">
+  {%- if section.settings.about_image != blank -%}
+    <img class="pp-about__bg"
+         src="{{ section.settings.about_image | image_url: width: 2400 }}"
+         alt=""
+         loading="lazy"
+         aria-hidden="true"
+         style="opacity: {{ section.settings.about_image_opacity | divided_by: 100.0 }}">
+  {%- endif -%}
+  <div class="pp-about__overlay"></div>
+  <div class="wrap pp-about__inner">
+    <div class="pp-about__left">
+      <p class="pp-about__eyebrow">About this variety</p>
+      {%- if pp_headline != blank -%}
+        <h2 class="pp-about__headline">{{ pp_headline }}</h2>
+      {%- endif -%}
+    </div>
+    {%- if pp_faqs.size > 0 -%}
+      {%- comment -%}
+        Care & keeping accordion lives here on the image band (faq blocks),
+        replacing the origin_copy text that duplicated the old standalone
+        accordion section.
+      {%- endcomment -%}
+      <div class="pp-about__acc">
+        {%- for block in pp_faqs -%}
+          <details class="pp-acc__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+            <summary class="pp-acc__q">
+              <span>{{ block.settings.title }}</span>
+              {%- render 'morghew-icon', icon: 'chevron', size: 18 -%}
+            </summary>
+            <div class="pp-acc__a">{{ block.settings.body }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- elsif pp_copy != blank -%}
+      <div class="pp-about__copy">{{ pp_copy | newline_to_br }}</div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     COOK METHODS — from shopify.cooking-method category metafield
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_cook_filtered = pp_cook_list | compact -%}
+{%- if pp_cook_filtered.size > 0 -%}
+<div class="pp-cook">
+  <div class="wrap">
+    <p class="pp-eyebrow">Best for</p>
+    <h2 class="pp-cook__heading">How to cook it</h2>
+    <div class="pp-cook__grid">
+      {%- for cook_tag in pp_cook_filtered -%}
+        {%- if cook_tag != "" -%}
+          {%- assign c_desc = "" -%}
+          {%- assign c_color = "var(--moss)" -%}
+          {%- for cd in pp_cook_meta -%}
+            {%- assign cm = cd | split: "|" -%}
+            {%- if cm[0] == cook_tag -%}
+              {%- assign c_desc = cm[1] -%}
+              {%- assign c_color = cm[2] -%}
+            {%- endif -%}
+          {%- endfor -%}
+          <div class="pp-cook-card" style="--cook-c: {{ c_color }}">
+            <div class="pp-cook-card__icon">{%- render 'morghew-icon', icon: cook_tag, size: 28 -%}</div>
+            <p class="pp-cook-card__name">{{ cook_tag | capitalize }}</p>
+            {%- if c_desc != "" -%}
+              <p class="pp-cook-card__desc">{{ c_desc }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     GOOD TO KNOW — dietary (taxonomy) + custom.product_attributes_1
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_attr_filtered = pp_attr_list | compact -%}
+{%- if pp_attr_filtered.size > 0 -%}
+<div class="pp-attrs">
+  <div class="wrap">
+    <p class="pp-eyebrow">Good to know</p>
+    <h2 class="pp-attrs__heading">{{ section.settings.attrs_heading }}</h2>
+    <div class="pp-attrs__grid">
+      {%- for attr_tag in pp_attr_filtered -%}
+        {%- if attr_tag != "" -%}
+          {%- assign a_title = attr_tag -%}
+          {%- assign a_desc = "" -%}
+          {%- assign a_key = attr_tag | downcase -%}
+          {%- for am in pp_attr_meta -%}
+            {%- assign a = am | split: "|" -%}
+            {%- if a[0] == a_key -%}
+              {%- assign a_desc = a[1] -%}
+            {%- endif -%}
+          {%- endfor -%}
+          <div class="pp-attr-card">
+            <div class="pp-attr-card__icon">{%- render 'morghew-icon', icon: 'leaf', size: 22 -%}</div>
+            <p class="pp-attr-card__title">{{ a_title }}</p>
+            {%- if a_desc != "" -%}
+              <p class="pp-attr-card__desc">{{ a_desc }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     RECIPES — section blocks
+     ═══════════════════════════════════════════════ -->
+{%- comment -%}
+  "Recipes that use this product" — reverse-lookup the recipes blog for articles whose
+  recipe_featured_product or recipe_shop_items reference this product. Link once on the
+  recipe (its shop items / featured product) and it appears here automatically. Max 3.
+{%- endcomment -%}
+{%- capture pp_recipe_cards -%}
+  {%- assign _rc = 0 -%}
+  {%- for art in blogs.recipes.articles -%}
+    {%- if _rc >= 3 -%}{%- break -%}{%- endif -%}
+    {%- assign _match = false -%}
+    {%- assign _feat = art.metafields.custom.recipe_featured_product.value -%}
+    {%- if _feat and _feat.id == product.id -%}{%- assign _match = true -%}{%- endif -%}
+    {%- unless _match -%}
+      {%- for _v in art.metafields.custom.recipe_shop_items.value -%}
+        {%- if _v.product.id == product.id -%}{%- assign _match = true -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endunless -%}
+    {%- if _match -%}
+      {%- assign _rc = _rc | plus: 1 -%}
+      {%- assign _sub = art.metafields.descriptors.subtitle.value -%}
+      <a href="{{ art.url }}" class="pp-recipe-card">
+        <div class="pp-recipe-card__img">
+          {%- if art.image != blank -%}
+            <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" loading="lazy">
+          {%- else -%}
+            <div class="pp-recipe-card__placeholder">
+              {%- render 'morghew-icon', icon: 'roast', size: 36 -%}
+              <span>Recipe shot coming soon</span>
+            </div>
+          {%- endif -%}
+        </div>
+        <p class="pp-recipe-card__name">{{ art.title }}</p>
+        {%- if _sub != blank -%}<p class="pp-recipe-card__sub">{{ _sub }}</p>{%- endif -%}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if pp_recipe_cards != blank -%}
+<div class="pp-recipes">
+  <div class="wrap">
+    <div class="pp-recipes__head">
+      <div>
+        <p class="pp-eyebrow">Cook it well</p>
+        <h2 class="pp-recipes__heading">Recipes that use {{ product.title }}</h2>
+      </div>
+      {%- if section.settings.recipes_url != blank -%}
+        <a href="{{ section.settings.recipes_url }}" class="pp-viewall">
+          All potato recipes
+          {%- render 'morghew-icon', icon: 'chevron', size: 18 -%}
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="pp-recipes__grid">{{ pp_recipe_cards }}</div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     PAIRS WELL WITH — section blocks
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_related = section.blocks | where: "type", "related_product" -%}
+{%- if pp_related.size > 0 -%}
+<div class="pp-related">
+  <div class="wrap">
+    <p class="pp-eyebrow">You may also like</p>
+    <h2 class="pp-related__heading">Pairs well with</h2>
+    <div class="pp-related__grid">
+      {%- for block in pp_related -%}
+        {%- assign rp = block.settings.product -%}
+        {%- if rp != blank -%}
+          <div {{ block.shopify_attributes }}>{%- render 'card-potato', product: rp -%}</div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<script>
+(function () {
+  var sid = '{{ section.id }}';
+
+  /* ── Gallery ── */
+  var mainImg = document.getElementById('pp-main-img-' + sid);
+  document.querySelectorAll('.pp-gallery__thumb').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.pp-gallery__thumb').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt || ''; }
+    });
+  });
+
+  /* ── Variant picker ── */
+  var vidInput = document.getElementById('pp-vid-' + sid);
+  var atcBtn   = document.getElementById('pp-atc-' + sid);
+  var tiles    = document.querySelectorAll('#pp-form-' + sid + ' .pp-vtile, .pp-vtile');
+  tiles.forEach(function (tile) {
+    tile.addEventListener('click', function () {
+      if (tile.disabled) return;
+      tiles.forEach(function (t) { t.classList.remove('is-active'); });
+      tile.classList.add('is-active');
+      if (vidInput) vidInput.value = tile.dataset.variantId;
+      var priceLine = document.getElementById('pp-price-' + sid);
+      if (priceLine && tile.dataset.price) priceLine.textContent = tile.dataset.price;
+      if (atcBtn) {
+        var priceEl = atcBtn.querySelector('.pp-atc__price');
+        if (priceEl) priceEl.textContent = tile.dataset.price;
+        atcBtn.disabled = tile.classList.contains('is-sold');
+      }
+    });
+  });
+
+  /* ── Quantity stepper ── */
+  var qtyInput = document.getElementById('pp-qty-' + sid);
+  if (qtyInput) {
+    document.querySelectorAll('#pp-form-' + sid + ' .pp-qty__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = parseInt(qtyInput.value, 10) || 1;
+        qtyInput.value = btn.classList.contains('pp-qty__btn--minus') ? Math.max(1, v - 1) : v + 1;
+      });
+    });
+    qtyInput.addEventListener('change', function () {
+      qtyInput.value = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    });
+  }
+}());
+</script>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Potato product",
+  "tag": "div",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "header", "content": "Buy-box trust row" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Freshly lifted to order" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free UK delivery over £40" },
+    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" },
+    {
+      "type": "image_picker",
+      "id": "about_image",
+      "label": "About section background image",
+      "info": "Farm/field scene used behind the origin story. Set once; applies to all products using this template."
+    },
+    {
+      "type": "range",
+      "id": "about_image_opacity",
+      "label": "Image opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "text",
+      "id": "attrs_heading",
+      "label": "Attributes section heading",
+      "default": "A heritage variety"
+    },
+    {
+      "type": "text",
+      "id": "delivery_note",
+      "label": "Delivery note",
+      "default": "Free UK delivery over £40 · packed by hand, shipped within 1 working day"
+    },
+    {
+      "type": "url",
+      "id": "recipes_url",
+      "label": "Recipes link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "related_product",
+      "name": "Paired product",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Care & keeping item",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Storing your potatoes" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ]
+}
+{% endschema %}

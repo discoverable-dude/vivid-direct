@@ -1,0 +1,290 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "80",
+            "label": "Bird bag"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "Up to 10",
+            "label": "Guns per day"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "Oct–Jan",
+            "label": "Shooting season"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Game to the table"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC00361.jpg",
+        "image_opacity": 55,
+        "crumb": "The Shoot",
+        "eyebrow": "Field sports · Morghew Estate",
+        "headline": "The shoot at Morghew.",
+        "lede": "Driven and walked-up days across six hundred acres of Kentish countryside, run the traditional way: small bags, challenging shots, beautiful scenery, and game that goes straight to the table."
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "A traditional Kentish shoot",
+        "body": "We run a small, sporting shoot on the estate: well-presented birds over mature woodland in beautiful scenery. Everything not taken home by guns is dressed and sold on through the farm shop, nothing goes to waste."
+      }
+    },
+    "split_driven": {
+      "type": "morghew-split",
+      "blocks": {
+        "li1": {
+          "type": "item",
+          "settings": {
+            "text": "Five to six drives across the day"
+          }
+        },
+        "li2": {
+          "type": "item",
+          "settings": {
+            "text": "Teams of ten guns - 80 bird days"
+          }
+        },
+        "li3": {
+          "type": "item",
+          "settings": {
+            "text": "Experienced gamekeeper and beating team"
+          }
+        },
+        "item_YL7GNa": {
+          "type": "item",
+          "settings": {
+            "text": "Tea & coffee on arrival, sloe gin & canapes at 11.00am, claret at lunchtime and tea, coffee and cake to finish the day"
+          }
+        },
+        "li4": {
+          "type": "item",
+          "settings": {
+            "text": "Transport for guns is provided in our 1968 Unimog gun bus"
+          }
+        }
+      },
+      "block_order": [
+        "li1",
+        "li2",
+        "li3",
+        "item_YL7GNa",
+        "li4"
+      ],
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/DSC00185.jpg",
+        "tag": "The estate woodland",
+        "ratio": "1 / 1",
+        "eyebrow": "Driven Shooting",
+        "heading": "Driven days, done properly",
+        "body": "<p>Our driven days make the most of Morghew's contours: birds shown high off the wooded banks and valleys, with five or six drives across the day.</p><p>Days are kept deliberately small and sporting. We would rather show quality birds to a happy line of guns than chase big numbers.</p>",
+        "cta_label": "Book a driven day",
+        "cta_url": "https://www.gunsonpegs.com/shoots/kent/the-morghew-shoot"
+      }
+    },
+    "split_walked": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "shopify://shop_images/Z91_0152-scaled-e1706697917906-1024x686.jpg",
+        "tag": "Rough shooting",
+        "ratio": "1 / 1",
+        "eyebrow": "Walked-up & rough shooting",
+        "heading": "For the smaller shooting party",
+        "body": "<p>For those who prefer a quieter day on foot, we offer walked-up and rough shooting over the estate's rougher ground, hedgerows and root crops.</p><p>A relaxed, informal way to shoot: a few guns, dogs working, and a real sense of the land. Ideal for a small party or a father and son.</p>",
+        "cta_label": "Book a walked-up day",
+        "cta_url": "https://www.gunsonpegs.com/shoots/kent/the-morghew-shoot"
+      }
+    },
+    "morghew_split_Bbfaqg": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/pigeon-shooting.jpg",
+        "tag": "Decoying",
+        "ratio": "1 / 1",
+        "eyebrow": "Pigeon & Vermin shooting season pass",
+        "heading": "For the lone gun",
+        "body": "<p>In return for a payment of £250 + VAT, subscribers have the right to shoot pigeons or other vermin with an over-and-under or side-by-side shotgun over the Estate's 2000+ acres of arable and woodland throughout the summer months, visiting on any or all days between now and 30th September!<br/><br/></p>",
+        "cta_label": "Buy a season pass",
+        "cta_url": "https://www.gunsonpegs.com/shoots/kent/the-morghew-shoot"
+      }
+    },
+    "stats": {
+      "type": "morghew-stats",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "Oct–Jan",
+            "label": "Pheasant & partridge season"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "10",
+            "label": "Guns on a driven day"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "5–6",
+            "label": "Drives per day"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "80 Bird",
+            "label": "Bag"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "The shoot at a glance"
+      }
+    },
+    "quote": {
+      "type": "morghew-quote",
+      "settings": {
+        "quote": "\"A good day in the field ends at the table. Nothing we take is wasted, and most of it is on a plate within the week.\"",
+        "author": "Nigel Foord - Estate Gamekeeper",
+        "role": "Morghew Estate"
+      }
+    },
+    "strands": {
+      "type": "morghew-strands",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/venison.jpg",
+            "title": "Estate venison",
+            "text": "Wild fallow and roe managed on the estate, hung and butchered here, sold in season through the farm shop.",
+            "link_label": "Shop game",
+            "link_url": "shopify://collections/wild-game"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Game & feathered",
+            "text": "Pheasant, partridge and pigeon from our own drives, oven-ready or prepared to order for the confident cook.",
+            "link_label": "Enquire",
+            "link_url": "shopify://collections/wild-game"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/patatas-bravas.jpg",
+            "title": "Game to cook",
+            "text": "Recipes and pairings for cooking estate game with Morghew potatoes: the whole dinner off one piece of land.",
+            "link_label": "See recipes",
+            "link_url": "/blogs/recipes"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "From field to table",
+        "heading": "Game, the estate way",
+        "intro": "Everything taken on the shoot is dressed on the estate and sold through the farm shop, alongside the rest of the Morghew larder."
+      }
+    },
+    "split_book": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": false,
+        "image": "shopify://shop_images/Z92_9810-Edit-1024x683.jpg",
+        "tag": "The estate barn",
+        "ratio": "4 / 5",
+        "eyebrow": "Book a day",
+        "heading": "Join us for a day on the estate",
+        "body": "<p>We take a limited number of let days each season, for full teams or individual guns joining a made-up day. Corporate and private parties both welcome.</p><p>Get in touch with the shoot office to talk dates, bag expectations and pricing. We will build a day that suits your party.</p>",
+        "cta_label": "Book a day via GunsOnPegs",
+        "cta_url": "https://www.gunsonpegs.com/shoots/kent/the-morghew-shoot"
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "image": "shopify://shop_images/crate-store-dark.jpg",
+        "eyebrow": "Field sports at Morghew",
+        "heading": "A proper day, then a proper dinner",
+        "body": "Enquire about driven and walked-up days, or shop estate game and everything else the land gives us.",
+        "button_1_label": "Book via GunsOnPegs",
+        "button_1_url": "https://www.gunsonpegs.com/shoots/kent/the-morghew-shoot",
+        "button_2_label": "Shop the estate",
+        "button_2_url": "shopify://collections/all-estate-produce"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "lede",
+    "split_driven",
+    "split_walked",
+    "morghew_split_Bbfaqg",
+    "stats",
+    "quote",
+    "strands",
+    "split_book",
+    "cta"
+  ]
+}

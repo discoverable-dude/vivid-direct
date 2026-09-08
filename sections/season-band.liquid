@@ -1,0 +1,142 @@
+{{ 'morghew-home.css' | asset_url | stylesheet_tag }}
+<section class="season-band" id="season-{{ section.id }}">
+  <div class="wrap">
+
+    <div class="season-band__head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow eyebrow--light">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      <h2 class="season-band__title">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="season-band__sub">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="season-band__grid">
+        {%- for block in section.blocks -%}
+          <a
+            class="season-card{% if forloop.first %} season-card--big{% endif %}"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            data-reveal
+            {{ block.shopify_attributes }}>
+
+            <div class="season-card__photo">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.name | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+
+            <div class="season-card__cap">
+              {%- if block.settings.name != blank -%}
+                <p class="season-card__name">{{ block.settings.name | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.note != blank -%}
+                <p class="season-card__note">{{ block.settings.note | escape }}</p>
+              {%- endif -%}
+            </div>
+
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Season band",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "From the field"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lifting this week"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Dug on Monday, packed on Tuesday, with you by Wednesday."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "season_card",
+      "name": "Variety card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Variety name",
+          "default": "Maris Piper"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Short note",
+          "default": "Lifting now · Excellent roaster"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link to variety"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Season band",
+      "blocks": [
+        {
+          "type": "season_card",
+          "settings": {
+            "name": "Maris Piper",
+            "note": "Lifting now · Excellent roaster"
+          }
+        },
+        {
+          "type": "season_card",
+          "settings": {
+            "name": "Pink Fir Apple",
+            "note": "Lifting now · Salad favourite"
+          }
+        },
+        {
+          "type": "season_card",
+          "settings": {
+            "name": "Ratte",
+            "note": "Limited harvest · Nutty flavour"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

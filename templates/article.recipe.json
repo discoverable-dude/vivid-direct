@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "recipe-article",
+      "settings": {
+        "hero_overlay": 55,
+        "shop_heading": "Shop the ingredients",
+        "shop_subtext": "The Morghew bits, in the right quantity, straight to your basket.",
+        "pantry_heading": "Plus from your pantry",
+        "made_with_label": "Made with",
+        "shop_all_label": "Shop all varieties",
+        "shop_all_url": ""
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

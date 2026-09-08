@@ -1,0 +1,220 @@
+{{ 'morghew-home.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+#plate-{{ section.id }}::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('{{ 'hessian-texture.png' | asset_url }}');
+  background-repeat: repeat;
+  background-size: auto;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: -1;
+}
+{%- endstyle -%}
+
+<section class="plate" id="plate-{{ section.id }}">
+  <div class="wrap">
+
+    <div class="plate__head">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="plate__title">
+          {{ section.settings.title_plain | escape }}
+          {%- if section.settings.title_highlight != blank -%}
+            <br><em>{{ section.settings.title_highlight | escape }}</em>
+          {%- endif -%}
+        </h2>
+      </div>
+      {%- if section.settings.description != blank -%}
+        <p class="plate__sub">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="plate__grid">
+        {%- for block in section.blocks -%}
+          {%- assign accent = block.settings.accent | default: 'clay' -%}
+          <a
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            class="plate__tile"
+            style="--ac: var(--{{ accent }})"
+            {{ block.shopify_attributes }}>
+
+            {%- if block.settings.icon != blank -%}
+              <span class="plate__ico">
+                {% render 'morghew-icon', icon: block.settings.icon, size: 40 %}
+              </span>
+            {%- endif -%}
+
+            <p class="plate__n">{{ block.settings.label | escape }}</p>
+            {%- if block.settings.description != blank -%}
+              <p class="plate__d">{{ block.settings.description | escape }}</p>
+            {%- endif -%}
+
+            <span class="plate__go">{% render 'morghew-icon', icon: 'chevron' %}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cooking methods",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Browse by cooking method"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title (first line)",
+      "default": "Start with the plate,"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Title (second line, italic/gold)",
+      "default": "not the variety."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Different potatoes behave differently under heat, water and fat. Pick your cooking method and we'll match you to the right variety."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cooking_method",
+      "name": "Cooking method",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Name",
+          "default": "Roast"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short description",
+          "default": "Crisp skin, fluffy centre. Needs a floury high-starch variety."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "roast", "label": "Roast" },
+            { "value": "mash", "label": "Mash" },
+            { "value": "chip", "label": "Chips" },
+            { "value": "jacket", "label": "Jacket" },
+            { "value": "boil", "label": "Boil" },
+            { "value": "steam", "label": "Steam" },
+            { "value": "salad", "label": "Salad" },
+            { "value": "wedge", "label": "Wedge" },
+            { "value": "dauphinoise", "label": "Dauphinoise" }
+          ],
+          "default": "roast"
+        },
+        {
+          "type": "select",
+          "id": "accent",
+          "label": "Accent colour",
+          "options": [
+            { "value": "clay", "label": "Clay (red-orange)" },
+            { "value": "mustard", "label": "Mustard (amber)" },
+            { "value": "wheat", "label": "Wheat (gold)" },
+            { "value": "rust", "label": "Rust (dark red)" },
+            { "value": "moss", "label": "Moss (dark green)" },
+            { "value": "sage", "label": "Sage (soft green)" },
+            { "value": "plum", "label": "Plum (purple)" },
+            { "value": "soil", "label": "Soil (brown)" }
+          ],
+          "default": "clay"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cooking methods",
+      "blocks": [
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Roast",
+            "description": "Crisp skin, fluffy centre. Needs a floury high-starch variety.",
+            "icon": "roast",
+            "accent": "clay"
+          }
+        },
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Mash",
+            "description": "Silky and rich when made right. Go floury, never waxy.",
+            "icon": "mash",
+            "accent": "mustard"
+          }
+        },
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Chips",
+            "description": "Triple-cooked or chunky oven chips — starch is your friend.",
+            "icon": "chip",
+            "accent": "wheat"
+          }
+        },
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Jacket",
+            "description": "Baked whole until the skin blisters. Size and starch matter.",
+            "icon": "jacket",
+            "accent": "rust"
+          }
+        },
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Boil",
+            "description": "For salads and sides. Waxy varieties hold their shape best.",
+            "icon": "boil",
+            "accent": "moss"
+          }
+        },
+        {
+          "type": "cooking_method",
+          "settings": {
+            "label": "Dauphinoise",
+            "description": "Thinly sliced, cream-baked. Waxy potatoes stay together.",
+            "icon": "dauphinoise",
+            "accent": "plum"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,320 @@
+/* ================================================
+   MINI-CART DRAWER — reskin of Dawn's cart-drawer
+   to match "The Crate". Scoped to .cart-drawer so it
+   never touches the full cart page (cart-crate).
+   Positioning/visibility/transform are left to Dawn's
+   component-cart-drawer.css — we only restyle visuals.
+   ================================================ */
+
+/* ── Panel ── */
+.cart-drawer .drawer__inner {
+  width: 42rem;
+  max-width: calc(100vw - 3rem);
+  padding: 0;
+  background: var(--hessian-weave), var(--paper);
+  box-shadow: -10px 0 44px rgba(0, 0, 0, 0.20);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* the implicit column must be allowed to shrink below the widest child's
+     min-content, or every row lays out wider than the drawer and clips off
+     the right edge on mobile */
+  grid-template-columns: minmax(0, 1fr);
+}
+.cart-drawer .drawer__inner > * { min-width: 0; }
+.cart-drawer .cart-items { width: 100%; }
+.cart-drawer .cart-drawer__overlay {
+  background: rgba(20, 16, 12, 0.42);
+}
+
+/* ── Header ── */
+.cart-drawer .drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--line);
+  background: var(--footer-bg);
+}
+.cart-drawer .drawer__heading {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--paper);
+}
+.cart-drawer .drawer__close {
+  position: static;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  color: var(--paper);
+}
+.cart-drawer .drawer__close:hover { opacity: 0.75; }
+.cart-drawer .drawer__close .svg-wrapper { width: 18px; height: 18px; }
+
+/* ── Scrollable contents ── */
+.cart-drawer .drawer__contents { padding: 0 26px; }
+.cart-drawer .drawer__cart-items-wrapper { margin: 0; }
+
+/* Flatten Dawn's table into stacked rows */
+.cart-drawer .cart-items,
+.cart-drawer .cart-items tbody { display: block; width: 100%; }
+.cart-drawer .cart-items thead { display: none; }
+
+.cart-drawer .cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 6px 14px;
+  padding: 20px 2px 20px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.cart-drawer .cart-item:last-child { border-bottom: none; }
+
+.cart-drawer .cart-item__media { flex: 0 0 72px; padding: 0; }
+.cart-drawer .cart-item__image {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.cart-drawer .cart-item__details { flex: 1 1 45%; padding: 0; }
+.cart-drawer .cart-item__name {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.25;
+}
+.cart-drawer .cart-item__name:hover { text-decoration: underline; }
+.cart-drawer .cart-item__details .product-option {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.cart-drawer .cart-item__details dl { margin: 4px 0 0; }
+.cart-drawer .cart-item__details dl .product-option { display: flex; gap: 4px; }
+.cart-drawer .cart-item__details dl dt { font-weight: 600; }
+
+/* Line price — top right of the row */
+.cart-drawer .cart-item__totals { flex: 0 0 auto; margin-left: auto; padding: 0; text-align: right; position: relative; }
+.cart-drawer .cart-item__price-wrapper { font-size: 15px; font-weight: 700; color: var(--ink); }
+
+/* Quantity row — second line, indented under the details */
+.cart-drawer .cart-item__quantity {
+  flex: 1 0 100%;
+  padding: 8px 0 0 86px;
+  border: none;
+}
+/* Stepper on the left, × on the right — same row, vertically centred together */
+.cart-drawer .cart-item__quantity-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Stepper — circular buttons + gap, identical to .crate-qty on the cart page */
+.cart-drawer .quantity.cart-quantity {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.cart-drawer .quantity.cart-quantity::after { display: none; box-shadow: none; }
+.cart-drawer .quantity__button {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+}
+.cart-drawer .quantity__button:hover { border-color: var(--ink); background: var(--paper-2); }
+.cart-drawer .quantity__button .svg-wrapper { width: 11px; height: 11px; }
+.cart-drawer .quantity__input {
+  width: 22px;
+  min-width: 18px;
+  padding: 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  background: transparent;
+}
+
+/* Remove — × on the same row as the stepper, styled like .crate-row__remove */
+.cart-drawer .cart-item cart-remove-button {
+  position: static;
+  margin: 0;
+  flex: 0 0 auto;
+}
+.cart-drawer .cart-item .cart-remove-button {
+  min-width: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+}
+.cart-drawer .cart-item .cart-remove-button:hover { color: var(--ink); background: var(--paper-2); }
+
+/* ── Empty state ── */
+.cart-drawer .drawer__inner-empty { padding: 40px 26px; }
+.cart-drawer .cart__empty-text {
+  font-family: var(--font-head);
+  font-size: 22px;
+  color: var(--ink);
+}
+.cart-drawer .drawer__inner-empty .button {
+  margin-top: 20px;
+}
+
+/* ── Footer ── */
+.cart-drawer .drawer__footer {
+  padding: 20px 26px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-2);
+}
+.cart-drawer .totals {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.cart-drawer .totals__total {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+.cart-drawer .totals__total-value {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.cart-drawer .tax-note {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ── CTAs ── */
+.cart-drawer .cart__ctas {
+  display: grid;
+  /* minmax(0,…) lets a track shrink below its nowrap min-content so a long
+     "CHECKOUT · £total" label can't push the footer into horizontal overflow */
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+  gap: 10px;
+}
+.cart-drawer .cart__view-crate-button,
+.cart-drawer .cart__checkout-button {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+/* Icons sized to sit inline with the label without forcing a wrap */
+.cart-drawer .cart__checkout-button svg,
+.cart-drawer .cart__view-crate-icon,
+.cart-drawer .cart__view-crate-icon svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+.cart-drawer .cart__view-crate-icon { display: inline-flex; }
+/* Checkout — same treatment as .crate-checkout-btn (bag icon + CTA colour) */
+.cart-drawer .cart__checkout-button {
+  padding: 15px 12px;
+  font-size: 13px;
+  background: var(--cta);
+  color: var(--paper);
+  border: none;
+}
+.cart-drawer .cart__checkout-button:hover:not([disabled]) { background: var(--cta-dark); }
+/* View crate — clean secondary */
+.cart-drawer .cart__view-crate-button {
+  padding: 15px 10px;
+  font-size: 13px;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.cart-drawer .cart__view-crate-button:hover { background: var(--ink); color: var(--paper); }
+.cart-drawer .cart__view-crate-button:hover .cart__view-crate-icon { color: var(--paper); }
+
+/* ── Loading state (stepper / remove) ──
+   Dawn's cart.js adds .cart__items--disabled to the items container and
+   removes .hidden from the active line's .loading__spinner. We dim the row
+   content and show the spinner where the price was, matching the cart page. */
+.cart-drawer .loading__spinner { display: none; }
+.cart-drawer .loading__spinner:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  inset: 0;
+}
+.cart-drawer .loading__spinner .spinner { width: 18px; height: 18px; }
+.cart-drawer .loading__spinner .path { stroke: var(--cta); }
+/* hide the price while its line is loading */
+.cart-drawer .cart-item__totals:has(.loading__spinner:not(.hidden)) .cart-item__price-wrapper {
+  visibility: hidden;
+}
+/* dim the whole list while any line updates */
+.cart-drawer .cart__items--disabled .cart-item { pointer-events: none; }
+.cart-drawer .cart__items--disabled .cart-item__media,
+.cart-drawer .cart__items--disabled .cart-item__details,
+.cart-drawer .cart__items--disabled .cart-item__quantity {
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+/* ── Mobile: 44px tap targets + full-width quantity row ── */
+@media (max-width: 749px) {
+  /* Drop the 86px indent so the stepper + remove get the full row width */
+  .cart-drawer .cart-item__quantity { padding-left: 0; }
+  /* Enlarge the stepper and remove hit areas (icon glyphs stay their size) */
+  .cart-drawer .quantity__button { width: 44px; height: 44px; }
+  .cart-drawer .cart-item .cart-remove-button { width: 44px; height: 44px; }
+  /* Let a long checkout total wrap rather than clip on a narrow drawer */
+  .cart-drawer .cart__checkout-button { white-space: normal; }
+}
+

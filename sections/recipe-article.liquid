@@ -1,0 +1,290 @@
+{%- comment -%}
+  recipe-article.liquid — custom recipe layout for blog articles.
+  Assigned via the "recipe" template suffix (templates/article.recipe.json).
+  Driven by article metafields under the `custom` namespace + a Chef metaobject.
+{%- endcomment -%}
+
+{{ 'morghew-recipe.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign mf = article.metafields.custom
+  assign eyebrow = mf.recipe_eyebrow.value
+  assign summary = mf.recipe_summary.value
+  assign serves = mf.recipe_serves.value
+  assign prep = mf.recipe_prep_time.value
+  assign cook = mf.recipe_cook_time.value
+  assign method = mf.recipe_method
+  assign chefs_tip = mf.recipe_chefs_tip.value
+  assign shop_items = mf.recipe_shop_items.value
+  assign pantry = mf.recipe_pantry.value
+  assign featured = mf.recipe_featured_product.value
+  assign chef = mf.recipe_chef.value
+
+  assign add_total = 0
+  assign variant_ids = ''
+  if shop_items
+    for v in shop_items
+      assign add_total = add_total | plus: v.price
+      assign variant_ids = variant_ids | append: v.id | append: ','
+    endfor
+  endif
+-%}
+
+<article class="recipe">
+
+  <!-- ── HERO ── -->
+  <header class="recipe__hero">
+    {%- if article.image -%}
+      <img class="recipe__hero-bg" src="{{ article.image | image_url: width: 2400 }}" alt="{{ article.image.alt | escape }}" width="{{ article.image.width }}" height="{{ article.image.height }}" loading="eager">
+      <div class="recipe__hero-overlay" style="background: rgba(20, 16, 12, {{ section.settings.hero_overlay | divided_by: 100.0 }});"></div>
+    {%- endif -%}
+    <div class="recipe__hero-inner">
+      {%- if eyebrow != blank -%}<p class="recipe__eyebrow">{{ eyebrow }}</p>{%- endif -%}
+      <h1 class="recipe__title">{{ article.title }}</h1>
+      {%- if summary != blank -%}<p class="recipe__summary">{{ summary }}</p>{%- endif -%}
+      {%- if serves != blank or prep != blank or cook != blank -%}
+        <div class="recipe__stats">
+          {%- if serves != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ serves }}</span><span class="recipe__stat-label">Serves</span></div>{%- endif -%}
+          {%- if prep != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ prep }}</span><span class="recipe__stat-label">Prep</span></div>{%- endif -%}
+          {%- if cook != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ cook }}</span><span class="recipe__stat-label">Cook</span></div>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <!-- ── INTRO (article body, two columns) ── -->
+  {%- if article.content != blank -%}
+    <section class="recipe__intro">
+      <div class="recipe__wrap">
+        <div class="recipe__intro-body rte">{{ article.content }}</div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <!-- ── METHOD + SHOP ── -->
+  <section class="recipe__main">
+    <div class="recipe__wrap recipe__main-grid">
+
+      <div class="recipe__method">
+        {%- if mf.recipe_method.value != blank -%}
+          <h2 class="recipe__h2">Method</h2>
+          <div class="recipe__steps rte">{{ mf.recipe_method | metafield_tag }}</div>
+        {%- endif -%}
+
+        {%- if chefs_tip != blank -%}
+          <div class="recipe__tip">
+            <p class="recipe__tip-eyebrow">Chef&rsquo;s tip</p>
+            <p class="recipe__tip-text">{{ chefs_tip }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if shop_items and shop_items.size > 0 or pantry.size > 0 -%}
+        <aside class="recipe__shop">
+          <div class="recipe__shop-card">
+            <h3 class="recipe__shop-title">{{ section.settings.shop_heading }}</h3>
+            {%- if section.settings.shop_subtext != blank -%}<p class="recipe__shop-sub">{{ section.settings.shop_subtext }}</p>{%- endif -%}
+
+            {%- if shop_items and shop_items.size > 0 -%}
+              <div class="recipe__shop-items">
+                {%- for v in shop_items -%}
+                  {%- assign v_img = v.image | default: v.product.featured_image -%}
+                  <div class="recipe__shop-item">
+                    <a class="recipe__shop-thumb" href="{{ v.product.url }}">
+                      {%- if v_img -%}<img src="{{ v_img | image_url: width: 120 }}" alt="{{ v.product.title | escape }}" width="48" height="48" loading="lazy">{%- endif -%}
+                    </a>
+                    <span class="recipe__shop-info">
+                      <a class="recipe__shop-name" href="{{ v.product.url }}">{{ v.product.title }}</a>
+                      <span class="recipe__shop-variant">{{ v.title }}</span>
+                    </span>
+                    <span class="recipe__shop-price">{{ v.price | money }}</span>
+                    <button type="button" class="recipe__shop-add" data-add-one="{{ v.id }}" aria-label="Add {{ v.product.title | escape }} to basket">
+                      <span class="recipe__shop-add-icon recipe__shop-add-icon--plus">{%- render 'morghew-icon', icon: 'plus', size: 16 -%}</span>
+                      <span class="recipe__shop-add-icon recipe__shop-add-icon--check">{%- render 'morghew-icon', icon: 'check', size: 16 -%}</span>
+                      {%- render 'loading-spinner' -%}
+                    </button>
+                  </div>
+                {%- endfor -%}
+              </div>
+
+              <button type="button" class="recipe__addall" data-add-all="{{ variant_ids | strip }}">
+                <span class="recipe__addall-label">Add all&nbsp;&middot;&nbsp;{{ add_total | money }}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            {%- endif -%}
+
+            {%- if pantry.size > 0 -%}
+              <div class="recipe__pantry">
+                <p class="recipe__pantry-eyebrow">{{ section.settings.pantry_heading }}</p>
+                <ul class="recipe__pantry-list">
+                  {%- for item in pantry -%}<li>{{ item }}</li>{%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          </div>
+        </aside>
+      {%- endif -%}
+
+    </div>
+  </section>
+
+  <!-- ── CHEF ── -->
+  {%- if chef -%}
+    <section class="recipe__chef">
+      {%- if section.settings.chef_bg_image != blank -%}
+        <img class="recipe__chef-bg" src="{{ section.settings.chef_bg_image | image_url: width: 2400 }}" alt="" aria-hidden="true" width="{{ section.settings.chef_bg_image.width }}" height="{{ section.settings.chef_bg_image.height }}" loading="lazy">
+      {%- endif -%}
+      <div class="recipe__chef-overlay"></div>
+      <div class="recipe__wrap recipe__chef-grid">
+        <div class="recipe__chef-portrait">
+          {%- if chef.portrait.value -%}
+            <img src="{{ chef.portrait.value | image_url: width: 700 }}" alt="{{ chef.name.value | escape }}" width="{{ chef.portrait.value.width }}" height="{{ chef.portrait.value.height }}" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="recipe__chef-body">
+          <p class="recipe__chef-eyebrow">The recipe is by</p>
+          <h2 class="recipe__chef-name">{{ chef.name.value }}</h2>
+          {%- if chef.role.value != blank -%}<p class="recipe__chef-role">{{ chef.role.value }}</p>{%- endif -%}
+          {%- if chef.bio.value != blank -%}<p class="recipe__chef-bio">{{ chef.bio.value }}</p>{%- endif -%}
+          {%- if chef.instagram.value != blank or chef.website.value != blank -%}
+            <div class="recipe__chef-links">
+              {%- if chef.instagram.value != blank -%}<a href="{{ chef.instagram.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Instagram <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
+              {%- if chef.website.value != blank -%}<a href="{{ chef.website.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Website <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <!-- ── MADE WITH ── -->
+  {%- if featured -%}
+    {%- assign flesh_sub = featured.metafields.descriptors.subtitle.value -%}
+    <section class="recipe__madewith">
+      <div class="recipe__wrap">
+        <div class="recipe__madewith-head">
+          <div>
+            <p class="recipe__madewith-eyebrow">{{ section.settings.made_with_label }}</p>
+            <h2 class="recipe__h2">{{ featured.title }}</h2>
+          </div>
+          {%- if section.settings.shop_all_url != blank -%}
+            <a href="{{ section.settings.shop_all_url }}" class="recipe__madewith-all">{{ section.settings.shop_all_label }} <span aria-hidden="true">&rarr;</span></a>
+          {%- endif -%}
+        </div>
+
+        <div class="recipe__madewith-card">{%- render 'card-potato', product: featured -%}</div>
+      </div>
+    </section>
+  {%- endif -%}
+
+</article>
+
+<script>
+  (function () {
+    document.querySelectorAll('[data-add-all]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var ids = (btn.dataset.addAll || '').split(',').filter(Boolean);
+        if (!ids.length) return;
+        var items = ids.map(function (id) { return { id: parseInt(id, 10), quantity: 1 }; });
+        var drawer = document.querySelector('cart-drawer');
+        var body = { items: items };
+        if (drawer && drawer.getSectionsToRender) {
+          body.sections = drawer.getSectionsToRender().map(function (s) { return s.id; });
+          body.sections_url = window.location.pathname;
+        }
+        btn.classList.add('is-loading');
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (state) {
+            btn.classList.remove('is-loading');
+            if (drawer && drawer.renderContents) {
+              if (drawer.classList.contains('is-empty')) drawer.classList.remove('is-empty');
+              drawer.renderContents(state);
+            } else {
+              window.location = '{{ routes.cart_url }}';
+            }
+          })
+          .catch(function () { btn.classList.remove('is-loading'); });
+      });
+    });
+
+    document.querySelectorAll('[data-add-one]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = parseInt(btn.dataset.addOne, 10);
+        if (!id || btn.classList.contains('is-loading')) return;
+        var drawer = document.querySelector('cart-drawer');
+        var body = { items: [{ id: id, quantity: 1 }] };
+        if (drawer && drawer.getSectionsToRender) {
+          body.sections = drawer.getSectionsToRender().map(function (s) { return s.id; });
+          body.sections_url = window.location.pathname;
+        }
+        btn.classList.add('is-loading');
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (state) {
+            btn.classList.remove('is-loading');
+            btn.classList.add('is-added');
+            if (drawer && drawer.renderContents) {
+              if (drawer.classList.contains('is-empty')) drawer.classList.remove('is-empty');
+              drawer.renderContents(state);
+            }
+          })
+          .catch(function () { btn.classList.remove('is-loading'); });
+      });
+    });
+  })();
+</script>
+
+{%- comment -%} BlogPosting/Article schema via Shopify's native filter {%- endcomment -%}
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{%- comment -%} Recipe rich-result schema, mapped from custom.recipe_* metafields. Free-text prep/cook times are omitted (schema requires ISO-8601 durations). {%- endcomment -%}
+{%- capture recipe_instructions -%}{{ method | metafield_tag }}{%- endcapture -%}
+{%- assign recipe_instructions = recipe_instructions | strip_html | strip_newlines | strip -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Recipe",
+  "name": {{ article.title | json }}
+  {%- if article.image %},"image": [{{ article.image | image_url: width: 1200 | prepend: 'https:' | json }}]{% endif -%}
+  {%- if summary != blank %},"description": {{ summary | strip_html | json }}{% endif -%}
+  ,"datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }}
+  ,"author": { "@type": "Person", "name": {{ chef.name.value | default: shop.name | json }} }
+  ,"publisher": { "@type": "Organization", "name": {{ shop.name | json }} }
+  {%- if serves != blank %},"recipeYield": {{ serves | json }}{% endif -%}
+  {%- if pantry.size > 0 %},"recipeIngredient": [{% for item in pantry %}{{ item | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif -%}
+  {%- if recipe_instructions != blank %},"recipeInstructions": {{ recipe_instructions | json }}{% endif -%}
+}
+</script>
+
+{% schema %}
+{
+  "name": "Recipe article",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "range", "id": "hero_overlay", "label": "Image overlay darkness", "info": "Increase for better text legibility over busy images.", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 60 },
+    { "type": "header", "content": "Shop the ingredients card" },
+    { "type": "text", "id": "shop_heading", "label": "Card heading", "default": "Shop the ingredients" },
+    { "type": "text", "id": "shop_subtext", "label": "Card subtext", "default": "The Morghew bits, in the right quantity, straight to your basket." },
+    { "type": "text", "id": "pantry_heading", "label": "Pantry heading", "default": "Plus from your pantry" },
+    { "type": "header", "content": "Chef section" },
+    { "type": "image_picker", "id": "chef_bg_image", "label": "Background image", "info": "Estate/wood scene behind the chef bio." },
+    { "type": "header", "content": "Made with" },
+    { "type": "text", "id": "made_with_label", "label": "Eyebrow", "default": "Made with" },
+    { "type": "text", "id": "shop_all_label", "label": "Shop-all link label", "default": "Shop all varieties" },
+    { "type": "url", "id": "shop_all_url", "label": "Shop-all link URL" }
+  ],
+  "presets": [ { "name": "Recipe article" } ]
+}
+{% endschema %}

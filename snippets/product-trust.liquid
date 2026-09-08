@@ -1,0 +1,12 @@
+{%- comment -%}
+  product-trust.liquid — editable reassurance row for the product buy box.
+  Params: t1, t2, t3 (short trust points; any that are blank are skipped).
+  Styles live in assets/morghew.css (.p-trust*), loaded on every page.
+{%- endcomment -%}
+{%- if t1 != blank or t2 != blank or t3 != blank -%}
+  <ul class="p-trust">
+    {%- if t1 != blank -%}<li class="p-trust__item">{%- render 'morghew-icon', icon: 'check', size: 16 -%}<span>{{ t1 | escape }}</span></li>{%- endif -%}
+    {%- if t2 != blank -%}<li class="p-trust__item">{%- render 'morghew-icon', icon: 'check', size: 16 -%}<span>{{ t2 | escape }}</span></li>{%- endif -%}
+    {%- if t3 != blank -%}<li class="p-trust__item">{%- render 'morghew-icon', icon: 'check', size: 16 -%}<span>{{ t3 | escape }}</span></li>{%- endif -%}
+  </ul>
+{%- endif -%}
