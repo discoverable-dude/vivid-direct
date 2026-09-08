@@ -14,22 +14,22 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "footer_logo": "shopify://shop_images/Morghew_logo_white.png",
-        "blurb": "A working farming estate near Tenterden, Kent. Heritage potatoes, estate produce, and a few good things besides.",
+        "footer_logo": "",
+        "blurb": "Your trusted partner in lighting. Huge range of LED, neon and decorative lighting, with trade accounts available.",
         "phone": "0203 916 6116",
         "show_social": true,
-        "newsletter_label": "Estate news & what's in season",
+        "newsletter_label": "Offers & new products",
         "email_placeholder": "your@email.com",
         "newsletter_button": "Join",
-        "col1_heading": "The estate",
-        "col1_menu": "the-estate",
+        "col1_heading": "About Us",
+        "col1_menu": "about-us",
         "col2_heading": "Shop",
         "col2_menu": "shop",
         "col3_heading": "Visit & find us",
         "col3_menu": "visit-us",
         "bottom_left": "© Vivid Direct",
         "bottom_mid": "Ashford, Kent · London",
-        "bottom_right": "Please drink responsibly"
+        "bottom_right": ""
       }
     }
   },

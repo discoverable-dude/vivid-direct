@@ -11,21 +11,22 @@
    the VALUES have been re-pointed to the Vivid palette.
    ====================== */
 :root {
-  /* Surfaces */
-  --paper:   #14171A;
-  --paper-2: #1E2328;
-  --card:    #1A1F24;
+  /* Surfaces — navy, matching the live vivid-direct.co.uk header/footer
+     (not a desaturated near-black) */
+  --paper:   #0A1622;
+  --paper-2: #122238;
+  --card:    #0E1D2E;
 
   /* Text */
-  --ink:      #F5F5F5;
-  --ink-soft: #9CA3AA;
+  --ink:      #FFFFFF;
+  --ink-soft: #9CB0C2;
 
   /* Warmth -> amber accent */
   --hessian:      #FFB800;
   --hessian-text: #FFC933;
   --straw:        #FFB800;
   --straw-light:  #FFCF4D;
-  --bark:         #0D0F11;
+  --bark:         #0A1622;
 
   /* Brand */
   --burgundy:  #FF4D4D;
