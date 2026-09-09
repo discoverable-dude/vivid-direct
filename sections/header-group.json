@@ -78,7 +78,6 @@
         "menu_feature_eWAGj6"
       ],
       "custom_css": [
-        ".header-wrapper.header-wrapper {background: #ffffff;}",
         ".header__submenu.m-mega.m-mega {background: #ffffff;}"
       ],
       "settings": {
