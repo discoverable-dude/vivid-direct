@@ -16,67 +16,15 @@
       "settings": {
         "mode": "rotate",
         "interval": 5,
-        "left_text": "Free UK delivery over £40",
-        "mid_text": "Grown in Tenterden, Kent",
-        "right_text": "Packed by hand"
+        "left_text": "Huge range of lighting",
+        "mid_text": "Free next day delivery over £150 — order by 1pm",
+        "right_text": "Trade accounts available"
       }
     },
     "header": {
       "type": "header",
-      "blocks": {
-        "menu_icon_qyRRE3": {
-          "type": "menu_icon",
-          "settings": {
-            "match": "Firewood",
-            "icon": "flame"
-          }
-        },
-        "menu_icon_h6zxGi": {
-          "type": "menu_icon",
-          "settings": {
-            "match": "Wild-Game",
-            "icon": "pheasant"
-          }
-        },
-        "menu_icon_bnna7m": {
-          "type": "menu_icon",
-          "settings": {
-            "match": "All Estate Produce",
-            "icon": "book"
-          }
-        },
-        "menu_feature_JDtGNf": {
-          "type": "menu_feature",
-          "settings": {
-            "menu_handle": "estate-produce",
-            "image": "shopify://shop_images/Morghew-Yukon-Gold-Potato-Vodka-scaled-e1729600832477.jpg",
-            "eyebrow": "Clean, Crisp & Fruity",
-            "heading": "Morghew Potato Vodka",
-            "subtext": "A refined spirit made from some special potatoes.",
-            "button_label": "Buy Now",
-            "button_url": "shopify://products/potato-vodka"
-          }
-        },
-        "menu_feature_eWAGj6": {
-          "type": "menu_feature",
-          "settings": {
-            "menu_handle": "potato-shop",
-            "image": "shopify://shop_images/2025-Sarpo-Kifli.jpg",
-            "eyebrow": "In season now",
-            "heading": "Sarpo Kifli",
-            "subtext": "Our waxy new potato",
-            "button_label": "Shop the shelf",
-            "button_url": "shopify://products/sarpo-kifli"
-          }
-        }
-      },
-      "block_order": [
-        "menu_icon_qyRRE3",
-        "menu_icon_h6zxGi",
-        "menu_icon_bnna7m",
-        "menu_feature_JDtGNf",
-        "menu_feature_eWAGj6"
-      ],
+      "blocks": {},
+      "block_order": [],
       "custom_css": [
         ".header__submenu.m-mega.m-mega {background: #ffffff;}"
       ],

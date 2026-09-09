@@ -108,28 +108,28 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "quote": "Excellent range and knowledgeable advice — they helped us spec the whole project and delivery was quick.",
+            "quote": "We worked with Lee from concept through to the installation of our project. Throughout the project communication was clear and the brief was met. The quality of the LEDs used is excellent, the colour and dimming quality are particularly excellent.",
             "stars": 5,
-            "name": "Placeholder review",
-            "meta": "Replace with a real customer quote"
+            "name": "Ben Wills",
+            "meta": "Deputy Production Manager (Technical)"
           }
         },
         "review_2": {
           "type": "review",
           "settings": {
-            "quote": "Great trade pricing and the products arrived well packaged. Will be ordering again for our next job.",
+            "quote": "We needed a complex design produced very quickly. Vivid hold a lot of off-the-shelf kit so could deliver within our allotted timeframe, to the quality we expected and required. Their standard of work throughout was excellent, as was their communication and professionalism.",
             "stars": 5,
-            "name": "Placeholder review",
-            "meta": "Replace with a real customer quote"
+            "name": "David Keane",
+            "meta": "Senior Production Manager"
           }
         },
         "review_3": {
           "type": "review",
           "settings": {
-            "quote": "Really useful how-to guides on the site — made choosing the right LED strip for our kitchen simple.",
+            "quote": "It's been great working with Lee, Rupert and the wider team. I can't recommend the team at Vivid enough and we will be using them again in the future.",
             "stars": 5,
-            "name": "Placeholder review",
-            "meta": "Replace with a real customer quote"
+            "name": "Tom Phillips",
+            "meta": "Client Director, Specials Lighting"
           }
         }
       },
@@ -140,7 +140,7 @@
         "heading": "What our customers say",
         "aggregate_score": "5.0",
         "aggregate_stars": 5,
-        "aggregate_text": "PLACEHOLDER — swap these three reviews for real customer quotes before launch",
+        "aggregate_text": "Reviews from real Vivid Direct clients",
         "surface": "paper",
         "texture": false
       }
