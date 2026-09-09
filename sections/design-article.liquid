@@ -1,24 +1,26 @@
 {%- comment -%}
-  recipe-article.liquid — custom recipe layout for blog articles.
-  Assigned via the "recipe" template suffix (templates/article.recipe.json).
-  Driven by article metafields under the `custom` namespace + a Chef metaobject.
+  design-article.liquid — long-form layout for lighting/design blog articles.
+  Assigned via the "design" template suffix (templates/article.design.json).
+  Driven by article metafields under the `custom` namespace + a Designer metaobject.
+  Renamed from the Morghew theme's recipe-article.liquid — CSS classes are
+  still prefixed `recipe__` internally (cosmetic only, not renamed this pass).
 {%- endcomment -%}
 
 {{ 'morghew-recipe.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign mf = article.metafields.custom
-  assign eyebrow = mf.recipe_eyebrow.value
-  assign summary = mf.recipe_summary.value
-  assign serves = mf.recipe_serves.value
-  assign prep = mf.recipe_prep_time.value
-  assign cook = mf.recipe_cook_time.value
-  assign method = mf.recipe_method
-  assign chefs_tip = mf.recipe_chefs_tip.value
-  assign shop_items = mf.recipe_shop_items.value
-  assign pantry = mf.recipe_pantry.value
-  assign featured = mf.recipe_featured_product.value
-  assign chef = mf.recipe_chef.value
+  assign eyebrow = mf.design_eyebrow.value
+  assign summary = mf.design_summary.value
+  assign serves = mf.design_area.value
+  assign prep = mf.design_budget.value
+  assign cook = mf.design_timeline.value
+  assign method = mf.design_process
+  assign designers_tip = mf.design_designers_tip.value
+  assign shop_items = mf.design_shop_items.value
+  assign pantry = mf.design_kit_list.value
+  assign featured = mf.design_featured_product.value
+  assign designer = mf.design_designer.value
 
   assign add_total = 0
   assign variant_ids = ''
@@ -44,9 +46,9 @@
       {%- if summary != blank -%}<p class="recipe__summary">{{ summary }}</p>{%- endif -%}
       {%- if serves != blank or prep != blank or cook != blank -%}
         <div class="recipe__stats">
-          {%- if serves != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ serves }}</span><span class="recipe__stat-label">Serves</span></div>{%- endif -%}
-          {%- if prep != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ prep }}</span><span class="recipe__stat-label">Prep</span></div>{%- endif -%}
-          {%- if cook != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ cook }}</span><span class="recipe__stat-label">Cook</span></div>{%- endif -%}
+          {%- if serves != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ serves }}</span><span class="recipe__stat-label">Room</span></div>{%- endif -%}
+          {%- if prep != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ prep }}</span><span class="recipe__stat-label">Budget</span></div>{%- endif -%}
+          {%- if cook != blank -%}<div class="recipe__stat"><span class="recipe__stat-val">{{ cook }}</span><span class="recipe__stat-label">Timeline</span></div>{%- endif -%}
         </div>
       {%- endif -%}
     </div>
@@ -66,15 +68,15 @@
     <div class="recipe__wrap recipe__main-grid">
 
       <div class="recipe__method">
-        {%- if mf.recipe_method.value != blank -%}
-          <h2 class="recipe__h2">Method</h2>
-          <div class="recipe__steps rte">{{ mf.recipe_method | metafield_tag }}</div>
+        {%- if mf.design_process.value != blank -%}
+          <h2 class="recipe__h2">Process</h2>
+          <div class="recipe__steps rte">{{ mf.design_process | metafield_tag }}</div>
         {%- endif -%}
 
-        {%- if chefs_tip != blank -%}
+        {%- if designers_tip != blank -%}
           <div class="recipe__tip">
-            <p class="recipe__tip-eyebrow">Chef&rsquo;s tip</p>
-            <p class="recipe__tip-text">{{ chefs_tip }}</p>
+            <p class="recipe__tip-eyebrow">Designer&rsquo;s tip</p>
+            <p class="recipe__tip-text">{{ designers_tip }}</p>
           </div>
         {%- endif -%}
       </div>
@@ -129,27 +131,27 @@
   </section>
 
   <!-- ── CHEF ── -->
-  {%- if chef -%}
+  {%- if designer -%}
     <section class="recipe__chef">
-      {%- if section.settings.chef_bg_image != blank -%}
-        <img class="recipe__chef-bg" src="{{ section.settings.chef_bg_image | image_url: width: 2400 }}" alt="" aria-hidden="true" width="{{ section.settings.chef_bg_image.width }}" height="{{ section.settings.chef_bg_image.height }}" loading="lazy">
+      {%- if section.settings.designer_bg_image != blank -%}
+        <img class="recipe__chef-bg" src="{{ section.settings.designer_bg_image | image_url: width: 2400 }}" alt="" aria-hidden="true" width="{{ section.settings.designer_bg_image.width }}" height="{{ section.settings.designer_bg_image.height }}" loading="lazy">
       {%- endif -%}
       <div class="recipe__chef-overlay"></div>
       <div class="recipe__wrap recipe__chef-grid">
         <div class="recipe__chef-portrait">
-          {%- if chef.portrait.value -%}
-            <img src="{{ chef.portrait.value | image_url: width: 700 }}" alt="{{ chef.name.value | escape }}" width="{{ chef.portrait.value.width }}" height="{{ chef.portrait.value.height }}" loading="lazy">
+          {%- if designer.portrait.value -%}
+            <img src="{{ designer.portrait.value | image_url: width: 700 }}" alt="{{ designer.name.value | escape }}" width="{{ designer.portrait.value.width }}" height="{{ designer.portrait.value.height }}" loading="lazy">
           {%- endif -%}
         </div>
         <div class="recipe__chef-body">
-          <p class="recipe__chef-eyebrow">The recipe is by</p>
-          <h2 class="recipe__chef-name">{{ chef.name.value }}</h2>
-          {%- if chef.role.value != blank -%}<p class="recipe__chef-role">{{ chef.role.value }}</p>{%- endif -%}
-          {%- if chef.bio.value != blank -%}<p class="recipe__chef-bio">{{ chef.bio.value }}</p>{%- endif -%}
-          {%- if chef.instagram.value != blank or chef.website.value != blank -%}
+          <p class="recipe__chef-eyebrow">Design by</p>
+          <h2 class="recipe__chef-name">{{ designer.name.value }}</h2>
+          {%- if designer.role.value != blank -%}<p class="recipe__chef-role">{{ designer.role.value }}</p>{%- endif -%}
+          {%- if designer.bio.value != blank -%}<p class="recipe__chef-bio">{{ designer.bio.value }}</p>{%- endif -%}
+          {%- if designer.instagram.value != blank or designer.website.value != blank -%}
             <div class="recipe__chef-links">
-              {%- if chef.instagram.value != blank -%}<a href="{{ chef.instagram.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Instagram <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
-              {%- if chef.website.value != blank -%}<a href="{{ chef.website.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Website <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
+              {%- if designer.instagram.value != blank -%}<a href="{{ designer.instagram.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Instagram <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
+              {%- if designer.website.value != blank -%}<a href="{{ designer.website.value }}" class="recipe__chef-link" target="_blank" rel="noopener">Website <span aria-hidden="true">&rarr;</span></a>{%- endif -%}
             </div>
           {%- endif -%}
         </div>
@@ -248,43 +250,24 @@
   {{ article | structured_data }}
 </script>
 
-{%- comment -%} Recipe rich-result schema, mapped from custom.recipe_* metafields. Free-text prep/cook times are omitted (schema requires ISO-8601 durations). {%- endcomment -%}
-{%- capture recipe_instructions -%}{{ method | metafield_tag }}{%- endcapture -%}
-{%- assign recipe_instructions = recipe_instructions | strip_html | strip_newlines | strip -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Recipe",
-  "name": {{ article.title | json }}
-  {%- if article.image %},"image": [{{ article.image | image_url: width: 1200 | prepend: 'https:' | json }}]{% endif -%}
-  {%- if summary != blank %},"description": {{ summary | strip_html | json }}{% endif -%}
-  ,"datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }}
-  ,"author": { "@type": "Person", "name": {{ chef.name.value | default: shop.name | json }} }
-  ,"publisher": { "@type": "Organization", "name": {{ shop.name | json }} }
-  {%- if serves != blank %},"recipeYield": {{ serves | json }}{% endif -%}
-  {%- if pantry.size > 0 %},"recipeIngredient": [{% for item in pantry %}{{ item | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif -%}
-  {%- if recipe_instructions != blank %},"recipeInstructions": {{ recipe_instructions | json }}{% endif -%}
-}
-</script>
-
 {% schema %}
 {
-  "name": "Recipe article",
+  "name": "Design article",
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Hero" },
     { "type": "range", "id": "hero_overlay", "label": "Image overlay darkness", "info": "Increase for better text legibility over busy images.", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 60 },
     { "type": "header", "content": "Shop the ingredients card" },
-    { "type": "text", "id": "shop_heading", "label": "Card heading", "default": "Shop the ingredients" },
-    { "type": "text", "id": "shop_subtext", "label": "Card subtext", "default": "The Morghew bits, in the right quantity, straight to your basket." },
-    { "type": "text", "id": "pantry_heading", "label": "Pantry heading", "default": "Plus from your pantry" },
-    { "type": "header", "content": "Chef section" },
-    { "type": "image_picker", "id": "chef_bg_image", "label": "Background image", "info": "Estate/wood scene behind the chef bio." },
+    { "type": "text", "id": "shop_heading", "label": "Card heading", "default": "Shop the fixtures" },
+    { "type": "text", "id": "shop_subtext", "label": "Card subtext", "default": "The products used in this design, ready to add to your basket." },
+    { "type": "text", "id": "pantry_heading", "label": "Extras heading", "default": "Plus, from the kit list" },
+    { "type": "header", "content": "Designer section" },
+    { "type": "image_picker", "id": "designer_bg_image", "label": "Background image", "info": "Background behind the designer bio." },
     { "type": "header", "content": "Made with" },
     { "type": "text", "id": "made_with_label", "label": "Eyebrow", "default": "Made with" },
     { "type": "text", "id": "shop_all_label", "label": "Shop-all link label", "default": "Shop all varieties" },
     { "type": "url", "id": "shop_all_url", "label": "Shop-all link URL" }
   ],
-  "presets": [ { "name": "Recipe article" } ]
+  "presets": [ { "name": "Design article" } ]
 }
 {% endschema %}

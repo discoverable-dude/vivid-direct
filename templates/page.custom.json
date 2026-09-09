@@ -1,0 +1,204 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero": {
+      "type": "morghew-hero-editorial",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": "1,200+",
+            "label": "Fixtures installed"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": "6",
+            "label": "Weeks, start to finish"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "label": "Rooms rewired"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Smart-controlled"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "image": "",
+        "image_opacity": 55,
+        "crumb": "Example page — page.custom",
+        "eyebrow": "EXAMPLE CONTENT · Project spotlight",
+        "headline": "A blank page.custom template, ready to reuse.",
+        "lede": "This is the reusable landing-page scaffold that used to hold Morghew's shoot content — same section types (editorial hero with stats, lede, image/text splits, quote, card strands, CTA), stripped back to placeholder copy. Assign this template to any page and swap the blocks in the theme editor."
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "How to use this template",
+        "body": "Everything below is a live example of each block type available on this page: a lede, two image/text splits, a stats strip, a pull quote, a three-card strand, and a closing CTA. Edit or delete any of them in the theme customizer — nothing here is wired to real data."
+      }
+    },
+    "split_a": {
+      "type": "morghew-split",
+      "blocks": {
+        "li1": {
+          "type": "item",
+          "settings": {
+            "text": "Free on-site consultation and lighting plan"
+          }
+        },
+        "li2": {
+          "type": "item",
+          "settings": {
+            "text": "Trade and retail pricing available"
+          }
+        },
+        "li3": {
+          "type": "item",
+          "settings": {
+            "text": "Installation partners across the South East"
+          }
+        }
+      },
+      "block_order": [
+        "li1",
+        "li2",
+        "li3"
+      ],
+      "settings": {
+        "flip": false,
+        "image": "",
+        "tag": "EXAMPLE CONTENT",
+        "ratio": "1 / 1",
+        "eyebrow": "Split block, image first",
+        "heading": "This is an image/text split",
+        "body": "<p>Use this block for a case study, a service explainer, or a brand story. It flips left/right depending on the \"flip\" setting.</p>",
+        "cta_label": "Example link",
+        "cta_url": "#"
+      }
+    },
+    "split_b": {
+      "type": "morghew-split",
+      "settings": {
+        "flip": true,
+        "image": "",
+        "tag": "EXAMPLE CONTENT",
+        "ratio": "1 / 1",
+        "eyebrow": "Split block, text first",
+        "heading": "Same block, flipped",
+        "body": "<p>Set \"flip\": true and the image and text columns swap sides. Handy for alternating rhythm down a long page.</p>",
+        "cta_label": "Example link",
+        "cta_url": "#"
+      }
+    },
+    "quote": {
+      "type": "morghew-quote",
+      "settings": {
+        "quote": "\"Replace this with a real client quote, or delete the block.\"",
+        "author": "Example Name",
+        "role": "Example role, company"
+      }
+    },
+    "strands": {
+      "type": "morghew-strands",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "title": "Example card one",
+            "text": "Short supporting line for the first card in the strand.",
+            "link_label": "Learn more",
+            "link_url": "#"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "title": "Example card two",
+            "text": "Short supporting line for the second card in the strand.",
+            "link_label": "Learn more",
+            "link_url": "#"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "title": "Example card three",
+            "text": "Short supporting line for the third card in the strand.",
+            "link_label": "Learn more",
+            "link_url": "#"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "EXAMPLE CONTENT",
+        "heading": "A three-card strand",
+        "intro": "Good for a services overview, a three-step process, or a set of related links."
+      }
+    },
+    "cta": {
+      "type": "morghew-cta",
+      "settings": {
+        "image": "",
+        "eyebrow": "EXAMPLE CONTENT",
+        "heading": "Closing call to action",
+        "body": "One heading, one line of body copy, up to two buttons — swap this for whatever this page is actually selling.",
+        "button_1_label": "Primary button",
+        "button_1_url": "#",
+        "button_2_label": "Secondary button",
+        "button_2_url": "#"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "lede",
+    "split_a",
+    "split_b",
+    "quote",
+    "strands",
+    "cta"
+  ]
+}
