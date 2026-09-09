@@ -47,6 +47,7 @@
       },
       "block_order": ["eyebrow", "heading", "text", "buttons"],
       "settings": {
+        "image": "shopify://shop_images/KILTER-DG-2700K-LARGE-1-600x804.jpg",
         "image_height": "large",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
