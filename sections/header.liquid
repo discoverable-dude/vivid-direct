@@ -160,7 +160,8 @@
                 }}
               </div>
             {%- else -%}
-              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="478" height="239" class="header__heading-logo">
+              {%- assign fallback_logo_height = settings.logo_width | divided_by: 2 -%}
+              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ settings.logo_width }}" height="{{ fallback_logo_height }}" class="header__heading-logo" style="width: {{ settings.logo_width }}px; height: auto; max-width: 100%;">
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -200,7 +201,8 @@
                 }}
               </div>
             {%- else -%}
-              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="478" height="239" class="header__heading-logo">
+              {%- assign fallback_logo_height = settings.logo_width | divided_by: 2 -%}
+              <img src="{{ 'logo-vivid-direct.png' | asset_url }}" alt="{{ shop.name | escape }}" width="{{ settings.logo_width }}" height="{{ fallback_logo_height }}" class="header__heading-logo" style="width: {{ settings.logo_width }}px; height: auto; max-width: 100%;">
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

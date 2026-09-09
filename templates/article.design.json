@@ -10,14 +10,14 @@
 {
   "sections": {
     "main": {
-      "type": "recipe-article",
+      "type": "design-article",
       "settings": {
         "hero_overlay": 55,
-        "shop_heading": "Shop the ingredients",
-        "shop_subtext": "The Morghew bits, in the right quantity, straight to your basket.",
-        "pantry_heading": "Plus from your pantry",
+        "shop_heading": "Shop the fixtures",
+        "shop_subtext": "The products used in this design, ready to add to your basket.",
+        "pantry_heading": "Plus, from the kit list",
         "made_with_label": "Made with",
-        "shop_all_label": "Shop all varieties",
+        "shop_all_label": "Shop all lighting",
         "shop_all_url": ""
       }
     }

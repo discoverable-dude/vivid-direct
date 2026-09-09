@@ -1,16 +1,16 @@
-{%- comment -%} Recipe hub — bespoke listing for the recipes blog. {%- endcomment -%}
+{%- comment -%} Design hub — bespoke listing for the lighting design blog. Renamed from recipe-hub.liquid; CSS classes stay `rhub-*` internally (cosmetic only, not renamed this pass). {%- endcomment -%}
 {{ 'morghew-recipe-hub.css' | asset_url | stylesheet_tag }}
-{%- assign recipes_blog = blogs.recipes -%}
+{%- assign design_blog = blogs.design -%}
 {%- liquid
   assign feat = blank
-  for a in recipes_blog.articles
+  for a in design_blog.articles
     if a.tags contains 'featured' or a.tags contains 'Featured'
       assign feat = a
       break
     endif
   endfor
-  if feat == blank and recipes_blog.articles.size > 0
-    assign feat = recipes_blog.articles.first
+  if feat == blank and design_blog.articles.size > 0
+    assign feat = design_blog.articles.first
   endif
 -%}
 
@@ -29,60 +29,60 @@
 
   <div class="rhub__wrap">
     {%- if feat != blank -%}
-      {%- assign feat_chef = feat.metafields.custom.recipe_chef.value -%}
+      {%- assign feat_designer = feat.metafields.custom.design_designer.value -%}
       <a class="rhub-feat" href="{{ feat.url }}">
         <div class="rhub-feat__media">
           {%- if feat.image -%}<img src="{{ feat.image | image_url: width: 1000 }}" alt="{{ feat.image.alt | default: feat.title | escape }}" loading="eager" fetchpriority="high" width="1000" height="750">{%- endif -%}
-          <span class="rhub-feat__badge">Featured recipe</span>
+          <span class="rhub-feat__badge">Featured article</span>
           <span class="rhub-feat__strip">
-            {%- if feat.metafields.custom.recipe_cook_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ feat.metafields.custom.recipe_cook_time.value }}</span>{%- endif -%}
-            {%- if feat.metafields.custom.recipe_serves != blank -%}<span>Serves {{ feat.metafields.custom.recipe_serves.value }}</span>{%- endif -%}
-            {%- if feat.metafields.custom.recipe_difficulty != blank -%}<span>{{ feat.metafields.custom.recipe_difficulty.value }}</span>{%- endif -%}
+            {%- if feat.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ feat.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+            {%- if feat.metafields.custom.design_area != blank -%}<span>Serves {{ feat.metafields.custom.design_area.value }}</span>{%- endif -%}
+            {%- if feat.metafields.custom.design_style != blank -%}<span>{{ feat.metafields.custom.design_style.value }}</span>{%- endif -%}
           </span>
         </div>
         <div class="rhub-feat__body">
-          {%- if feat_chef -%}<p class="rhub-feat__by">by {{ feat_chef.name.value }}</p>{%- endif -%}
+          {%- if feat_designer -%}<p class="rhub-feat__by">by {{ feat_designer.name.value }}</p>{%- endif -%}
           <h2 class="rhub-feat__title">{{ feat.title }}</h2>
           {%- assign feat_sub = feat.metafields.descriptors.subtitle.value -%}
           {%- if feat_sub != blank -%}<p class="rhub-feat__sub">{{ feat_sub }}</p>{%- endif -%}
-          {%- assign feat_intro = feat.metafields.custom.recipe_summary.value -%}
+          {%- assign feat_intro = feat.metafields.custom.design_summary.value -%}
           {%- if feat_intro != blank -%}<p class="rhub-feat__intro">{{ feat_intro | strip_html | truncatewords: 34 }}</p>{%- endif -%}
-          {%- assign feat_methods = feat.metafields.custom.recipe_methods -%}
+          {%- assign feat_methods = feat.metafields.custom.design_rooms -%}
           {%- if feat_methods != blank -%}<div class="rhub-feat__tags">{%- for m in feat_methods.value -%}<span class="rhub-tag">{{ m }}</span>{%- endfor -%}</div>{%- endif -%}
-          <span class="rhub-feat__cta">Read recipe <span aria-hidden="true">&rarr;</span></span>
+          <span class="rhub-feat__cta">Read article <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>
     {%- endif -%}
   </div>
 
-  {%- assign method_list = 'Roast,Boil,Mash,Chip,Steam,Dauphinoise,Fry' | split: ',' -%}
-  {%- assign diff_list = 'Easy,Medium,Advanced' | split: ',' -%}
+  {%- assign room_list = 'Kitchen,Bathroom,Living Room,Bedroom,Outdoor,Hallway,Commercial' | split: ',' -%}
+  {%- assign style_list = 'Modern,Classic,Industrial,Minimalist' | split: ',' -%}
   <div class="rhub-filters" id="rhub-filters-{{ section.id }}">
     <div class="rhub__wrap rhub-filters__inner">
       <div class="rhub-search">
         {%- render 'morghew-icon', icon: 'search' -%}
-        <input type="search" class="rhub-search__input" id="rhub-q-{{ section.id }}" placeholder="Search by name or variety…" aria-label="Search recipes">
+        <input type="search" class="rhub-search__input" id="rhub-q-{{ section.id }}" placeholder="Search by title or room…" aria-label="Search recipes">
       </div>
-      <div class="rhub-filtergroup" data-group="method">
-        <span class="rhub-filtergroup__label">Method</span>
-        <button type="button" class="rhub-pill is-active" data-filter="method" data-value="all">All</button>
-        {%- for m in method_list -%}<button type="button" class="rhub-pill" data-filter="method" data-value="{{ m | downcase }}">{{ m }}</button>{%- endfor -%}
+      <div class="rhub-filtergroup" data-group="room">
+        <span class="rhub-filtergroup__label">Room</span>
+        <button type="button" class="rhub-pill is-active" data-filter="room" data-value="all">All</button>
+        {%- for m in room_list -%}<button type="button" class="rhub-pill" data-filter="room" data-value="{{ m | downcase }}">{{ m }}</button>{%- endfor -%}
       </div>
-      <div class="rhub-filtergroup" data-group="difficulty">
-        <span class="rhub-filtergroup__label">Difficulty</span>
-        <button type="button" class="rhub-pill is-active" data-filter="difficulty" data-value="all">All</button>
-        {%- for d in diff_list -%}<button type="button" class="rhub-pill" data-filter="difficulty" data-value="{{ d | downcase }}">{{ d }}</button>{%- endfor -%}
+      <div class="rhub-filtergroup" data-group="style">
+        <span class="rhub-filtergroup__label">Style</span>
+        <button type="button" class="rhub-pill is-active" data-filter="style" data-value="all">All</button>
+        {%- for d in style_list -%}<button type="button" class="rhub-pill" data-filter="style" data-value="{{ d | downcase }}">{{ d }}</button>{%- endfor -%}
       </div>
     </div>
   </div>
-  <div class="rhub__wrap"><p class="rhub-count"><span id="rhub-count-{{ section.id }}">{{ recipes_blog.articles.size }}</span> recipes</p></div>
+  <div class="rhub__wrap"><p class="rhub-count"><span id="rhub-count-{{ section.id }}">{{ design_blog.articles.size }}</span> recipes</p></div>
 
   <div class="rhub__wrap">
     <div class="rhub-grid" id="rhub-grid-{{ section.id }}">
-      {%- for a in recipes_blog.articles -%}
-        {%- assign a_chef = a.metafields.custom.recipe_chef.value -%}
-        {%- assign a_diff = a.metafields.custom.recipe_difficulty.value -%}
-        {%- assign a_methods = a.metafields.custom.recipe_methods -%}
+      {%- for a in design_blog.articles -%}
+        {%- assign a_designer = a.metafields.custom.design_designer.value -%}
+        {%- assign a_diff = a.metafields.custom.design_style.value -%}
+        {%- assign a_methods = a.metafields.custom.design_rooms -%}
         {%- capture a_method_data -%}{%- if a_methods != blank -%}{%- for m in a_methods.value -%}{{ m | downcase }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}{%- endif -%}{%- endcapture -%}
         <a class="rhub-card" href="{{ a.url }}"
            data-title="{{ a.title | downcase | escape }} {{ a.metafields.descriptors.subtitle.value | downcase | escape }}"
@@ -91,8 +91,8 @@
           <div class="rhub-card__media">
             {%- if a.image -%}<img src="{{ a.image | image_url: width: 600 }}" alt="{{ a.image.alt | default: a.title | escape }}" loading="lazy" width="600" height="450">{%- endif -%}
             <span class="rhub-card__overlay">
-              {%- if a.metafields.custom.recipe_cook_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ a.metafields.custom.recipe_cook_time.value }}</span>{%- endif -%}
-              {%- if a.metafields.custom.recipe_serves != blank -%}<span>Serves {{ a.metafields.custom.recipe_serves.value }}</span>{%- endif -%}
+              {%- if a.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ a.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+              {%- if a.metafields.custom.design_area != blank -%}<span>Serves {{ a.metafields.custom.design_area.value }}</span>{%- endif -%}
             </span>
           </div>
           <div class="rhub-card__body">
@@ -103,35 +103,35 @@
             <h3 class="rhub-card__title">{{ a.title }}</h3>
             {%- assign a_sub = a.metafields.descriptors.subtitle.value -%}
             {%- if a_sub != blank -%}<p class="rhub-card__sub">{{ a_sub }}</p>{%- endif -%}
-            {%- if a_chef -%}<p class="rhub-card__by">by {{ a_chef.name.value }}</p>{%- endif -%}
+            {%- if a_designer -%}<p class="rhub-card__by">by {{ a_designer.name.value }}</p>{%- endif -%}
           </div>
         </a>
       {%- endfor -%}
-      <p class="rhub-empty" id="rhub-empty-{{ section.id }}" hidden>No recipes match those filters.</p>
+      <p class="rhub-empty" id="rhub-empty-{{ section.id }}" hidden>No articles match those filters.</p>
     </div>
   </div>
 
-  {%- assign all_chefs = shop.metaobjects.chef.values -%}
-  {%- if all_chefs.size > 0 -%}
+  {%- assign all_designers = shop.metaobjects.designer.values -%}
+  {%- if all_designers.size > 0 -%}
     <section class="rhub-chefs">
       <div class="rhub__wrap rhub-chefs__grid">
         <div class="rhub-chefs__head">
-          {%- if section.settings.chefs_eyebrow != blank -%}<p class="rhub-chefs__eyebrow">{{ section.settings.chefs_eyebrow }}</p>{%- endif -%}
-          {%- if section.settings.chefs_heading != blank -%}<h2 class="rhub-chefs__heading">{{ section.settings.chefs_heading }}</h2>{%- endif -%}
-          {%- if section.settings.chefs_intro != blank -%}<div class="rhub-chefs__intro">{{ section.settings.chefs_intro }}</div>{%- endif -%}
+          {%- if section.settings.designers_eyebrow != blank -%}<p class="rhub-chefs__eyebrow">{{ section.settings.designers_eyebrow }}</p>{%- endif -%}
+          {%- if section.settings.designers_heading != blank -%}<h2 class="rhub-chefs__heading">{{ section.settings.designers_heading }}</h2>{%- endif -%}
+          {%- if section.settings.designers_intro != blank -%}<div class="rhub-chefs__intro">{{ section.settings.designers_intro }}</div>{%- endif -%}
         </div>
         <div class="rhub-chefs__list">
-          {%- for c in all_chefs -%}
+          {%- for c in all_designers -%}
             {%- assign n = 0 -%}
-            {%- for a in recipes_blog.articles -%}
-              {%- if a.metafields.custom.recipe_chef.value == c -%}{%- assign n = n | plus: 1 -%}{%- endif -%}
+            {%- for a in design_blog.articles -%}
+              {%- if a.metafields.custom.design_designer.value == c -%}{%- assign n = n | plus: 1 -%}{%- endif -%}
             {%- endfor -%}
             <div class="rhub-chef">
               {%- if c.portrait.value -%}<span class="rhub-chef__portrait"><img src="{{ c.portrait.value | image_url: width: 160 }}" alt="{{ c.name.value | escape }}" loading="lazy" width="80" height="80"></span>{%- endif -%}
               <div class="rhub-chef__body">
                 <p class="rhub-chef__name">{{ c.name.value }}</p>
                 {%- if c.role.value != blank -%}<p class="rhub-chef__role">{{ c.role.value }}</p>{%- endif -%}
-                <p class="rhub-chef__count">{{ n }} recipe{% if n != 1 %}s{% endif %}</p>
+                <p class="rhub-chef__count">{{ n }} article{% if n != 1 %}s{% endif %}</p>
               </div>
               {%- if c.instagram.value != blank -%}<a class="rhub-chef__ig" href="{{ c.instagram.value }}" target="_blank" rel="noopener" aria-label="{{ c.name.value | escape }} on Instagram">{%- render 'morghew-icon', icon: 'arrow' -%}</a>{%- endif -%}
             </div>
@@ -166,7 +166,7 @@
   var emptyEl = document.getElementById('rhub-empty-' + sid);
   if (!grid) return;
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.rhub-card'));
-  var state = { q: '', method: 'all', difficulty: 'all' };
+  var state = { q: '', room: 'all', style: 'all' };
   var pills = document.querySelectorAll('#rhub-filters-' + sid + ' .rhub-pill');
   pills.forEach(function (p) {
     p.addEventListener('click', function () {
@@ -182,8 +182,8 @@
     var visible = 0;
     cards.forEach(function (card) {
       var okQ = !state.q || (card.dataset.title || '').indexOf(state.q) !== -1;
-      var okM = state.method === 'all' || (',' + (card.dataset.methods || '') + ',').indexOf(',' + state.method + ',') !== -1;
-      var okD = state.difficulty === 'all' || (card.dataset.difficulty || '') === state.difficulty;
+      var okM = state.room === 'all' || (',' + (card.dataset.methods || '') + ',').indexOf(',' + state.room + ',') !== -1;
+      var okD = state.style === 'all' || (card.dataset.difficulty || '') === state.style;
       var show = okQ && okM && okD;
       card.classList.toggle('is-hidden', !show);
       if (show) visible++;
@@ -196,28 +196,28 @@
 
 {% schema %}
 {
-  "name": "Recipe hub",
+  "name": "Design hub",
   "tag": "section",
   "class": "section",
   "settings": [
     { "type": "header", "content": "Hero" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero background image" },
     { "type": "range", "id": "hero_overlay", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 45 },
-    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "From the estate kitchen" },
-    { "type": "text", "id": "hero_title", "label": "Title", "default": "Recipes" },
-    { "type": "textarea", "id": "hero_sub", "label": "Subtitle", "default": "Heritage varieties deserve good cooking. Here's how we use them." },
-    { "type": "header", "content": "Our chefs" },
-    { "type": "text", "id": "chefs_eyebrow", "label": "Eyebrow", "default": "Our chefs" },
-    { "type": "text", "id": "chefs_heading", "label": "Heading", "default": "Recipes from great kitchens" },
-    { "type": "richtext", "id": "chefs_intro", "label": "Intro", "default": "<p>We work with Michelin-starred chefs and food writers who cook with our varieties, bringing heritage potatoes to life in their own kitchens.</p>" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "From our design team" },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Design Ideas" },
+    { "type": "textarea", "id": "hero_sub", "label": "Subtitle", "default": "Real rooms, real installs. Here's how we lit them." },
+    { "type": "header", "content": "Our designers" },
+    { "type": "text", "id": "designers_eyebrow", "label": "Eyebrow", "default": "Our designers" },
+    { "type": "text", "id": "designers_heading", "label": "Heading", "default": "Ideas from our design team" },
+    { "type": "richtext", "id": "designers_intro", "label": "Intro", "default": "<p>We work with lighting designers and installers who write up their own projects, sharing how they approached each room.</p>" },
     { "type": "header", "content": "Submit CTA" },
     { "type": "image_picker", "id": "submit_image", "label": "Background image" },
-    { "type": "text", "id": "submit_eyebrow", "label": "Eyebrow", "default": "Share your cooking" },
-    { "type": "text", "id": "submit_heading", "label": "Heading", "default": "Made something with Morghew?" },
-    { "type": "textarea", "id": "submit_text", "label": "Text", "default": "Send us a photo and the recipe, we'd love to feature your dish and share it with the estate community." },
-    { "type": "text", "id": "submit_btn_label", "label": "Button label", "default": "Submit a recipe" },
+    { "type": "text", "id": "submit_eyebrow", "label": "Eyebrow", "default": "Share your project" },
+    { "type": "text", "id": "submit_heading", "label": "Heading", "default": "Finished a project with us?" },
+    { "type": "textarea", "id": "submit_text", "label": "Text", "default": "Send us photos and a few lines on the project, we'd love to feature it here." },
+    { "type": "text", "id": "submit_btn_label", "label": "Button label", "default": "Submit a project" },
     { "type": "url", "id": "submit_btn_url", "label": "Button link" }
   ],
-  "presets": [{ "name": "Recipe hub" }]
+  "presets": [{ "name": "Design hub" }]
 }
 {% endschema %}

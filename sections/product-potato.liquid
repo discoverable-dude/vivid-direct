@@ -416,22 +416,23 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     RECIPES — section blocks
+     DESIGN ARTICLES — section blocks
      ═══════════════════════════════════════════════ -->
 {%- comment -%}
-  "Recipes that use this product" — reverse-lookup the recipes blog for articles whose
-  recipe_featured_product or recipe_shop_items reference this product. Link once on the
-  recipe (its shop items / featured product) and it appears here automatically. Max 3.
+  "Design articles that feature this product" — reverse-lookup the design blog for articles
+  whose design_featured_product or design_shop_items reference this product. Link once on
+  the article (its shop items / featured product) and it appears here automatically. Max 3.
+  Renamed from the Morghew theme's "Recipes that use this product" block.
 {%- endcomment -%}
-{%- capture pp_recipe_cards -%}
+{%- capture pp_design_cards -%}
   {%- assign _rc = 0 -%}
-  {%- for art in blogs.recipes.articles -%}
+  {%- for art in blogs.design.articles -%}
     {%- if _rc >= 3 -%}{%- break -%}{%- endif -%}
     {%- assign _match = false -%}
-    {%- assign _feat = art.metafields.custom.recipe_featured_product.value -%}
+    {%- assign _feat = art.metafields.custom.design_featured_product.value -%}
     {%- if _feat and _feat.id == product.id -%}{%- assign _match = true -%}{%- endif -%}
     {%- unless _match -%}
-      {%- for _v in art.metafields.custom.recipe_shop_items.value -%}
+      {%- for _v in art.metafields.custom.design_shop_items.value -%}
         {%- if _v.product.id == product.id -%}{%- assign _match = true -%}{%- break -%}{%- endif -%}
       {%- endfor -%}
     {%- endunless -%}
@@ -445,7 +446,7 @@
           {%- else -%}
             <div class="pp-recipe-card__placeholder">
               {%- render 'morghew-icon', icon: 'roast', size: 36 -%}
-              <span>Recipe shot coming soon</span>
+              <span>Article photo coming soon</span>
             </div>
           {%- endif -%}
         </div>
@@ -455,22 +456,22 @@
     {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
-{%- if pp_recipe_cards != blank -%}
+{%- if pp_design_cards != blank -%}
 <div class="pp-recipes">
   <div class="wrap">
     <div class="pp-recipes__head">
       <div>
-        <p class="pp-eyebrow">Cook it well</p>
-        <h2 class="pp-recipes__heading">Recipes that use {{ product.title }}</h2>
+        <p class="pp-eyebrow">See it installed</p>
+        <h2 class="pp-recipes__heading">Design articles featuring {{ product.title }}</h2>
       </div>
-      {%- if section.settings.recipes_url != blank -%}
-        <a href="{{ section.settings.recipes_url }}" class="pp-viewall">
-          All potato recipes
+      {%- if section.settings.design_articles_url != blank -%}
+        <a href="{{ section.settings.design_articles_url }}" class="pp-viewall">
+          All design articles
           {%- render 'morghew-icon', icon: 'chevron', size: 18 -%}
         </a>
       {%- endif -%}
     </div>
-    <div class="pp-recipes__grid">{{ pp_recipe_cards }}</div>
+    <div class="pp-recipes__grid">{{ pp_design_cards }}</div>
   </div>
 </div>
 {%- endif -%}
@@ -591,12 +592,12 @@
       "type": "text",
       "id": "delivery_note",
       "label": "Delivery note",
-      "default": "Free UK delivery over £40 · packed by hand, shipped within 1 working day"
+      "default": "Free next day delivery over £150 · order by 1pm"
     },
     {
       "type": "url",
-      "id": "recipes_url",
-      "label": "Recipes link URL"
+      "id": "design_articles_url",
+      "label": "Design articles link URL"
     }
   ],
   "blocks": [

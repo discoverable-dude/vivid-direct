@@ -11,28 +11,29 @@
   "sections": {
     "potato-product": {
       "type": "product-potato",
+      "name": "Product page — page.custom variant",
       "blocks": {
         "faq_1": {
           "type": "faq",
           "settings": {
-            "title": "Storing your potatoes",
-            "body": "<p>When you receive your potatoes we advise you keep them in cool, dark, dry, frost-free conditions during the winter months. Stored correctly they should keep well for up to a month.</p><p>In spring and summer you may prefer to refrigerate them. They'll try to grow once the warmer weather arrives, as we don't spray our potatoes with any sprout-inhibiting chemicals. Kept in the fridge they should last a couple of weeks.</p>",
+            "title": "EXAMPLE — Installation",
+            "body": "<p>Replace with real fitting/installation guidance for this product, or delete this FAQ block.</p>",
             "open_by_default": true
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "title": "A note on seed potatoes",
-            "body": "<p>All our varieties are grown from certified seed stock and are destined for your table. We do not supply any certified seed potatoes.</p>",
+            "title": "EXAMPLE — Warranty",
+            "body": "<p>Replace with your real warranty terms for this product line.</p>",
             "open_by_default": false
           }
         },
         "faq_3": {
           "type": "faq",
           "settings": {
-            "title": "Delivery information",
-            "body": "<p>Orders are packed by hand in ventilated paper bags and dispatched via tracked courier. We aim to deliver within 1 to 2 working days</p>",
+            "title": "EXAMPLE — Delivery information",
+            "body": "<p>Free next day delivery over £150 when ordered by 1pm. Standard delivery otherwise.</p>",
             "open_by_default": false
           }
         }
@@ -43,32 +44,32 @@
         "faq_3"
       ],
       "settings": {
-        "trust_1": "Grown Locally on Morghew Estate",
-        "trust_2": "Packed by Hand",
-        "trust_3": "Packed & shipped within 2 working days",
-        "about_image": "shopify://shop_images/SI_RM_FOD_MORGHEW-2255.jpg",
+        "trust_1": "EXAMPLE — Trade pricing available",
+        "trust_2": "EXAMPLE — In stock, ships fast",
+        "trust_3": "EXAMPLE — 2 year warranty",
+        "about_image": "",
         "about_image_opacity": 30,
-        "attrs_heading": "A heritage variety",
-        "delivery_note": "Free UK delivery over £40. Normally £7.50",
-        "recipes_url": "#"
+        "attrs_heading": "EXAMPLE — Product specification",
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "design_articles_url": "#"
       }
     },
     "morghew_season_hYwhMC": {
       "type": "morghew-season",
       "disabled": true,
-      "name": "Morghew Seasonal Chart",
+      "name": "Seasonal/availability chart (disabled by default)",
       "settings": {
         "bg": "paper2",
         "eyebrow": "Availability",
-        "heading": "When it's in the ground",
-        "intro": "<p>Main season August to December. Some stock held in cool storage through spring.</p>"
+        "heading": "EXAMPLE heading",
+        "intro": "<p>EXAMPLE — this block is disabled by default; enable it if this product needs a seasonal or lead-time chart.</p>"
       }
     },
     "morghew_product_grid_katCah": {
       "type": "morghew-product-grid",
-      "name": "Morghew product grid",
+      "name": "Related products grid",
       "settings": {
-        "collection": "potato-shop",
+        "collection": "",
         "products_to_show": 4,
         "eyebrow": "You may also like",
         "heading": "Pairs well with",
