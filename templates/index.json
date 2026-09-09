@@ -84,6 +84,8 @@
       },
       "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
       "settings": {
+        "title": "",
+        "button_label": "",
         "image_width": "third",
         "columns_desktop": 4,
         "column_alignment": "center",
@@ -111,6 +113,7 @@
         "cat_downlights": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/Image_One_FX_OR_Plinth-e1776184772774-600x728.jpg",
             "title": "Downlights",
             "text": "<p>Recessed and surface downlights for every room</p>",
             "link_label": "Shop Downlights",
@@ -120,6 +123,7 @@
         "cat_smart": {
           "type": "column",
           "settings": {
+            "image": "shopify://shop_images/Pico-Scene-Keypad_Dimmer_Repeater_App_White-600x513.jpg",
             "title": "Smart Lighting",
             "text": "<p>App and voice-controlled lighting solutions</p>",
             "link_label": "Shop Smart Lighting",
@@ -140,6 +144,7 @@
       "block_order": ["cat_neon", "cat_downlights", "cat_smart", "cat_outdoor"],
       "settings": {
         "title": "Shop by Category",
+        "button_label": "",
         "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "square",
