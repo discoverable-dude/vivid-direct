@@ -12,6 +12,13 @@
     "hero": {
       "type": "image-banner",
       "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "settings": {
+            "text": "Create atmosphere with",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
@@ -38,7 +45,7 @@
           }
         }
       },
-      "block_order": ["heading", "text", "buttons"],
+      "block_order": ["eyebrow", "heading", "text", "buttons"],
       "settings": {
         "image_height": "large",
         "desktop_content_position": "middle-left",
