@@ -23,8 +23,6 @@
     },
     "header": {
       "type": "header",
-      "blocks": {},
-      "block_order": [],
       "custom_css": [
         ".header__submenu.m-mega.m-mega {background: #ffffff;}"
       ],

@@ -12,13 +12,6 @@
     "hero": {
       "type": "image-banner",
       "blocks": {
-        "eyebrow": {
-          "type": "text",
-          "settings": {
-            "text": "Create atmosphere with",
-            "text_style": "caption-with-letter-spacing"
-          }
-        },
         "heading": {
           "type": "heading",
           "settings": {
@@ -45,7 +38,7 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading", "text", "buttons"],
+      "block_order": ["heading", "text", "buttons"],
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
         "image_height": "large",
