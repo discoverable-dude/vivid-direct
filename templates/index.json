@@ -57,6 +57,76 @@
         "show_text_below": true
       }
     },
+    "featured_product_TCMnPp": {
+      "type": "featured-product",
+      "blocks": {
+        "text_zdUaU3": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_hpKTJN": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_FiN9EP": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_Hh7cHz": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_ajXrz3": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_8Yxmki": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_wgtXTU": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_zdUaU3",
+        "title_hpKTJN",
+        "price_FiN9EP",
+        "variant_picker_Hh7cHz",
+        "quantity_selector_ajXrz3",
+        "buy_buttons_8Yxmki",
+        "share_wgtXTU"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "nano-free-cut-recessed-neon-top-bend-9x6mm-white-ip44",
+        "color_scheme": "scheme-2",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "trust-badges": {
       "type": "multicolumn",
       "blocks": {
@@ -182,7 +252,7 @@
         "background_style": "none",
         "color_scheme": "scheme-1",
         "columns_mobile": "2",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -424,6 +494,7 @@
   },
   "order": [
     "hero",
+    "featured_product_TCMnPp",
     "trust-badges",
     "shop-by-category",
     "bestsellers",
