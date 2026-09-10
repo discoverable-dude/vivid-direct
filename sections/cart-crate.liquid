@@ -9,6 +9,7 @@
 {%- assign _pct = _cart_total | times: 100 | divided_by: _free_threshold -%}
 {%- if _pct > 100 -%}{%- assign _pct = 100 -%}{%- endif -%}
 
+<div class="crate-root{% if section.settings.dark_mode %} crate-root--dark{% endif %}">
 <div class="crate-page">
   <div class="page-width">
 
@@ -282,10 +283,23 @@
 
 <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
 
+</div><!-- /.crate-root -->
+
+{%- style -%}
+  .crate-root--dark {
+    --paper: #082A38;
+    --card: #0D4761;
+    --ink: #F6F0EA;
+    --ink-soft: rgba(246, 240, 234, 0.68);
+    --line: rgba(255, 255, 255, 0.14);
+  }
+{%- endstyle -%}
+
 {% schema %}
 {
   "name": "Cart — The Crate",
   "settings": [
+    { "type": "checkbox", "id": "dark_mode", "label": "Dark navy theme", "default": true },
     {
       "type": "collection",
       "id": "rec_collection",

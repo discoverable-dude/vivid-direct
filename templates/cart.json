@@ -12,7 +12,8 @@
     "cart-crate": {
       "type": "cart-crate",
       "settings": {
-        "rec_collection": "potato-shop",
+        "dark_mode": true,
+        "rec_collection": "neon-flex-by-foss-led",
         "rec_heading": "Add to your basket"
       }
     }
