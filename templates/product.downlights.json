@@ -148,7 +148,7 @@
       "type": "morghew-product-grid",
       "name": "Product grid",
       "settings": {
-        "collection": "blaze-recessed-lighting",
+        "collection": "downlights",
         "products_to_show": 4,
         "eyebrow": "You may also like",
         "heading": "recommended products",
