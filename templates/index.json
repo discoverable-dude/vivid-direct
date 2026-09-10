@@ -127,6 +127,62 @@
         "padding_bottom": 36
       }
     },
+    "how-we-help": {
+      "type": "multicolumn",
+      "blocks": {
+        "step_1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Complete-fittings-header-600x400.jpg",
+            "title": "Browse & Order",
+            "text": "<p>Huge in-stock range across LED, neon and smart lighting — filter by brand, room or spec.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step_2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Triple-Pendant-Silver-Voronoi-II-Black-Canopy-Lifestyle-600x600.jpg",
+            "title": "Fast, Tracked Delivery",
+            "text": "<p>Free next-day delivery over £150 when you order by 1pm, packed and dispatched the same day.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step_3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Pico-Scene-Keypad_Dimmer_Repeater_App_White-600x513.jpg",
+            "title": "Expert Support",
+            "text": "<p>Real advice from people who know the products, before and after you order.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "title": "How We Help",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "square",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    },
     "trust-badges": {
       "type": "multicolumn",
       "blocks": {
@@ -411,6 +467,31 @@
         "padding_bottom": 52
       }
     },
+    "portfolio-teaser": {
+      "type": "portfolio-gallery",
+      "blocks": {
+        "bond": { "type": "project", "settings": { "image_filename": "portfolio-bond-1.jpg", "image_width": "1200", "image_height": "1600", "name": "Bond" } },
+        "kemsing": { "type": "project", "settings": { "image_filename": "portfolio-kemsing-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Kemsing" } },
+        "mayfair": { "type": "project", "settings": { "image_filename": "portfolio-mayfair-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Mayfair" } },
+        "mercury": { "type": "project", "settings": { "image_filename": "portfolio-mercury-1.jpg", "image_width": "1600", "image_height": "991", "name": "Mercury" } },
+        "silverstone": { "type": "project", "settings": { "image_filename": "portfolio-silverstone-1.jpg", "image_width": "4032", "image_height": "3024", "name": "Silverstone" } },
+        "ucl": { "type": "project", "settings": { "image_filename": "portfolio-ucl-1.jpg", "image_width": "2000", "image_height": "1429", "name": "UCL" } }
+      },
+      "block_order": [
+        "bond",
+        "kemsing",
+        "mayfair",
+        "mercury",
+        "silverstone",
+        "ucl"
+      ],
+      "settings": {
+        "eyebrow": "Inspiration",
+        "heading": "Lighting excellence",
+        "intro": "<p>From architectural LED strips to precision downlights — see the products and installations that define our portfolio.</p>",
+        "attribution": "<p>Projects designed and installed by <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, our sister company. Interested in a bespoke lighting design and installation service? <a href=\"https://vividlightworx.co.uk\">Get in touch with the LightWorX team</a>.</p>"
+      }
+    },
     "portfolio-cta": {
       "type": "rich-text",
       "blocks": {
@@ -495,6 +576,7 @@
   "order": [
     "hero",
     "featured_product_TCMnPp",
+    "how-we-help",
     "trust-badges",
     "shop-by-category",
     "bestsellers",
@@ -502,6 +584,7 @@
     "help-advice",
     "customer_reviews_yJc9hA",
     "trade",
+    "portfolio-teaser",
     "portfolio-cta",
     "about"
   ]
