@@ -119,6 +119,8 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
+<div class="pp-root{% if section.settings.dark_mode %} pp-root--dark{% endif %}">
+
 <!-- ═══════════════════════════════════════════════
      HERO — gallery + info
      ═══════════════════════════════════════════════ -->
@@ -553,6 +555,19 @@
   {{ product | structured_data }}
 </script>
 
+</div><!-- /.pp-root -->
+
+{%- style -%}
+  .pp-root--dark {
+    --paper: #082A38;
+    --card: #0D4761;
+    --ink: #F6F0EA;
+    --ink-soft: rgba(246, 240, 234, 0.68);
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.26);
+  }
+{%- endstyle -%}
+
 {% schema %}
 {
   "name": "Potato product",
@@ -562,15 +577,16 @@
     "templates": ["product"]
   },
   "settings": [
+    { "type": "checkbox", "id": "dark_mode", "label": "Dark navy theme", "info": "Matches the Vivid LightWorX product-modal styling.", "default": true },
     { "type": "header", "content": "Buy-box trust row" },
-    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Freshly lifted to order" },
-    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free UK delivery over £40" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },
     { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" },
     {
       "type": "image_picker",
       "id": "about_image",
       "label": "About section background image",
-      "info": "Farm/field scene used behind the origin story. Set once; applies to all products using this template."
+      "info": "Set once; applies to all products using this template."
     },
     {
       "type": "range",
@@ -586,7 +602,7 @@
       "type": "text",
       "id": "attrs_heading",
       "label": "Attributes section heading",
-      "default": "A heritage variety"
+      "default": "Product specification"
     },
     {
       "type": "text",
