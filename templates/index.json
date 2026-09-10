@@ -342,16 +342,43 @@
       }
     },
     "brands": {
-      "type": "collection-list",
+      "type": "brands-directory",
+      "blocks": {
+        "cat_lighting": { "type": "category", "settings": { "name": "Lighting" } },
+        "b_orluna": { "type": "brand", "settings": { "name": "Orluna", "text": "Renowned for unrivalled colour rendering and beautiful, natural light in luxury interiors.", "badge": "" } },
+        "b_johncullen": { "type": "brand", "settings": { "name": "John Cullen Lighting", "text": "The go-to brand for architectural lighting artistry.", "badge": "" } },
+        "b_fossled": { "type": "brand", "settings": { "name": "FOSS LED", "text": "Exclusive luxury product lines, available only from Vivid Direct.", "badge": "Exclusive" } },
+        "b_lol": { "type": "brand", "settings": { "name": "Lighting of London", "text": "Curated lighting solutions for London's finest projects.", "badge": "" } },
+        "b_delta": { "type": "brand", "settings": { "name": "Delta Light", "text": "Contemporary Belgian style, blending form and function.", "badge": "" } },
+        "b_sensio": { "type": "brand", "settings": { "name": "Sensio Lighting", "text": "Innovative LED solutions for kitchen, bathroom and furniture lighting.", "badge": "" } },
+        "b_phos": { "type": "brand", "settings": { "name": "Phos", "text": "Precision-engineered, UK-made downlights and spotlights.", "badge": "" } },
+        "b_astro": { "type": "brand", "settings": { "name": "Astro Lighting", "text": "Award-winning British lighting design.", "badge": "" } },
+        "b_bega": { "type": "brand", "settings": { "name": "BEGA", "text": "Top-tier German exterior and landscape lighting.", "badge": "" } },
+        "b_iguzzini": { "type": "brand", "settings": { "name": "iGuzzini", "text": "Italian innovation in architectural lighting.", "badge": "" } },
+        "b_magnalux": { "type": "brand", "settings": { "name": "Magnalux", "text": "Quality decorative and architectural lighting.", "badge": "" } },
+        "b_gardentrading": { "type": "brand", "settings": { "name": "Garden Trading", "text": "Stylish indoor and outdoor lighting with timeless British design.", "badge": "" } },
+        "cat_controls": { "type": "category", "settings": { "name": "Controls" } },
+        "b_flux": { "type": "brand", "settings": { "name": "FLUX", "text": "Strategic partner for custom, high-performance smart functionality.", "badge": "" } },
+        "b_lutron": { "type": "brand", "settings": { "name": "Lutron", "text": "Pioneers in intuitive lighting control and shading systems.", "badge": "" } },
+        "b_crestron": { "type": "brand", "settings": { "name": "Crestron", "text": "Advanced smart home and automation.", "badge": "" } },
+        "b_control4": { "type": "brand", "settings": { "name": "Control4", "text": "Effortless, robust smart lighting and total home control.", "badge": "" } },
+        "cat_electrical": { "type": "category", "settings": { "name": "Electrical Accessories" } },
+        "b_focussb": { "type": "brand", "settings": { "name": "Focus SB", "text": "Premium British-crafted switches and sockets.", "badge": "" } },
+        "b_knightsbridge": { "type": "brand", "settings": { "name": "Knightsbridge", "text": "Comprehensive range of wiring accessories.", "badge": "" } },
+        "b_verilight": { "type": "brand", "settings": { "name": "Verilight", "text": "Specialist electrical accessories.", "badge": "" } },
+        "b_stearn": { "type": "brand", "settings": { "name": "Stearn Electrical", "text": "Trusted electrical accessories.", "badge": "" } },
+        "b_forbeslomax": { "type": "brand", "settings": { "name": "Forbes & Lomax", "text": "Discreet, luxury electrical accessories.", "badge": "" } }
+      },
+      "block_order": [
+        "cat_lighting", "b_orluna", "b_johncullen", "b_fossled", "b_lol", "b_delta", "b_sensio", "b_phos", "b_astro", "b_bega", "b_iguzzini", "b_magnalux", "b_gardentrading",
+        "cat_controls", "b_flux", "b_lutron", "b_crestron", "b_control4",
+        "cat_electrical", "b_focussb", "b_knightsbridge", "b_verilight", "b_stearn", "b_forbeslomax"
+      ],
       "settings": {
-        "title": "We Stock the Best Lighting & Accessory Brands",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 5,
+        "eyebrow": "Library",
+        "heading": "Brands We Work With",
+        "intro": "<p>We select only the most exceptional lighting and smart control brands.</p>",
         "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
         "padding_top": 52,
         "padding_bottom": 52
       }
