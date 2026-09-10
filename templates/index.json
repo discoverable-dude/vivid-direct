@@ -38,16 +38,23 @@
           }
         }
       },
-      "block_order": ["heading", "text", "buttons"],
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ],
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
+        "image_overlay_opacity": 40,
         "image_height": "large",
+        "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
         "show_text_box": true,
-        "image_overlay_opacity": 40,
         "color_scheme": "scheme-1",
-        "mobile_content_alignment": "left"
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "left",
+        "show_text_below": true
       }
     },
     "trust-badges": {
@@ -57,36 +64,52 @@
           "type": "column",
           "settings": {
             "title": "Free Delivery Over £150",
-            "text": "<p>Order by 1pm for next-day delivery</p>"
+            "text": "<p>Order by 1pm for next-day delivery</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "badge_2": {
           "type": "column",
           "settings": {
             "title": "Trade Accounts Available",
-            "text": "<p>Dedicated pricing for electricians and businesses</p>"
+            "text": "<p>Dedicated pricing for electricians and businesses</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "badge_3": {
           "type": "column",
           "settings": {
             "title": "Expert Advice & Guides",
-            "text": "<p>Real help choosing the right products, first time</p>"
+            "text": "<p>Real help choosing the right products, first time</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "badge_4": {
           "type": "column",
           "settings": {
             "title": "Huge Range In Stock",
-            "text": "<p>LED, neon, smart lighting and accessories</p>"
+            "text": "<p>LED, neon, smart lighting and accessories</p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
-      "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"],
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
       "settings": {
         "title": "",
-        "button_label": "",
+        "heading_size": "h1",
         "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
         "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
@@ -141,13 +164,19 @@
           }
         }
       },
-      "block_order": ["cat_neon", "cat_downlights", "cat_smart", "cat_outdoor"],
+      "block_order": [
+        "cat_neon",
+        "cat_downlights",
+        "cat_smart",
+        "cat_outdoor"
+      ],
       "settings": {
         "title": "Shop by Category",
-        "button_label": "",
         "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "square",
+        "button_label": "",
+        "button_link": "",
         "columns_desktop": 4,
         "column_alignment": "left",
         "background_style": "none",
@@ -161,20 +190,27 @@
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
+        "collection": "neon-flex-by-foss-led",
+        "products_to_show": 10,
         "title": "Our Bestsellers",
+        "heading_size": "h1",
         "description": "<p>These are our hottest sellers and trending products right now.</p>",
         "show_description": true,
         "description_style": "body",
-        "heading_size": "h1",
-        "products_to_show": 10,
         "columns_desktop": 5,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "enable_desktop_slider": false,
+        "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -186,9 +222,9 @@
         "heading_size": "h1",
         "image_ratio": "square",
         "columns_desktop": 5,
-        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "show_view_all": true,
+        "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 52,
         "padding_bottom": 52
@@ -197,10 +233,10 @@
     "help-advice": {
       "type": "featured-blog",
       "settings": {
-        "heading": "Help & Advice",
-        "heading_size": "h1",
         "blog": "news",
         "post_limit": 4,
+        "heading": "Help & Advice",
+        "heading_size": "h1",
         "columns_desktop": 4,
         "show_view_all": true,
         "show_image": true,
@@ -242,7 +278,11 @@
           }
         }
       },
-      "block_order": ["review_1", "review_2", "review_3"],
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
       "name": "Customer reviews",
       "settings": {
         "eyebrow": "Client Testimonials",
@@ -280,15 +320,22 @@
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "image": "shopify://shop_images/PRO50S-Silver-Kitchen-683x1024.jpg",
-        "layout": "image_first",
         "height": "medium",
         "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
         "color_scheme": "scheme-2",
         "padding_top": 52,
         "padding_bottom": 52
@@ -315,11 +362,18 @@
           "settings": {
             "button_label": "View Our Portfolio",
             "button_link": "shopify://pages/portfolio",
-            "button_style_secondary": false
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -347,15 +401,21 @@
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
         "image": "shopify://shop_images/Kitchen-Pantry-Kit-1-e1760645270386-692x1024.jpg",
-        "layout": "text_first",
         "height": "medium",
         "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
         "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 80
