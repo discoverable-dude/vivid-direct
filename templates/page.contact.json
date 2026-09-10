@@ -24,7 +24,7 @@
         "bg_image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0019.jpg",
         "image_opacity": 40,
         "show_overlay": true,
-        "bg_color": "#141a16",
+        "bg_color": "#082A38",
         "eyebrow": "Get in touch",
         "headline": "Contact Us",
         "text": "<p>No enquiry is too big or too small.</p>",
@@ -77,7 +77,7 @@
           "settings": {
             "type": "text",
             "label": "Business name",
-            "placeholder": "The Crown, Tenterden",
+            "placeholder": "Sparks Electrical Ltd",
             "required": false,
             "width": "half"
           }
@@ -107,7 +107,7 @@
           "settings": {
             "type": "textarea",
             "label": "Tell us what you need",
-            "placeholder": "Varieties you're interested in, volumes, delivery area…",
+            "placeholder": "Products you're interested in, quantities, install date…",
             "required": true,
             "width": "half"
           }

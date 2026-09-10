@@ -11,17 +11,20 @@
    the VALUES have been re-pointed to the Vivid palette.
    ====================== */
 :root {
-  /* Surfaces — white body/cards, matching the live vivid-direct.co.uk
-     (header/footer/dropdowns are dark navy — see --footer-bg below and
-     the HEADER/FOOTER sections, which use --ink as their background via
-     the same light/dark inversion the announcement bar already used) */
-  --paper:   #FFFFFF;
-  --paper-2: #F7F9FA;
-  --card:    #FFFFFF;
+  /* Surfaces — dark navy body/cards throughout, matching the sister site
+     vividlightworx.co.uk (every page there is dark navy with amber
+     accents; there are no light sections). Superseded the earlier
+     white-body design that matched vivid-direct.co.uk's old WordPress
+     site — role of --paper/--ink is now inverted from the original
+     light-theme values so every section using these tokens goes dark
+     without per-section edits. */
+  --paper:   #082A38;
+  --paper-2: #0D4761;
+  --card:    #0D4761;
 
   /* Text */
-  --ink:      #082A38;
-  --ink-soft: #6B8089;
+  --ink:      #F6F0EA;
+  --ink-soft: rgba(246, 240, 234, 0.68);
 
   /* Amber accent (exact values from the live site's CSS) */
   --hessian:      #0D4761;
@@ -49,9 +52,9 @@
   --plum:    #6C7CFF;
   --soil:    #6B8089;
 
-  /* Lines — for light (body) surfaces */
-  --line:        rgba(8, 42, 56, 0.12);
-  --line-strong: rgba(8, 42, 56, 0.24);
+  /* Lines — now used on dark (navy) body surfaces throughout */
+  --line:        rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.26);
 
   /* Lines — for dark (header/footer/dropdown) surfaces */
   --line-on-dark:        rgba(255, 255, 255, 0.16);

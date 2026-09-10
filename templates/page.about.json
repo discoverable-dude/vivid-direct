@@ -20,33 +20,33 @@
     "hero": {
       "type": "morghew-hero-editorial",
       "settings": {
-        "image": "shopify://shop_images/IMG_8362.jpg",
+        "image": "shopify://shop_images/vd-neon-hero.jpg",
         "image_opacity": 70,
         "crumb": "About",
-        "eyebrow": "About Morghew",
-        "headline": "We grow potatoes worth talking about.",
-        "lede": "A family estate in Kent that decided ordinary was not good enough. Thirty heritage varieties, grown properly and sold direct, so the potato on your plate has a name and a place it came from."
+        "eyebrow": "About Vivid Direct",
+        "headline": "Your trusted partner in lighting.",
+        "lede": "We supply professional lighting and electrical accessories to electricians, contractors and homeowners across the UK, backed by a sister company that designs and installs the schemes our products go into."
       }
     },
     "lede": {
       "type": "morghew-lede",
       "settings": {
         "kicker": "The short version",
-        "body": "The supermarket potato is a compromise: bred to store, to travel, and to look the same in every bag. We grow ours the way they used to be grown — in real soil, by name — and sell them straight to the people who cook them."
+        "body": "We stock a huge range of LED, neon and smart lighting from the brands the trade actually specifies, hold it in stock, and get it to you fast. No hunting around, no guesswork on compatibility, and real advice from people who know the products."
       }
     },
     "split_story": {
       "type": "morghew-split",
       "settings": {
         "flip": false,
-        "image": "shopify://shop_images/field-rover-standing.jpg",
-        "tag": "The grading shed",
+        "image": "shopify://shop_images/vd-neon-cap-vs-mould.png",
+        "tag": "What we supply",
         "ratio": "4 / 5",
         "eyebrow": "Our story",
-        "heading": "It started with a variety nobody sold",
-        "body": "<p>Morghew grew potatoes for supermarkets for years — chasing yield, uniformity, and contracts that got tighter every season. The margins kept shrinking and the varieties kept narrowing to whatever stored longest and looked best in a bag.</p><p>So we started growing a handful of heritage varieties for the family table instead — potatoes with real flavour that had quietly disappeared from the shops because they came out came out too knobbly, too varied or didn't yield enough for a packer.</p><p>Chefs started asking. Then their friends. Before long we were lifting Pink Fir Apple and La Ratte for kitchens across Kent and London. Morghew, and The Potato Shop, grew out of that, into what it is today.</p>",
-        "cta_label": "",
-        "cta_url": ""
+        "heading": "Built alongside a design and install team",
+        "body": "<p>Vivid Direct grew out of the same team behind Vivid LightWorX, our sister company, who design and install bespoke lighting schemes for architects, interior designers and property professionals.</p><p>That relationship is why our range looks the way it does: it's built from the products a working design team actually specifies and trusts on real projects, not just what's easy to import and mark up.</p><p>We supply the products; Vivid LightWorX brings them to life. Between the two, you get the range of a specialist supplier and the credibility of a team that fits what it sells.</p>",
+        "cta_label": "See our work",
+        "cta_url": "shopify://pages/portfolio"
       }
     },
     "split_work": {
@@ -55,25 +55,25 @@
         "li1": {
           "type": "item",
           "settings": {
-            "text": "Sold direct, never through supermarkets"
+            "text": "Trade accounts with dedicated pricing"
           }
         },
         "li2": {
           "type": "item",
           "settings": {
-            "text": "Grown for flavour, not for shelf life"
+            "text": "Free next-day delivery over £150, order by 1pm"
           }
         },
         "li3": {
           "type": "item",
           "settings": {
-            "text": "Honest about how we farm, always"
+            "text": "Real advice before and after you order"
           }
         },
         "li4": {
           "type": "item",
           "settings": {
-            "text": "Family-run, on the same land for generations to come"
+            "text": "Products chosen alongside a working design team"
           }
         }
       },
@@ -85,110 +85,22 @@
       ],
       "settings": {
         "flip": true,
-        "image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0085.jpg",
-        "tag": "The spud fields",
+        "image": "shopify://shop_images/PRO50S-Silver-Kitchen-683x1024.jpg",
+        "tag": "How we work",
         "ratio": "4 / 5",
         "eyebrow": "How we work",
-        "heading": "Direct, honest, and a little bit particular",
-        "body": "<p>We sell straight to the people who cook: home kitchens, restaurants, delis and farm shops. No supermarkets, no middlemen, no anonymous sacks.</p><p>That means we can grow varieties for flavour instead of shelf life.</p>",
-        "cta_label": "",
-        "cta_url": ""
-      }
-    },
-    "morghew_split_VNVy8j": {
-      "type": "morghew-split",
-      "blocks": {
-        "item_3hRExx": {
-          "type": "item",
-          "settings": {
-            "text": "Hand-graded"
-          }
-        },
-        "item_MiHBxh": {
-          "type": "item",
-          "settings": {
-            "text": "No sprout supressants"
-          }
-        },
-        "item_kpHrLY": {
-          "type": "item",
-          "settings": {
-            "text": "Traceable to the individual bed in the field"
-          }
-        },
-        "item_LqtTdj": {
-          "type": "item",
-          "settings": {
-            "text": "Packed to order every day"
-          }
-        }
-      },
-      "block_order": [
-        "item_3hRExx",
-        "item_MiHBxh",
-        "item_kpHrLY",
-        "item_LqtTdj"
-      ],
-      "settings": {
-        "flip": false,
-        "image": "shopify://shop_images/IMG_6465.jpg",
-        "tag": "Packed to order",
-        "ratio": "4 / 5",
-        "eyebrow": "The process",
-        "heading": "Packed to order. By hand.",
-        "body": "<p>We pack our orders every day by hand. Each potato is checked by us to ensure you receive the quality we would expect.<br/><br/></p>",
-        "cta_label": "",
-        "cta_url": ""
-      }
-    },
-    "stats": {
-      "type": "morghew-stats",
-      "blocks": {
-        "s1": {
-          "type": "stat",
-          "settings": {
-            "number": "2003",
-            "label": "The Potato Shop opens"
-          }
-        },
-        "s2": {
-          "type": "stat",
-          "settings": {
-            "number": "30+",
-            "label": "Heritage varieties grown year in year out"
-          }
-        },
-        "s3": {
-          "type": "stat",
-          "settings": {
-            "number": "100's",
-            "label": "Of restaurants supplied"
-          }
-        },
-        "s4": {
-          "type": "stat",
-          "settings": {
-            "number": "100%",
-            "label": "Sold direct to the plate"
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ],
-      "settings": {
-        "heading": "What that adds up to"
+        "heading": "Direct, in stock, and properly supported",
+        "body": "<p>Whether you're a trade customer fitting out a project or a homeowner upgrading a single room, you get the same range, the same stock levels, and the same support.</p><p>No middlemen, no waiting on backorders for the products we hold — just a straightforward supplier that knows what it's selling.</p>",
+        "cta_label": "Apply for a trade account",
+        "cta_url": "shopify://pages/trade"
       }
     },
     "quote": {
       "type": "morghew-quote",
       "settings": {
-        "quote": "The potato deserves better. It's not a side dish — it's the star",
-        "author": "The Potato Shop",
-        "role": "Tenterden, Kent"
+        "quote": "We needed a complex design produced very quickly. Vivid hold a lot of off-the-shelf kit so could deliver within our allotted timeframe, to the quality we expected and required.",
+        "author": "David Keane",
+        "role": "Senior Production Manager"
       }
     },
     "strands": {
@@ -197,31 +109,31 @@
         "c1": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/IMG_5760.jpg",
-            "title": "The growing team",
-            "text": "The people who plant, lift and grade every variety by hand. If your crate has a name on it, they packed it.",
-            "link_label": "How we grow",
-            "link_url": "shopify://pages/thepotatoshop"
+            "image": "shopify://shop_images/Complete-fittings-header-600x400.jpg",
+            "title": "Shop the range",
+            "text": "LED, neon, smart lighting and electrical accessories, always in stock.",
+            "link_label": "Browse products",
+            "link_url": "shopify://collections/all"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/crate-store-flare.jpg",
-            "title": "The Potato Shop",
-            "text": "Our online farm shop. Thirty varieties, sold by the kilo, delivered across the UK.",
-            "link_label": "Shop potatoes",
-            "link_url": "/collections/potato-shop"
+            "image": "shopify://shop_images/09611-II.jpeg-copy-600x600.jpg",
+            "title": "Trade accounts",
+            "text": "Dedicated pricing and support for electricians, contractors and installers.",
+            "link_label": "Apply for trade",
+            "link_url": "shopify://pages/trade"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/oil-field-pair.jpg",
-            "title": "The wider estate",
-            "text": "Cold-pressed oil, potato vodka, spelt flour and game, all produced on the same land in Tenterden.",
-            "link_label": "Explore the estate",
-            "link_url": "/pages/the-estate"
+            "image": "shopify://shop_images/vd-neon-hero.jpg",
+            "title": "Design & install",
+            "text": "Our sister company, Vivid LightWorX, designs and installs bespoke lighting schemes.",
+            "link_label": "Visit Vivid LightWorX",
+            "link_url": "https://vividlightworx.co.uk"
           }
         }
       },
@@ -231,22 +143,22 @@
         "c3"
       ],
       "settings": {
-        "eyebrow": "Meet the estate",
-        "heading": "The people and the produce",
-        "intro": "Behind every crate is a small team who plant, lift, grade and pack by hand. And a farm that does more than potatoes."
+        "eyebrow": "Get started",
+        "heading": "Three ways to work with us",
+        "intro": "Buy direct, open a trade account, or bring in the design and install team for a full scheme."
       }
     },
     "cta": {
       "type": "morghew-cta",
       "settings": {
-        "image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0094.jpg",
-        "eyebrow": "Come and taste for yourself",
-        "heading": "Potatoes with a name and a place",
-        "body": "Order heritage varieties direct from the estate, or get in touch about supplying your kitchen.",
-        "button_1_label": "Shop the Potato Shop",
-        "button_1_url": "/collections/potato-shop",
-        "button_2_label": "Trade & wholesale",
-        "button_2_url": "/pages/trade"
+        "image": "shopify://shop_images/vd-neon-series-360.jpg",
+        "eyebrow": "Ready when you are",
+        "heading": "Let's get your project lit",
+        "body": "Order direct, apply for trade pricing, or get in touch about a bespoke scheme.",
+        "button_1_label": "Shop Now",
+        "button_1_url": "shopify://collections/all",
+        "button_2_label": "Apply for Trade Account",
+        "button_2_url": "shopify://pages/trade"
       }
     }
   },
@@ -256,8 +168,6 @@
     "lede",
     "split_story",
     "split_work",
-    "morghew_split_VNVy8j",
-    "stats",
     "quote",
     "strands",
     "cta"
