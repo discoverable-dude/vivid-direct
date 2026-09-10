@@ -114,7 +114,7 @@
       "name": "t:sections.featured-product.presets.name",
       "settings": {
         "product": "nano-free-cut-recessed-neon-top-bend-9x6mm-white-ip44",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-4",
         "secondary_background": false,
         "media_size": "medium",
         "constrain_to_viewport": true,
@@ -128,57 +128,53 @@
       }
     },
     "how-we-help": {
-      "type": "multicolumn",
+      "type": "split-icon-grid",
       "blocks": {
-        "step_1": {
-          "type": "column",
+        "f_delivery": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/Complete-fittings-header-600x400.jpg",
-            "title": "Browse & Order",
-            "text": "<p>Huge in-stock range across LED, neon and smart lighting — filter by brand, room or spec.</p>",
-            "link_label": "",
-            "link": ""
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Free next-day delivery over £150, order by 1pm."
           }
         },
-        "step_2": {
-          "type": "column",
+        "f_trade": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/Triple-Pendant-Silver-Voronoi-II-Black-Canopy-Lifestyle-600x600.jpg",
-            "title": "Fast, Tracked Delivery",
-            "text": "<p>Free next-day delivery over £150 when you order by 1pm, packed and dispatched the same day.</p>",
-            "link_label": "",
-            "link": ""
+            "icon": "check",
+            "heading": "Trade Accounts",
+            "text": "Dedicated pricing for electricians and businesses."
           }
         },
-        "step_3": {
-          "type": "column",
+        "f_support": {
+          "type": "feature",
           "settings": {
-            "image": "shopify://shop_images/Pico-Scene-Keypad_Dimmer_Repeater_App_White-600x513.jpg",
-            "title": "Expert Support",
-            "text": "<p>Real advice from people who know the products, before and after you order.</p>",
-            "link_label": "",
-            "link": ""
+            "icon": "phone",
+            "heading": "Expert Support",
+            "text": "Real advice from people who know the products."
+          }
+        },
+        "f_range": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "heading": "Huge Range",
+            "text": "LED, neon, smart lighting and accessories, always in stock."
           }
         }
       },
       "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
+        "f_delivery",
+        "f_trade",
+        "f_support",
+        "f_range"
       ],
       "settings": {
-        "title": "How We Help",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "square",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
+        "eyebrow": "How We Help",
+        "heading": "A Partner, Not Just a Supplier",
+        "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
+        "image_position": "left",
         "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
         "padding_top": 60,
         "padding_bottom": 52
       }
@@ -229,6 +225,10 @@
         "badge_3",
         "badge_4"
       ],
+      "custom_css": [
+        ".multicolumn-card { border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius); background: rgba(var(--color-foreground), 0.03); padding: 22px 20px; }",
+        ".multicolumn-card__info { padding: 0; margin-top: 10px; }"
+      ],
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -239,7 +239,7 @@
         "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-4",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 36,
@@ -296,6 +296,10 @@
         "cat_smart",
         "cat_outdoor"
       ],
+      "custom_css": [
+        ".multicolumn-card { border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius-lg); overflow: hidden; background: rgba(var(--color-foreground), 0.03); }",
+        ".multicolumn-card__info { padding: 18px 18px 20px; }"
+      ],
       "settings": {
         "title": "Shop by Category",
         "heading_size": "h1",
@@ -344,35 +348,218 @@
     "brands": {
       "type": "brands-directory",
       "blocks": {
-        "cat_lighting": { "type": "category", "settings": { "name": "Lighting" } },
-        "b_orluna": { "type": "brand", "settings": { "name": "Orluna", "text": "Renowned for unrivalled colour rendering and beautiful, natural light in luxury interiors.", "badge": "" } },
-        "b_johncullen": { "type": "brand", "settings": { "name": "John Cullen Lighting", "text": "The go-to brand for architectural lighting artistry.", "badge": "" } },
-        "b_fossled": { "type": "brand", "settings": { "name": "FOSS LED", "text": "Exclusive luxury product lines, available only from Vivid Direct.", "badge": "Exclusive" } },
-        "b_lol": { "type": "brand", "settings": { "name": "Lighting of London", "text": "Curated lighting solutions for London's finest projects.", "badge": "" } },
-        "b_delta": { "type": "brand", "settings": { "name": "Delta Light", "text": "Contemporary Belgian style, blending form and function.", "badge": "" } },
-        "b_sensio": { "type": "brand", "settings": { "name": "Sensio Lighting", "text": "Innovative LED solutions for kitchen, bathroom and furniture lighting.", "badge": "" } },
-        "b_phos": { "type": "brand", "settings": { "name": "Phos", "text": "Precision-engineered, UK-made downlights and spotlights.", "badge": "" } },
-        "b_astro": { "type": "brand", "settings": { "name": "Astro Lighting", "text": "Award-winning British lighting design.", "badge": "" } },
-        "b_bega": { "type": "brand", "settings": { "name": "BEGA", "text": "Top-tier German exterior and landscape lighting.", "badge": "" } },
-        "b_iguzzini": { "type": "brand", "settings": { "name": "iGuzzini", "text": "Italian innovation in architectural lighting.", "badge": "" } },
-        "b_magnalux": { "type": "brand", "settings": { "name": "Magnalux", "text": "Quality decorative and architectural lighting.", "badge": "" } },
-        "b_gardentrading": { "type": "brand", "settings": { "name": "Garden Trading", "text": "Stylish indoor and outdoor lighting with timeless British design.", "badge": "" } },
-        "cat_controls": { "type": "category", "settings": { "name": "Controls" } },
-        "b_flux": { "type": "brand", "settings": { "name": "FLUX", "text": "Strategic partner for custom, high-performance smart functionality.", "badge": "" } },
-        "b_lutron": { "type": "brand", "settings": { "name": "Lutron", "text": "Pioneers in intuitive lighting control and shading systems.", "badge": "" } },
-        "b_crestron": { "type": "brand", "settings": { "name": "Crestron", "text": "Advanced smart home and automation.", "badge": "" } },
-        "b_control4": { "type": "brand", "settings": { "name": "Control4", "text": "Effortless, robust smart lighting and total home control.", "badge": "" } },
-        "cat_electrical": { "type": "category", "settings": { "name": "Electrical Accessories" } },
-        "b_focussb": { "type": "brand", "settings": { "name": "Focus SB", "text": "Premium British-crafted switches and sockets.", "badge": "" } },
-        "b_knightsbridge": { "type": "brand", "settings": { "name": "Knightsbridge", "text": "Comprehensive range of wiring accessories.", "badge": "" } },
-        "b_verilight": { "type": "brand", "settings": { "name": "Verilight", "text": "Specialist electrical accessories.", "badge": "" } },
-        "b_stearn": { "type": "brand", "settings": { "name": "Stearn Electrical", "text": "Trusted electrical accessories.", "badge": "" } },
-        "b_forbeslomax": { "type": "brand", "settings": { "name": "Forbes & Lomax", "text": "Discreet, luxury electrical accessories.", "badge": "" } }
+        "cat_lighting": {
+          "type": "category",
+          "settings": {
+            "name": "Lighting"
+          }
+        },
+        "b_orluna": {
+          "type": "brand",
+          "settings": {
+            "name": "Orluna",
+            "text": "Renowned for unrivalled colour rendering and beautiful, natural light in luxury interiors.",
+            "badge": ""
+          }
+        },
+        "b_johncullen": {
+          "type": "brand",
+          "settings": {
+            "name": "John Cullen Lighting",
+            "text": "The go-to brand for architectural lighting artistry.",
+            "badge": ""
+          }
+        },
+        "b_fossled": {
+          "type": "brand",
+          "settings": {
+            "name": "FOSS LED",
+            "text": "Exclusive luxury product lines, available only from Vivid Direct.",
+            "badge": "Exclusive"
+          }
+        },
+        "b_lol": {
+          "type": "brand",
+          "settings": {
+            "name": "Lighting of London",
+            "text": "Curated lighting solutions for London's finest projects.",
+            "badge": ""
+          }
+        },
+        "b_delta": {
+          "type": "brand",
+          "settings": {
+            "name": "Delta Light",
+            "text": "Contemporary Belgian style, blending form and function.",
+            "badge": ""
+          }
+        },
+        "b_sensio": {
+          "type": "brand",
+          "settings": {
+            "name": "Sensio Lighting",
+            "text": "Innovative LED solutions for kitchen, bathroom and furniture lighting.",
+            "badge": ""
+          }
+        },
+        "b_phos": {
+          "type": "brand",
+          "settings": {
+            "name": "Phos",
+            "text": "Precision-engineered, UK-made downlights and spotlights.",
+            "badge": ""
+          }
+        },
+        "b_astro": {
+          "type": "brand",
+          "settings": {
+            "name": "Astro Lighting",
+            "text": "Award-winning British lighting design.",
+            "badge": ""
+          }
+        },
+        "b_bega": {
+          "type": "brand",
+          "settings": {
+            "name": "BEGA",
+            "text": "Top-tier German exterior and landscape lighting.",
+            "badge": ""
+          }
+        },
+        "b_iguzzini": {
+          "type": "brand",
+          "settings": {
+            "name": "iGuzzini",
+            "text": "Italian innovation in architectural lighting.",
+            "badge": ""
+          }
+        },
+        "b_magnalux": {
+          "type": "brand",
+          "settings": {
+            "name": "Magnalux",
+            "text": "Quality decorative and architectural lighting.",
+            "badge": ""
+          }
+        },
+        "b_gardentrading": {
+          "type": "brand",
+          "settings": {
+            "name": "Garden Trading",
+            "text": "Stylish indoor and outdoor lighting with timeless British design.",
+            "badge": ""
+          }
+        },
+        "cat_controls": {
+          "type": "category",
+          "settings": {
+            "name": "Controls"
+          }
+        },
+        "b_flux": {
+          "type": "brand",
+          "settings": {
+            "name": "FLUX",
+            "text": "Strategic partner for custom, high-performance smart functionality.",
+            "badge": ""
+          }
+        },
+        "b_lutron": {
+          "type": "brand",
+          "settings": {
+            "name": "Lutron",
+            "text": "Pioneers in intuitive lighting control and shading systems.",
+            "badge": ""
+          }
+        },
+        "b_crestron": {
+          "type": "brand",
+          "settings": {
+            "name": "Crestron",
+            "text": "Advanced smart home and automation.",
+            "badge": ""
+          }
+        },
+        "b_control4": {
+          "type": "brand",
+          "settings": {
+            "name": "Control4",
+            "text": "Effortless, robust smart lighting and total home control.",
+            "badge": ""
+          }
+        },
+        "cat_electrical": {
+          "type": "category",
+          "settings": {
+            "name": "Electrical Accessories"
+          }
+        },
+        "b_focussb": {
+          "type": "brand",
+          "settings": {
+            "name": "Focus SB",
+            "text": "Premium British-crafted switches and sockets.",
+            "badge": ""
+          }
+        },
+        "b_knightsbridge": {
+          "type": "brand",
+          "settings": {
+            "name": "Knightsbridge",
+            "text": "Comprehensive range of wiring accessories.",
+            "badge": ""
+          }
+        },
+        "b_verilight": {
+          "type": "brand",
+          "settings": {
+            "name": "Verilight",
+            "text": "Specialist electrical accessories.",
+            "badge": ""
+          }
+        },
+        "b_stearn": {
+          "type": "brand",
+          "settings": {
+            "name": "Stearn Electrical",
+            "text": "Trusted electrical accessories.",
+            "badge": ""
+          }
+        },
+        "b_forbeslomax": {
+          "type": "brand",
+          "settings": {
+            "name": "Forbes & Lomax",
+            "text": "Discreet, luxury electrical accessories.",
+            "badge": ""
+          }
+        }
       },
       "block_order": [
-        "cat_lighting", "b_orluna", "b_johncullen", "b_fossled", "b_lol", "b_delta", "b_sensio", "b_phos", "b_astro", "b_bega", "b_iguzzini", "b_magnalux", "b_gardentrading",
-        "cat_controls", "b_flux", "b_lutron", "b_crestron", "b_control4",
-        "cat_electrical", "b_focussb", "b_knightsbridge", "b_verilight", "b_stearn", "b_forbeslomax"
+        "cat_lighting",
+        "b_orluna",
+        "b_johncullen",
+        "b_fossled",
+        "b_lol",
+        "b_delta",
+        "b_sensio",
+        "b_phos",
+        "b_astro",
+        "b_bega",
+        "b_iguzzini",
+        "b_magnalux",
+        "b_gardentrading",
+        "cat_controls",
+        "b_flux",
+        "b_lutron",
+        "b_crestron",
+        "b_control4",
+        "cat_electrical",
+        "b_focussb",
+        "b_knightsbridge",
+        "b_verilight",
+        "b_stearn",
+        "b_forbeslomax"
       ],
       "settings": {
         "eyebrow": "Library",
@@ -395,7 +582,7 @@
         "show_image": true,
         "show_date": true,
         "show_author": false,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-4",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -443,7 +630,7 @@
         "aggregate_score": "5.0",
         "aggregate_stars": 5,
         "aggregate_text": "Reviews from real Vivid Direct clients",
-        "surface": "paper",
+        "surface": "ink",
         "texture": false
       }
     },
@@ -489,7 +676,7 @@
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
         "section_color_scheme": "",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-4",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -497,12 +684,60 @@
     "portfolio-teaser": {
       "type": "portfolio-gallery",
       "blocks": {
-        "bond": { "type": "project", "settings": { "image_filename": "portfolio-bond-1.jpg", "image_width": "1200", "image_height": "1600", "name": "Bond" } },
-        "kemsing": { "type": "project", "settings": { "image_filename": "portfolio-kemsing-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Kemsing" } },
-        "mayfair": { "type": "project", "settings": { "image_filename": "portfolio-mayfair-1.jpg", "image_width": "2048", "image_height": "1536", "name": "Mayfair" } },
-        "mercury": { "type": "project", "settings": { "image_filename": "portfolio-mercury-1.jpg", "image_width": "1600", "image_height": "991", "name": "Mercury" } },
-        "silverstone": { "type": "project", "settings": { "image_filename": "portfolio-silverstone-1.jpg", "image_width": "4032", "image_height": "3024", "name": "Silverstone" } },
-        "ucl": { "type": "project", "settings": { "image_filename": "portfolio-ucl-1.jpg", "image_width": "2000", "image_height": "1429", "name": "UCL" } }
+        "bond": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-bond-1.jpg",
+            "image_width": "1200",
+            "image_height": "1600",
+            "name": "Bond"
+          }
+        },
+        "kemsing": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-kemsing-1.jpg",
+            "image_width": "2048",
+            "image_height": "1536",
+            "name": "Kemsing"
+          }
+        },
+        "mayfair": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-mayfair-1.jpg",
+            "image_width": "2048",
+            "image_height": "1536",
+            "name": "Mayfair"
+          }
+        },
+        "mercury": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-mercury-1.jpg",
+            "image_width": "1600",
+            "image_height": "991",
+            "name": "Mercury"
+          }
+        },
+        "silverstone": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-silverstone-1.jpg",
+            "image_width": "4032",
+            "image_height": "3024",
+            "name": "Silverstone"
+          }
+        },
+        "ucl": {
+          "type": "project",
+          "settings": {
+            "image_filename": "portfolio-ucl-1.jpg",
+            "image_width": "2000",
+            "image_height": "1429",
+            "name": "UCL"
+          }
+        }
       },
       "block_order": [
         "bond",

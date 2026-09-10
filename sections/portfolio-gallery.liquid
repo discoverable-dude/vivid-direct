@@ -4,7 +4,7 @@
   come from the sister company's project archive rather than product photos.
 {%- endcomment -%}
 
-<section class="port-gal" id="port-gal-{{ section.id }}">
+<section class="port-gal{% if section.settings.dark_mode %} port-gal--dark{% endif %}" id="port-gal-{{ section.id }}">
   <div class="wrap sec">
     {%- if section.settings.eyebrow != blank -%}
       <p class="eyebrow">{{ section.settings.eyebrow }}</p>
@@ -98,6 +98,14 @@
     color: var(--ink-soft);
   }
   .port-gal__attribution a { color: var(--field); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+
+  .port-gal--dark {
+    --ink: #F6F0EA;
+    --ink-soft: rgba(246, 240, 234, 0.68);
+    --paper-2: #0D4761;
+    --line: rgba(255, 255, 255, 0.14);
+    --field: #FFD24D;
+  }
 {% endstyle %}
 
 {% schema %}
@@ -105,6 +113,7 @@
   "name": "Portfolio gallery",
   "tag": "section",
   "settings": [
+    { "type": "checkbox", "id": "dark_mode", "label": "Dark navy theme", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our work" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Lighting installations" },
     {
