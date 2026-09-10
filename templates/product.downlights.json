@@ -23,16 +23,16 @@
         "faq_1": {
           "type": "faq",
           "settings": {
-            "title": "EXAMPLE — Installation",
-            "body": "<p>Replace with real fitting/installation guidance for this product, or delete this FAQ block.</p>",
+            "title": "Installation",
+            "body": "<p>Fits a standard cut-out — check the product spec above for the exact size. Mains wiring should be carried out by a qualified electrician.</p>",
             "open_by_default": true
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "title": "EXAMPLE — Warranty",
-            "body": "<p>Replace with your real warranty terms for this product line.</p>",
+            "title": "Warranty",
+            "body": "<p>Covered by the manufacturer's standard warranty. Contact us with your order number if you have an issue.</p>",
             "open_by_default": false
           }
         },
@@ -53,11 +53,11 @@
       ],
       "name": "Product page — page.custom variant",
       "settings": {
-        "trust_1": "EXAMPLE — Trade pricing available",
-        "trust_2": "EXAMPLE — In stock, ships fast",
-        "trust_3": "EXAMPLE — 2 year warranty",
+        "trust_1": "Trade pricing available",
+        "trust_2": "In stock, ships fast",
+        "trust_3": "Manufacturer warranty",
         "about_image_opacity": 30,
-        "attrs_heading": "EXAMPLE — Product specification",
+        "attrs_heading": "Product specification",
         "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "design_articles_url": "#"
       }
