@@ -1,0 +1,192 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "potato-product": {
+      "type": "product-potato",
+      "blocks": {
+        "faq_zdy8jt": {
+          "type": "faq",
+          "settings": {
+            "title": "Downloads",
+            "body": "{{ product.description }}",
+            "open_by_default": false
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "title": "EXAMPLE — Installation",
+            "body": "<p>Replace with real fitting/installation guidance for this product, or delete this FAQ block.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "title": "EXAMPLE — Warranty",
+            "body": "<p>Replace with your real warranty terms for this product line.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "title": "EXAMPLE — Delivery information",
+            "body": "<p>Free next day delivery over £150 when ordered by 1pm. Standard delivery otherwise.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_zdy8jt",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "name": "Product page — page.custom variant",
+      "settings": {
+        "trust_1": "EXAMPLE — Trade pricing available",
+        "trust_2": "EXAMPLE — In stock, ships fast",
+        "trust_3": "EXAMPLE — 2 year warranty",
+        "about_image_opacity": 30,
+        "attrs_heading": "EXAMPLE — Product specification",
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "design_articles_url": "#"
+      }
+    },
+    "category_spotlight_6CcCbV": {
+      "type": "category-spotlight",
+      "blocks": {
+        "diagram_KwBatD": {
+          "type": "diagram",
+          "settings": {
+            "heading": "",
+            "text": ""
+          }
+        },
+        "diagram_dR94Cw": {
+          "type": "diagram",
+          "settings": {
+            "heading": "",
+            "text": ""
+          }
+        },
+        "diagram_eA67Ma": {
+          "type": "diagram",
+          "settings": {
+            "heading": "",
+            "text": ""
+          }
+        },
+        "series_tile_4NRjk9": {
+          "type": "series_tile",
+          "settings": {
+            "heading": "",
+            "link": ""
+          }
+        },
+        "series_tile_MGfH4L": {
+          "type": "series_tile",
+          "settings": {
+            "heading": "",
+            "link": ""
+          }
+        },
+        "series_tile_3iEPdJ": {
+          "type": "series_tile",
+          "settings": {
+            "heading": "",
+            "link": ""
+          }
+        },
+        "mount_method_RBQtAB": {
+          "type": "mount_method",
+          "settings": {
+            "heading": ""
+          }
+        },
+        "mount_method_QGccUD": {
+          "type": "mount_method",
+          "settings": {
+            "heading": ""
+          }
+        }
+      },
+      "block_order": [
+        "diagram_KwBatD",
+        "diagram_dR94Cw",
+        "diagram_eA67Ma",
+        "series_tile_4NRjk9",
+        "series_tile_MGfH4L",
+        "series_tile_3iEPdJ",
+        "mount_method_RBQtAB",
+        "mount_method_QGccUD"
+      ],
+      "name": "Category spotlight",
+      "settings": {
+        "hero_eyebrow": "Featured category",
+        "hero_heading": "LED NEON Flex",
+        "hero_text": "Flexible, cuttable neon-style lighting for architectural and decorative projects.",
+        "hero_button_label": "Shop the range",
+        "hero_button_url": "",
+        "diagrams_heading": "How it works",
+        "series_heading": "Choose your series",
+        "mounts_heading": "Mounting options",
+        "badge_alt": "Made in Britain",
+        "badge_text": "Proudly made in Britain"
+      }
+    },
+    "morghew_product_grid_DMbQyj": {
+      "type": "morghew-product-grid",
+      "name": "Product grid",
+      "settings": {
+        "collection": "blaze-recessed-lighting",
+        "products_to_show": 4,
+        "eyebrow": "You may also like",
+        "heading": "recommended products",
+        "show_view_all": false,
+        "view_all_label": "View all",
+        "background": "paper-2"
+      }
+    },
+    "morghew_season_hYwhMC": {
+      "type": "morghew-season",
+      "disabled": true,
+      "name": "Seasonal/availability chart (disabled by default)",
+      "settings": {
+        "bg": "paper2",
+        "eyebrow": "Availability",
+        "heading": "EXAMPLE heading",
+        "intro": "<p>EXAMPLE — this block is disabled by default; enable it if this product needs a seasonal or lead-time chart.</p>"
+      }
+    },
+    "morghew_product_grid_katCah": {
+      "type": "morghew-product-grid",
+      "name": "Related products grid",
+      "settings": {
+        "collection": "",
+        "products_to_show": 4,
+        "eyebrow": "You may also like",
+        "heading": "Pairs well with",
+        "show_view_all": true,
+        "view_all_label": "View all",
+        "background": "paper-2"
+      }
+    }
+  },
+  "order": [
+    "potato-product",
+    "category_spotlight_6CcCbV",
+    "morghew_product_grid_DMbQyj",
+    "morghew_season_hYwhMC",
+    "morghew_product_grid_katCah"
+  ]
+}
