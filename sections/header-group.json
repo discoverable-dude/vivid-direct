@@ -23,13 +23,30 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "menu_feature_3qDfwL": {
+          "type": "menu_feature",
+          "settings": {
+            "menu_handle": "Brands",
+            "image": "shopify://shop_images/09184-Armada-Wall-Lantern-Raw-Brass_52c970bc-b0fa-4a43-87e3-78be4c57cec5.png",
+            "eyebrow": "In season now",
+            "heading": "Golden Wonder",
+            "subtext": "The heritage chipper",
+            "button_label": "Shop the shelf",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_feature_3qDfwL"
+      ],
       "custom_css": [
         ".header__submenu.m-mega.m-mega {background: #ffffff;}"
       ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
-        "menu": "main-menu-1",
+        "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
