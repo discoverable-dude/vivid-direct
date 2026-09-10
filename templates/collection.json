@@ -22,6 +22,7 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "show_secondary_image": false,
         "show_vendor": false,
