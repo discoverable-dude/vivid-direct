@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Reasons to Shop With Us",
+        "body": "We're here for all your lighting supplies — a huge range, trade discounts, next-day delivery, and a team that actually knows the products."
+      }
+    },
+    "benefits": {
+      "type": "multicolumn",
+      "blocks": {
+        "b1": {
+          "type": "column",
+          "settings": {
+            "title": "Huge range & trade discounts",
+            "text": "<p>A huge catalogue of high-quality lighting products and accessories, supplied UK-wide in bulk quantities for trade and business clients, with trade discounts on offer.</p>",
+            "link_label": "Apply for a trade account",
+            "link": "shopify://pages/trade"
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "title": "Free next-day delivery",
+            "text": "<p>Free next-day delivery on orders over £150 (ex. VAT), anywhere in the UK. Need something faster? We can offer same-day service on some items — contact us for a quote.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "title": "Bespoke lighting",
+            "text": "<p>Through our work with Vivid LightWorX, we can cut LED strip profiles and channels to size and colour-match them to your installation on request — bespoke solutions at affordable prices.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "column",
+          "settings": {
+            "title": "Knowledgeable customer service",
+            "text": "<p>We supply quality LED strips and lighting at competitive prices, but our team's product knowledge and service is what our clients come back for.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b5": {
+          "type": "column",
+          "settings": {
+            "title": "The best electrical brands",
+            "text": "<p>Every product we sell comes from reputable, well-known manufacturers — brands like Lutron, Sensio Lighting, FOSS LED, Knightsbridge, Magnalux and Coolicon, among others.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "benefits"
+  ]
+}

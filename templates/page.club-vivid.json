@@ -1,0 +1,188 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Club VIVID",
+        "body": "Take advantage of member discounts and design services, and be first to access new products. Members benefit from seasonal discounts and a 5-year guarantee on products as standard."
+      }
+    },
+    "benefits": {
+      "type": "multicolumn",
+      "blocks": {
+        "b1": {
+          "type": "column",
+          "settings": {
+            "title": "Trade discount",
+            "text": "<p>Trade discount applied on all purchases.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b2": {
+          "type": "column",
+          "settings": {
+            "title": "30-day net terms",
+            "text": "<p>Trade account with 30 days net facilities, upon approval.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b3": {
+          "type": "column",
+          "settings": {
+            "title": "Members Zone",
+            "text": "<p>Access to our Members Zone, technical library and manufacturers' support services.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b4": {
+          "type": "column",
+          "settings": {
+            "title": "Seek & source",
+            "text": "<p>Access to our seek and source service — can't find it, we'll track it down.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b5": {
+          "type": "column",
+          "settings": {
+            "title": "Regular promotions",
+            "text": "<p>Additional promotional discounts on a regular basis.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "b6": {
+          "type": "column",
+          "settings": {
+            "title": "Click & collect",
+            "text": "<p>Collect from our Sevenoaks showroom, out of hours, upon request.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "title": "Member benefits",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "registration_form": {
+      "type": "morghew-form",
+      "blocks": {
+        "field_1": {
+          "type": "field",
+          "settings": {
+            "type": "text",
+            "label": "Main contact name",
+            "placeholder": "Jane Smith",
+            "required": true,
+            "width": "half"
+          }
+        },
+        "field_2": {
+          "type": "field",
+          "settings": {
+            "type": "tel",
+            "label": "Main contact number",
+            "placeholder": "+44 7700 000000",
+            "required": true,
+            "width": "half"
+          }
+        },
+        "field_3": {
+          "type": "field",
+          "settings": {
+            "type": "email",
+            "label": "Main contact email address",
+            "placeholder": "jane@example.com",
+            "required": true,
+            "width": "half"
+          }
+        },
+        "field_4": {
+          "type": "field",
+          "settings": {
+            "type": "text",
+            "label": "Business name",
+            "placeholder": "Sparks Electrical Ltd",
+            "required": false,
+            "width": "half"
+          }
+        },
+        "field_5": {
+          "type": "field",
+          "settings": {
+            "type": "textarea",
+            "label": "Address",
+            "placeholder": "Street address, city, postcode",
+            "required": true,
+            "width": "half"
+          }
+        }
+      },
+      "block_order": [
+        "field_1",
+        "field_2",
+        "field_3",
+        "field_4",
+        "field_5"
+      ],
+      "name": "Members registration",
+      "settings": {
+        "bg": "paper",
+        "eyebrow": "Members Registration",
+        "heading": "Join Club VIVID",
+        "intro": "<p>Register for the VIVID Members Zone and we'll be in touch to confirm your account.</p>",
+        "submit_label": "Register",
+        "success_message": "Thanks — we've got your registration and will be in touch shortly."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "benefits",
+    "registration_form"
+  ]
+}
