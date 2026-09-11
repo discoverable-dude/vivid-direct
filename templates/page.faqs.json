@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "FAQs",
+        "body": "Answers to some of our most common questions. Can't find what you need? Get in touch and we'll help directly."
+      }
+    },
+    "faq_products": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I know what driver to buy when using LED strip?",
+            "icon": "none",
+            "row_content": "<p>Selecting the right driver (PSU) is often the trickiest part of an LED strip set-up. Work through it like this:</p><ol><li>Check the watts per metre (wpm) of your strip — this is on the technical spec supplied with it.</li><li>Work out how many metres of strip you're using.</li><li>Multiply the two together. E.g. 10wpm strip over a 5m run = 5m × 10w = 50w.</li><li>Add headroom — a good rule of thumb is 20%. So 50w × 1.2 = 60w. Look for a driver rated 60w or higher.</li><li>Decide whether you need a standard (non-dimmable) or dimmable driver, based on how the set-up will be controlled — a conventional switch, or 0–10V / mains / DALI / smart home dimming.</li></ol><p>If you're unsure, call us and we'll talk you through it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1"
+      ],
+      "settings": {
+        "caption": "Our Products",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "left",
+        "padding_top": 20,
+        "padding_bottom": 12
+      }
+    },
+    "faq_trade": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do I get a discount with a Trade Account?",
+            "icon": "none",
+            "row_content": "<p>If you haven't registered for a trade account, you'll see full retail pricing. Trade customers get a discounted rate on purchases, and for particularly large orders we'll consider a one-off special rate — the aim is for it to work for all of us, including your clients.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1"
+      ],
+      "settings": {
+        "caption": "My Trade Account",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "left",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "faq_payment": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can we pay via bank transfer?",
+            "icon": "none",
+            "row_content": "<p>Yes. We'll issue a pro-forma invoice with our bank details — once funds have cleared, your order is released. To speed this up, send your remittance to <a href=\"mailto:sales@vivid-direct.co.uk\">sales@vivid-direct.co.uk</a> with your order number clearly shown in the payment reference and email subject.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1"
+      ],
+      "settings": {
+        "caption": "Payment",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "left",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "faq_delivery": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can an item be returned if it has been opened?",
+            "icon": "none",
+            "row_content": "<p>If the product isn't right, we accept returns within 30 days of purchase provided all packaging, instructions and boxed items are present, and the product is unused. A 15% restocking charge applies, and return shipping is covered by the customer.</p><p>If the product is faulty: if you need a replacement immediately, it's invoiced at your agreed rate, or you can wait for us to review and confirm the fault before we send a replacement. Send the faulty item back to us — we'll test it and confirm the fault within 2 weeks.</p><p>See our full <a href=\"/pages/refunds-returns\">Refunds &amp; Returns policy</a> for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1"
+      ],
+      "settings": {
+        "caption": "Delivery & Returns",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "left",
+        "padding_top": 12,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "faq_products",
+    "faq_trade",
+    "faq_payment",
+    "faq_delivery"
+  ]
+}

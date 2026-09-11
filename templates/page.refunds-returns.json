@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Refunds & Returns Policy",
+        "body": "Not right for the job? You have 30 days from the date of purchase to return it, as long as it's unused and in its original packaging."
+      }
+    },
+    "body": {
+      "type": "rich-text",
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our policy is valid for 30 calendar days from the date of purchase. If you receive your order and aren't satisfied for any reason, you can return the product for a refund. After 30 days, any refund is at Vivid Direct's discretion. For exchanges, the new item is processed and paid for in the normal way, and the returned item follows the standard returns process below.</p><h2>Refund requirements</h2><p>To qualify for a refund, the product must be:</p><ul><li>Defective, or not as described</li><li>In its original packaging</li><li>Unused</li></ul><p>All returns are inspected on arrival. If a product doesn't meet the criteria above, we reserve the right not to issue a refund.</p><h2>Sale &amp; clearance items</h2><p>Only regular-priced items can be returned — sale or clearance items can't be returned.</p><h2>Shipping a return</h2><p>To return an order, contact us first to obtain a Return Merchandise Authorisation (RMA) and shipping label — this will be used by our courier when collecting the item. Returns won't be accepted without a valid RMA.</p><p>Please package returns carefully so they aren't damaged in transit — if a product arrives damaged or used beyond what's reasonable for inspection, we may reject the refund.</p><p>All refunds are subject to a <strong>15% restocking fee</strong>.</p><p>Send returns to:</p><p>VIVID Lighting Limited<br>Ascot Barn, Court Lodge Farm<br>Hinxhill, Ashford, Kent TN25 5NR</p><h2>Contacting us</h2><p>Questions about this policy? Get in touch via our contact form or email <a href=\"mailto:sales@vivid-direct.co.uk\">sales@vivid-direct.co.uk</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_1"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "body"
+  ]
+}

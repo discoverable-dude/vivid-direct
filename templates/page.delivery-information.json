@@ -1,0 +1,62 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "morghew-lede",
+      "settings": {
+        "kicker": "Delivery Information",
+        "body": "Free UK delivery on orders over £150 net. Here's exactly how shipping, next-day delivery and lead times work."
+      }
+    },
+    "body": {
+      "type": "rich-text",
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Shipping &amp; handling</h2><p>All orders over £150 net are delivered free of charge within the UK, with the exception of the Scottish Highlands and Islands and the Scilly Isles (see below).</p><p>For orders under £150 net, a standard delivery charge of £9.95 (ex. VAT) is added at checkout. If next-day delivery is selected, a charge of £20.00 (ex. VAT) applies instead.</p><p>Deliveries run on standard working days (Monday–Friday). The cut-off for next-day delivery is <strong>1pm</strong> — orders placed after 1pm on a Friday for next-day delivery will arrive the following Monday.</p><p>Scottish Highlands &amp; Islands and the Scilly Isles: shipping is charged at £30.00 (inc. VAT) on a 2-day delivery service.</p><p>We use a range of third-party couriers (including DHL, DPD 24hr and DX) for UK deliveries, and DHL for international deliveries. Couriers may require a signature on receipt — if you choose an option other than signing for your parcel (including a \"safe place\" preference), we can't be held responsible for damage or loss in transit.</p><p>We don't currently offer checkout delivery to Europe or the rest of the world — please contact us directly to arrange this.</p>"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Delivery policy</h2><p>All products are listed with an estimated lead time, which may vary depending on availability — some items are ordered directly from suppliers. Your estimated delivery time is shown at checkout and confirmed on your order confirmation. If we can't dispatch within this time, we'll let you know the likely delivery date and give you the option to proceed or cancel.</p><p>Orders over 1.2m in length may attract an additional delivery charge depending on size and destination — though this won't apply if your order already qualifies for free delivery over £150 net.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "body"
+  ]
+}
