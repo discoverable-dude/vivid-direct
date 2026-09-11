@@ -81,7 +81,7 @@
 }
 .e-btn:hover { transform: translateY(-2px); background: var(--cta-dark); border-color: var(--cta-dark); }
 .e-btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
-.e-btn--ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.e-btn--ghost:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .e-btn--ghost-light { background: transparent; color: #fff; border-color: rgba(255, 255, 255, 0.6); }
 .e-btn--ghost-light:hover { background: #fff; color: var(--ink); border-color: #fff; }
 .e-btn--lg { padding: 18px 34px; font-size: 15px; }

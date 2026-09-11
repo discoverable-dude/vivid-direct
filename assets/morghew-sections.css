@@ -30,7 +30,7 @@
 /* ── Hero ── */
 .pshop-hero {
   background: var(--hessian-weave), var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
   padding: 52px 0 0;
 }
 .pshop-crumb {
@@ -46,7 +46,7 @@
   text-decoration: none;
   transition: color 0.2s;
 }
-.pshop-crumb a:hover { color: var(--paper); }
+.pshop-crumb a:hover { color: var(--white); }
 .pshop-crumb__sep { opacity: 0.45; }
 
 .pshop-heading {
@@ -56,7 +56,7 @@
   line-height: 0.95;
   letter-spacing: -0.02em;
   margin: 0 0 18px;
-  color: var(--paper);
+  color: var(--white);
   max-width: 20ch;
 }
 .pshop-sub {
@@ -92,7 +92,7 @@
   flex-shrink: 0;
   min-width: 88px;
 }
-.pshop-tab:hover { background: rgba(255,255,255,0.14); color: var(--paper); }
+.pshop-tab:hover { background: rgba(255,255,255,0.14); color: var(--white); }
 .pshop-tab--active {
   background: var(--paper);
   color: var(--footer-bg);
@@ -553,7 +553,7 @@
 .pp-vtile.is-active {
   border-color: var(--footer-bg);
   background: var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
 }
 .pp-vtile.is-sold { opacity: 0.45; cursor: not-allowed; }
 .pp-vtile__size {
@@ -658,7 +658,7 @@
   position: relative;
   isolation: isolate;
   padding: clamp(60px, 8vw, 110px) 0;
-  color: var(--paper);
+  color: var(--white);
   background: var(--bark);
 }
 .pp-about__bg {
@@ -698,7 +698,7 @@
   font-size: clamp(30px, 4vw, 52px);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--paper);
+  color: var(--white);
   margin: 0;
 }
 .pp-about__copy {
@@ -910,7 +910,7 @@
 }
 .mpg[data-bg="paper"]   { background: var(--hessian-weave), var(--paper); }
 .mpg[data-bg="paper-2"] { background: var(--hessian-weave), var(--paper-2); }
-.mpg[data-bg="bark"]    { background: var(--hessian-weave), var(--bark); color: var(--paper); }
+.mpg[data-bg="bark"]    { background: var(--hessian-weave), var(--bark); color: var(--white); }
 .mpg__heading {
   font-family: var(--font-head);
   font-weight: 800;
@@ -999,9 +999,9 @@
 /* Estate collection hero: wider intro column + branded rich-text links + Read more toggle */
 .ecoll-hero .pshop-sub { max-width: 64ch; }
 .pshop-sub a { color: var(--straw-light); text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
-.pshop-sub a:hover { color: var(--paper); }
+.pshop-sub a:hover { color: var(--white); }
 .pshop-sub__toggle { display: inline-block; margin-top: 10px; padding: 0; background: none; border: none; color: var(--straw-light); font-family: var(--font-body); font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
-.pshop-sub__toggle:hover { color: var(--paper); }
+.pshop-sub__toggle:hover { color: var(--white); }
 .pshop-sub__toggle:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; border-radius: 3px; }
 
 /* ── About band: care & keeping accordion (faq blocks, light-on-dark) ── */

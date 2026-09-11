@@ -11,7 +11,7 @@
   grid-template-columns: 1.15fr 0.85fr;
   grid-template-rows: minmax(600px, 1fr) auto;
   background: var(--hessian-weave), var(--bark);
-  color: var(--paper);
+  color: var(--white);
 }
 .bhero__media {
   position: relative;
@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--paper);
+  color: var(--white);
   transition: transform 0.2s, background 0.2s;
   cursor: pointer;
   text-decoration: none;
@@ -81,7 +81,7 @@
   margin: 0;
   font-family: var(--font-head);
   font-weight: 800;
-  color: var(--paper);
+  color: var(--white);
 }
 .bhero__cycler {
   display: inline-block;
@@ -114,7 +114,7 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: var(--paper);
+  color: var(--white);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.03em;
@@ -128,7 +128,7 @@
 .bhero__ticker {
   grid-column: 1 / -1;
   background: var(--hessian-text);
-  color: var(--paper);
+  color: var(--white);
   overflow: hidden;
   white-space: nowrap;
   padding: 11px 0;
@@ -295,7 +295,7 @@
   justify-content: center;
   transition: background 0.2s, color 0.2s;
 }
-.variety-rail__btn:hover { background: var(--ink); color: var(--paper); }
+.variety-rail__btn:hover { background: var(--ink); color: var(--white); }
 .variety-rail__btn svg { display: block; }
 .variety-rail__btn--prev svg { transform: scaleX(-1); }
 .variety-rail__scroller {
@@ -387,7 +387,7 @@
   justify-content: center;
   gap: 18px;
   background: var(--ink);
-  color: var(--paper);
+  color: var(--white);
   border-radius: 8px;
   font-family: var(--font-head);
   font-weight: 700;
@@ -397,7 +397,7 @@
   transition: background 0.2s;
   padding: 40px 20px;
 }
-.vcard__all:hover { background: var(--bark); color: var(--paper); }
+.vcard__all:hover { background: var(--bark); color: var(--white); }
 .vcard__all-circ {
   width: 64px;
   height: 64px;
@@ -415,7 +415,7 @@
 .season-band {
   padding: clamp(64px, 8vw, 116px) 0;
   background: var(--hessian-weave), var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
 }
 .season-band__head {
   max-width: 60ch;
@@ -428,7 +428,7 @@
   margin: 10px 0 0;
   font-family: var(--font-head);
   font-weight: 800;
-  color: var(--paper);
+  color: var(--white);
 }
 .season-band__sub {
   font-size: 18px;
@@ -446,7 +446,7 @@
   border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
-  color: var(--paper);
+  color: var(--white);
   display: block;
   transition: transform 0.32s cubic-bezier(.2,.8,.2,1), box-shadow 0.32s;
 }
@@ -484,7 +484,7 @@
   font-family: var(--font-head);
   font-weight: 800;
   margin: 0;
-  color: var(--paper);
+  color: var(--white);
   transition: color 0.25s;
 }
 .season-card:hover .season-card__name { color: var(--straw-light); }
@@ -504,7 +504,7 @@
   position: relative;
   isolation: isolate;
   padding: clamp(72px, 9vw, 130px) 0;
-  color: var(--paper);
+  color: var(--white);
   background: #221409;
 }
 .shard-moment__bg {
@@ -539,7 +539,7 @@
   margin: 0;
   font-family: var(--font-head);
   font-weight: 800;
-  color: var(--paper);
+  color: var(--white);
 }
 .shard-moment__stats {
   display: flex;

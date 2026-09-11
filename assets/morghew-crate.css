@@ -147,7 +147,7 @@
 .crate-vtile.is-active {
   background: var(--footer-bg);
   border-color: var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
 }
 .crate-vtile.is-sold-out { opacity: 0.38; cursor: not-allowed; }
 
@@ -315,7 +315,7 @@
   gap: 9px;
   padding: 15px 22px;
   background: var(--cta);
-  color: var(--paper);
+  color: var(--white);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 700;
@@ -450,7 +450,7 @@
   align-items: center;
   padding: 7px 14px;
   background: var(--clay);
-  color: var(--paper);
+  color: var(--white);
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 700;
@@ -542,7 +542,7 @@ body.crate-busy .crate-checkout-btn { pointer-events: none; }
   height: 16px;
   margin: -8px 0 0 -8px;
   border: 2px solid color-mix(in srgb, var(--paper) 40%, transparent);
-  border-top-color: var(--paper);
+  border-top-color: var(--white);
   border-radius: 50%;
   animation: crate-spin 0.7s linear infinite;
 }
@@ -556,7 +556,7 @@ body.crate-busy .crate-checkout-btn { pointer-events: none; }
   max-width: min(90vw, 420px);
   padding: 14px 20px;
   background: var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
   font-size: 14px;
   line-height: 1.4;
   border-radius: 8px;

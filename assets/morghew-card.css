@@ -69,7 +69,7 @@
   justify-content: center;
   padding: 10px 6px;
   background: var(--cta);
-  color: var(--paper);
+  color: var(--white);
   border: none;
   border-radius: var(--radius);
   font-family: var(--font-body);
@@ -89,7 +89,7 @@
   text-decoration: none;
   gap: 7px;
 }
-.mcard__btn--gated:hover { background: var(--ink); color: var(--paper); }
+.mcard__btn--gated:hover { background: var(--ink); color: var(--white); }
 .mcard__btn--gated svg { flex: 0 0 auto; width: 15px; height: 15px; }
 .mcard__btn .loading__spinner { display: none; }
 .mcard__btn.is-loading .mcard__btn-label { visibility: hidden; }
@@ -97,12 +97,12 @@
   display: flex; position: absolute; inset: 0; align-items: center; justify-content: center;
 }
 .mcard__btn .spinner { width: 16px; height: 16px; }
-.mcard__btn .path { stroke: var(--paper); }
+.mcard__btn .path { stroke: var(--white); }
 
 /* Card title heading wrapper — layout-neutral; .mcard__name keeps the link styling (a11y: heading outline) */
 .mcard__title { margin: 0; font: inherit; }
 
 /* Multi-option products link to the PDP to choose options (instead of quick-add) */
-.mcard__choose { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; background: var(--cta); color: var(--paper); border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 700; text-decoration: none; transition: background 0.18s; }
+.mcard__choose { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; background: var(--cta); color: var(--white); border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 700; text-decoration: none; transition: background 0.18s; }
 .mcard__choose:hover { background: var(--cta-dark); }
 .mcard__choose:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }

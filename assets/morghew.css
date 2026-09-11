@@ -22,6 +22,12 @@
   --paper-2: #0D4761;
   --card:    #0D4761;
 
+  /* Literal white — for icons/buttons/text sitting on a component's own
+     dark accent colour (--cta, --field, --footer-bg, --bark, etc.), which
+     always needs to read as white regardless of what --paper means for
+     page backgrounds. Was previously --paper before backgrounds went dark. */
+  --white: #FFFFFF;
+
   /* Text */
   --ink:      #F6F0EA;
   --ink-soft: rgba(246, 240, 234, 0.68);
@@ -260,7 +266,7 @@ h1, h2, h3, h4, h5, h6,
 
 .btn--ghost:hover {
   background: var(--ink);
-  color: var(--paper);
+  color: var(--white);
   border-color: var(--ink);
 }
 
@@ -333,7 +339,7 @@ h1, h2, h3, h4, h5, h6,
   gap: 28px;
   padding: 9px 16px;
   background: var(--field);
-  color: var(--paper);
+  color: var(--white);
   font-family: var(--font-body);
   font-size: 11.5px;
   font-weight: 600;
@@ -425,7 +431,7 @@ h1, h2, h3, h4, h5, h6,
   font-size: 15px;
   font-weight: 700;
   font-family: var(--font-head);
-  color: var(--paper) !important;
+  color: var(--white) !important;
   padding: 4px 0;
   white-space: nowrap;
   letter-spacing: 0;
@@ -492,7 +498,7 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 700;
   font-size: 15px;
   line-height: 1.2;
-  color: var(--paper);
+  color: var(--white);
   text-decoration: none;
   padding: 9px 12px;
   border-radius: 10px;
@@ -507,20 +513,20 @@ h1, h2, h3, h4, h5, h6,
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.12);
-  color: var(--paper);
+  color: var(--white);
   transition: background 0.15s ease, color 0.15s ease;
 }
 .m-mega__ic svg { width: 22px; height: 22px; display: block; }
 .m-mega__link--plain { padding-left: 14px; }
 .m-mega__link-label { min-width: 0; }
 .m-mega__link:hover,
-.m-mega__link:focus-visible { background: var(--field); color: var(--paper); outline: none; }
+.m-mega__link:focus-visible { background: var(--field); color: var(--white); outline: none; }
 .m-mega__link:hover .m-mega__ic,
 .m-mega__link:focus-visible .m-mega__ic { background: rgba(255, 255, 255, 0.18); color: var(--straw-light); }
 .m-mega__link.is-current { color: var(--cta); }
 .m-mega__link.is-current .m-mega__ic { color: var(--cta); }
 .m-mega__link.is-current:hover,
-.m-mega__link.is-current:focus-visible { color: var(--paper); }
+.m-mega__link.is-current:focus-visible { color: var(--white); }
 .m-mega__link.is-current:hover .m-mega__ic,
 .m-mega__link.is-current:focus-visible .m-mega__ic { color: var(--straw-light); }
 
@@ -536,7 +542,7 @@ h1, h2, h3, h4, h5, h6,
   transition: background 0.15s ease, color 0.15s ease;
 }
 .m-mega__sublink:hover,
-.m-mega__sublink:focus-visible { background: var(--field); color: var(--paper); outline: none; }
+.m-mega__sublink:focus-visible { background: var(--field); color: var(--white); outline: none; }
 .m-mega__sublink.is-current { color: var(--cta); }
 
 .m-mega__feature {
@@ -548,7 +554,7 @@ h1, h2, h3, h4, h5, h6,
   min-height: 190px;
   padding: 20px;
   background: var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
   text-decoration: none;
   overflow: hidden;
 }
@@ -594,7 +600,7 @@ h1, h2, h3, h4, h5, h6,
   border: 1px solid var(--line-on-dark-strong) !important;
   border-radius: var(--radius) !important;
   background: transparent !important;
-  color: var(--paper) !important;
+  color: var(--white) !important;
   cursor: pointer !important;
   transition: background 0.2s, border-color 0.2s !important;
   text-decoration: none !important;
@@ -603,7 +609,7 @@ h1, h2, h3, h4, h5, h6,
 
 .header__icon:hover {
   background: rgba(255, 255, 255, 0.10) !important;
-  color: var(--paper) !important;
+  color: var(--white) !important;
 }
 
 /* Don't touch .svg-wrapper display — Dawn controls close/open icon toggling via aria-expanded */
@@ -712,7 +718,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
 
 .mft {
   background: var(--hessian-weave), var(--footer-bg);
-  color: var(--paper);
+  color: var(--white);
 }
 
 .mft__top {
@@ -745,7 +751,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
   font-family: var(--font-head);
   font-size: 22px;
   font-weight: 800;
-  color: var(--paper);
+  color: var(--white);
 }
 
 .mft__blurb {
@@ -780,7 +786,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
   flex: 1;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  color: var(--paper);
+  color: var(--white);
   padding: 13px 16px;
   font-family: var(--font-body);
   font-size: 14px;
@@ -858,7 +864,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
 }
 
 .mft__col a:hover {
-  color: var(--paper);
+  color: var(--white);
   padding-left: 5px;
 }
 
@@ -903,7 +909,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
 .pp-gallery__main img, .est-gallery__main img { cursor: zoom-in; }
 .mlb { position: fixed; inset: 0; z-index: 9999; background: rgba(28, 18, 10, 0.93); display: flex; align-items: center; justify-content: center; padding: 24px; }
 .mlb__img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 4px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
-.mlb__close { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border: none; background: transparent; color: var(--paper); font-size: 34px; line-height: 1; cursor: pointer; }
+.mlb__close { position: absolute; top: 16px; right: 20px; width: 44px; height: 44px; border: none; background: transparent; color: var(--white); font-size: 34px; line-height: 1; cursor: pointer; }
 .mlb__close:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; border-radius: 4px; }
 
 /* ── Branded content links ──────────────────────────────────────────

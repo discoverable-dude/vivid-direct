@@ -42,14 +42,14 @@
   font-size: 24px;
   font-weight: 800;
   letter-spacing: 0.01em;
-  color: var(--paper);
+  color: var(--white);
 }
 .cart-drawer .drawer__close {
   position: static;
   width: 40px;
   height: 40px;
   margin: 0;
-  color: var(--paper);
+  color: var(--white);
 }
 .cart-drawer .drawer__close:hover { opacity: 0.75; }
 .cart-drawer .drawer__close .svg-wrapper { width: 18px; height: 18px; }
@@ -265,7 +265,7 @@
   padding: 15px 12px;
   font-size: 13px;
   background: var(--cta);
-  color: var(--paper);
+  color: var(--white);
   border: none;
 }
 .cart-drawer .cart__checkout-button:hover:not([disabled]) { background: var(--cta-dark); }
@@ -277,8 +277,8 @@
   color: var(--ink);
   border: 1.5px solid var(--ink);
 }
-.cart-drawer .cart__view-crate-button:hover { background: var(--ink); color: var(--paper); }
-.cart-drawer .cart__view-crate-button:hover .cart__view-crate-icon { color: var(--paper); }
+.cart-drawer .cart__view-crate-button:hover { background: var(--ink); color: var(--white); }
+.cart-drawer .cart__view-crate-button:hover .cart__view-crate-icon { color: var(--white); }
 
 /* ── Loading state (stepper / remove) ──
    Dawn's cart.js adds .cart__items--disabled to the items container and
