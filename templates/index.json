@@ -33,7 +33,7 @@
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
             "button_label_2": "Apply for a Trade Account",
-            "button_link_2": "shopify://pages/trade",
+            "button_link_2": "shopify://pages/contact",
             "button_style_secondary_2": true
           }
         }
@@ -55,76 +55,6 @@
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
         "show_text_below": true
-      }
-    },
-    "featured_product_TCMnPp": {
-      "type": "featured-product",
-      "blocks": {
-        "text_zdUaU3": {
-          "type": "text",
-          "settings": {
-            "text": "{{ section.settings.product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
-        "title_hpKTJN": {
-          "type": "title",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "price_FiN9EP": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker_Hh7cHz": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector_ajXrz3": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons_8Yxmki": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "share_wgtXTU": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        }
-      },
-      "block_order": [
-        "text_zdUaU3",
-        "title_hpKTJN",
-        "price_FiN9EP",
-        "variant_picker_Hh7cHz",
-        "quantity_selector_ajXrz3",
-        "buy_buttons_8Yxmki",
-        "share_wgtXTU"
-      ],
-      "name": "t:sections.featured-product.presets.name",
-      "settings": {
-        "product": "nano-free-cut-recessed-neon-top-bend-9x6mm-white-ip44",
-        "color_scheme": "scheme-4",
-        "secondary_background": false,
-        "media_size": "medium",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "how-we-help": {
@@ -226,8 +156,8 @@
         "badge_4"
       ],
       "custom_css": [
-        ".multicolumn-card { border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius); background: rgba(var(--color-foreground), 0.03); padding: 22px 20px; }",
-        ".multicolumn-card__info { padding: 0; margin-top: 10px; }"
+        ".multicolumn-card {border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius); background: rgba(var(--color-foreground), 0.03); padding: 22px 20px;}",
+        ".multicolumn-card__info {padding: 0; margin-top: 10px;}"
       ],
       "settings": {
         "title": "",
@@ -239,7 +169,7 @@
         "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 36,
@@ -297,8 +227,8 @@
         "cat_outdoor"
       ],
       "custom_css": [
-        ".multicolumn-card { border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius-lg); overflow: hidden; background: rgba(var(--color-foreground), 0.03); }",
-        ".multicolumn-card__info { padding: 18px 18px 20px; }"
+        ".multicolumn-card {border: 1px solid rgba(var(--color-foreground), 0.12); border-radius: var(--radius-lg); overflow: hidden; background: rgba(var(--color-foreground), 0.03);}",
+        ".multicolumn-card__info {padding: 18px 18px 20px;}"
       ],
       "settings": {
         "title": "Shop by Category",
@@ -332,7 +262,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -582,7 +512,7 @@
         "show_image": true,
         "show_date": true,
         "show_author": false,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -681,79 +611,6 @@
         "padding_bottom": 52
       }
     },
-    "portfolio-teaser": {
-      "type": "portfolio-gallery",
-      "blocks": {
-        "bond": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-bond-1.jpg",
-            "image_width": "1200",
-            "image_height": "1600",
-            "name": "Bond"
-          }
-        },
-        "kemsing": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-kemsing-1.jpg",
-            "image_width": "2048",
-            "image_height": "1536",
-            "name": "Kemsing"
-          }
-        },
-        "mayfair": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-mayfair-1.jpg",
-            "image_width": "2048",
-            "image_height": "1536",
-            "name": "Mayfair"
-          }
-        },
-        "mercury": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-mercury-1.jpg",
-            "image_width": "1600",
-            "image_height": "991",
-            "name": "Mercury"
-          }
-        },
-        "silverstone": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-silverstone-1.jpg",
-            "image_width": "4032",
-            "image_height": "3024",
-            "name": "Silverstone"
-          }
-        },
-        "ucl": {
-          "type": "project",
-          "settings": {
-            "image_filename": "portfolio-ucl-1.jpg",
-            "image_width": "2000",
-            "image_height": "1429",
-            "name": "UCL"
-          }
-        }
-      },
-      "block_order": [
-        "bond",
-        "kemsing",
-        "mayfair",
-        "mercury",
-        "silverstone",
-        "ucl"
-      ],
-      "settings": {
-        "eyebrow": "Inspiration",
-        "heading": "Lighting excellence",
-        "intro": "<p>From architectural LED strips to precision downlights — see the products and installations that define our portfolio.</p>",
-        "attribution": "<p>Projects designed and installed by <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, our sister company. Interested in a bespoke lighting design and installation service? <a href=\"https://vividlightworx.co.uk\">Get in touch with the LightWorX team</a>.</p>"
-      }
-    },
     "portfolio-cta": {
       "type": "rich-text",
       "blocks": {
@@ -790,7 +647,7 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-5",
         "full_width": false,
         "padding_top": 60,
         "padding_bottom": 60
@@ -828,8 +685,8 @@
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "scheme-1",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-4",
         "padding_top": 52,
         "padding_bottom": 80
       }
@@ -837,7 +694,6 @@
   },
   "order": [
     "hero",
-    "featured_product_TCMnPp",
     "how-we-help",
     "trust-badges",
     "shop-by-category",
@@ -846,7 +702,6 @@
     "help-advice",
     "customer_reviews_yJc9hA",
     "trade",
-    "portfolio-teaser",
     "portfolio-cta",
     "about"
   ]
