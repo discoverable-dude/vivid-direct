@@ -387,7 +387,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--hessian-text);
+  color: var(--cta);
   margin: 0 0 10px;
 }
 

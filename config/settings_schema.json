@@ -8,6 +8,31 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Quick add button"
+      },
+      {
+        "type": "paragraph",
+        "content": "Colours for the \"Choose options\" / quick add button that appears on product cards when quick add is enabled on a collection."
+      },
+      {
+        "type": "color",
+        "id": "quick_add_button_background",
+        "label": "Background",
+        "default": "#F5B800"
+      },
+      {
+        "type": "color",
+        "id": "quick_add_button_text",
+        "label": "Text",
+        "default": "#082A38"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

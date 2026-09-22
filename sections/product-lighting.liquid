@@ -117,12 +117,12 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-<div class="pp-root{% if section.settings.dark_mode %} pp-root--dark{% endif %}">
+<div class="pp-root pp-root--dark">
 
 <!-- ═══════════════════════════════════════════════
      HERO — gallery + info
      ═══════════════════════════════════════════════ -->
-<div class="pp-hero">
+<div class="pp-hero color-{{ section.settings.hero_scheme }} gradient" style="--paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --bark: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
 
     <div class="pp-hero__grid">
@@ -315,7 +315,7 @@
 {%- assign pp_copy = product.metafields.custom.origin_copy -%}
 {%- assign pp_faqs = section.blocks | where: "type", "faq" -%}
 {%- if pp_headline != blank or pp_copy != blank or pp_faqs.size > 0 -%}
-<div class="pp-about">
+<div class="pp-about color-{{ section.settings.about_scheme }} gradient" style="--bark: rgb(var(--color-background)); --white: rgb(var(--color-foreground));">
   {%- if section.settings.about_image != blank -%}
     <img class="pp-about__bg"
          src="{{ section.settings.about_image | image_url: width: 2400 }}"
@@ -364,7 +364,7 @@
      ═══════════════════════════════════════════════ -->
 {%- assign pp_cook_filtered = pp_cook_list | compact -%}
 {%- if pp_cook_filtered.size > 0 -%}
-<div class="pp-cook">
+<div class="pp-cook color-{{ section.settings.cook_scheme }} gradient" style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <p class="pp-eyebrow">Best for</p>
     <h2 class="pp-cook__heading">How to cook it</h2>
@@ -400,7 +400,7 @@
      ═══════════════════════════════════════════════ -->
 {%- assign pp_attr_filtered = pp_attr_list | compact -%}
 {%- if pp_attr_filtered.size > 0 -%}
-<div class="pp-attrs">
+<div class="pp-attrs color-{{ section.settings.attrs_scheme }} gradient" style="--paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <p class="pp-eyebrow">Good to know</p>
     <h2 class="pp-attrs__heading">{{ section.settings.attrs_heading }}</h2>
@@ -473,7 +473,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 {%- if pp_design_cards != blank -%}
-<div class="pp-recipes">
+<div class="pp-recipes color-{{ section.settings.recipes_scheme }} gradient" style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <div class="pp-recipes__head">
       <div>
@@ -498,7 +498,7 @@
      ═══════════════════════════════════════════════ -->
 {%- assign pp_related = section.blocks | where: "type", "related_product" -%}
 {%- if pp_related.size > 0 -%}
-<div class="pp-related">
+<div class="pp-related color-{{ section.settings.related_scheme }} gradient" style="--paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <p class="pp-eyebrow">You may also like</p>
     <h2 class="pp-related__heading">Pairs well with</h2>
@@ -591,7 +591,13 @@
     "templates": ["product"]
   },
   "settings": [
-    { "type": "checkbox", "id": "dark_mode", "label": "Dark navy theme", "info": "Matches the Vivid LightWorX product-modal styling.", "default": true },
+    { "type": "header", "content": "Section colours" },
+    { "type": "color_scheme", "id": "hero_scheme", "label": "Hero colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "about_scheme", "label": "About colour scheme", "default": "scheme-4" },
+    { "type": "color_scheme", "id": "cook_scheme", "label": "How to cook it colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "attrs_scheme", "label": "Good to know colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "recipes_scheme", "label": "Design articles colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "related_scheme", "label": "Pairs well with colour scheme", "default": "scheme-1" },
     { "type": "header", "content": "Buy-box trust row" },
     { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
     { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },

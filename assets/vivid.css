@@ -1018,3 +1018,15 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
   transform: scale(1.045);
 }
 
+/* ── Quick add button (PLP, when quick add is enabled) — colour set via
+   Theme settings → Product cards, independent of the main button colour. ── */
+.quick-add__submit.quick-add__submit {
+  background: var(--quick-add-bg);
+  color: var(--quick-add-text);
+  border-color: var(--quick-add-bg);
+}
+.quick-add__submit.quick-add__submit:hover {
+  background: color-mix(in srgb, var(--quick-add-bg) 85%, black);
+  border-color: color-mix(in srgb, var(--quick-add-bg) 85%, black);
+}
+
