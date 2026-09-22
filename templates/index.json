@@ -45,6 +45,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
+        "enable_video_bg": true,
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
@@ -611,6 +612,32 @@
         "padding_bottom": 52
       }
     },
+    "portfolio-teaser": {
+      "type": "portfolio-gallery",
+      "blocks": {
+        "vlx_led": { "type": "project", "settings": { "image_filename": "vlx-led-strip.jpg", "image_width": "2204", "image_height": "1200", "name": "LED Strip Detail" } },
+        "vlx_cove": { "type": "project", "settings": { "image_filename": "vlx-cove-lighting-1.jpg", "image_width": "1376", "image_height": "1566", "name": "Cove Lighting" } },
+        "vlx_bedroom": { "type": "project", "settings": { "image_filename": "vlx-bedroom-1-wide.jpg", "image_width": "1244", "image_height": "830", "name": "Ambient Bedroom Lighting" } },
+        "vlx_stairs": { "type": "project", "settings": { "image_filename": "vlx-stairs-3.jpg", "image_width": "796", "image_height": "1368", "name": "Staircase LED Lighting" } },
+        "vlx_undercab": { "type": "project", "settings": { "image_filename": "vlx-under-cab-2.jpg", "image_width": "1546", "image_height": "900", "name": "Under-Cabinet Lighting" } },
+        "vlx_bathroom": { "type": "project", "settings": { "image_filename": "vlx-bathroom-lighting-1.jpg", "image_width": "528", "image_height": "528", "name": "Bathroom Vanity Lighting" } }
+      },
+      "block_order": [
+        "vlx_led",
+        "vlx_cove",
+        "vlx_bedroom",
+        "vlx_stairs",
+        "vlx_undercab",
+        "vlx_bathroom"
+      ],
+      "settings": {
+        "dark_mode": true,
+        "eyebrow": "Inspiration",
+        "heading": "Lighting excellence",
+        "intro": "<p>From architectural LED strips to precision downlights — see the products and installations that define our portfolio.</p>",
+        "attribution": "<p>Projects designed and installed by <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, our sister company. Interested in a bespoke lighting design and installation service? <a href=\"https://vividlightworx.co.uk\">Get in touch with the LightWorX team</a>.</p>"
+      }
+    },
     "portfolio-cta": {
       "type": "rich-text",
       "blocks": {
@@ -702,6 +729,7 @@
     "help-advice",
     "customer_reviews_yJc9hA",
     "trade",
+    "portfolio-teaser",
     "portfolio-cta",
     "about"
   ]
