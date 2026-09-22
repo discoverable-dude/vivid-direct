@@ -124,16 +124,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
-    "upsell_products": [
-      "potato-vodka",
-      "morghew-honey",
-      "stoneground-wholemeal-wheat-flour"
-    ],
-    "log_mapbox_token": "",
-    "log_farm_postcode": "TN30 7LR",
-    "log_max_miles": 20,
-    "log_gate_districts": "TN30=3, TN26=7, TN17=8, TN31=10, TN18=11, TN27=11, TN23=12, TN12=14, TN24=14, TN25=15, TN28=15",
-    "log_charge_product": "log-delivery",
+    "upsell_products": [],
     "sections": {
       "main-password-header": {
         "type": "main-password-header",

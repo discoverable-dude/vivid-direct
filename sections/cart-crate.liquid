@@ -109,29 +109,7 @@
                       </div>
                     {%- endif -%}
 
-                    {%- liquid
-                      # The distance-priced delivery line: quantity encodes the
-                      # charge (£1.50 units), so hide the stepper and show the
-                      # distance instead. Line price still shows the full charge.
-                      assign _is_charge = false
-                      if settings.log_charge_product != blank and item.product_id == settings.log_charge_product.id
-                        assign _is_charge = true
-                      endif
-                      assign _dist = ''
-                      if _is_charge
-                        for p in item.properties
-                          if p.first == 'Distance'
-                            assign _dist = p.last
-                          endif
-                        endfor
-                      endif
-                    -%}
                     <div class="crate-row__foot">
-                      {%- if _is_charge -%}
-                        <span class="crate-row__deliv-note">
-                          {%- if _dist != blank -%}{{ _dist }} from the farm{%- else -%}Priced by distance{%- endif -%}
-                        </span>
-                      {%- else -%}
                       <div class="crate-qty" data-vid="{{ item.variant.id }}">
                         <button type="button" class="crate-qty__btn" data-action="minus" aria-label="Decrease quantity">
                           <svg width="12" height="2" viewBox="0 0 12 2" fill="none" aria-hidden="true"><line x1="0" y1="1" x2="12" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -141,7 +119,6 @@
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                         </button>
                       </div>
-                      {%- endif -%}
                       <span class="crate-row__price">{{ item.original_line_price | money }}</span>
                     </div>
                   </div>
