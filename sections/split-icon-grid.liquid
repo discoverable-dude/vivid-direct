@@ -107,16 +107,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: rgb(var(--color-button));
+    width: 48px;
+    height: 48px;
+    color: var(--cta);
+    background: color-mix(in srgb, var(--cta) 10%, transparent);
     margin-bottom: 14px;
-    border-radius: 50%;
-    transition: transform 0.25s ease, box-shadow 0.35s ease;
+    border-radius: 4px;
+    transition: transform 0.25s ease, box-shadow 0.35s ease, background 0.25s ease;
   }
   .sig__card:hover .sig__icon {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 10px color-mix(in srgb, var(--cta) 16%, transparent), 0 0 24px 4px color-mix(in srgb, var(--cta) 45%, transparent);
+    transform: scale(1.05);
+    background: color-mix(in srgb, var(--cta) 20%, transparent);
+    box-shadow: 0 0 24px 4px color-mix(in srgb, var(--cta) 35%, transparent);
   }
-  .sig__icon svg { width: 28px; height: 28px; }
+  .sig__icon svg { width: 24px; height: 24px; }
   .sig__light {
     position: absolute;
     left: 0;
