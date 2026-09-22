@@ -40,34 +40,6 @@
 
               {%- for item in cart.items -%}
 
-                {%- comment -%} Cook methods string {%- endcomment -%}
-                {%- assign _tax_cooking = item.product.metafields.shopify.cooking-method.value -%}
-                {%- assign _cook_str = "" -%}
-                {%- for _m in _tax_cooking -%}
-                  {%- assign _m_str = _m.label | default: _m | downcase -%}
-                  {%- assign _m_label = "" -%}
-                  {%- case _m_str -%}
-                    {%- when "boiling"          -%}{%- assign _m_label = "Boil"   -%}
-                    {%- when "steaming"         -%}{%- assign _m_label = "Steam"  -%}
-                    {%- when "roasting"         -%}{%- assign _m_label = "Roast"  -%}
-                    {%- when "mashing"          -%}{%- assign _m_label = "Mash"   -%}
-                    {%- when "chips", "frying"  -%}{%- assign _m_label = "Chip"   -%}
-                    {%- when "jacket", "baking" -%}{%- assign _m_label = "Jacket" -%}
-                  {%- endcase -%}
-                  {%- if _m_label != "" -%}
-                    {%- if _cook_str != "" -%}{%- assign _cook_str = _cook_str | append: " / " -%}{%- endif -%}
-                    {%- assign _cook_str = _cook_str | append: _m_label -%}
-                  {%- endif -%}
-                {%- endfor -%}
-
-                {%- comment -%} Flesh variety label {%- endcomment -%}
-                {%- assign _tax_variety = item.product.metafields.shopify.potato-variety.value -%}
-                {%- assign _flesh_label = "" -%}
-                {%- if _tax_variety != blank -%}
-                  {%- assign _v = _tax_variety | first -%}
-                  {%- assign _flesh_label = _v.label | default: _v -%}
-                {%- endif -%}
-
                 <div class="crate-row" id="CartItem-{{ item.index | plus: 1 }}">
 
                   <a href="{{ item.url }}" class="crate-row__img" aria-hidden="true" tabindex="-1">
@@ -82,15 +54,6 @@
                   </a>
 
                   <div class="crate-row__body">
-                    {%- if _cook_str != "" or _flesh_label != "" -%}
-                      <p class="crate-row__meta">
-                        {{- _cook_str | upcase -}}
-                        {%- if _cook_str != "" and _flesh_label != "" %} · {% endif -%}
-                        {{- _flesh_label | upcase -}}
-                        {%- if _flesh_label != "" %} FLESH{% endif -%}
-                      </p>
-                    {%- endif -%}
-
                     <a href="{{ item.url }}" class="crate-row__name">{{ item.product.title }}</a>
 
                     {%- if item.product.has_only_default_variant == false -%}
@@ -240,7 +203,7 @@
         {%- if _shown >= 4 -%}{%- break -%}{%- endif -%}
         {%- unless _cart_pids contains _p.id -%}
           {%- assign _shown = _shown | plus: 1 -%}
-          {%- render 'card-potato', product: _p -%}
+          {%- render 'product-card', product: _p -%}
         {%- endunless -%}
       {%- endfor -%}
     {%- endcapture -%}

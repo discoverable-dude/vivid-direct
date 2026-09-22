@@ -1,23 +1,21 @@
 {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'vivid-lightbox.js' | asset_url }}" defer="defer"></script>
 {%- comment -%}
-  product-potato.liquid
-  Heritage potato product page.
+  product-lighting.liquid
+  Main product page.
 
   Per-product metafields (set in Shopify admin → product → metafields):
-    custom.origin_headline  — e.g. "Bred on a German heath, grown in Kent."
+    custom.origin_headline  — headline for the About section
     custom.origin_copy      — multi-line body paragraphs for About section
-    (variant) custom.note   — serving note per variant, e.g. "serves 2–4"
+    (variant) custom.note   — note per variant, e.g. "IP65 rated"
 
   Category (Shopify taxonomy) + custom metafields drive everything — no tags:
-    custom.flesh_colour         → flesh badge + gallery label (fallback: shopify.potato-variety if a valid colour)
-    shopify.cooking-method      → "How to cook it" cards
-    shopify.dietary-preferences → "Good to know" cards
+    shopify.dietary-preferences → "Good to know" cards (leave unused for lighting products)
     custom.product_attributes_1 → "Good to know" cards (bespoke, see lookup below)
 
   Section blocks (configure per product in Online Store customizer):
-    recipe           → "Cook it well" cards
     related_product  → "Pairs well with" product cards
+    faq               → "Care & keeping" accordion items
 {%- endcomment -%}
 
 {%- comment -%}
@@ -492,7 +490,7 @@
       {%- for block in pp_related -%}
         {%- assign rp = block.settings.product -%}
         {%- if rp != blank -%}
-          <div {{ block.shopify_attributes }}>{%- render 'card-potato', product: rp -%}</div>
+          <div {{ block.shopify_attributes }}>{%- render 'product-card', product: rp -%}</div>
         {%- endif -%}
       {%- endfor -%}
     </div>
@@ -570,7 +568,7 @@
 
 {% schema %}
 {
-  "name": "Potato product",
+  "name": "Product page",
   "tag": "div",
   "class": "section",
   "enabled_on": {
@@ -634,7 +632,7 @@
       "name": "Care & keeping item",
       "limit": 5,
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Storing your potatoes" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Care & keeping" },
         { "type": "richtext", "id": "body", "label": "Body" },
         { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
       ]

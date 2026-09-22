@@ -10,7 +10,7 @@
 {
   "sections": {
     "potato-product": {
-      "type": "product-potato",
+      "type": "product-lighting",
       "blocks": {
         "faq_zdy8jt": {
           "type": "faq",
@@ -157,17 +157,6 @@
         "background": "paper-2"
       }
     },
-    "vivid_season_hYwhMC": {
-      "type": "vivid-season",
-      "disabled": true,
-      "name": "Seasonal/availability chart (disabled by default)",
-      "settings": {
-        "bg": "paper2",
-        "eyebrow": "Availability",
-        "heading": "EXAMPLE heading",
-        "intro": "<p>EXAMPLE — this block is disabled by default; enable it if this product needs a seasonal or lead-time chart.</p>"
-      }
-    },
     "vivid_product_grid_katCah": {
       "type": "vivid-product-grid",
       "name": "Related products grid",
@@ -186,7 +175,6 @@
     "potato-product",
     "category_spotlight_6CcCbV",
     "vivid_product_grid_DMbQyj",
-    "vivid_season_hYwhMC",
     "vivid_product_grid_katCah"
   ]
 }

@@ -2,7 +2,7 @@
 {%- comment -%}
   vivid-product-grid.liquid
   Branded product grid — replaces Dawn's featured-collection on Vivid templates.
-  Renders up to 4 products from a chosen collection using the unified card-potato snippet.
+  Renders up to 4 products from a chosen collection using the unified product-card snippet.
   Excludes the current product when rendered on a product page.
 {%- endcomment -%}
 
@@ -36,7 +36,7 @@
         {%- if shown >= limit -%}{%- break -%}{%- endif -%}
         {%- assign shown = shown | plus: 1 -%}
 
-        {%- render 'card-potato', product: p -%}
+        {%- render 'product-card', product: p -%}
 
       {%- endfor -%}
     </div>

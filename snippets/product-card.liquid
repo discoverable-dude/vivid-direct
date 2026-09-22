@@ -1,9 +1,9 @@
 {%- comment -%}
-  Unified product card. Usage: {% render 'card-potato', product: product %}
+  Unified product card. Usage: {% render 'product-card', product: product %}
   Content is auto-derived — no per-card data entry.
 {%- endcomment -%}
-{{ 'morghew-card.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'morghew-card.js' | asset_url }}" defer="defer"></script>
+{{ 'vivid-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vivid-card.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign _vcount = product.variants.size
