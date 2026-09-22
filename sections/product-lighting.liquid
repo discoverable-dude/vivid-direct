@@ -192,6 +192,22 @@
 
         <h1 class="pp-title">{{ product.title }}</h1>
 
+        {%- assign pp_stats = section.blocks | where: "type", "stat" -%}
+        {%- if pp_stats.size > 0 -%}
+          <ul class="pp-stats">
+            {%- for block in pp_stats -%}
+              {%- if block.settings.label != blank -%}
+                <li class="pp-stat" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != "none" -%}
+                    <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
+                  {%- endif -%}
+                  <span>{{ block.settings.label }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
         <div class="pp-price" id="pp-price-{{ section.id }}">
           {%- if product.price_varies -%}
             {{ product.price_min | money }} – {{ product.price_max | money }}
@@ -615,6 +631,24 @@
     }
   ],
   "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "info": "e.g. IP65 Rated, 24V, 3000K", "default": "IP65 Rated" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
+          { "value": "none", "label": "No icon" },
+          { "value": "check", "label": "Check" },
+          { "value": "lightbulb", "label": "Lightbulb" },
+          { "value": "eye", "label": "Eye" },
+          { "value": "house", "label": "House" },
+          { "value": "building", "label": "Building" },
+          { "value": "truck", "label": "Delivery truck" },
+          { "value": "clock", "label": "Clock" },
+          { "value": "package", "label": "Package" }
+        ] }
+      ]
+    },
     {
       "type": "related_product",
       "name": "Paired product",

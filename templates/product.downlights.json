@@ -43,9 +43,33 @@
             "body": "<p>Free next day delivery over £150 when ordered by 1pm. Standard delivery otherwise.</p>",
             "open_by_default": false
           }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — IP65 Rated",
+            "icon": "check"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — Dimmable",
+            "icon": "lightbulb"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — 5 Yr Warranty",
+            "icon": "package"
+          }
         }
       },
       "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
         "faq_zdy8jt",
         "faq_1",
         "faq_2",
