@@ -96,13 +96,13 @@
       "type": "vivid-product-grid",
       "name": "Product grid",
       "settings": {
-        "collection": "downlights",
+        "collection": "adapt-draw-corner-lighting",
         "products_to_show": 4,
         "eyebrow": "You may also like",
-        "heading": "recommended products",
+        "heading": "Recommended Products",
         "show_view_all": false,
         "view_all_label": "View all",
-        "background": "paper-2"
+        "background": "paper"
       }
     },
     "vivid_product_grid_katCah": {

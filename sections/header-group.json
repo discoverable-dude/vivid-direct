@@ -23,12 +23,29 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "menu_feature_X7xcrA": {
+          "type": "menu_feature",
+          "settings": {
+            "menu_handle": "fossled",
+            "image": "shopify://shop_images/Screenshot_16-9-2026_163737_fossled.com.jpg",
+            "eyebrow": "In season now",
+            "heading": "Golden Wonder",
+            "subtext": "The heritage chipper",
+            "button_label": "Shop the shelf",
+            "button_url": "shopify://collections/fossled"
+          }
+        }
+      },
+      "block_order": [
+        "menu_feature_X7xcrA"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
+        "sticky_header_type": "always",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
