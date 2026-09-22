@@ -1043,7 +1043,10 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
 }
 
 /* Product card images always fit fully inside their box (letterboxed on
-   the white tile above) rather than being cropped to fill it. */
+   the white tile above) rather than being cropped to fill it. Matches
+   Dawn's own .card__media .media img selector plus an ancestor class, so
+   it wins on specificity regardless of stylesheet load order. */
+.card-wrapper .card__media .media img,
 .card-wrapper .card__media img {
   object-fit: contain;
 }
