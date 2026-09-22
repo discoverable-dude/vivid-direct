@@ -42,7 +42,7 @@
 .rhub-filtergroup__label { font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-right: 4px; }
 .rhub-pill { display: inline-flex; align-items: center; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--ink); background: var(--paper); border: 1.5px solid var(--line); border-radius: 100px; padding: 7px 16px; cursor: pointer; transition: border-color 0.18s, background 0.18s, color 0.18s; }
 .rhub-pill:hover { border-color: var(--ink); }
-.rhub-pill.is-active { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.rhub-pill.is-active { background: var(--paper); border-color: var(--paper); color: var(--white); }
 .rhub-count { font-family: var(--font-body); font-size: 14px; color: var(--ink-soft); padding: 20px 0 0; margin: 0; }
 .rhub-count span { font-family: var(--font-head); font-weight: 800; color: var(--ink); font-size: 16px; }
 @media (max-width: 700px) { .rhub-filters__inner { flex-direction: column; align-items: stretch; } .rhub-search { max-width: none; } }
@@ -87,7 +87,7 @@
 .rhub-chef__role { font-family: var(--font-body); font-size: 13px; color: var(--ink-soft); margin: 0 0 2px; }
 .rhub-chef__count { font-family: var(--font-body); font-size: 12px; color: var(--ink-soft); margin: 0; }
 .rhub-chef__ig { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--paper-2); color: var(--ink); transition: background 0.18s, color 0.18s; }
-.rhub-chef__ig:hover { background: var(--ink); color: var(--white); }
+.rhub-chef__ig:hover { background: var(--paper); color: var(--white); }
 .rhub-chef__ig svg { width: 16px; height: 16px; }
 @media (max-width: 860px) { .rhub-chefs__grid { grid-template-columns: 1fr; } }
 

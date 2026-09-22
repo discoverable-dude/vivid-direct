@@ -277,7 +277,7 @@
   color: var(--ink);
   border: 1.5px solid var(--ink);
 }
-.cart-drawer .cart__view-crate-button:hover { background: var(--ink); color: var(--white); }
+.cart-drawer .cart__view-crate-button:hover { background: var(--paper); color: var(--white); }
 .cart-drawer .cart__view-crate-button:hover .cart__view-crate-icon { color: var(--white); }
 
 /* ── Loading state (stepper / remove) ──

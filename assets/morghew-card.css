@@ -89,7 +89,7 @@
   text-decoration: none;
   gap: 7px;
 }
-.mcard__btn--gated:hover { background: var(--ink); color: var(--white); }
+.mcard__btn--gated:hover { background: var(--paper); color: var(--white); }
 .mcard__btn--gated svg { flex: 0 0 auto; width: 15px; height: 15px; }
 .mcard__btn .loading__spinner { display: none; }
 .mcard__btn.is-loading .mcard__btn-label { visibility: hidden; }

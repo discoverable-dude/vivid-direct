@@ -268,9 +268,9 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .btn--ghost:hover {
-  background: var(--ink);
+  background: var(--paper);
   color: var(--white);
-  border-color: var(--ink);
+  border-color: var(--paper);
 }
 
 .btn--outline-light {

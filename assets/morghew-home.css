@@ -295,7 +295,7 @@
   justify-content: center;
   transition: background 0.2s, color 0.2s;
 }
-.variety-rail__btn:hover { background: var(--ink); color: var(--white); }
+.variety-rail__btn:hover { background: var(--paper); color: var(--white); }
 .variety-rail__btn svg { display: block; }
 .variety-rail__btn--prev svg { transform: scaleX(-1); }
 .variety-rail__scroller {
@@ -386,7 +386,7 @@
   align-items: center;
   justify-content: center;
   gap: 18px;
-  background: var(--ink);
+  background: var(--paper);
   color: var(--white);
   border-radius: 8px;
   font-family: var(--font-head);

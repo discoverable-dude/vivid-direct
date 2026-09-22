@@ -12,8 +12,8 @@
 .msp[data-surface="sage"]  { --msp-bg: var(--wash-sage);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
 .msp[data-surface="clay"]  { --msp-bg: var(--wash-clay);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
 .msp[data-surface="soil"]  { --msp-bg: var(--wash-soil);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="bark"]  { --msp-bg: var(--bark); --sec-ink: var(--paper); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
-.msp[data-surface="ink"]   { --msp-bg: var(--ink);  --sec-ink: var(--paper); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
+.msp[data-surface="bark"]  { --msp-bg: var(--bark); --sec-ink: var(--ink); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
+.msp[data-surface="ink"]   { --msp-bg: var(--bark); --sec-ink: var(--ink); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
 
 /* Gold accent — darker gold on light surfaces (AA-safe for text), bright wheat on dark surfaces. */
 .msp { --msp-accent: var(--hessian-text); }
