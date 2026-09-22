@@ -87,10 +87,13 @@
   --sec-pad-sm: clamp(36px, 4vw, 56px);
   --sec-pad-lg: clamp(72px, 9vw, 130px);
 
-  /* Radius — matches the live site's rounded cards (14px) and pill
-     buttons (40px) */
-  --radius:      10px;
-  --radius-lg:   14px;
+  /* Radius — matches vividlightworx.co.uk: sharp, square-cornered cards
+     and images (definition comes from tonal contrast and hard image
+     edges, not rounding), with fully-rounded pill buttons as the one
+     deliberate exception. Was 10px/14px when this matched a rounded-card
+     WordPress design; now 0 to match VLX's edge language. */
+  --radius:      0px;
+  --radius-lg:   0px;
   --radius-pill: 40px;
 
   /* Shadows */
