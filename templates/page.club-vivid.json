@@ -18,7 +18,7 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Club VIVID",
         "body": "Take advantage of member discounts and design services, and be first to access new products. Members benefit from seasonal discounts and a 5-year guarantee on products as standard."
@@ -108,7 +108,7 @@
       }
     },
     "registration_form": {
-      "type": "morghew-form",
+      "type": "vivid-form",
       "blocks": {
         "field_1": {
           "type": "field",

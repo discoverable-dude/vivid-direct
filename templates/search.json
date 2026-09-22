@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "morghew-search",
+      "type": "vivid-search",
       "blocks": {
         "popular_1": { "type": "popular", "settings": { "label": "LED strip lights", "icon": "roast" } },
         "popular_2": { "type": "popular", "settings": { "label": "Downlights", "icon": "leaf" } },

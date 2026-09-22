@@ -18,7 +18,7 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "FAQs",
         "body": "Answers to some of our most common questions. Can't find what you need? Get in touch and we'll help directly."

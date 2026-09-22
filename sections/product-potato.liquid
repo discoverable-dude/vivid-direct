@@ -1,5 +1,5 @@
-{{ 'morghew-sections.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'morghew-lightbox.js' | asset_url }}" defer="defer"></script>
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vivid-lightbox.js' | asset_url }}" defer="defer"></script>
 {%- comment -%}
   product-potato.liquid
   Heritage potato product page.
@@ -264,7 +264,7 @@
           </product-form>
 
           <p class="pp-delivery">
-            {%- render 'morghew-icon', icon: 'truck', size: 16 -%}
+            {%- render 'vivid-icon', icon: 'truck', size: 16 -%}
             {{ section.settings.delivery_note }}
           </p>
 
@@ -331,7 +331,7 @@
           <details class="pp-acc__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
             <summary class="pp-acc__q">
               <span>{{ block.settings.title }}</span>
-              {%- render 'morghew-icon', icon: 'chevron', size: 18 -%}
+              {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
             </summary>
             <div class="pp-acc__a">{{ block.settings.body }}</div>
           </details>
@@ -367,7 +367,7 @@
             {%- endif -%}
           {%- endfor -%}
           <div class="pp-cook-card" style="--cook-c: {{ c_color }}">
-            <div class="pp-cook-card__icon">{%- render 'morghew-icon', icon: cook_tag, size: 28 -%}</div>
+            <div class="pp-cook-card__icon">{%- render 'vivid-icon', icon: cook_tag, size: 28 -%}</div>
             <p class="pp-cook-card__name">{{ cook_tag | capitalize }}</p>
             {%- if c_desc != "" -%}
               <p class="pp-cook-card__desc">{{ c_desc }}</p>
@@ -403,7 +403,7 @@
             {%- endif -%}
           {%- endfor -%}
           <div class="pp-attr-card">
-            <div class="pp-attr-card__icon">{%- render 'morghew-icon', icon: 'leaf', size: 22 -%}</div>
+            <div class="pp-attr-card__icon">{%- render 'vivid-icon', icon: 'leaf', size: 22 -%}</div>
             <p class="pp-attr-card__title">{{ a_title }}</p>
             {%- if a_desc != "" -%}
               <p class="pp-attr-card__desc">{{ a_desc }}</p>
@@ -424,7 +424,7 @@
   "Design articles that feature this product" — reverse-lookup the design blog for articles
   whose design_featured_product or design_shop_items reference this product. Link once on
   the article (its shop items / featured product) and it appears here automatically. Max 3.
-  Renamed from the Morghew theme's "Recipes that use this product" block.
+  Renamed from the Vivid theme's "Recipes that use this product" block.
 {%- endcomment -%}
 {%- capture pp_design_cards -%}
   {%- assign _rc = 0 -%}
@@ -447,7 +447,7 @@
             <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" width="700" height="{{ 700 | divided_by: art.image.aspect_ratio | default: 700 | round }}" loading="lazy">
           {%- else -%}
             <div class="pp-recipe-card__placeholder">
-              {%- render 'morghew-icon', icon: 'roast', size: 36 -%}
+              {%- render 'vivid-icon', icon: 'roast', size: 36 -%}
               <span>Article photo coming soon</span>
             </div>
           {%- endif -%}
@@ -469,7 +469,7 @@
       {%- if section.settings.design_articles_url != blank -%}
         <a href="{{ section.settings.design_articles_url }}" class="pp-viewall">
           All design articles
-          {%- render 'morghew-icon', icon: 'chevron', size: 18 -%}
+          {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
         </a>
       {%- endif -%}
     </div>

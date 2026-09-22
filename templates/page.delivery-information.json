@@ -18,7 +18,7 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Delivery Information",
         "body": "Free UK delivery on orders over £150 net. Here's exactly how shipping, next-day delivery and lead times work."

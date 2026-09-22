@@ -1,11 +1,11 @@
 {%- comment -%}
-  Morghew Editorial Hero — tall, bottom-aligned page hero for the editorial
+  Vivid Editorial Hero — tall, bottom-aligned page hero for the editorial
   pages (About / The Estate / The Shoot): breadcrumb strip, eyebrow, h1,
-  lede, optional stats row. Standalone variation — morghew-hero (used on
+  lede, optional stats row. Standalone variation — vivid-hero (used on
   trade/contact) is deliberately left untouched.
 {%- endcomment -%}
 
-{{ 'morghew-editorial.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
 {%- assign has_image = false -%}
 {%- if section.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}

@@ -18,7 +18,7 @@
       }
     },
     "hero": {
-      "type": "morghew-hero-editorial",
+      "type": "vivid-hero-editorial",
       "settings": {
         "image": "",
         "image_opacity": 30,
@@ -29,14 +29,14 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Trade customers",
         "body": "Whatever the job, there's a Vivid Direct product to suit it — from everyday LED essentials to bespoke neon and smart lighting."
       }
     },
     "split_how": {
-      "type": "morghew-split",
+      "type": "vivid-split",
       "blocks": {
         "li1": {
           "type": "item",
@@ -81,8 +81,8 @@
         "cta_url": ""
       }
     },
-    "morghew_form_f3CEt8": {
-      "type": "morghew-form",
+    "vivid_form_f3CEt8": {
+      "type": "vivid-form",
       "blocks": {
         "field_hjTD9y": {
           "type": "field",
@@ -153,7 +153,7 @@
       }
     },
     "cta": {
-      "type": "morghew-cta",
+      "type": "vivid-cta",
       "settings": {
         "image": "",
         "eyebrow": "Trade & wholesale",
@@ -171,7 +171,7 @@
     "hero",
     "lede",
     "split_how",
-    "morghew_form_f3CEt8",
+    "vivid_form_f3CEt8",
     "cta"
   ]
 }

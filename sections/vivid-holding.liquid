@@ -1,7 +1,7 @@
 {%- comment -%}
-  Morghew Holding — full-viewport "coming soon" page for the password
+  Vivid Holding — full-viewport "coming soon" page for the password
   template. Homepage-style video/image hero, countdown to launch, email
-  signup. Self-contained: loads the brand fonts + morghew.css itself
+  signup. Self-contained: loads the brand fonts + vivid.css itself
   because layout/password.liquid doesn't. The "Enter using password"
   link stays available via Dawn's main-password-header, which this
   section restyles to float transparently over the hero.
@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
-{{ 'morghew.css' | asset_url | stylesheet_tag }}
+{{ 'vivid.css' | asset_url | stylesheet_tag }}
 
 <section class="mhold" id="mhold-{{ section.id }}">
   {%- if section.settings.video != blank -%}

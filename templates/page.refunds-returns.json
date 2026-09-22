@@ -18,7 +18,7 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Refunds & Returns Policy",
         "body": "Not right for the job? You have 30 days from the date of purchase to return it, as long as it's unused and in its original packaging."

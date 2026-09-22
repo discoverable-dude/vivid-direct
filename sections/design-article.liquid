@@ -2,11 +2,11 @@
   design-article.liquid — long-form layout for lighting/design blog articles.
   Assigned via the "design" template suffix (templates/article.design.json).
   Driven by article metafields under the `custom` namespace + a Designer metaobject.
-  Renamed from the Morghew theme's recipe-article.liquid — CSS classes are
+  Renamed from the Vivid theme's recipe-article.liquid — CSS classes are
   still prefixed `recipe__` internally (cosmetic only, not renamed this pass).
 {%- endcomment -%}
 
-{{ 'morghew-recipe.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-recipe.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign mf = article.metafields.custom
@@ -101,8 +101,8 @@
                     </span>
                     <span class="recipe__shop-price">{{ v.price | money }}</span>
                     <button type="button" class="recipe__shop-add" data-add-one="{{ v.id }}" aria-label="Add {{ v.product.title | escape }} to basket">
-                      <span class="recipe__shop-add-icon recipe__shop-add-icon--plus">{%- render 'morghew-icon', icon: 'plus', size: 16 -%}</span>
-                      <span class="recipe__shop-add-icon recipe__shop-add-icon--check">{%- render 'morghew-icon', icon: 'check', size: 16 -%}</span>
+                      <span class="recipe__shop-add-icon recipe__shop-add-icon--plus">{%- render 'vivid-icon', icon: 'plus', size: 16 -%}</span>
+                      <span class="recipe__shop-add-icon recipe__shop-add-icon--check">{%- render 'vivid-icon', icon: 'check', size: 16 -%}</span>
                       {%- render 'loading-spinner' -%}
                     </button>
                   </div>

@@ -1,5 +1,5 @@
 {%- comment -%} Design hub — bespoke listing for the lighting design blog. Renamed from recipe-hub.liquid; CSS classes stay `rhub-*` internally (cosmetic only, not renamed this pass). {%- endcomment -%}
-{{ 'morghew-recipe-hub.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-recipe-hub.css' | asset_url | stylesheet_tag }}
 {%- assign design_blog = blogs.design -%}
 {%- liquid
   assign feat = blank
@@ -35,7 +35,7 @@
           {%- if feat.image -%}<img src="{{ feat.image | image_url: width: 1000 }}" alt="{{ feat.image.alt | default: feat.title | escape }}" loading="eager" fetchpriority="high" width="1000" height="750">{%- endif -%}
           <span class="rhub-feat__badge">Featured article</span>
           <span class="rhub-feat__strip">
-            {%- if feat.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock', size: 14 -%}{{ feat.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+            {%- if feat.metafields.custom.design_read_time != blank -%}<span>{%- render 'vivid-icon', icon: 'clock', size: 14 -%}{{ feat.metafields.custom.design_read_time.value }}</span>{%- endif -%}
             {%- if feat.metafields.custom.design_area != blank -%}<span>Serves {{ feat.metafields.custom.design_area.value }}</span>{%- endif -%}
             {%- if feat.metafields.custom.design_style != blank -%}<span>{{ feat.metafields.custom.design_style.value }}</span>{%- endif -%}
           </span>
@@ -60,7 +60,7 @@
   <div class="rhub-filters" id="rhub-filters-{{ section.id }}">
     <div class="rhub__wrap rhub-filters__inner">
       <div class="rhub-search">
-        {%- render 'morghew-icon', icon: 'search' -%}
+        {%- render 'vivid-icon', icon: 'search' -%}
         <input type="search" class="rhub-search__input" id="rhub-q-{{ section.id }}" placeholder="Search by title or room…" aria-label="Search recipes">
       </div>
       <div class="rhub-filtergroup" data-group="room">
@@ -91,7 +91,7 @@
           <div class="rhub-card__media">
             {%- if a.image -%}<img src="{{ a.image | image_url: width: 600 }}" alt="{{ a.image.alt | default: a.title | escape }}" loading="lazy" width="600" height="450">{%- endif -%}
             <span class="rhub-card__overlay">
-              {%- if a.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock', size: 14 -%}{{ a.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+              {%- if a.metafields.custom.design_read_time != blank -%}<span>{%- render 'vivid-icon', icon: 'clock', size: 14 -%}{{ a.metafields.custom.design_read_time.value }}</span>{%- endif -%}
               {%- if a.metafields.custom.design_area != blank -%}<span>Serves {{ a.metafields.custom.design_area.value }}</span>{%- endif -%}
             </span>
           </div>
@@ -133,7 +133,7 @@
                 {%- if c.role.value != blank -%}<p class="rhub-chef__role">{{ c.role.value }}</p>{%- endif -%}
                 <p class="rhub-chef__count">{{ n }} article{% if n != 1 %}s{% endif %}</p>
               </div>
-              {%- if c.instagram.value != blank -%}<a class="rhub-chef__ig" href="{{ c.instagram.value }}" target="_blank" rel="noopener" aria-label="{{ c.name.value | escape }} on Instagram">{%- render 'morghew-icon', icon: 'arrow' -%}</a>{%- endif -%}
+              {%- if c.instagram.value != blank -%}<a class="rhub-chef__ig" href="{{ c.instagram.value }}" target="_blank" rel="noopener" aria-label="{{ c.name.value | escape }} on Instagram">{%- render 'vivid-icon', icon: 'arrow' -%}</a>{%- endif -%}
             </div>
           {%- endfor -%}
         </div>

@@ -1,5 +1,5 @@
 {%- comment -%}
-  morghew-contact-details.liquid — phone / email / hours / address + embedded map.
+  vivid-contact-details.liquid — phone / email / hours / address + embedded map.
   Built for the Contact page (sits between the hero and the form) but works on
   any page. Map is a keyless Google embed driven by the "Map search" setting.
 {%- endcomment -%}
@@ -24,7 +24,7 @@
 
         {%- if section.settings.phone != blank -%}
           <div class="mcd__row">
-            <span class="mcd__ic">{% render 'morghew-icon', icon: 'phone', size: 22 %}</span>
+            <span class="mcd__ic">{% render 'vivid-icon', icon: 'phone', size: 22 %}</span>
             <div>
               <span class="mcd__label">{{ section.settings.phone_label | default: 'Call the estate office' | escape }}</span>
               <a class="mcd__big" href="tel:{{ _tel }}">{{ section.settings.phone | escape }}</a>
@@ -35,7 +35,7 @@
 
         {%- if section.settings.email != blank -%}
           <div class="mcd__row">
-            <span class="mcd__ic">{% render 'morghew-icon', icon: 'mail', size: 22 %}</span>
+            <span class="mcd__ic">{% render 'vivid-icon', icon: 'mail', size: 22 %}</span>
             <div>
               <span class="mcd__label">{{ section.settings.email_label | default: 'Email us' | escape }}</span>
               <a class="mcd__big mcd__big--email" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
@@ -46,7 +46,7 @@
 
         {%- if section.settings.hours != blank -%}
           <div class="mcd__row">
-            <span class="mcd__ic">{% render 'morghew-icon', icon: 'clock', size: 22 %}</span>
+            <span class="mcd__ic">{% render 'vivid-icon', icon: 'clock', size: 22 %}</span>
             <div>
               <span class="mcd__label">{{ section.settings.hours_label | default: 'Farm shop hours' | escape }}</span>
               <span class="mcd__strong">{{ section.settings.hours | escape }}</span>
@@ -57,7 +57,7 @@
 
         {%- if section.settings.address != blank -%}
           <div class="mcd__row">
-            <span class="mcd__ic">{% render 'morghew-icon', icon: 'pin', size: 22 %}</span>
+            <span class="mcd__ic">{% render 'vivid-icon', icon: 'pin', size: 22 %}</span>
             <div>
               <span class="mcd__label">{{ section.settings.address_label | default: 'Find us' | escape }}</span>
               <address class="mcd__address">{{ section.settings.address }}</address>
@@ -82,7 +82,7 @@
         <div class="mcd__actions">
           {%- if section.settings.map_query != blank -%}
             <a class="mcd__btn mcd__btn--solid" href="https://www.google.com/maps/dir/?api=1&destination={{ section.settings.map_query | url_encode }}" target="_blank" rel="noopener">
-              {% render 'morghew-icon', icon: 'truck', size: 18 %} Get directions
+              {% render 'vivid-icon', icon: 'truck', size: 18 %} Get directions
             </a>
           {%- endif -%}
           {%- if section.settings.secondary_label != blank and section.settings.secondary_url != blank -%}

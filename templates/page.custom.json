@@ -18,7 +18,7 @@
       }
     },
     "hero": {
-      "type": "morghew-hero-editorial",
+      "type": "vivid-hero-editorial",
       "blocks": {
         "s1": {
           "type": "stat",
@@ -61,18 +61,18 @@
         "crumb": "Example page — page.custom",
         "eyebrow": "EXAMPLE CONTENT · Project spotlight",
         "headline": "A blank page.custom template, ready to reuse.",
-        "lede": "This is the reusable landing-page scaffold that used to hold Morghew's shoot content — same section types (editorial hero with stats, lede, image/text splits, quote, card strands, CTA), stripped back to placeholder copy. Assign this template to any page and swap the blocks in the theme editor."
+        "lede": "This is the reusable landing-page scaffold that used to hold Vivid's shoot content — same section types (editorial hero with stats, lede, image/text splits, quote, card strands, CTA), stripped back to placeholder copy. Assign this template to any page and swap the blocks in the theme editor."
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "How to use this template",
         "body": "Everything below is a live example of each block type available on this page: a lede, two image/text splits, a stats strip, a pull quote, a three-card strand, and a closing CTA. Edit or delete any of them in the theme customizer — nothing here is wired to real data."
       }
     },
     "split_a": {
-      "type": "morghew-split",
+      "type": "vivid-split",
       "blocks": {
         "li1": {
           "type": "item",
@@ -111,7 +111,7 @@
       }
     },
     "split_b": {
-      "type": "morghew-split",
+      "type": "vivid-split",
       "settings": {
         "flip": true,
         "image": "",
@@ -125,7 +125,7 @@
       }
     },
     "quote": {
-      "type": "morghew-quote",
+      "type": "vivid-quote",
       "settings": {
         "quote": "\"Replace this with a real client quote, or delete the block.\"",
         "author": "Example Name",
@@ -133,7 +133,7 @@
       }
     },
     "strands": {
-      "type": "morghew-strands",
+      "type": "vivid-strands",
       "blocks": {
         "c1": {
           "type": "card",
@@ -178,7 +178,7 @@
       }
     },
     "cta": {
-      "type": "morghew-cta",
+      "type": "vivid-cta",
       "settings": {
         "image": "",
         "eyebrow": "EXAMPLE CONTENT",

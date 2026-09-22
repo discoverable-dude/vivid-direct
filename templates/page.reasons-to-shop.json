@@ -18,7 +18,7 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Reasons to Shop With Us",
         "body": "We're here for all your lighting supplies — a huge range, trade discounts, next-day delivery, and a team that actually knows the products."

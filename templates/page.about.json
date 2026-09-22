@@ -18,7 +18,7 @@
       }
     },
     "hero": {
-      "type": "morghew-hero-editorial",
+      "type": "vivid-hero-editorial",
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
         "image_opacity": 70,
@@ -29,14 +29,14 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "The short version",
         "body": "We stock a huge range of LED, neon and smart lighting from the brands the trade actually specifies, hold it in stock, and get it to you fast. No hunting around, no guesswork on compatibility, and real advice from people who know the products."
       }
     },
     "split_story": {
-      "type": "morghew-split",
+      "type": "vivid-split",
       "settings": {
         "flip": false,
         "image": "shopify://shop_images/vd-neon-cap-vs-mould.png",
@@ -50,7 +50,7 @@
       }
     },
     "split_work": {
-      "type": "morghew-split",
+      "type": "vivid-split",
       "blocks": {
         "li1": {
           "type": "item",
@@ -96,7 +96,7 @@
       }
     },
     "quote": {
-      "type": "morghew-quote",
+      "type": "vivid-quote",
       "settings": {
         "quote": "We needed a complex design produced very quickly. Vivid hold a lot of off-the-shelf kit so could deliver within our allotted timeframe, to the quality we expected and required.",
         "author": "David Keane",
@@ -104,7 +104,7 @@
       }
     },
     "strands": {
-      "type": "morghew-strands",
+      "type": "vivid-strands",
       "blocks": {
         "c1": {
           "type": "card",
@@ -149,7 +149,7 @@
       }
     },
     "cta": {
-      "type": "morghew-cta",
+      "type": "vivid-cta",
       "settings": {
         "image": "shopify://shop_images/vd-neon-series-360.jpg",
         "eyebrow": "Ready when you are",

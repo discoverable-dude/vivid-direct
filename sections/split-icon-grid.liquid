@@ -29,7 +29,7 @@
           {%- if block.type == 'feature' -%}
             <div class="sig__card" {{ block.shopify_attributes }}>
               {%- if block.settings.icon != blank -%}
-                <span class="sig__icon">{%- render 'morghew-icon', icon: block.settings.icon, size: 28 -%}</span>
+                <span class="sig__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 28 -%}</span>
               {%- endif -%}
               {%- if block.settings.heading != blank -%}<h3 class="sig__card-h">{{ block.settings.heading }}</h3>{%- endif -%}
               {%- if block.settings.text != blank -%}<p class="sig__card-t">{{ block.settings.text }}</p>{%- endif -%}
