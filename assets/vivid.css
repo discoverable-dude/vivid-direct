@@ -1042,3 +1042,9 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
   background-color: #ffffff;
 }
 
+/* Product card images always fit fully inside their box (letterboxed on
+   the white tile above) rather than being cropped to fill it. */
+.card-wrapper .card__media img {
+  object-fit: contain;
+}
+
