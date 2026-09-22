@@ -1030,3 +1030,15 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
   border-color: color-mix(in srgb, var(--quick-add-bg) 85%, black);
 }
 
+/* ── Product card image area — always white, never transparent.
+   Many supplier product photos (FossLED, Knightsbridge etc.) are PNGs with
+   a transparent background; Dawn's default lets the card's own (dark)
+   background show through those transparent pixels, which looks broken
+   next to photos that have their own opaque white/grey studio backdrop.
+   Forcing a consistent white tile behind every product image fixes both
+   at once and matches standard e-commerce presentation. ── */
+.card-wrapper .media--transparent,
+.card-wrapper .card__media {
+  background-color: #ffffff;
+}
+
