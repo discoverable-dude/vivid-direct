@@ -12,6 +12,7 @@
     "banner": {
       "type": "collection-hero-banner",
       "settings": {
+        "image": "{{ collection.image }}",
         "heading": "",
         "description": ""
       }
