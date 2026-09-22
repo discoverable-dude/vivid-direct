@@ -21,86 +21,139 @@
       "type": "vivid-lede",
       "settings": {
         "kicker": "Reasons to Shop With Us",
-        "body": "We're here for all your lighting supplies — a huge range, trade discounts, next-day delivery, and a team that actually knows the products."
+        "body": "We're here for all your lighting supplies."
       }
     },
-    "benefits": {
-      "type": "multicolumn",
+    "row_range": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": false,
+        "asset_image": "vlx-neon-banner.jpg",
+        "ratio": "4 / 3",
+        "eyebrow": "Range & Pricing",
+        "heading": "Huge range and trade discounts",
+        "body": "<p>With a huge catalogue of high-quality lighting products and accessories, Vivid Direct is your ideal wholesale partner in the UK. We offer trade discounts and can supply electrical lighting products and components UK-wide in bulk quantities for trade and business clients.</p><p>Our extensive selection is ideal for installers looking for flexible, dynamic lighting solutions for homes and businesses. Browse our range of LED strips and lighting products online, or get in touch to learn more.</p>",
+        "cta_label": "Sign up to a trade account",
+        "cta_url": "shopify://pages/trade-account",
+        "cta_style": "solid",
+        "asset_image_width": "2560",
+        "asset_image_height": "1338"
+      }
+    },
+    "row_delivery": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": true,
+        "asset_image": "vlx-light-skirting-1.jpg",
+        "ratio": "4 / 3",
+        "eyebrow": "Delivery",
+        "heading": "Free next-day delivery",
+        "body": "<p>We supply wholesale lighting products and accessories across the UK to our trade and business clients, with free next-day delivery on orders over £150 (ex. VAT). Order by 1pm and it's with you the very next day, anywhere in the UK.</p><p>Need something faster? We can offer a same-day service on some items — contact us for a quote.</p>",
+        "cta_label": "",
+        "cta_url": "",
+        "cta_style": "solid",
+        "asset_image_width": "920",
+        "asset_image_height": "664"
+      }
+    },
+    "row_bespoke": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": false,
+        "asset_image": "vlx-plaster-in-1.jpg",
+        "ratio": "4 / 3",
+        "eyebrow": "Bespoke",
+        "heading": "Bespoke lighting",
+        "body": "<p>Through our work with Vivid LightWorX and our experienced team, we can offer bespoke lighting solutions to meet the exact requirements of your installation. Many products, such as LED strip profiles and channels, can be cut to size and matched to your installation on request.</p><p>Reach out and let us know what you need — our team will do what it can to accommodate your lighting requirements at affordable prices.</p>",
+        "cta_label": "Get in touch",
+        "cta_url": "shopify://pages/contact",
+        "cta_style": "solid",
+        "asset_image_width": "788",
+        "asset_image_height": "1178"
+      }
+    },
+    "row_service": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": true,
+        "asset_image": "vlx-stairs-commercial.jpg",
+        "ratio": "4 / 3",
+        "eyebrow": "Service",
+        "heading": "Knowledgeable customer service",
+        "body": "<p>Our expertise is second to none when it comes to lighting products and accessories. Although we consistently supply top-quality LED strips and lighting products at competitive prices, it's our friendly, knowledgeable team that our clients come back for.</p><p>Reach out to us and leave an enquiry using our online form, or contact us by telephone or email — our team can help you select exactly the right product for your installation.</p>",
+        "cta_label": "Get in touch",
+        "cta_url": "shopify://pages/contact",
+        "cta_style": "solid",
+        "asset_image_width": "877",
+        "asset_image_height": "880"
+      }
+    },
+    "row_brands": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": false,
+        "asset_image": "vlx-aluminium-profiles.jpg",
+        "ratio": "4 / 3",
+        "eyebrow": "Brands",
+        "heading": "The best electrical brands",
+        "body": "<p>When you shop with Vivid Direct, you can be assured you're getting the very best value for quality lighting solutions on the market. Every product we sell comes from reputable, trustworthy manufacturers that are leaders in innovation.</p><p>We carry products from brands including Lutron, Sensio Lighting, FOSS LED, Knightsbridge and Magnalux, among others. Get in touch if you'd like to know more about these brands and the products they manufacture.</p>",
+        "cta_label": "Shop all products",
+        "cta_url": "shopify://collections/all",
+        "cta_style": "solid",
+        "asset_image_width": "2204",
+        "asset_image_height": "1200"
+      }
+    },
+    "contact_strip": {
+      "type": "contact-info-strip",
       "blocks": {
-        "b1": {
-          "type": "column",
+        "box_call": {
+          "type": "box",
           "settings": {
-            "title": "Huge range & trade discounts",
-            "text": "<p>A huge catalogue of high-quality lighting products and accessories, supplied UK-wide in bulk quantities for trade and business clients, with trade discounts on offer.</p>",
-            "link_label": "Apply for a trade account",
-            "link": "shopify://pages/trade-account"
+            "icon": "phone",
+            "heading": "Call us",
+            "detail": "0203 916 6116",
+            "caption": "Speak to one of our advisors for help, advice and product support.",
+            "link": "tel:02039166116"
           }
         },
-        "b2": {
-          "type": "column",
+        "box_email": {
+          "type": "box",
           "settings": {
-            "title": "Free next-day delivery",
-            "text": "<p>Free next-day delivery on orders over £150 (ex. VAT), anywhere in the UK. Need something faster? We can offer same-day service on some items — contact us for a quote.</p>",
-            "link_label": "",
-            "link": ""
+            "icon": "mail",
+            "heading": "Email us",
+            "detail": "Fill out our form",
+            "caption": "We'll aim to get back to you within one working day.",
+            "link": "shopify://pages/contact"
           }
         },
-        "b3": {
-          "type": "column",
+        "box_faqs": {
+          "type": "box",
           "settings": {
-            "title": "Bespoke lighting",
-            "text": "<p>Through our work with Vivid LightWorX, we can cut LED strip profiles and channels to size and colour-match them to your installation on request — bespoke solutions at affordable prices.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "b4": {
-          "type": "column",
-          "settings": {
-            "title": "Knowledgeable customer service",
-            "text": "<p>We supply quality LED strips and lighting at competitive prices, but our team's product knowledge and service is what our clients come back for.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "b5": {
-          "type": "column",
-          "settings": {
-            "title": "The best electrical brands",
-            "text": "<p>Every product we sell comes from reputable, well-known manufacturers — brands like Lutron, Sensio Lighting, FOSS LED, Knightsbridge, Magnalux and Coolicon, among others.</p>",
-            "link_label": "",
-            "link": ""
+            "icon": "check",
+            "heading": "FAQs",
+            "detail": "All FAQs",
+            "caption": "Quick answers to common questions about ordering and delivery.",
+            "link": "shopify://pages/faqs"
           }
         }
       },
       "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5"
+        "box_call",
+        "box_email",
+        "box_faqs"
       ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 20,
-        "padding_bottom": 60
-      }
+      "settings": {}
     }
   },
   "order": [
     "main",
     "lede",
-    "benefits"
+    "row_range",
+    "row_delivery",
+    "row_bespoke",
+    "row_service",
+    "row_brands",
+    "contact_strip"
   ]
 }
