@@ -94,7 +94,7 @@
      WordPress design; now 0 to match VLX's edge language. */
   --radius:      0px;
   --radius-lg:   0px;
-  --radius-pill: 40px;
+  --radius-pill: 4px;
 
   /* Shadows */
   --shadow-card:       0 24px 50px -24px rgba(8, 42, 56, 0.25);
@@ -185,11 +185,12 @@ h1, h2, h3, h4, h5, h6,
   font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--hessian-text);
+  color: var(--cta);
   display: block;
 }
 
 .eyebrow--light { color: var(--straw-light); }
+.eyebrow--dark { color: var(--hessian-text); }
 
 /* ======================
    6. LAYOUT UTILITIES
