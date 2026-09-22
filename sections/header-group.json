@@ -27,7 +27,7 @@
         "menu_feature_X7xcrA": {
           "type": "menu_feature",
           "settings": {
-            "menu_handle": "fossled",
+            "menu_handle": "downlights",
             "image": "shopify://shop_images/Screenshot_16-9-2026_163737_fossled.com.jpg",
             "eyebrow": "In season now",
             "heading": "Golden Wonder",
@@ -44,7 +44,7 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "always",
         "show_line_separator": true,
         "color_scheme": "scheme-1",

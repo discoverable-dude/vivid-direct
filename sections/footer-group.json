@@ -14,19 +14,18 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "footer_logo": "",
         "blurb": "Your trusted partner in lighting. Huge range of LED, neon and decorative lighting, with trade accounts available.",
         "phone": "0203 916 6116",
         "show_social": true,
         "newsletter_label": "Offers & new products",
-        "email_placeholder": "your@email.com",
+        "email_placeholder": "sales@vivid-direct.co.uk",
         "newsletter_button": "Join",
         "col1_heading": "About Us",
-        "col1_menu": "about-us",
+        "col1_menu": "",
         "col2_heading": "Shop",
-        "col2_menu": "shop",
+        "col2_menu": "",
         "col3_heading": "Visit & find us",
-        "col3_menu": "visit-us",
+        "col3_menu": "",
         "bottom_left": "© Vivid Direct",
         "bottom_mid": "Ashford, Kent · London",
         "bottom_right": ""
