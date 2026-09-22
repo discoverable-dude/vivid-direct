@@ -24,6 +24,18 @@
     "header": {
       "type": "header",
       "blocks": {
+        "menu_feature_XbkcB9": {
+          "type": "menu_feature",
+          "settings": {
+            "menu_handle": "downlights",
+            "image": "shopify://shop_images/Downlight-Shower.jpg",
+            "eyebrow": "Trending",
+            "heading": "Downlights",
+            "subtext": "",
+            "button_label": "Shop now",
+            "button_url": "shopify://collections/downlights"
+          }
+        },
         "menu_feature_X7xcrA": {
           "type": "menu_feature",
           "settings": {
@@ -38,6 +50,7 @@
         }
       },
       "block_order": [
+        "menu_feature_XbkcB9",
         "menu_feature_X7xcrA"
       ],
       "settings": {
