@@ -670,7 +670,7 @@ details[open] > .header__icon--menu .icon-close { display: block !important; }
   min-height: 44px;
   transition: color 0.18s;
 }
-.menu-drawer__account:hover { color: var(--hessian-text) !important; }
+.menu-drawer__account:hover { color: var(--cta) !important; }
 .menu-drawer__account .svg-wrapper,
 .menu-drawer__account account-icon > .svg-wrapper {
   width: 18px !important;
@@ -957,7 +957,7 @@ nav[aria-label="Breadcrumb"][aria-label] {
   color: var(--ink-soft);
 }
 nav[aria-label="Breadcrumb"][aria-label] a {
-  color: var(--hessian-text);
+  color: var(--ink-soft);
   text-decoration: none;
   padding-bottom: 1px;
   background-image: linear-gradient(currentColor, currentColor);

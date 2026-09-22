@@ -45,11 +45,53 @@
         "padding_top": 20,
         "padding_bottom": 60
       }
+    },
+    "contact_strip": {
+      "type": "contact-info-strip",
+      "blocks": {
+        "box_call": {
+          "type": "box",
+          "settings": {
+            "icon": "phone",
+            "heading": "Call us",
+            "detail": "0203 916 6116",
+            "caption": "Speak to one of our advisors for help, advice and product support.",
+            "link": "tel:02039166116"
+          }
+        },
+        "box_email": {
+          "type": "box",
+          "settings": {
+            "icon": "mail",
+            "heading": "Email us",
+            "detail": "Fill out our form",
+            "caption": "We'll aim to get back to you within one working day.",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "box_faqs": {
+          "type": "box",
+          "settings": {
+            "icon": "check",
+            "heading": "FAQs",
+            "detail": "All FAQs",
+            "caption": "Quick answers to common questions about ordering and delivery.",
+            "link": "shopify://pages/faqs"
+          }
+        }
+      },
+      "block_order": [
+        "box_call",
+        "box_email",
+        "box_faqs"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
     "lede",
-    "body"
+    "body",
+    "contact_strip"
   ]
 }
