@@ -75,6 +75,10 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .port-gal__item:hover img {
+    transform: scale(1.06);
   }
   .port-gal__item-info { padding: 16px 18px 20px; }
   .port-gal__item-name {

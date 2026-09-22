@@ -84,6 +84,12 @@
     border-radius: 0;
     padding: 16px 18px;
     background: rgba(var(--color-foreground), 0.03);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .brdir__card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(var(--color-foreground), 0.28);
+    background: rgba(var(--color-foreground), 0.06);
   }
   .brdir__card-top {
     display: flex;

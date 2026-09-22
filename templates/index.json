@@ -87,7 +87,7 @@
         "f_range": {
           "type": "feature",
           "settings": {
-            "icon": "star",
+            "icon": "package",
             "heading": "Huge Range",
             "text": "LED, neon, smart lighting and accessories, always in stock."
           }

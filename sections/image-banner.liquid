@@ -27,6 +27,27 @@
   #Banner-{{ section.id }}::after {
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
+
+  #Banner-{{ section.id }} .banner__video-bg {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    #Banner-{{ section.id }} .banner__video-bg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    #Banner-{{ section.id }} .banner__media img {
+      position: relative;
+      z-index: 0;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -81,6 +102,19 @@
           widths: widths,
           fetchpriority: fetch_priority
       }}
+      {%- if section.settings.enable_video_bg -%}
+        <video
+          class="banner__video-bg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="{{ 'vd-hero-video.mp4' | asset_url }}" type="video/mp4">
+        </video>
+      {%- endif -%}
     </div>
   {%- elsif section.settings.image_2 == blank -%}
     <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
@@ -184,6 +218,13 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_bg",
+      "label": "Play background video over image (desktop)",
+      "info": "Uses assets/vd-hero-video.mp4. The image above is still used as the poster frame and as the mobile background.",
+      "default": false
     },
     {
       "type": "range",

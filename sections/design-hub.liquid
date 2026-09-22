@@ -35,7 +35,7 @@
           {%- if feat.image -%}<img src="{{ feat.image | image_url: width: 1000 }}" alt="{{ feat.image.alt | default: feat.title | escape }}" loading="eager" fetchpriority="high" width="1000" height="750">{%- endif -%}
           <span class="rhub-feat__badge">Featured article</span>
           <span class="rhub-feat__strip">
-            {%- if feat.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ feat.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+            {%- if feat.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock', size: 14 -%}{{ feat.metafields.custom.design_read_time.value }}</span>{%- endif -%}
             {%- if feat.metafields.custom.design_area != blank -%}<span>Serves {{ feat.metafields.custom.design_area.value }}</span>{%- endif -%}
             {%- if feat.metafields.custom.design_style != blank -%}<span>{{ feat.metafields.custom.design_style.value }}</span>{%- endif -%}
           </span>
@@ -91,7 +91,7 @@
           <div class="rhub-card__media">
             {%- if a.image -%}<img src="{{ a.image | image_url: width: 600 }}" alt="{{ a.image.alt | default: a.title | escape }}" loading="lazy" width="600" height="450">{%- endif -%}
             <span class="rhub-card__overlay">
-              {%- if a.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock' -%}{{ a.metafields.custom.design_read_time.value }}</span>{%- endif -%}
+              {%- if a.metafields.custom.design_read_time != blank -%}<span>{%- render 'morghew-icon', icon: 'clock', size: 14 -%}{{ a.metafields.custom.design_read_time.value }}</span>{%- endif -%}
               {%- if a.metafields.custom.design_area != blank -%}<span>Serves {{ a.metafields.custom.design_area.value }}</span>{%- endif -%}
             </span>
           </div>
