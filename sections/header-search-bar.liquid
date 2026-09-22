@@ -1,0 +1,106 @@
+{%- comment -%}
+  Header search bar — a persistent white search row under the main nav,
+  with a "have a question" phone prompt alongside. Matches the reference
+  header layout from the client's previous WordPress site.
+{%- endcomment -%}
+
+<div class="hsb">
+  <div class="wrap hsb__inner">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="hsb__form">
+      <input type="hidden" name="type" value="product">
+      <input
+        class="hsb__input"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ section.settings.search_placeholder }}"
+        aria-label="{{ 'general.search.search' | t }}"
+        autocomplete="off">
+      <button type="submit" class="hsb__submit" aria-label="{{ 'general.search.search' | t }}">
+        {%- render 'vivid-icon', icon: 'search', size: 18 -%}
+      </button>
+    </form>
+
+    {%- if section.settings.phone != blank -%}
+      <a href="tel:{{ section.settings.phone | remove: ' ' }}" class="hsb__contact">
+        {%- render 'vivid-icon', icon: 'phone', size: 22 -%}
+        <span>{{ section.settings.contact_prompt }} <strong>{{ section.settings.phone }}</strong></span>
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% style %}
+  .hsb {
+    background: var(--white);
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+  .hsb__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 14px;
+  }
+  .hsb__form {
+    flex: 1;
+    max-width: 640px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hsb__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--footer-bg);
+    padding: 6px 0;
+  }
+  .hsb__input::placeholder { color: rgba(8, 42, 56, 0.45); }
+  .hsb__input:focus { outline: none; }
+  .hsb__submit {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    background: var(--cta);
+    color: var(--footer-bg);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .hsb__submit:hover { background: var(--cta-dark); }
+  .hsb__contact {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--footer-bg);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .hsb__contact svg { color: var(--footer-bg); flex-shrink: 0; }
+  .hsb__contact strong { font-weight: 700; }
+  @media screen and (max-width: 749px) {
+    .hsb__contact span { display: none; }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Header search bar",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search for products" },
+    { "type": "text", "id": "contact_prompt", "label": "Contact prompt text", "default": "Have a question?" },
+    { "type": "text", "id": "phone", "label": "Phone number", "default": "0203 916 6116" }
+  ]
+}
+{% endschema %}

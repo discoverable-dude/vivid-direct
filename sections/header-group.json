@@ -39,10 +39,19 @@
         "padding_top": 12,
         "padding_bottom": 12
       }
+    },
+    "search-bar": {
+      "type": "header-search-bar",
+      "settings": {
+        "search_placeholder": "Search for products",
+        "contact_prompt": "Have a question?",
+        "phone": "0203 916 6116"
+      }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "search-bar"
   ]
 }
