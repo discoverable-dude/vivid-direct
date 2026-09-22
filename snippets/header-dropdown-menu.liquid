@@ -51,32 +51,19 @@
               >
                 <ul class="m-mega__links" role="list">
                   {%- for childlink in link.links -%}
-                    {%- comment -%} Icon: a 'menu_icon' header block (matched on name or handle) wins; otherwise auto-match the label {%- endcomment -%}
+                    {%- comment -%} Icon: only shown when an explicit 'menu_icon' header
+                        block matches this item's name or handle — no automatic guessing,
+                        so items without an override render identically (no icon). {%- endcomment -%}
                     {%- assign _t = childlink.title | downcase -%}
                     {%- assign _icon = '' -%}
-                    {%- assign _forced = false -%}
                     {%- for iblock in section.blocks -%}
                       {%- if iblock.type == 'menu_icon' and iblock.settings.match != blank -%}
                         {%- assign _m = iblock.settings.match | strip | downcase -%}
                         {%- if _m == _t or _m == childlink.handle -%}
-                          {%- assign _forced = true -%}
                           {%- unless iblock.settings.icon == 'none' -%}{%- assign _icon = iblock.settings.icon -%}{%- endunless -%}
                         {%- endif -%}
                       {%- endif -%}
                     {%- endfor -%}
-                    {%- if _forced -%}
-                    {%- elsif _t contains 'led' or _t contains 'strip' or _t contains 'bulb' -%}{%- assign _icon = 'lightbulb' -%}
-                    {%- elsif _t contains 'downlight' or _t contains 'ceiling' -%}{%- assign _icon = 'house' -%}
-                    {%- elsif _t contains 'smart' or _t contains 'control' -%}{%- assign _icon = 'building' -%}
-                    {%- elsif _t contains 'outdoor' or _t contains 'garden' -%}{%- assign _icon = 'leaf' -%}
-                    {%- elsif _t contains 'trade' or _t contains 'business' or _t contains 'account' -%}{%- assign _icon = 'users' -%}
-                    {%- elsif _t contains 'deliver' -%}{%- assign _icon = 'truck' -%}
-                    {%- elsif _t contains 'contact' or _t contains 'help' -%}{%- assign _icon = 'phone' -%}
-                    {%- elsif _t contains 'faq' -%}{%- assign _icon = 'check' -%}
-                    {%- elsif _t contains 'about' or _t contains 'our story' -%}{%- assign _icon = 'eye' -%}
-                    {%- elsif _t contains 'visit' or _t contains 'find us' -%}{%- assign _icon = 'pin' -%}
-                    {%- elsif _t contains 'all' or _t contains 'everything' -%}{%- assign _icon = 'package' -%}
-                    {%- endif -%}
                     <li class="m-mega__col">
                       <a
                         id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
