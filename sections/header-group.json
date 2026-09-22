@@ -14,7 +14,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "mode": "rotate",
+        "mode": "all",
         "interval": 5,
         "left_text": "Huge range of lighting",
         "mid_text": "Free next day delivery over £150 — order by 1pm",
