@@ -86,88 +86,6 @@
         "design_articles_url": "#"
       }
     },
-    "category_spotlight_6CcCbV": {
-      "type": "category-spotlight",
-      "blocks": {
-        "diagram_KwBatD": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "diagram_dR94Cw": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "diagram_eA67Ma": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "series_tile_4NRjk9": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "series_tile_MGfH4L": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "series_tile_3iEPdJ": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "mount_method_RBQtAB": {
-          "type": "mount_method",
-          "settings": {
-            "heading": ""
-          }
-        },
-        "mount_method_QGccUD": {
-          "type": "mount_method",
-          "settings": {
-            "heading": ""
-          }
-        }
-      },
-      "block_order": [
-        "diagram_KwBatD",
-        "diagram_dR94Cw",
-        "diagram_eA67Ma",
-        "series_tile_4NRjk9",
-        "series_tile_MGfH4L",
-        "series_tile_3iEPdJ",
-        "mount_method_RBQtAB",
-        "mount_method_QGccUD"
-      ],
-      "name": "Category spotlight",
-      "settings": {
-        "hero_eyebrow": "Featured category",
-        "hero_heading": "LED NEON Flex",
-        "hero_text": "Flexible, cuttable neon-style lighting for architectural and decorative projects.",
-        "hero_button_label": "Shop the range",
-        "hero_button_url": "",
-        "diagrams_heading": "How it works",
-        "series_heading": "Choose your series",
-        "mounts_heading": "Mounting options",
-        "badge_alt": "Made in Britain",
-        "badge_text": "Proudly made in Britain"
-      }
-    },
     "vivid_product_grid_DMbQyj": {
       "type": "vivid-product-grid",
       "name": "Product grid",
@@ -197,7 +115,6 @@
   },
   "order": [
     "potato-product",
-    "category_spotlight_6CcCbV",
     "vivid_product_grid_DMbQyj",
     "vivid_product_grid_katCah"
   ]

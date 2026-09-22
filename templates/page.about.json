@@ -92,7 +92,7 @@
         "heading": "Direct, in stock, and properly supported",
         "body": "<p>Whether you're a trade customer fitting out a project or a homeowner upgrading a single room, you get the same range, the same stock levels, and the same support.</p><p>No middlemen, no waiting on backorders for the products we hold — just a straightforward supplier that knows what it's selling.</p>",
         "cta_label": "Apply for a trade account",
-        "cta_url": "shopify://pages/trade"
+        "cta_url": "shopify://pages/trade-account"
       }
     },
     "quote": {
@@ -123,7 +123,7 @@
             "title": "Trade accounts",
             "text": "Dedicated pricing and support for electricians, contractors and installers.",
             "link_label": "Apply for trade",
-            "link_url": "shopify://pages/trade"
+            "link_url": "shopify://pages/trade-account"
           }
         },
         "c3": {
@@ -158,7 +158,7 @@
         "button_1_label": "Shop Now",
         "button_1_url": "shopify://collections/all",
         "button_2_label": "Apply for Trade Account",
-        "button_2_url": "shopify://pages/trade"
+        "button_2_url": "shopify://pages/trade-account"
       }
     }
   },
