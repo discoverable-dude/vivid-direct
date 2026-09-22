@@ -187,7 +187,7 @@
             "title": "LED Neon Flex",
             "text": "<p>Flexible neon-style lighting for any project</p>",
             "link_label": "Shop Neon Flex",
-            "link": "shopify://collections/led-neon-flex"
+            "link": "shopify://collections/neon-flex-by-foss-led"
           }
         },
         "cat_downlights": {
@@ -207,7 +207,7 @@
             "title": "Smart Lighting",
             "text": "<p>App and voice-controlled lighting solutions</p>",
             "link_label": "Shop Smart Lighting",
-            "link": "shopify://collections/smart-lighting"
+            "link": "shopify://collections/ra2-select-smart-home-by-lutron"
           }
         },
         "cat_outdoor": {
@@ -217,7 +217,7 @@
             "title": "Outdoor & Garden",
             "text": "<p>Weatherproof lighting for outside spaces</p>",
             "link_label": "Shop Outdoor Lighting",
-            "link": "shopify://collections/outdoor-garden-lighting"
+            "link": "shopify://collections/outdoor-lighting"
           }
         }
       },
