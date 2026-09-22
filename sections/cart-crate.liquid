@@ -17,7 +17,7 @@
       <div class="crate-empty">
         <p class="crate-eyebrow">Your basket</p>
         <h1 class="crate-title">Your basket is empty</h1>
-        <a href="{{ routes.all_products_collection_url }}" class="mpg-btn mpg-btn--primary" style="display:inline-block;margin-top:28px;">Shop the harvest</a>
+        <a href="{{ routes.all_products_collection_url }}" class="mpg-btn mpg-btn--primary" style="display:inline-block;margin-top:28px;">Shop all products</a>
       </div>
 
     {%- else -%}
@@ -25,7 +25,7 @@
       <div class="crate-header">
         <div>
           <p class="crate-eyebrow">Your basket</p>
-          <h1 class="crate-title">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} from the estate</h1>
+          <h1 class="crate-title">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in your basket</h1>
         </div>
         <a href="{{ routes.all_products_collection_url }}" class="crate-continue">← Continue shopping</a>
       </div>
@@ -198,16 +198,16 @@
             </button>
 
             <p class="crate-trust-copy">Free returns &middot; 48hr tracked delivery</p>
-            <p class="crate-trust-copy">We harvest to order, expect freshness</p>
+            <p class="crate-trust-copy">Order by 1pm for next-day delivery</p>
 
             <ul class="crate-trust-list">
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                Grown on our estate
+                Trusted lighting brands
               </li>
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Harvested to order
+                Fast dispatch
               </li>
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
