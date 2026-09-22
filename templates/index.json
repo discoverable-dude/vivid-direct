@@ -43,15 +43,18 @@
         "text",
         "buttons"
       ],
+      "custom_css": [
+        ".banner::after {background: linear-gradient(90deg, rgba(11,28,41,0.95) 0%, rgba(11,28,41,0.65) 35%, rgba(11,28,41,0.15) 65%, rgba(11,28,41,0) 85%);}"
+      ],
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
         "enable_video_bg": true,
-        "image_overlay_opacity": 40,
+        "image_overlay_opacity": 20,
         "image_height": "large",
         "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
-        "show_text_box": true,
+        "show_text_box": false,
         "color_scheme": "scheme-1",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
@@ -105,7 +108,7 @@
         "heading": "A Partner, Not Just a Supplier",
         "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
         "image_position": "left",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 60,
         "padding_bottom": 52
       }
@@ -170,7 +173,7 @@
         "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "none",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 36,
@@ -241,7 +244,7 @@
         "columns_desktop": 4,
         "column_alignment": "left",
         "background_style": "none",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 52,
@@ -496,7 +499,7 @@
         "eyebrow": "Library",
         "heading": "Brands We Work With",
         "intro": "<p>We select only the most exceptional lighting and smart control brands.</p>",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -513,7 +516,7 @@
         "show_image": true,
         "show_date": true,
         "show_author": false,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -607,7 +610,7 @@
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
         "section_color_scheme": "",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
       }
