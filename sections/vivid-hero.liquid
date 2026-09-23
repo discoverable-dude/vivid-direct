@@ -17,11 +17,12 @@
   {%- if section.settings.bg_color != blank -%}--hero-bg: {{ section.settings.bg_color }};{%- endif -%}
   {%- if section.settings.button_bg != blank -%}--btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};{%- endif -%}
   {%- if section.settings.button_text != blank -%}--btn-text: {{ section.settings.button_text }};{%- endif -%}
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
 {%- endcapture -%}
 
 <section
   class="m-hero m-hero--{{ section.settings.height }} m-hero--{{ section.settings.alignment }}{% unless has_image %} m-hero--no-image{% endunless %}"
-  {% if hero_style != blank %}style="{{ hero_style }}"{% endif %}
+  style="{{ hero_style }}"
 >
   {%- if has_image -%}
     <img
@@ -93,7 +94,10 @@
     { "type": "text", "id": "button_2_label", "label": "Secondary button label" },
     { "type": "url", "id": "button_2_url", "label": "Secondary button link" },
     { "type": "color", "id": "button_bg", "label": "Primary button background", "info": "Optional. Leave blank to use the theme's default button colour." },
-    { "type": "color", "id": "button_text", "label": "Primary button text colour", "info": "Optional." }
+    { "type": "color", "id": "button_text", "label": "Primary button text colour", "info": "Optional." },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88 }
   ],
   "presets": [ { "name": "Hero" } ]
 }

@@ -12,6 +12,7 @@
 
 {%- capture scheme_vars -%}
   --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
 {%- endcapture -%}
 
 <section class="ehero{% if has_image %} ehero--img{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
@@ -74,7 +75,10 @@
     { "type": "text", "id": "headline", "label": "Headline", "default": "A headline worth talking about." },
     { "type": "textarea", "id": "lede", "label": "Lede", "default": "One or two sentences that set the scene for the page." },
     { "type": "header", "content": "Colour" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 68 }
   ],
   "blocks": [
     {
