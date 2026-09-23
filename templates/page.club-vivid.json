@@ -25,32 +25,35 @@
       }
     },
     "standard_benefits": {
-      "type": "multicolumn",
+      "type": "contact-info-strip",
       "blocks": {
         "s1": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "Members Zone",
-            "text": "<p>Access to our Members Zone, technical library and manufacturers' support services.</p>",
-            "link_label": "",
+            "icon": "users",
+            "heading": "",
+            "detail": "Members Zone",
+            "caption": "Access to our Members Zone, technical library and manufacturers' support services.",
             "link": ""
           }
         },
         "s2": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "Seek & source",
-            "text": "<p>Access to our seek and source service — can't find it, we'll track it down.</p>",
-            "link_label": "",
+            "icon": "search",
+            "heading": "",
+            "detail": "Seek & source",
+            "caption": "Access to our seek and source service — can't find it, we'll track it down.",
             "link": ""
           }
         },
         "s3": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "Regular promotions",
-            "text": "<p>Additional promotional discounts on a regular basis.</p>",
-            "link_label": "",
+            "icon": "star",
+            "heading": "",
+            "detail": "Regular promotions",
+            "caption": "Additional promotional discounts on a regular basis.",
             "link": ""
           }
         }
@@ -62,48 +65,41 @@
       ],
       "settings": {
         "title": "Standard membership — free for everyone",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
         "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
         "padding_top": 20,
         "padding_bottom": 20
       }
     },
     "trade_benefits": {
-      "type": "multicolumn",
+      "type": "contact-info-strip",
       "blocks": {
         "t1": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "Trade discount",
-            "text": "<p>Trade discount applied on all purchases.</p>",
-            "link_label": "",
+            "icon": "sale-tag",
+            "heading": "",
+            "detail": "Trade discount",
+            "caption": "Trade discount applied on all purchases.",
             "link": ""
           }
         },
         "t2": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "30-day net terms",
-            "text": "<p>Trade account with 30 days net facilities, upon approval.</p>",
-            "link_label": "",
+            "icon": "clock",
+            "heading": "",
+            "detail": "30-day net terms",
+            "caption": "Trade account with 30 days net facilities, upon approval.",
             "link": ""
           }
         },
         "t3": {
-          "type": "column",
+          "type": "box",
           "settings": {
-            "title": "Click & collect",
-            "text": "<p>Collect from our Sevenoaks showroom, out of hours, upon request.</p>",
-            "link_label": "",
+            "icon": "package",
+            "heading": "",
+            "detail": "Click & collect",
+            "caption": "Collect from our Sevenoaks showroom, out of hours, upon request.",
             "link": ""
           }
         }
@@ -115,17 +111,7 @@
       ],
       "settings": {
         "title": "Trade membership — for approved trade accounts",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
         "color_scheme": "scheme-4",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
         "padding_top": 20,
         "padding_bottom": 40
       }

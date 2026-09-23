@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "lede": {
+      "type": "vivid-lede",
+      "settings": {
+        "kicker": "Reviews",
+        "body": "Don't just take our word for it — here's what our customers say."
+      }
+    },
+    "reviews": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "We found Vivid Lighting via a web search as we needed a complex design produced very quickly. Exhausting our regular supplier list, we were really struggling to find a company that could turn around a bespoke design in the two week lead time we had. Vivid hold a lot of off-the-shelf kit so could deliver within our allotted timeframe, to the quality we expected and required. They had elements powder-coated to fit the brief and their standard of work throughout was excellent, as was their communication and professionalism. I can't recommend the team at Vivid enough and we will be using them again in the future. It's been great working with Lee, Rupert and the wider team.",
+            "stars": 5,
+            "name": "David Keane",
+            "meta": "Senior Production Manager"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "We worked with Lee from concept through to the installation of our project. Throughout the project communication was clear and the brief was met. The final product is excellent and exactly what we needed to ensure our production really stood out. The quality of the LEDs used is excellent, the colour and dimming quality are particularly excellent. We're so pleased with how they turned out and so many audience members commented on how effective they were. If we need something like this again, we'll certainly be in touch with Lee!",
+            "stars": 5,
+            "name": "Ben Willis",
+            "meta": "Deputy Production Manager (Technical)"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2"
+      ],
+      "name": "Customer reviews",
+      "settings": {
+        "eyebrow": "Client Testimonials",
+        "heading": "What our customers say",
+        "aggregate_score": "5.0",
+        "aggregate_stars": 5,
+        "aggregate_text": "Reviews from real Vivid Direct clients",
+        "color_scheme": "scheme-4",
+        "texture": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "contact_strip": {
+      "type": "contact-info-strip",
+      "blocks": {
+        "box_call": {
+          "type": "box",
+          "settings": {
+            "icon": "phone",
+            "heading": "Call us",
+            "detail": "0203 916 6116",
+            "caption": "Call to speak to one of our experienced advisors for all help, advice and product support.",
+            "link": "tel:02039166116"
+          }
+        },
+        "box_email": {
+          "type": "box",
+          "settings": {
+            "icon": "mail",
+            "heading": "Email us",
+            "detail": "Fill out our form",
+            "caption": "We'll aim to get back to you within one working day.",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "box_faqs": {
+          "type": "box",
+          "settings": {
+            "icon": "check",
+            "heading": "FAQs",
+            "detail": "All FAQs",
+            "caption": "Quick answers to common questions about ordering and delivery.",
+            "link": "shopify://pages/faqs"
+          }
+        }
+      },
+      "block_order": [
+        "box_call",
+        "box_email",
+        "box_faqs"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "lede",
+    "reviews",
+    "contact_strip"
+  ]
+}
