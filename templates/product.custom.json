@@ -12,6 +12,27 @@
     "potato-product": {
       "type": "product-lighting",
       "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — IP65 Rated",
+            "icon": "check"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — Dimmable",
+            "icon": "lightbulb"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — 5 Yr Warranty",
+            "icon": "package"
+          }
+        },
         "faq_zdy8jt": {
           "type": "faq",
           "settings": {
@@ -43,27 +64,6 @@
             "body": "<p>Free next day delivery over £150 when ordered by 1pm. Standard delivery otherwise.</p>",
             "open_by_default": false
           }
-        },
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "label": "EXAMPLE — IP65 Rated",
-            "icon": "check"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "label": "EXAMPLE — Dimmable",
-            "icon": "lightbulb"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "label": "EXAMPLE — 5 Yr Warranty",
-            "icon": "package"
-          }
         }
       },
       "block_order": [
@@ -77,6 +77,12 @@
       ],
       "name": "Product page — page.custom variant",
       "settings": {
+        "hero_scheme": "scheme-2",
+        "about_scheme": "",
+        "cook_scheme": "",
+        "attrs_scheme": "",
+        "recipes_scheme": "",
+        "related_scheme": "",
         "trust_1": "EXAMPLE — Trade pricing available",
         "trust_2": "EXAMPLE — In stock, ships fast",
         "trust_3": "EXAMPLE — 2 year warranty",
@@ -90,13 +96,13 @@
       "type": "vivid-product-grid",
       "name": "Product grid",
       "settings": {
-        "collection": "downlights",
+        "collection": "adapt-draw-corner-lighting",
         "products_to_show": 4,
         "eyebrow": "You may also like",
-        "heading": "recommended products",
+        "heading": "Recommended Products",
         "show_view_all": false,
         "view_all_label": "View all",
-        "background": "paper-2"
+        "background": "paper"
       }
     },
     "vivid_product_grid_katCah": {
