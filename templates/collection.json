@@ -38,7 +38,7 @@
         "tab_P786wL": {
           "type": "tab",
           "settings": {
-            "label": "{{ collection.title }}",
+            "label": "Downlights",
             "icon": "pin",
             "link": "shopify://collections/downlights"
           }
