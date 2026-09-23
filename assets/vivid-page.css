@@ -306,6 +306,10 @@
 /* Multi-step wizard */
 .m-form__step { display: none; }
 .m-form__step.is-active { display: grid; }
+/* .m-btn sets display: inline-flex unconditionally, which otherwise beats the
+   browser's default [hidden] { display: none }; re-assert it here so Back/Next/
+   Submit actually hide instead of all three showing at once. */
+.m-form__stepbtns [hidden] { display: none; }
 .m-form__stepnav {
   display: flex;
   align-items: center;
