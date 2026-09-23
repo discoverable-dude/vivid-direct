@@ -11,373 +11,38 @@
 }
 [data-reveal].in { opacity: 1; transform: none; }
 
-/* ===== POTATO SHOP COLLECTION ===== */
-
-/* ── Shared flesh colour dots ── */
-.pshop-flesh-dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.pshop-flesh-dot--white  { background: #f5f0e8; border: 1px solid #c8bfaf; }
-.pshop-flesh-dot--cream  { background: #f2e6c2; }
-.pshop-flesh-dot--yellow { background: #e8c84a; }
-.pshop-flesh-dot--red    { background: #c0392b; }
-.pshop-flesh-dot--blue   { background: #7b4fa6; }
-
-/* ── Hero ── */
-.pshop-hero {
-  background: var(--hessian-weave), var(--footer-bg);
-  color: var(--white);
-  padding: 52px 0 0;
-}
-.pshop-crumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: rgba(246,240,234,0.6);
-  margin-bottom: 28px;
-}
-.pshop-crumb a {
-  color: rgba(246,240,234,0.6);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.pshop-crumb a:hover { color: var(--white); }
-.pshop-crumb__sep { opacity: 0.45; }
-
-.pshop-heading {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: clamp(36px, 6vw, 76px);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  margin: 0 0 18px;
-  color: var(--white);
-  max-width: 20ch;
-}
-.pshop-sub {
-  font-size: 15px;
-  color: rgba(246,240,234,0.72);
-  line-height: 1.6;
-  max-width: 52ch;
-  margin: 0 0 40px;
-}
-
-/* ── Cook-method tabs ── */
-.pshop-tabs {
+/* ===== COLLECTION CROSS-NAV TABS ===== */
+.xnav-tabs {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding-bottom: 0;
-}
-.pshop-tabs::-webkit-scrollbar { display: none; }
-
-.pshop-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 16px 22px 18px;
-  border-radius: 10px 10px 0 0;
-  background: rgba(255,255,255,0.08);
-  color: rgba(246,240,234,0.78);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
-  flex-shrink: 0;
-  min-width: 88px;
-}
-.pshop-tab:hover { background: rgba(255,255,255,0.14); color: var(--white); }
-.pshop-tab--active {
-  background: var(--paper);
-  color: var(--footer-bg);
-}
-.pshop-tab--active:hover { background: var(--paper); color: var(--footer-bg); }
-.pshop-tab__icon { line-height: 0; }
-.pshop-tab__label {
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-.pshop-tab__sub {
-  font-size: 12px;
-  opacity: 0.85;
-}
-.pshop-tab--active .pshop-tab__sub { opacity: 0.85; }
-
-/* ── Results ── */
-.pshop-results {
-  background: var(--hessian-weave), var(--paper);
-  padding: 40px 0 80px;
-}
-
-/* Count + flesh filter bar */
-.pshop-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 36px;
   flex-wrap: wrap;
 }
-.pshop-count {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.pshop-count__n {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 64px;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-.pshop-count__label {
-  font-size: 15px;
-  color: var(--ink-soft);
-}
-.pshop-flesh {
+.xnav-tabs::-webkit-scrollbar { display: none; }
+.xnav-tab {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
-}
-.pshop-flesh__label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-right: 4px;
-}
-.pshop-flesh__opt {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 100px;
-  border: 1.5px solid var(--line);
-  background: var(--paper);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  cursor: pointer;
-  transition: border-color 0.18s, background 0.18s, color 0.18s;
-}
-.pshop-flesh__opt:hover { border-color: var(--ink); }
-.pshop-flesh__opt.is-active {
-  background: var(--footer-bg);
-  border-color: var(--footer-bg);
-  color: #fff;
-}
-
-/* ── Product grid ── */
-.pshop-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  align-items: stretch;
-}
-.pshop-grid .pshop-item { height: 100%; }
-/* Flesh filter hides non-matching cards via the [hidden] attribute. The featured
-   card sets its own display, which beats the UA [hidden]{display:none}, so force it. */
-#pshop-grid [hidden] { display: none !important; }
-
-/* Standard card */
-.pshop-card {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: var(--ink);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: #fff;
-  transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s;
-}
-.pshop-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 44px -18px rgba(40,26,18,0.36);
-}
-.pshop-card__img-wrap {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: var(--hessian-weave), var(--paper-2);
-}
-.pshop-card__img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s;
-}
-.pshop-card:hover .pshop-card__img-wrap img { transform: scale(1.04); }
-
-/* In-season badge */
-.pshop-card__season {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--footer-bg);
-  color: #fff;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 6px;
-}
-/* Flesh tag (bottom-left pill) */
-.pshop-card__flesh-tag {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(20,10,5,0.62);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 4px 9px 4px 7px;
-  border-radius: 100px;
-}
-.pshop-card__info {
-  padding: 14px 16px 18px;
-}
-.pshop-card__row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 5px;
-}
-.pshop-card__name {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1;
-  margin: 0;
+  padding: 12px 18px;
+  border-radius: var(--radius-pill, 20px);
+  border: 1.5px solid var(--line-strong);
+  background: transparent;
   color: var(--ink);
   text-decoration: none;
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-.pshop-card__name:hover { text-decoration: none; }
-.pshop-card__price {
-  font-size: 15px;
-  font-weight: 700;
   white-space: nowrap;
-  color: var(--ink);
-}
-.pshop-card__best {
-  font-size: 13px;
-  font-style: italic;
-  font-family: var(--font-head);
-  color: var(--hessian-text);
-  margin: 0;
-}
-
-/* Featured card (first — spans 2 cols, horizontal layout) */
-.pshop-card--featured {
-  grid-column: span 2;
-  flex-direction: row;
-  aspect-ratio: auto;
-}
-.pshop-card--featured .pshop-card__img-wrap {
-  width: 55%;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   flex-shrink: 0;
-  aspect-ratio: auto;
-  height: auto;
 }
-.pshop-card--featured .pshop-card__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 28px 26px;
-}
-.pshop-card--featured .pshop-card__name { font-size: 28px; margin-bottom: 8px; }
-.pshop-card__desc {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-soft);
-  margin: 10px 0 0;
-}
-
-.pshop-empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 0;
-  color: var(--ink-soft);
-}
-.pshop-empty a { color: var(--ink); }
-
-/* ── Trust strip ── */
-.pshop-trust {
-  background: var(--hessian-weave), var(--paper-2);
-  padding: 52px 0;
-}
-.pshop-trust__inner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-.pshop-trust__item {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-.pshop-trust__icon {
+.xnav-tab:hover { border-color: var(--cta); color: var(--ink); }
+.xnav-tab--active {
+  background: var(--cta);
+  border-color: var(--cta);
   color: var(--footer-bg);
-  flex-shrink: 0;
-  margin-top: 2px;
 }
-.pshop-trust__title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 4px;
-}
-.pshop-trust__sub {
-  font-size: 14px;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-/* ── Responsive ── */
-@media (max-width: 1024px) {
-  .pshop-grid { grid-template-columns: repeat(3, 1fr); }
-  .pshop-card--featured { grid-column: span 3; }
-  .pshop-card--featured .pshop-card__img-wrap { width: 50%; }
-}
-@media (max-width: 760px) {
-  .pshop-grid { grid-template-columns: repeat(2, 1fr); }
-  .pshop-card--featured { grid-column: span 2; flex-direction: column; }
-  .pshop-card--featured .pshop-card__img-wrap { width: 100%; aspect-ratio: 4 / 3; }
-  /* Stacked featured card: top-align content, clean gap above the buttons,
-     and breathing room below them (desktop keeps its bottom-aligned layout) */
-  .pshop-card--featured .pshop-card__info { justify-content: flex-start; padding-bottom: 32px; }
-  .pshop-card--featured .mcard__add { margin-top: 20px; }
-  .pshop-trust__inner { grid-template-columns: 1fr; gap: 24px; }
-  .pshop-count__n { font-size: 48px; }
-  .pshop-bar { flex-direction: column; align-items: flex-start; }
-}
-@media (max-width: 500px) {
-  .pshop-grid { grid-template-columns: 1fr; }
-  .pshop-card--featured { grid-column: auto; }
-  .pshop-tabs { gap: 6px; }
-  .pshop-tab { min-width: 72px; padding: 14px 14px 16px; }
-  /* Larger tap area for the flesh-filter pills on touch */
-  .pshop-flesh__opt { min-height: 44px; padding: 8px 16px; }
-}
+.xnav-tab--active:hover { background: var(--cta); color: var(--footer-bg); }
+.xnav-tab__icon { line-height: 0; display: flex; }
+.xnav-tab__label { font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em; }
 
 /* ===== POTATO PRODUCT PAGE ===== */
 
@@ -1004,26 +669,11 @@
 }
 
 
-/* Card title heading wrapper (a11y) */
-.pshop-card__title { margin: 0; font: inherit; }
-
 /* Focus-visible on custom buy-box controls (a11y) */
 .pp-vtile:focus-visible,
 .pp-gallery__thumb:focus-visible,
 .pp-qty__btn:focus-visible,
 .pp-atc:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }
-
-/* Collection hero subtext can render the collection's rich-text Description */
-.pshop-sub p { margin: 0 0 0.6em; }
-.pshop-sub p:last-child { margin-bottom: 0; }
-
-/* Estate collection hero: wider intro column + branded rich-text links + Read more toggle */
-.ecoll-hero .pshop-sub { max-width: 64ch; }
-.pshop-sub a { color: var(--straw-light); text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
-.pshop-sub a:hover { color: var(--white); }
-.pshop-sub__toggle { display: inline-block; margin-top: 10px; padding: 0; background: none; border: none; color: var(--straw-light); font-family: var(--font-body); font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
-.pshop-sub__toggle:hover { color: var(--white); }
-.pshop-sub__toggle:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; border-radius: 3px; }
 
 /* ── About band: care & keeping accordion (faq blocks, light-on-dark) ── */
 .pp-about__acc { width: 100%; align-self: center; }

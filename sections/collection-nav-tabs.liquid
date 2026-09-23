@@ -1,0 +1,114 @@
+{%- comment -%}
+  Collection cross-nav tabs — a row of pill links at the top of a collection
+  page for cross-selling into other collections (e.g. show "Neon Flex" and
+  "LED Strip" as tabs on the Downlights collection). Ported from the old
+  Morghew theme's cook-method variety tabs, rebuilt with lighting-relevant
+  icons and no flesh/dietary filtering — those never applied here.
+{%- endcomment -%}
+
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+
+{%- assign nav_tabs = section.blocks | where: 'type', 'tab' -%}
+{%- if nav_tabs.size > 0 -%}
+
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+{%- endcapture -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
+  <div class="wrap">
+    <nav class="xnav-tabs" aria-label="{{ section.settings.aria_label | default: 'Shop other collections' }}">
+      {%- if section.settings.show_current -%}
+        <span class="xnav-tab xnav-tab--active">
+          {%- if section.settings.current_icon != 'none' -%}
+            <span class="xnav-tab__icon">{%- render 'vivid-icon', icon: section.settings.current_icon, size: 16 -%}</span>
+          {%- endif -%}
+          <span class="xnav-tab__label">{{ section.settings.current_label | default: collection.title }}</span>
+        </span>
+      {%- endif -%}
+      {%- for block in nav_tabs -%}
+        {%- assign _is_active = false -%}
+        {%- if block.settings.link != blank and block.settings.link == request.path -%}{%- assign _is_active = true -%}{%- endif -%}
+        <a href="{{ block.settings.link | default: '#' }}"
+           class="xnav-tab{% if _is_active %} xnav-tab--active{% endif %}"
+           {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}
+            <span class="xnav-tab__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 16 -%}</span>
+          {%- endif -%}
+          <span class="xnav-tab__label">{{ block.settings.label | escape }}</span>
+        </a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</div>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection cross-nav tabs",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    { "type": "checkbox", "id": "show_current", "label": "Show a tab for this collection", "default": true },
+    { "type": "text", "id": "current_label", "label": "Label for this collection", "info": "Leave empty to use the collection's own title." },
+    {
+      "type": "select", "id": "current_icon", "label": "Icon for this collection", "default": "none",
+      "options": [
+        { "value": "none", "label": "No icon" },
+        { "value": "lightbulb", "label": "Lightbulb" },
+        { "value": "house", "label": "House" },
+        { "value": "building", "label": "Building" },
+        { "value": "eye", "label": "Eye" },
+        { "value": "leaf", "label": "Leaf" },
+        { "value": "camera", "label": "Camera" },
+        { "value": "truck", "label": "Delivery truck" },
+        { "value": "check", "label": "Check" },
+        { "value": "package", "label": "Package" },
+        { "value": "star", "label": "Star" }
+      ]
+    },
+    { "type": "text", "id": "aria_label", "label": "Accessibility label", "default": "Shop other collections" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Cross-sell tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Neon Flex" },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "none",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "lightbulb", "label": "Lightbulb" },
+            { "value": "house", "label": "House" },
+            { "value": "building", "label": "Building" },
+            { "value": "eye", "label": "Eye" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "camera", "label": "Camera" },
+            { "value": "truck", "label": "Delivery truck" },
+            { "value": "check", "label": "Check" },
+            { "value": "package", "label": "Package" },
+            { "value": "star", "label": "Star" }
+          ]
+        },
+        { "type": "url", "id": "link", "label": "Link", "info": "Usually another collection." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection cross-nav tabs"
+    }
+  ]
+}
+{% endschema %}
