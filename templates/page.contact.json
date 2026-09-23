@@ -21,9 +21,10 @@
       "type": "vivid-hero",
       "name": "Vivid Hero",
       "settings": {
+        "bg_image": "shopify://shop_images/luxo_single_spot_light_antique_brass_2.jpg",
         "image_opacity": 40,
         "show_overlay": true,
-        "bg_color": "#082A38",
+        "bg_color": "#082a38",
         "eyebrow": "Get in touch",
         "headline": "Contact Us",
         "text": "<p>No enquiry is too big or too small.</p>",
@@ -32,7 +33,11 @@
         "button_1_label": "",
         "button_1_url": "",
         "button_2_label": "",
-        "button_2_url": ""
+        "button_2_url": "",
+        "button_bg": "",
+        "button_text": "",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "contact_details": {
@@ -55,7 +60,12 @@
         "map_query": "TN25 5NR",
         "map_zoom": 14,
         "secondary_label": "",
-        "secondary_url": ""
+        "secondary_url": "",
+        "color_scheme": "",
+        "button_bg": "",
+        "button_text": "",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "vivid_form_wPyMjc": {
@@ -69,7 +79,8 @@
             "placeholder": "Jane Smith",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_WVVeFr": {
@@ -80,7 +91,8 @@
             "placeholder": "Sparks Electrical Ltd",
             "options": "",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_tM3XQz": {
@@ -91,7 +103,8 @@
             "placeholder": "jane@example.com",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_epA6yW": {
@@ -102,7 +115,8 @@
             "placeholder": "+44 7700 000000",
             "options": "",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_H8nQ3n": {
@@ -113,7 +127,8 @@
             "placeholder": "Products you're interested in, quantities, install date…",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         }
       },
@@ -126,12 +141,18 @@
       ],
       "name": "Vivid Custom Form",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "button_bg": "",
+        "button_text": "",
         "eyebrow": "",
         "heading": "Get in touch",
         "intro": "<p>Fill in the form below and we'll normally get back to you within two working days.</p>",
+        "content_align": "left",
         "submit_label": "Send enquiry",
-        "success_message": "Thanks — we've got your message and will be in touch shortly."
+        "success_message": "Thanks — we've got your message and will be in touch shortly.",
+        "multi_step": false,
+        "padding_top": 68,
+        "padding_bottom": 68
       }
     }
   },
