@@ -1,5 +1,5 @@
 /* vivid-home.css — homepage-only editorial sections (hero-bold, cooking-methods,
-   variety-rail, season-band, shard-moment) + responsive.
+   xsell-rail, season-band, shard-moment) + responsive.
    (recipe-feature is split into vivid-recipe-feature.css as it's reused on product pages.)
    Extracted from vivid-sections.css; loaded per home-section so it no longer
    render-blocks product/collection/blog/cart pages. */
@@ -256,33 +256,34 @@
   color: var(--ac, var(--clay));
 }
 
-/* ===== VARIETY RAIL ===== */
-.variety-rail {
+/* ===== CROSS-SELL RAIL ===== */
+.xsell-rail {
   padding: clamp(56px, 7vw, 104px) 0;
-  background: var(--hessian-weave), var(--paper-2);
+  background: var(--paper-2);
   overflow: hidden;
 }
-.variety-rail__head {
+.xsell-rail__head {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
   margin-bottom: 34px;
 }
-.variety-rail__title {
+.xsell-rail__title {
   font-size: clamp(30px, 3.6vw, 52px);
   line-height: 1;
   letter-spacing: -0.02em;
   margin: 8px 0 0;
   font-family: var(--font-head);
   font-weight: 800;
+  color: var(--ink);
 }
-.variety-rail__controls {
+.xsell-rail__controls {
   display: flex;
   gap: 10px;
   flex-shrink: 0;
 }
-.variety-rail__btn {
+.xsell-rail__btn {
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -295,10 +296,10 @@
   justify-content: center;
   transition: background 0.2s, color 0.2s;
 }
-.variety-rail__btn:hover { background: var(--paper); color: var(--white); }
-.variety-rail__btn svg { display: block; }
-.variety-rail__btn--prev svg { transform: scaleX(-1); }
-.variety-rail__scroller {
+.xsell-rail__btn:hover { background: var(--cta); color: var(--footer-bg); border-color: var(--cta); }
+.xsell-rail__btn svg { display: block; }
+.xsell-rail__btn--prev svg { transform: scaleX(-1); }
+.xsell-rail__scroller {
   display: flex;
   gap: 22px;
   overflow-x: auto;
@@ -309,76 +310,10 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
-.variety-rail__scroller::-webkit-scrollbar { display: none; }
-.variety-rail__item { flex: 0 0 clamp(220px, 42vw, 280px); scroll-snap-align: start; }
-.variety-rail__scroller.is-grabbing { cursor: grabbing; user-select: none; }
-.vcard {
-  flex: 0 0 300px;
-  scroll-snap-align: start;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
-  text-decoration: none;
-  color: var(--ink);
-  user-select: none;
-  display: block;
-}
-.vcard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 50px -26px rgba(40,26,18,0.5);
-}
-.vcard__media { position: relative; }
-.vcard__photo {
-  aspect-ratio: 3 / 4;
-  background: var(--hessian-weave), var(--paper-2);
-  overflow: hidden;
-}
-.vcard__photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.35s;
-}
-.vcard:hover .vcard__photo img { transform: scale(1.05); }
-.vcard__flesh {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--ac, var(--clay));
-  padding: 5px 10px;
-  border-radius: 8px;
-}
-.vcard__body { padding: 18px 20px 22px; }
-.vcard__n {
-  font-size: 24px;
-  line-height: 1;
-  font-family: var(--font-head);
-  font-weight: 800;
-  margin: 0;
-}
-.vcard__best {
-  margin: 7px 0 0;
-  font-size: 13.5px;
-  font-style: italic;
-  font-family: var(--font-head);
-  color: var(--cta);
-}
-.vcard__price {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.vcard__all {
+.xsell-rail__scroller::-webkit-scrollbar { display: none; }
+.xsell-rail__item { flex: 0 0 clamp(220px, 42vw, 280px); scroll-snap-align: start; }
+.xsell-rail__scroller.is-grabbing { cursor: grabbing; user-select: none; }
+.xsell-rail__all {
   flex: 0 0 220px;
   scroll-snap-align: start;
   display: flex;
@@ -388,7 +323,7 @@
   gap: 18px;
   background: var(--paper);
   color: var(--white);
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 22px;
@@ -397,8 +332,8 @@
   transition: background 0.2s;
   padding: 40px 20px;
 }
-.vcard__all:hover { background: var(--bark); color: var(--white); }
-.vcard__all-circ {
+.xsell-rail__all:hover { background: var(--cta); color: var(--footer-bg); }
+.xsell-rail__all-circ {
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -408,8 +343,9 @@
   justify-content: center;
   transition: background 0.2s;
 }
-.vcard__all svg { display: block; }
-.vcard__all:hover .vcard__all-circ { background: rgba(246,240,234,0.14); }
+.xsell-rail__all svg { display: block; }
+.xsell-rail__all:hover .xsell-rail__all-circ { background: rgba(8,42,56,0.14); }
+.xsell-rail-placeholder { padding: 40px 0; color: var(--ink-soft); font-size: 14px; }
 
 /* ===== SEASON BAND ===== */
 .season-band {
@@ -580,8 +516,7 @@
   .plate__grid { grid-template-columns: 1fr; }
   .season-band__grid { grid-template-columns: 1fr; }
   .season-card--big { grid-column: auto; }
-  .variety-rail__scroller { padding-left: 22px; padding-right: 22px; margin: 0 -22px; }
-  .vcard { flex-basis: 240px; }
+  .xsell-rail__scroller { padding-left: 22px; padding-right: 22px; margin: 0 -22px; }
   /* Stack the heading above the scroll buttons so it isn't crushed */
-  .variety-rail__head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .xsell-rail__head { flex-direction: column; align-items: flex-start; gap: 16px; }
 }

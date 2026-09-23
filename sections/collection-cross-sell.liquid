@@ -1,0 +1,174 @@
+{%- comment -%}
+  Collection Cross-Sell Rail — horizontal, drag/scroll product rail pulling
+  from a chosen collection. Built to promote one collection from within
+  another (e.g. surface Neon Flex on the Downlights collection page).
+  Ported from the old Morghew theme's "variety rail" (a scrollable rail of
+  potato varieties) and rebuilt on the shared product-card snippet so cards
+  match the rest of the site — no bespoke card markup left behind.
+{%- endcomment -%}
+
+{{ 'vivid-home.css' | asset_url | stylesheet_tag }}
+
+{%- assign rail_coll = collections[section.settings.collection] -%}
+{%- assign rail_limit = section.settings.products_to_show | default: 8 -%}
+
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+{%- endcapture -%}
+
+{%- if rail_coll == blank or rail_coll.products_count == 0 -%}
+  {%- if request.design_mode -%}
+    <div class="xsell-rail-placeholder">
+      <div class="wrap"><p>Select a collection in section settings to cross-sell it here.</p></div>
+    </div>
+  {%- endif -%}
+{%- else -%}
+
+<section class="xsell-rail color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" id="xsell-rail-{{ section.id }}">
+  <div class="wrap">
+    <div class="xsell-rail__head" data-reveal>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2 class="xsell-rail__title">{{ section.settings.title | escape }}</h2>
+      </div>
+      <div class="xsell-rail__controls" aria-label="Scroll products">
+        <button class="xsell-rail__btn xsell-rail__btn--prev" id="rail-prev-{{ section.id }}" aria-label="Previous">
+          {% render 'vivid-icon', icon: 'nav-arrow', size: 18 %}
+        </button>
+        <button class="xsell-rail__btn xsell-rail__btn--next" id="rail-next-{{ section.id }}" aria-label="Next">
+          {% render 'vivid-icon', icon: 'nav-arrow', size: 18 %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="xsell-rail__scroller" id="rail-scroller-{{ section.id }}" role="list">
+
+      {%- comment -%}
+        In-stock products first: without this, `limit` can fill the whole
+        rail with sold-out items and hide everything actually buyable behind
+        the "view all" link.
+      {%- endcomment -%}
+      {%- assign _rail_available = rail_coll.products | where: 'available' -%}
+      {%- assign _rail_sold_out = rail_coll.products | where: 'available', false -%}
+      {%- assign _rail_products = _rail_available | concat: _rail_sold_out -%}
+
+      {%- for p in _rail_products limit: rail_limit -%}
+        {%- if product and p.id == product.id -%}{%- continue -%}{%- endif -%}
+        <div class="xsell-rail__item" role="listitem">{%- render 'product-card', product: p -%}</div>
+      {%- endfor -%}
+
+      {%- if section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="xsell-rail__all">
+          <span class="xsell-rail__all-circ">{% render 'vivid-icon', icon: 'view-all-arrow', size: 20 %}</span>
+          {{ section.settings.view_all_label | default: 'See all' }}
+        </a>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var scroller = document.getElementById('rail-scroller-{{ section.id }}');
+  var prev = document.getElementById('rail-prev-{{ section.id }}');
+  var next = document.getElementById('rail-next-{{ section.id }}');
+  if (!scroller) return;
+
+  var cardW = 302;
+
+  if (prev) prev.addEventListener('click', function() {
+    scroller.scrollBy({ left: -cardW, behavior: 'smooth' });
+  });
+  if (next) next.addEventListener('click', function() {
+    scroller.scrollBy({ left: cardW, behavior: 'smooth' });
+  });
+
+  var isDragging = false, startX, scrollLeft;
+  scroller.addEventListener('mousedown', function(e) {
+    isDragging = true;
+    startX = e.pageX - scroller.offsetLeft;
+    scrollLeft = scroller.scrollLeft;
+    scroller.classList.add('is-grabbing');
+  });
+  document.addEventListener('mouseup', function() {
+    isDragging = false;
+    scroller.classList.remove('is-grabbing');
+  });
+  scroller.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    var x = e.pageX - scroller.offsetLeft;
+    var walk = (x - startX) * 1.4;
+    scroller.scrollLeft = scrollLeft - walk;
+  });
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cross-sell rail",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "You might also need"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Explore our range"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to cross-sell",
+      "info": "Pick a different collection to promote here — e.g. show Neon Flex on the Downlights page."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "See all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View all URL"
+    },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    {
+      "name": "Cross-sell rail"
+    }
+  ]
+}
+{% endschema %}

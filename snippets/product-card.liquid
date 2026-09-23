@@ -25,7 +25,6 @@
         alt="{{ product.featured_image.alt | default: product.title | escape }}"
         width="300" height="300" loading="lazy">
     {%- endif -%}
-    {%- render 'card-flesh', product: product -%}
   </a>
 
   <div class="mcard__body">
