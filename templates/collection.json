@@ -12,7 +12,6 @@
     "banner": {
       "type": "collection-hero-banner",
       "settings": {
-        "image": "shopify://shop_images/bell-lighting-collection-banner.png",
         "heading": "",
         "description": ""
       }
