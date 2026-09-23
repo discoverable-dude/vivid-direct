@@ -1,4 +1,5 @@
 {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'vivid-lightbox.js' | asset_url }}" defer="defer"></script>
 {%- comment -%}
   product-lighting.liquid
@@ -16,6 +17,7 @@
 {%- endcomment -%}
 
 {%- assign pp_variant = product.selected_or_first_available_variant -%}
+{%- assign pp_form_id = 'pp-form-' | append: section.id -%}
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
@@ -112,23 +114,21 @@
         {%- comment -%} Buy box — variants + ATC + delivery {%- endcomment -%}
         <div class="pp-buy-box">
 
-          {%- comment -%} Weight/variant tiles {%- endcomment -%}
-          {%- if product.variants.size > 1 -%}
-            <div class="pp-variants" role="group" aria-label="Select weight">
-              {%- for v in product.variants -%}
-                <button class="pp-vtile{% if v == pp_variant %} is-active{% endif %}{% unless v.available %} is-sold{% endunless %}"
-                        data-variant-id="{{ v.id }}"
-                        data-price="{{ v.price | money }}"
-                        type="button"
-                        {% unless v.available %}disabled aria-disabled="true"{% endunless %}>
-                  <span class="pp-vtile__size">{{ v.title }}</span>
-                  <span class="pp-vtile__price">{{ v.price | money }}</span>
-                  {%- if v.metafields.custom.note != blank -%}
-                    <span class="pp-vtile__note">{{ v.metafields.custom.note }}</span>
-                  {%- endif -%}
-                </button>
-              {%- endfor -%}
-            </div>
+          {%- comment -%}
+            Variant selectors — same <variant-selects> component and
+            product-variant-picker/product-variant-options snippets as
+            Dawn's default product template (dropdown or pill per option,
+            sold-out combinations greyed out). The picker itself only
+            toggles selection; matching the choice to a real variant and
+            updating price/ATC state is done by the plain client-side
+            script at the bottom of this file rather than Dawn's
+            section-rendering-API round trip, since this template's buy box
+            (gallery, qty stepper, trust row) isn't structured the way
+            Dawn's <product-info> expects.
+          {%- endcomment -%}
+          {%- assign pp_variant_picker_block = section.blocks | where: "type", "variant_picker" | first -%}
+          {%- if pp_variant_picker_block -%}
+            {%- render 'product-variant-picker', product: product, block: pp_variant_picker_block, product_form_id: pp_form_id -%}
           {%- endif -%}
 
           {%- comment -%} ATC form — wrapped in <product-form> so add-to-cart is AJAX and opens the drawer {%- endcomment -%}
@@ -139,6 +139,9 @@
 
             <form action="{{ routes.cart_add_url }}" method="post" id="pp-form-{{ section.id }}">
               <input type="hidden" name="id" id="pp-vid-{{ section.id }}" value="{{ pp_variant.id }}">
+              {%- if pp_variant_picker_block -%}
+                <script type="application/json" id="pp-variants-{{ section.id }}">{{ product.variants | json }}</script>
+              {%- endif -%}
 
               <div class="pp-atc-row">
                 <div class="pp-qty" aria-label="Quantity">
@@ -346,25 +349,69 @@
     });
   });
 
-  /* ── Variant picker ── */
-  var vidInput = document.getElementById('pp-vid-' + sid);
-  var atcBtn   = document.getElementById('pp-atc-' + sid);
-  var tiles    = document.querySelectorAll('#pp-form-' + sid + ' .pp-vtile, .pp-vtile');
-  tiles.forEach(function (tile) {
-    tile.addEventListener('click', function () {
-      if (tile.disabled) return;
-      tiles.forEach(function (t) { t.classList.remove('is-active'); });
-      tile.classList.add('is-active');
-      if (vidInput) vidInput.value = tile.dataset.variantId;
-      var priceLine = document.getElementById('pp-price-' + sid);
-      if (priceLine && tile.dataset.price) priceLine.textContent = tile.dataset.price;
+  /* ── Variant picker ──
+     <variant-selects> (Dawn's own component, defined in global.js) tracks
+     selection and disables sold-out option values on its own; we only need
+     to react to its native 'change' event, work out which real variant that
+     combination maps to, and update price/ATC state to match — no
+     section-rendering-API round trip. */
+  var vidInput   = document.getElementById('pp-vid-' + sid);
+  var atcBtn     = document.getElementById('pp-atc-' + sid);
+  var priceLine  = document.getElementById('pp-price-' + sid);
+  var variantsEl = document.getElementById('pp-variants-' + sid);
+  var picker     = document.getElementById('variant-selects-' + sid);
+
+  if (variantsEl && picker) {
+    var variants = JSON.parse(variantsEl.textContent);
+
+    var moneyFormat = function (cents) {
+      return (cents / 100).toLocaleString('en-GB', { style: 'currency', currency: '{{ cart.currency.iso_code | default: shop.currency }}' });
+    };
+
+    var currentSelection = function () {
+      var values = [];
+      picker.querySelectorAll('fieldset, .product-form__input--dropdown').forEach(function (group) {
+        var checked = group.querySelector('input:checked');
+        var select  = group.querySelector('select');
+        if (checked) values.push(checked.value);
+        else if (select) values.push(select.value);
+      });
+      return values;
+    };
+
+    var findVariant = function (values) {
+      return variants.filter(function (v) {
+        return v.options.length === values.length && v.options.every(function (opt, i) { return opt === values[i]; });
+      })[0];
+    };
+
+    var applyVariant = function (variant) {
+      if (!variant) {
+        if (atcBtn) { atcBtn.disabled = true; atcBtn.classList.add('pp-atc--sold'); atcBtn.querySelector('span').textContent = 'Unavailable'; }
+        return;
+      }
+      if (vidInput) vidInput.value = variant.id;
+      var priceStr = moneyFormat(variant.price);
+      if (priceLine) priceLine.textContent = priceStr;
       if (atcBtn) {
         var priceEl = atcBtn.querySelector('.pp-atc__price');
-        if (priceEl) priceEl.textContent = tile.dataset.price;
-        atcBtn.disabled = tile.classList.contains('is-sold');
+        var labelEl = atcBtn.querySelector('span');
+        atcBtn.disabled = !variant.available;
+        atcBtn.classList.toggle('pp-atc--sold', !variant.available);
+        if (!variant.available) {
+          labelEl.textContent = 'Sold Out';
+        } else if (priceEl) {
+          priceEl.textContent = priceStr;
+        } else {
+          labelEl.innerHTML = 'Add to Basket · <span class="pp-atc__price">' + priceStr + '</span>';
+        }
       }
+    };
+
+    picker.addEventListener('change', function () {
+      applyVariant(findVariant(currentSelection()));
     });
-  });
+  }
 
   /* ── Quantity stepper ── */
   var qtyInput = document.getElementById('pp-qty-' + sid);
@@ -446,6 +493,35 @@
     }
   ],
   "blocks": [
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "label": "Picker type",
+          "default": "button",
+          "options": [
+            { "value": "button", "label": "Pills" },
+            { "value": "dropdown", "label": "Dropdowns" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "swatch_shape",
+          "label": "Swatch shape",
+          "info": "Only used for options with a colour/image swatch set on the value.",
+          "default": "none",
+          "options": [
+            { "value": "circle", "label": "Circle" },
+            { "value": "square", "label": "Square" },
+            { "value": "none", "label": "No swatch — text only" }
+          ]
+        }
+      ]
+    },
     {
       "type": "stat",
       "name": "Stat pill",
