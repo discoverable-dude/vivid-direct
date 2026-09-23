@@ -1,20 +1,31 @@
 {%- comment -%}
-  Contact info strip — 3-across dark cards with icon, bold heading and
-  a short caption. Used to close out content pages with quick contact
-  routes (call / email / FAQs etc).
+  Contact info strip — 3-across cards with a circular icon outline, bold
+  heading and a short caption. Used to close out content pages with quick
+  contact routes (call / email / FAQs etc). Icon treatment matches
+  vivid-contact-details.liquid's .mcd__ic circles rather than a filled
+  square, to stay consistent with the rest of the VLX design language.
 {%- endcomment -%}
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="cis">
-  <div class="wrap cis__grid">
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+{%- endcapture -%}
+
+<section class="cis color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
+  <div class="wrap">
+    {%- if section.settings.title != blank -%}
+      <h2 class="cis__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    <div class="cis__grid">
     {%- for block in section.blocks -%}
       {%- if block.type == 'box' -%}
         {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="cis__box" {{ block.shopify_attributes }}>
         {%- else -%}<div class="cis__box" {{ block.shopify_attributes }}>
         {%- endif -%}
           {%- if block.settings.icon != "none" -%}
-            <span class="cis__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 26 -%}</span>
+            <span class="cis__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 22 -%}</span>
           {%- endif -%}
           {%- if block.settings.heading != blank -%}<h3 class="cis__heading">{{ block.settings.heading }}</h3>{%- endif -%}
           {%- if block.settings.detail != blank -%}<p class="cis__detail">{{ block.settings.detail }}</p>{%- endif -%}
@@ -22,15 +33,23 @@
         {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
+    </div>
   </div>
 </section>
 
 {% style %}
+  .cis { padding-block: var(--sec-pad-sm); }
+  .cis__title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(22px, 2.6vw, 30px);
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
   .cis__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    padding-block: var(--sec-pad-sm);
   }
   @media screen and (max-width: 749px) {
     .cis__grid { grid-template-columns: 1fr; }
@@ -38,39 +57,42 @@
   .cis__box {
     display: block;
     text-align: center;
-    background: var(--card);
+    background: color-mix(in srgb, var(--ink) 4%, transparent);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     padding: 32px 24px;
     text-decoration: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   }
-  a.cis__box:hover { transform: translateY(-3px); border-color: var(--cta); }
+  a.cis__box:hover { transform: translateY(-3px); border-color: var(--cta); background: color-mix(in srgb, var(--ink) 7%, transparent); }
   .cis__icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 48px;
     height: 48px;
-    border-radius: var(--radius-pill);
-    background: var(--cta);
-    color: var(--footer-bg);
-    margin-bottom: 14px;
+    border-radius: 50%;
+    border: 1.5px solid color-mix(in srgb, var(--cta) 45%, var(--line-strong));
+    color: var(--cta);
+    margin-bottom: 16px;
   }
   .cis__heading {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--ink);
-    margin: 0 0 6px;
-  }
-  .cis__detail {
     font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--cta);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
     margin: 0 0 8px;
   }
+  .cis__detail {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  a.cis__box:hover .cis__detail { color: var(--cta); }
   .cis__caption {
     font-family: var(--font-body);
     font-size: 13.5px;
@@ -86,6 +108,14 @@
   "tag": "section",
   "class": "m-section",
   "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title (optional)" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
   "blocks": [
     {
       "type": "box",
@@ -96,7 +126,13 @@
           { "value": "phone", "label": "Phone" },
           { "value": "mail", "label": "Mail" },
           { "value": "check", "label": "Check" },
-          { "value": "clock", "label": "Clock" }
+          { "value": "clock", "label": "Clock" },
+          { "value": "truck", "label": "Delivery truck" },
+          { "value": "package", "label": "Package" },
+          { "value": "users", "label": "Users" },
+          { "value": "star", "label": "Star" },
+          { "value": "search", "label": "Search" },
+          { "value": "sale-tag", "label": "Clearance" }
         ] },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Call us" },
         { "type": "text", "id": "detail", "label": "Detail (bold line)", "default": "0203 916 6116" },
