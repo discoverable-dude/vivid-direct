@@ -18,11 +18,49 @@
     },
     "nav-tabs": {
       "type": "collection-nav-tabs",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "tab_YGHiEY": {
+          "type": "tab",
+          "settings": {
+            "label": "Neon Flex",
+            "icon": "none",
+            "link": ""
+          }
+        },
+        "tab_3p6ygK": {
+          "type": "tab",
+          "settings": {
+            "label": "Neon Flex",
+            "icon": "eye",
+            "link": "shopify://collections/beam-corner-lighting"
+          }
+        },
+        "tab_tT3cFi": {
+          "type": "tab",
+          "settings": {
+            "label": "Neon Flex",
+            "icon": "none",
+            "link": ""
+          }
+        },
+        "tab_tTPmXn": {
+          "type": "tab",
+          "settings": {
+            "label": "Neon Flex",
+            "icon": "house",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_YGHiEY",
+        "tab_3p6ygK",
+        "tab_tT3cFi",
+        "tab_tTPmXn"
+      ],
       "settings": {
         "show_current": true,
-        "current_label": "",
+        "current_label": "Browse Our Collections",
         "current_icon": "none",
         "aria_label": "Shop other collections",
         "color_scheme": "scheme-2",

@@ -20,12 +20,15 @@
     "hero": {
       "type": "vivid-hero-editorial",
       "settings": {
+        "image": "shopify://shop_images/electrical-trade-counter-showroom.png",
         "image_opacity": 30,
         "crumb": "Trade",
         "eyebrow": "Trade & wholesale",
         "headline": "Wholesale lighting, by the pallet.",
         "lede": "We supply electricians, contractors and businesses across the UK with trade pricing on our full range of LED, neon and decorative lighting. Tell us what you need and we'll help you find the right products.",
-        "color_scheme": ""
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 68
       }
     },
     "lede": {
@@ -33,7 +36,9 @@
       "settings": {
         "kicker": "Trade customers",
         "body": "Whatever the job, there's a Vivid Direct product to suit it — from everyday LED essentials to bespoke neon and smart lighting.",
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "split_how": {
@@ -86,7 +91,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": ""
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "vivid_form_f3CEt8": {
@@ -275,7 +282,9 @@
         "content_align": "left",
         "submit_label": "Apply for trade account",
         "success_message": "Thanks, we've got your application and will be in touch shortly.",
-        "multi_step": true
+        "multi_step": true,
+        "padding_top": 68,
+        "padding_bottom": 68
       }
     },
     "cta": {
@@ -289,7 +298,9 @@
         "button_2_label": "Contact us",
         "button_2_url": "/pages/contact",
         "button_bg": "",
-        "button_text": ""
+        "button_text": "",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
