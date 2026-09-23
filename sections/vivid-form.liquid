@@ -17,7 +17,7 @@
       </div>
     {%- endif -%}
 
-    {%- form 'contact', class: 'm-form__form' -%}
+    {%- form 'contact', class: 'm-form__form', enctype: 'multipart/form-data' -%}
       {%- if form.posted_successfully? -%}
         <p class="m-form__note m-form__note--success">{{ section.settings.success_message }}</p>
       {%- elsif form.errors -%}
@@ -34,30 +34,63 @@
             endif
             assign f_id = 'MForm-' | append: section.id | append: '-' | append: forloop.index
           -%}
-          <div class="m-form__field{% if block.settings.type == 'textarea' or block.settings.width == 'full' %} m-form__field--full{% endif %}" {{ block.shopify_attributes }}>
-            <label class="m-form__label" for="{{ f_id }}">
-              {{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}
-            </label>
-            {%- if block.settings.type == 'textarea' -%}
-              <textarea
-                id="{{ f_id }}"
-                class="m-form__textarea"
-                name="{{ f_name }}"
-                placeholder="{{ block.settings.placeholder }}"
-                {% if block.settings.required %}required{% endif %}
-              ></textarea>
-            {%- else -%}
-              <input
-                id="{{ f_id }}"
-                class="m-form__input"
-                type="{{ block.settings.type }}"
-                name="{{ f_name }}"
-                placeholder="{{ block.settings.placeholder }}"
-                {% if block.settings.type == 'email' %}autocomplete="email"{% endif %}
-                {% if block.settings.required %}required{% endif %}
-              >
-            {%- endif -%}
-          </div>
+          {%- if block.settings.type == 'checkbox' -%}
+            <div class="m-form__field m-form__field--full m-form__field--checkbox" {{ block.shopify_attributes }}>
+              <label class="m-form__checkbox-label">
+                <input
+                  type="checkbox"
+                  name="{{ f_name }}"
+                  value="Yes"
+                  {% if block.settings.required %}required{% endif %}
+                >
+                <span>{{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}</span>
+              </label>
+            </div>
+          {%- else -%}
+            <div class="m-form__field{% if block.settings.type == 'textarea' or block.settings.width == 'full' %} m-form__field--full{% endif %}" {{ block.shopify_attributes }}>
+              <label class="m-form__label" for="{{ f_id }}">
+                {{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}
+              </label>
+              {%- case block.settings.type -%}
+                {%- when 'textarea' -%}
+                  <textarea
+                    id="{{ f_id }}"
+                    class="m-form__textarea"
+                    name="{{ f_name }}"
+                    placeholder="{{ block.settings.placeholder }}"
+                    {% if block.settings.required %}required{% endif %}
+                  ></textarea>
+                {%- when 'select' -%}
+                  <select id="{{ f_id }}" class="m-form__input m-form__select" name="{{ f_name }}" {% if block.settings.required %}required{% endif %}>
+                    {%- if block.settings.placeholder != blank -%}<option value="" disabled selected>{{ block.settings.placeholder }}</option>{%- endif -%}
+                    {%- assign f_options = block.settings.options | split: "," -%}
+                    {%- for opt in f_options -%}
+                      {%- assign opt_trimmed = opt | strip -%}
+                      <option value="{{ opt_trimmed }}">{{ opt_trimmed }}</option>
+                    {%- endfor -%}
+                  </select>
+                {%- when 'file' -%}
+                  <input
+                    id="{{ f_id }}"
+                    class="m-form__input m-form__file"
+                    type="file"
+                    name="{{ f_name }}[]"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    {% if block.settings.required %}required{% endif %}
+                  >
+                {%- else -%}
+                  <input
+                    id="{{ f_id }}"
+                    class="m-form__input"
+                    type="{{ block.settings.type }}"
+                    name="{{ f_name }}"
+                    placeholder="{{ block.settings.placeholder }}"
+                    {% if block.settings.type == 'email' %}autocomplete="email"{% endif %}
+                    {% if block.settings.required %}required{% endif %}
+                  >
+              {%- endcase -%}
+            </div>
+          {%- endif -%}
         {%- endfor -%}
       </div>
 
@@ -86,9 +119,10 @@
       "type": "field",
       "name": "Field",
       "settings": [
-        { "type": "select", "id": "type", "label": "Field type", "options": [ { "value": "text", "label": "Text" }, { "value": "email", "label": "Email (reply-to)" }, { "value": "tel", "label": "Phone" }, { "value": "textarea", "label": "Message (multi-line)" } ], "default": "text" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Field label" },
-        { "type": "text", "id": "placeholder", "label": "Placeholder" },
+        { "type": "select", "id": "type", "label": "Field type", "options": [ { "value": "text", "label": "Text" }, { "value": "email", "label": "Email (reply-to)" }, { "value": "tel", "label": "Phone" }, { "value": "textarea", "label": "Message (multi-line)" }, { "value": "select", "label": "Dropdown" }, { "value": "checkbox", "label": "Checkbox (single, e.g. terms agreement)" }, { "value": "file", "label": "File upload" } ], "default": "text" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Field label", "info": "For a checkbox, this is the text shown next to it." },
+        { "type": "text", "id": "placeholder", "label": "Placeholder", "info": "For a dropdown, this is used as the first, unselectable option." },
+        { "type": "text", "id": "options", "label": "Dropdown options", "info": "Dropdown fields only. Comma-separated, e.g. Standard, Trade, VIP." },
         { "type": "checkbox", "id": "required", "label": "Required", "default": false },
         { "type": "select", "id": "width", "label": "Width", "options": [ { "value": "half", "label": "Half" }, { "value": "full", "label": "Full" } ], "default": "half", "info": "Message fields are always full width." }
       ]
@@ -102,7 +136,7 @@
         { "type": "field", "settings": { "type": "text", "label": "Business name", "placeholder": "The Crown, Tenterden", "width": "half" } },
         { "type": "field", "settings": { "type": "email", "label": "Email address", "placeholder": "jane@example.com", "required": true, "width": "half" } },
         { "type": "field", "settings": { "type": "tel", "label": "Phone (optional)", "placeholder": "+44 7700 000000", "width": "half" } },
-        { "type": "field", "settings": { "type": "textarea", "label": "Tell us what you need", "placeholder": "Varieties you're interested in, volumes, delivery area…", "required": true } }
+        { "type": "field", "settings": { "type": "textarea", "label": "Tell us what you need", "placeholder": "Products you're interested in, quantities, delivery area…", "required": true } }
       ]
     }
   ]
