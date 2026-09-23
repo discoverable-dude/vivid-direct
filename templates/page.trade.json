@@ -20,7 +20,6 @@
     "hero": {
       "type": "vivid-hero-editorial",
       "settings": {
-        "image": "",
         "image_opacity": 30,
         "crumb": "Trade",
         "eyebrow": "Trade & wholesale",
@@ -71,14 +70,18 @@
       ],
       "settings": {
         "flip": false,
-        "image": "",
+        "image": "shopify://shop_images/electrician-fitting-luxury-lights.png",
+        "asset_image": "",
+        "asset_image_width": "",
+        "asset_image_height": "",
         "tag": "Trusted by trade",
         "ratio": "4 / 5",
         "eyebrow": "How we work with you",
         "heading": "Quality lighting, backed by expert advice",
         "body": "<p>If you're looking for reliable lighting products for your business, get in touch and we'll be happy to discuss your requirements. We can guide you on the right products for your project, from a single room to a full commercial fit-out.</p><p>We also offer wholesale pricing for bulk orders. Contact us for trade rates.</p>",
         "cta_label": "",
-        "cta_url": ""
+        "cta_url": "",
+        "cta_style": "solid"
       }
     },
     "vivid_form_f3CEt8": {
@@ -90,6 +93,7 @@
             "type": "text",
             "label": "Your name",
             "placeholder": "Jane Smith",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -100,6 +104,7 @@
             "type": "text",
             "label": "Job title / role",
             "placeholder": "Purchasing manager",
+            "options": "",
             "required": false,
             "width": "half"
           }
@@ -110,6 +115,7 @@
             "type": "text",
             "label": "Business name",
             "placeholder": "Your company name",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -131,6 +137,7 @@
             "type": "text",
             "label": "Company registration number (optional)",
             "placeholder": "e.g. 01234567",
+            "options": "",
             "required": false,
             "width": "half"
           }
@@ -141,6 +148,7 @@
             "type": "text",
             "label": "VAT number (optional)",
             "placeholder": "e.g. GB123456789",
+            "options": "",
             "required": false,
             "width": "half"
           }
@@ -151,6 +159,7 @@
             "type": "email",
             "label": "Email address",
             "placeholder": "jane@example.com",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -161,6 +170,7 @@
             "type": "tel",
             "label": "Phone",
             "placeholder": "+44 7700 000000",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -171,6 +181,7 @@
             "type": "textarea",
             "label": "Business address",
             "placeholder": "Street address, city, postcode",
+            "options": "",
             "required": true,
             "width": "full"
           }
@@ -192,6 +203,7 @@
             "type": "textarea",
             "label": "Tell us what you need",
             "placeholder": "Products you're interested in, volumes, delivery area…",
+            "options": "",
             "required": true,
             "width": "full"
           }
@@ -202,6 +214,7 @@
             "type": "file",
             "label": "Trade certificate or VAT registration (optional)",
             "placeholder": "",
+            "options": "",
             "required": false,
             "width": "full"
           }
@@ -211,6 +224,8 @@
           "settings": {
             "type": "checkbox",
             "label": "I confirm the information provided is accurate and agree to Vivid Direct's trade account terms",
+            "placeholder": "",
+            "options": "",
             "required": true,
             "width": "full"
           }
@@ -233,7 +248,7 @@
       ],
       "name": "Vivid Direct Custom Form",
       "settings": {
-        "bg": "paper2",
+        "bg": "cream",
         "eyebrow": "",
         "heading": "Apply for a trade account",
         "intro": "<p>Fill in the form below and we'll get back to you within one working day. Uploading your VAT certificate or trade documentation now can speed up approval, but it's not required to apply.</p>",
@@ -244,7 +259,6 @@
     "cta": {
       "type": "vivid-cta",
       "settings": {
-        "image": "",
         "eyebrow": "Trade & wholesale",
         "heading": "Let's talk lighting",
         "body": "Call us on 0203 916 6116, or send an enquiry above and we will normally come back to you within two working days.",
