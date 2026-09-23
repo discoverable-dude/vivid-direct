@@ -149,8 +149,8 @@
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.m-btn--primary { background: var(--cta); color: var(--white); border-color: var(--cta); }
-.m-btn--primary:hover { background: var(--cta-dark); border-color: var(--cta-dark); }
+.m-btn--primary { background: var(--btn-bg, var(--cta)); color: var(--btn-text, var(--white)); border-color: var(--btn-bg, var(--cta)); }
+.m-btn--primary:hover { background: var(--btn-bg-hover, var(--cta-dark)); border-color: var(--btn-bg-hover, var(--cta-dark)); }
 .m-btn--ghost { background: transparent; color: var(--white); border-color: rgba(246, 240, 234, 0.5); }
 .m-btn--ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--white); }
 
@@ -292,6 +292,48 @@
   flex-shrink: 0;
   accent-color: var(--cta);
 }
+
+/* Header alignment (form eyebrow/heading/intro block) */
+.m-form__head--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.m-form__head--center .m-eyebrow,
+.m-form__head--center .m-heading,
+.m-form__head--center .m-intro { text-align: center; }
+
+/* Multi-step wizard */
+.m-form__step { display: none; }
+.m-form__step.is-active { display: grid; }
+.m-form__stepnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.m-form__stepdots { display: flex; align-items: center; gap: 8px; }
+.m-form__stepdot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: background 0.2s, transform 0.2s;
+}
+.m-form__stepdot.is-active { background: var(--cta); transform: scale(1.25); }
+.m-form__stepdot.is-done { background: var(--ink-soft); }
+.m-form__stepbtns { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.m-form__back {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+.m-form__back:hover { background: var(--paper); border-color: var(--ink-soft); }
+.m-sec--dark .m-form__back { color: var(--white); border-color: rgba(246, 240, 234, 0.5); }
+.m-sec--dark .m-form__stepdot { background: rgba(246, 240, 234, 0.35); }
+.m-sec--dark .m-form__stepdot.is-done { background: rgba(246, 240, 234, 0.7); }
 
 /* ================================================
    FAQ ACCORDION
