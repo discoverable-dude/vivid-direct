@@ -52,7 +52,7 @@
         "address_label": "Find us",
         "address": "<p><strong>Kent:</strong><br/>Ascot Barn, Court Lodge Farm<br/>Hinxhill, Ashford, Kent TN25 5NR</p><p><strong>London:</strong><br/>1 Regent Terrace, Rita Rd<br/>London SW8 1AW</p>",
         "directions": "",
-        "map_query": "Ascot Barn, Court Lodge Farm, Hinxhill, Ashford, Kent TN25 5NR",
+        "map_query": "TN25 5NR",
         "map_zoom": 14,
         "secondary_label": "",
         "secondary_url": ""
@@ -67,6 +67,7 @@
             "type": "text",
             "label": "Your name",
             "placeholder": "Jane Smith",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -77,6 +78,7 @@
             "type": "text",
             "label": "Business name",
             "placeholder": "Sparks Electrical Ltd",
+            "options": "",
             "required": false,
             "width": "half"
           }
@@ -87,6 +89,7 @@
             "type": "email",
             "label": "Email address",
             "placeholder": "jane@example.com",
+            "options": "",
             "required": true,
             "width": "half"
           }
@@ -97,6 +100,7 @@
             "type": "tel",
             "label": "Phone (optional)",
             "placeholder": "+44 7700 000000",
+            "options": "",
             "required": false,
             "width": "half"
           }
@@ -107,6 +111,7 @@
             "type": "textarea",
             "label": "Tell us what you need",
             "placeholder": "Products you're interested in, quantities, install date…",
+            "options": "",
             "required": true,
             "width": "half"
           }
