@@ -37,7 +37,7 @@
           {%- assign _tel = _tel | slice: 1, 19 | prepend: '+44' -%}
         {%- endif -%}
         <a class="mft__phone" href="tel:{{ _tel }}">
-          {% render 'morghew-icon', icon: 'phone', size: 17 %}
+          {% render 'vivid-icon', icon: 'phone', size: 17 %}
           <span>{{ section.settings.phone | escape }}</span>
         </a>
       {%- endif -%}

@@ -77,7 +77,7 @@
         "featured_collection_q7qTQj": {
           "type": "featured_collection",
           "settings": {
-            "collection": "led-neon-flex"
+            "collection": "neon-flex-by-foss-led"
           }
         },
         "featured_collection_ghrCXA": {
@@ -89,7 +89,7 @@
         "featured_collection_VniFQC": {
           "type": "featured_collection",
           "settings": {
-            "collection": "smart-lighting"
+            "collection": "ra2-select-smart-home-by-lutron"
           }
         }
       },

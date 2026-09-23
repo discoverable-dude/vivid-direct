@@ -2801,7 +2801,7 @@ details[open] > .header__submenu {
   color: rgb(var(--color-foreground));
 }
 
-/* Underline handled by the theme's slide-in ::after (morghew.css) — Dawn's
+/* Underline handled by the theme's slide-in ::after (vivid.css) — Dawn's
    text-decoration underline removed to avoid a duplicate underline. */
 
 details[open] > .header__menu-item .icon-caret {

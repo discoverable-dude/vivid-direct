@@ -10,7 +10,7 @@
 {
   "sections": {
     "potato-product": {
-      "type": "product-potato",
+      "type": "product-lighting",
       "blocks": {
         "faq_zdy8jt": {
           "type": "faq",
@@ -43,9 +43,33 @@
             "body": "<p>Free next day delivery over £150 when ordered by 1pm. Standard delivery otherwise.</p>",
             "open_by_default": false
           }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — IP65 Rated",
+            "icon": "check"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — Dimmable",
+            "icon": "lightbulb"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "label": "EXAMPLE — 5 Yr Warranty",
+            "icon": "package"
+          }
         }
       },
       "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
         "faq_zdy8jt",
         "faq_1",
         "faq_2",
@@ -62,90 +86,8 @@
         "design_articles_url": "#"
       }
     },
-    "category_spotlight_6CcCbV": {
-      "type": "category-spotlight",
-      "blocks": {
-        "diagram_KwBatD": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "diagram_dR94Cw": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "diagram_eA67Ma": {
-          "type": "diagram",
-          "settings": {
-            "heading": "",
-            "text": ""
-          }
-        },
-        "series_tile_4NRjk9": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "series_tile_MGfH4L": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "series_tile_3iEPdJ": {
-          "type": "series_tile",
-          "settings": {
-            "heading": "",
-            "link": ""
-          }
-        },
-        "mount_method_RBQtAB": {
-          "type": "mount_method",
-          "settings": {
-            "heading": ""
-          }
-        },
-        "mount_method_QGccUD": {
-          "type": "mount_method",
-          "settings": {
-            "heading": ""
-          }
-        }
-      },
-      "block_order": [
-        "diagram_KwBatD",
-        "diagram_dR94Cw",
-        "diagram_eA67Ma",
-        "series_tile_4NRjk9",
-        "series_tile_MGfH4L",
-        "series_tile_3iEPdJ",
-        "mount_method_RBQtAB",
-        "mount_method_QGccUD"
-      ],
-      "name": "Category spotlight",
-      "settings": {
-        "hero_eyebrow": "Featured category",
-        "hero_heading": "LED NEON Flex",
-        "hero_text": "Flexible, cuttable neon-style lighting for architectural and decorative projects.",
-        "hero_button_label": "Shop the range",
-        "hero_button_url": "",
-        "diagrams_heading": "How it works",
-        "series_heading": "Choose your series",
-        "mounts_heading": "Mounting options",
-        "badge_alt": "Made in Britain",
-        "badge_text": "Proudly made in Britain"
-      }
-    },
-    "morghew_product_grid_DMbQyj": {
-      "type": "morghew-product-grid",
+    "vivid_product_grid_DMbQyj": {
+      "type": "vivid-product-grid",
       "name": "Product grid",
       "settings": {
         "collection": "downlights",
@@ -157,19 +99,8 @@
         "background": "paper-2"
       }
     },
-    "morghew_season_hYwhMC": {
-      "type": "morghew-season",
-      "disabled": true,
-      "name": "Seasonal/availability chart (disabled by default)",
-      "settings": {
-        "bg": "paper2",
-        "eyebrow": "Availability",
-        "heading": "EXAMPLE heading",
-        "intro": "<p>EXAMPLE — this block is disabled by default; enable it if this product needs a seasonal or lead-time chart.</p>"
-      }
-    },
-    "morghew_product_grid_katCah": {
-      "type": "morghew-product-grid",
+    "vivid_product_grid_katCah": {
+      "type": "vivid-product-grid",
       "name": "Related products grid",
       "settings": {
         "collection": "",
@@ -184,9 +115,7 @@
   },
   "order": [
     "potato-product",
-    "category_spotlight_6CcCbV",
-    "morghew_product_grid_DMbQyj",
-    "morghew_season_hYwhMC",
-    "morghew_product_grid_katCah"
+    "vivid_product_grid_DMbQyj",
+    "vivid_product_grid_katCah"
   ]
 }

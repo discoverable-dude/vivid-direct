@@ -18,34 +18,16 @@
       }
     },
     "lede": {
-      "type": "morghew-lede",
+      "type": "vivid-lede",
       "settings": {
         "kicker": "Club VIVID",
-        "body": "Take advantage of member discounts and design services, and be first to access new products. Members benefit from seasonal discounts and a 5-year guarantee on products as standard."
+        "body": "Two ways to join. Standard membership is free for anyone who wants early access, seasonal promotions and our technical library. Trade membership is for approved trade accounts and adds discount pricing, 30-day net terms and a 5-year guarantee as standard."
       }
     },
-    "benefits": {
+    "standard_benefits": {
       "type": "multicolumn",
       "blocks": {
-        "b1": {
-          "type": "column",
-          "settings": {
-            "title": "Trade discount",
-            "text": "<p>Trade discount applied on all purchases.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "b2": {
-          "type": "column",
-          "settings": {
-            "title": "30-day net terms",
-            "text": "<p>Trade account with 30 days net facilities, upon approval.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "b3": {
+        "s1": {
           "type": "column",
           "settings": {
             "title": "Members Zone",
@@ -54,7 +36,7 @@
             "link": ""
           }
         },
-        "b4": {
+        "s2": {
           "type": "column",
           "settings": {
             "title": "Seek & source",
@@ -63,7 +45,7 @@
             "link": ""
           }
         },
-        "b5": {
+        "s3": {
           "type": "column",
           "settings": {
             "title": "Regular promotions",
@@ -71,28 +53,16 @@
             "link_label": "",
             "link": ""
           }
-        },
-        "b6": {
-          "type": "column",
-          "settings": {
-            "title": "Click & collect",
-            "text": "<p>Collect from our Sevenoaks showroom, out of hours, upon request.</p>",
-            "link_label": "",
-            "link": ""
-          }
         }
       },
       "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5",
-        "b6"
+        "s1",
+        "s2",
+        "s3"
       ],
       "settings": {
-        "title": "Member benefits",
-        "heading_size": "h1",
+        "title": "Standard membership — free for everyone",
+        "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
         "button_label": "",
@@ -104,13 +74,77 @@
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "trade_benefits": {
+      "type": "multicolumn",
+      "blocks": {
+        "t1": {
+          "type": "column",
+          "settings": {
+            "title": "Trade discount",
+            "text": "<p>Trade discount applied on all purchases.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "t2": {
+          "type": "column",
+          "settings": {
+            "title": "30-day net terms",
+            "text": "<p>Trade account with 30 days net facilities, upon approval.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "t3": {
+          "type": "column",
+          "settings": {
+            "title": "Click & collect",
+            "text": "<p>Collect from our Sevenoaks showroom, out of hours, upon request.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "title": "Trade membership — for approved trade accounts",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-4",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 20,
         "padding_bottom": 40
       }
     },
     "registration_form": {
-      "type": "morghew-form",
+      "type": "vivid-form",
       "blocks": {
         "field_1": {
+          "type": "field",
+          "settings": {
+            "type": "select",
+            "label": "Which membership are you applying for?",
+            "placeholder": "Select membership type",
+            "options": "Standard membership, Trade membership",
+            "required": true,
+            "width": "full"
+          }
+        },
+        "field_2": {
           "type": "field",
           "settings": {
             "type": "text",
@@ -120,7 +154,7 @@
             "width": "half"
           }
         },
-        "field_2": {
+        "field_3": {
           "type": "field",
           "settings": {
             "type": "tel",
@@ -130,7 +164,7 @@
             "width": "half"
           }
         },
-        "field_3": {
+        "field_4": {
           "type": "field",
           "settings": {
             "type": "email",
@@ -140,24 +174,33 @@
             "width": "half"
           }
         },
-        "field_4": {
+        "field_5": {
           "type": "field",
           "settings": {
             "type": "text",
-            "label": "Business name",
+            "label": "Business name (trade applicants)",
             "placeholder": "Sparks Electrical Ltd",
             "required": false,
             "width": "half"
           }
         },
-        "field_5": {
+        "field_6": {
           "type": "field",
           "settings": {
             "type": "textarea",
             "label": "Address",
             "placeholder": "Street address, city, postcode",
             "required": true,
-            "width": "half"
+            "width": "full"
+          }
+        },
+        "field_7": {
+          "type": "field",
+          "settings": {
+            "type": "checkbox",
+            "label": "I agree to VIVID Direct's terms of membership",
+            "required": true,
+            "width": "full"
           }
         }
       },
@@ -166,14 +209,16 @@
         "field_2",
         "field_3",
         "field_4",
-        "field_5"
+        "field_5",
+        "field_6",
+        "field_7"
       ],
       "name": "Members registration",
       "settings": {
         "bg": "paper",
         "eyebrow": "Members Registration",
         "heading": "Join Club VIVID",
-        "intro": "<p>Register for the VIVID Members Zone and we'll be in touch to confirm your account.</p>",
+        "intro": "<p>Register for Club VIVID and we'll be in touch to confirm your account. Trade applicants will be contacted to complete account approval.</p>",
         "submit_label": "Register",
         "success_message": "Thanks — we've got your registration and will be in touch shortly."
       }
@@ -182,7 +227,8 @@
   "order": [
     "main",
     "lede",
-    "benefits",
+    "standard_benefits",
+    "trade_benefits",
     "registration_form"
   ]
 }

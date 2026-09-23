@@ -1,6 +1,6 @@
-{{ 'morghew-sections.css' | asset_url | stylesheet_tag }}
-{{ 'morghew-crate.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'morghew-cart.js' | asset_url }}" defer="defer"></script>
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-crate.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vivid-cart.js' | asset_url }}" defer="defer"></script>
 
 {%- assign _free_threshold = 4000 -%}
 {%- assign _cart_total = cart.total_price -%}
@@ -17,7 +17,7 @@
       <div class="crate-empty">
         <p class="crate-eyebrow">Your basket</p>
         <h1 class="crate-title">Your basket is empty</h1>
-        <a href="{{ routes.all_products_collection_url }}" class="mpg-btn mpg-btn--primary" style="display:inline-block;margin-top:28px;">Shop the harvest</a>
+        <a href="{{ routes.all_products_collection_url }}" class="mpg-btn mpg-btn--primary" style="display:inline-block;margin-top:28px;">Shop all products</a>
       </div>
 
     {%- else -%}
@@ -25,7 +25,7 @@
       <div class="crate-header">
         <div>
           <p class="crate-eyebrow">Your basket</p>
-          <h1 class="crate-title">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} from the estate</h1>
+          <h1 class="crate-title">{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %} in your basket</h1>
         </div>
         <a href="{{ routes.all_products_collection_url }}" class="crate-continue">← Continue shopping</a>
       </div>
@@ -39,34 +39,6 @@
               <button type="submit" name="checkout" class="visually-hidden" aria-hidden="true" tabindex="-1">Checkout</button>
 
               {%- for item in cart.items -%}
-
-                {%- comment -%} Cook methods string {%- endcomment -%}
-                {%- assign _tax_cooking = item.product.metafields.shopify.cooking-method.value -%}
-                {%- assign _cook_str = "" -%}
-                {%- for _m in _tax_cooking -%}
-                  {%- assign _m_str = _m.label | default: _m | downcase -%}
-                  {%- assign _m_label = "" -%}
-                  {%- case _m_str -%}
-                    {%- when "boiling"          -%}{%- assign _m_label = "Boil"   -%}
-                    {%- when "steaming"         -%}{%- assign _m_label = "Steam"  -%}
-                    {%- when "roasting"         -%}{%- assign _m_label = "Roast"  -%}
-                    {%- when "mashing"          -%}{%- assign _m_label = "Mash"   -%}
-                    {%- when "chips", "frying"  -%}{%- assign _m_label = "Chip"   -%}
-                    {%- when "jacket", "baking" -%}{%- assign _m_label = "Jacket" -%}
-                  {%- endcase -%}
-                  {%- if _m_label != "" -%}
-                    {%- if _cook_str != "" -%}{%- assign _cook_str = _cook_str | append: " / " -%}{%- endif -%}
-                    {%- assign _cook_str = _cook_str | append: _m_label -%}
-                  {%- endif -%}
-                {%- endfor -%}
-
-                {%- comment -%} Flesh variety label {%- endcomment -%}
-                {%- assign _tax_variety = item.product.metafields.shopify.potato-variety.value -%}
-                {%- assign _flesh_label = "" -%}
-                {%- if _tax_variety != blank -%}
-                  {%- assign _v = _tax_variety | first -%}
-                  {%- assign _flesh_label = _v.label | default: _v -%}
-                {%- endif -%}
 
                 <div class="crate-row" id="CartItem-{{ item.index | plus: 1 }}">
 
@@ -82,15 +54,6 @@
                   </a>
 
                   <div class="crate-row__body">
-                    {%- if _cook_str != "" or _flesh_label != "" -%}
-                      <p class="crate-row__meta">
-                        {{- _cook_str | upcase -}}
-                        {%- if _cook_str != "" and _flesh_label != "" %} · {% endif -%}
-                        {{- _flesh_label | upcase -}}
-                        {%- if _flesh_label != "" %} FLESH{% endif -%}
-                      </p>
-                    {%- endif -%}
-
                     <a href="{{ item.url }}" class="crate-row__name">{{ item.product.title }}</a>
 
                     {%- if item.product.has_only_default_variant == false -%}
@@ -109,29 +72,7 @@
                       </div>
                     {%- endif -%}
 
-                    {%- liquid
-                      # The distance-priced delivery line: quantity encodes the
-                      # charge (£1.50 units), so hide the stepper and show the
-                      # distance instead. Line price still shows the full charge.
-                      assign _is_charge = false
-                      if settings.log_charge_product != blank and item.product_id == settings.log_charge_product.id
-                        assign _is_charge = true
-                      endif
-                      assign _dist = ''
-                      if _is_charge
-                        for p in item.properties
-                          if p.first == 'Distance'
-                            assign _dist = p.last
-                          endif
-                        endfor
-                      endif
-                    -%}
                     <div class="crate-row__foot">
-                      {%- if _is_charge -%}
-                        <span class="crate-row__deliv-note">
-                          {%- if _dist != blank -%}{{ _dist }} from the farm{%- else -%}Priced by distance{%- endif -%}
-                        </span>
-                      {%- else -%}
                       <div class="crate-qty" data-vid="{{ item.variant.id }}">
                         <button type="button" class="crate-qty__btn" data-action="minus" aria-label="Decrease quantity">
                           <svg width="12" height="2" viewBox="0 0 12 2" fill="none" aria-hidden="true"><line x1="0" y1="1" x2="12" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -141,7 +82,6 @@
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                         </button>
                       </div>
-                      {%- endif -%}
                       <span class="crate-row__price">{{ item.original_line_price | money }}</span>
                     </div>
                   </div>
@@ -221,16 +161,16 @@
             </button>
 
             <p class="crate-trust-copy">Free returns &middot; 48hr tracked delivery</p>
-            <p class="crate-trust-copy">We harvest to order, expect freshness</p>
+            <p class="crate-trust-copy">Order by 1pm for next-day delivery</p>
 
             <ul class="crate-trust-list">
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                Grown on our estate
+                Trusted lighting brands
               </li>
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Harvested to order
+                Fast dispatch
               </li>
               <li>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
@@ -263,7 +203,7 @@
         {%- if _shown >= 4 -%}{%- break -%}{%- endif -%}
         {%- unless _cart_pids contains _p.id -%}
           {%- assign _shown = _shown | plus: 1 -%}
-          {%- render 'card-potato', product: _p -%}
+          {%- render 'product-card', product: _p -%}
         {%- endunless -%}
       {%- endfor -%}
     {%- endcapture -%}

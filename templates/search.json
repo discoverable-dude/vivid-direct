@@ -10,14 +10,14 @@
 {
   "sections": {
     "main": {
-      "type": "morghew-search",
+      "type": "vivid-search",
       "blocks": {
-        "popular_1": { "type": "popular", "settings": { "label": "LED strip lights", "icon": "roast" } },
-        "popular_2": { "type": "popular", "settings": { "label": "Downlights", "icon": "leaf" } },
-        "popular_3": { "type": "popular", "settings": { "label": "Neon flex", "icon": "bottle" } },
-        "popular_4": { "type": "popular", "settings": { "label": "Smart lighting", "icon": "book" } },
+        "popular_1": { "type": "popular", "settings": { "label": "LED strip lights", "icon": "lightbulb" } },
+        "popular_2": { "type": "popular", "settings": { "label": "Downlights", "icon": "house" } },
+        "popular_3": { "type": "popular", "settings": { "label": "Neon flex", "icon": "eye" } },
+        "popular_4": { "type": "popular", "settings": { "label": "Smart lighting", "icon": "building" } },
         "browse_1": { "type": "browse", "settings": { "title": "Shop All", "subtitle": "LED, neon, smart lighting & accessories", "link": "shopify://collections/all" } },
-        "browse_2": { "type": "browse", "settings": { "title": "Trade Accounts", "subtitle": "Dedicated pricing for the trade", "link": "shopify://pages/trade" } },
+        "browse_2": { "type": "browse", "settings": { "title": "Trade Accounts", "subtitle": "Dedicated pricing for the trade", "link": "shopify://pages/trade-account" } },
         "browse_3": { "type": "browse", "settings": { "title": "Help & Advice", "subtitle": "Guides to help you choose", "link": "shopify://blogs/design" } }
       },
       "block_order": ["popular_1", "popular_2", "popular_3", "popular_4", "browse_1", "browse_2", "browse_3"],

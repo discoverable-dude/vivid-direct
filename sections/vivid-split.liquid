@@ -1,0 +1,98 @@
+{%- comment -%}
+  Vivid Split — editorial image + text, alternating sides.
+  Check-list items are blocks; optional ghost CTA below the copy.
+{%- endcomment -%}
+
+{{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
+
+<section class="esec esplit{% if section.settings.flip %} esplit--flip{% endif %}" data-reveal>
+  <div class="wrap esplit__grid">
+    {%- if section.settings.image != blank -%}
+      <div class="esplit__media">
+        <div class="eimg" style="aspect-ratio: {{ section.settings.ratio }};">
+          <img
+            src="{{ section.settings.image | image_url: width: 1400 }}"
+            srcset="{{ section.settings.image | image_url: width: 700 }} 700w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+            sizes="(max-width: 820px) 100vw, 50vw"
+            alt="{{ section.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+          {%- if section.settings.tag != blank -%}<span class="ph__tag">{{ section.settings.tag }}</span>{%- endif -%}
+        </div>
+      </div>
+    {%- elsif section.settings.asset_image != blank -%}
+      <div class="esplit__media">
+        <div class="eimg" style="aspect-ratio: {{ section.settings.ratio }};">
+          <img
+            src="{{ section.settings.asset_image | asset_url }}"
+            alt=""
+            width="{{ section.settings.asset_image_width | default: 1400 }}"
+            height="{{ section.settings.asset_image_height | default: 1000 }}"
+            loading="lazy">
+          {%- if section.settings.tag != blank -%}<span class="ph__tag">{{ section.settings.tag }}</span>{%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+    <div class="esplit__text">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="esec__h">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="esplit__body">{{ section.settings.body }}</div>{%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ul class="esplit__list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{% render 'vivid-icon', icon: 'check', size: 18 %}{{ block.settings.text }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        {%- assign _ext = false -%}
+        {%- if section.settings.cta_url contains '://' -%}{%- assign _ext = true -%}{%- endif -%}
+        <a href="{{ section.settings.cta_url | default: '#' }}" class="e-btn{% if section.settings.cta_style == 'ghost' %} e-btn--ghost{% endif %} esplit__cta"{% if _ext %} target="_blank" rel="noopener"{% endif %}>
+          {{ section.settings.cta_label }}{% render 'vivid-icon', icon: 'arrow', size: 18 %}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image/text split",
+  "tag": "section",
+  "class": "m-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "checkbox", "id": "flip", "label": "Image on the right", "default": false },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset_image", "label": "Image filename (theme asset)", "info": "Used only when no image above is set. The exact filename in the theme's assets folder." },
+    { "type": "text", "id": "asset_image_width", "label": "Asset image width (px)" },
+    { "type": "text", "id": "asset_image_height", "label": "Asset image height (px)" },
+    { "type": "text", "id": "tag", "label": "Image caption tag", "info": "Small label pinned to the image, e.g. \"The home field\"." },
+    { "type": "select", "id": "ratio", "label": "Image ratio", "options": [
+      { "value": "4 / 5", "label": "Portrait (4:5)" },
+      { "value": "4 / 3", "label": "Landscape (4:3)" },
+      { "value": "3 / 2", "label": "Landscape (3:2)" },
+      { "value": "1 / 1", "label": "Square" }
+    ], "default": "4 / 5" },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A heading goes here" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Two or three short paragraphs of body copy.</p>" },
+    { "type": "header", "content": "Button (optional)" },
+    { "type": "text", "id": "cta_label", "label": "Button label" },
+    { "type": "url", "id": "cta_url", "label": "Button link" },
+    { "type": "select", "id": "cta_style", "label": "Button style", "options": [ { "value": "solid", "label": "Solid" }, { "value": "ghost", "label": "Outline" } ], "default": "solid" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Check-list item",
+      "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "A short proof point" } ]
+    }
+  ],
+  "presets": [ { "name": "Image/text split" } ]
+}
+{% endschema %}

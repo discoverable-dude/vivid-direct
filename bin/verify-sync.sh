@@ -17,8 +17,8 @@
 #
 set -euo pipefail
 
-STORE="morghew.myshopify.com"
-THEME="186901365031"   # morghew/dev (live)
+STORE="vivid-direct-uuha9esw.myshopify.com"
+THEME="204153880924"   # setup/vivid-direct-base (live)
 
 cd "$(dirname "$0")/.."
 TMP="$(mktemp -d)"

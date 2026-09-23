@@ -1,4 +1,4 @@
-{{ 'morghew-social-proof.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-social-proof.css' | asset_url | stylesheet_tag }}
 <section class="msp msp--reviews" data-surface="{{ section.settings.surface }}"{% if section.settings.texture %} data-texture="true"{% endif %}>
   <div class="msp__wrap">
     <div class="msp-reviews__head">
@@ -10,7 +10,7 @@
         <div class="msp-reviews__agg">
           <span class="msp-reviews__score">{{ section.settings.aggregate_score | escape }}</span>
           <div class="msp-reviews__agg-meta">
-            {%- if section.settings.aggregate_stars > 0 -%}<span class="msp-stars" role="img" aria-label="{{ section.settings.aggregate_stars }} out of 5 stars">{% for i in (1..section.settings.aggregate_stars) %}{% render 'morghew-icon', icon: 'star', size: 15 %}{% endfor %}</span>{%- endif -%}
+            {%- if section.settings.aggregate_stars > 0 -%}<span class="msp-stars" role="img" aria-label="{{ section.settings.aggregate_stars }} out of 5 stars">{% for i in (1..section.settings.aggregate_stars) %}{% render 'vivid-icon', icon: 'star', size: 15 %}{% endfor %}</span>{%- endif -%}
             {%- if section.settings.aggregate_text != blank -%}<span class="msp-reviews__agg-text">{{ section.settings.aggregate_text | escape }}</span>{%- endif -%}
           </div>
         </div>
@@ -21,7 +21,7 @@
       <div class="msp-reviews__grid">
         {%- for block in section.blocks -%}
           <article class="msp-review" {{ block.shopify_attributes }}>
-            {%- if block.settings.stars > 0 -%}<span class="msp-stars" role="img" aria-label="{{ block.settings.stars }} out of 5 stars">{% for i in (1..block.settings.stars) %}{% render 'morghew-icon', icon: 'star', size: 14 %}{% endfor %}</span>{%- endif -%}
+            {%- if block.settings.stars > 0 -%}<span class="msp-stars" role="img" aria-label="{{ block.settings.stars }} out of 5 stars">{% for i in (1..block.settings.stars) %}{% render 'vivid-icon', icon: 'star', size: 14 %}{% endfor %}</span>{%- endif -%}
             {%- if block.settings.quote != blank -%}<p class="msp-review__quote">{{ block.settings.quote | escape }}</p>{%- endif -%}
             <div class="msp-review__foot">
               {%- if block.settings.name != blank -%}<p class="msp-review__name">{{ block.settings.name | escape }}</p>{%- endif -%}

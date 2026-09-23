@@ -17,11 +17,10 @@
         "padding_bottom": 36
       }
     },
-    "morghew_hero_EwMPR4": {
-      "type": "morghew-hero",
-      "name": "Morghew Hero",
+    "vivid_hero_EwMPR4": {
+      "type": "vivid-hero",
+      "name": "Vivid Hero",
       "settings": {
-        "bg_image": "shopify://shop_images/SI_RM_PRD_MORGHEW-0019.jpg",
         "image_opacity": 40,
         "show_overlay": true,
         "bg_color": "#082A38",
@@ -37,7 +36,7 @@
       }
     },
     "contact_details": {
-      "type": "morghew-contact-details",
+      "type": "vivid-contact-details",
       "settings": {
         "eyebrow": "Vivid Direct",
         "heading": "Call in, or come and see us.",
@@ -59,8 +58,8 @@
         "secondary_url": ""
       }
     },
-    "morghew_form_wPyMjc": {
-      "type": "morghew-form",
+    "vivid_form_wPyMjc": {
+      "type": "vivid-form",
       "blocks": {
         "field_KMEqTe": {
           "type": "field",
@@ -120,7 +119,7 @@
         "field_epA6yW",
         "field_H8nQ3n"
       ],
-      "name": "Morghew Custom Form",
+      "name": "Vivid Custom Form",
       "settings": {
         "bg": "paper",
         "eyebrow": "",
@@ -133,8 +132,8 @@
   },
   "order": [
     "main",
-    "morghew_hero_EwMPR4",
+    "vivid_hero_EwMPR4",
     "contact_details",
-    "morghew_form_wPyMjc"
+    "vivid_form_wPyMjc"
   ]
 }

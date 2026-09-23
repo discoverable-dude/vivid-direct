@@ -43,14 +43,18 @@
         "text",
         "buttons"
       ],
+      "custom_css": [
+        ".banner::after {background: linear-gradient(90deg, rgba(11,28,41,0.95) 0%, rgba(11,28,41,0.65) 35%, rgba(11,28,41,0.15) 65%, rgba(11,28,41,0) 85%);}"
+      ],
       "settings": {
         "image": "shopify://shop_images/vd-neon-hero.jpg",
-        "image_overlay_opacity": 40,
+        "enable_video_bg": true,
+        "image_overlay_opacity": 20,
         "image_height": "large",
         "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
-        "show_text_box": true,
+        "show_text_box": false,
         "color_scheme": "scheme-1",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "left",
@@ -87,7 +91,7 @@
         "f_range": {
           "type": "feature",
           "settings": {
-            "icon": "star",
+            "icon": "package",
             "heading": "Huge Range",
             "text": "LED, neon, smart lighting and accessories, always in stock."
           }
@@ -104,7 +108,7 @@
         "heading": "A Partner, Not Just a Supplier",
         "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
         "image_position": "left",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 60,
         "padding_bottom": 52
       }
@@ -186,7 +190,7 @@
             "title": "LED Neon Flex",
             "text": "<p>Flexible neon-style lighting for any project</p>",
             "link_label": "Shop Neon Flex",
-            "link": "shopify://collections/led-neon-flex"
+            "link": "shopify://collections/neon-flex-by-foss-led"
           }
         },
         "cat_downlights": {
@@ -206,7 +210,7 @@
             "title": "Smart Lighting",
             "text": "<p>App and voice-controlled lighting solutions</p>",
             "link_label": "Shop Smart Lighting",
-            "link": "shopify://collections/smart-lighting"
+            "link": "shopify://collections/ra2-select-smart-home-by-lutron"
           }
         },
         "cat_outdoor": {
@@ -216,7 +220,7 @@
             "title": "Outdoor & Garden",
             "text": "<p>Weatherproof lighting for outside spaces</p>",
             "link_label": "Shop Outdoor Lighting",
-            "link": "shopify://collections/outdoor-garden-lighting"
+            "link": "shopify://collections/outdoor-lighting"
           }
         }
       },
@@ -240,7 +244,7 @@
         "columns_desktop": 4,
         "column_alignment": "left",
         "background_style": "none",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 52,
@@ -262,7 +266,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -495,7 +499,7 @@
         "eyebrow": "Library",
         "heading": "Brands We Work With",
         "intro": "<p>We select only the most exceptional lighting and smart control brands.</p>",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -512,7 +516,7 @@
         "show_image": true,
         "show_date": true,
         "show_author": false,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
       }
@@ -585,7 +589,7 @@
           "type": "button",
           "settings": {
             "button_label": "Apply for Trade Account Today",
-            "button_link": "shopify://pages/trade",
+            "button_link": "shopify://pages/trade-account",
             "button_style_secondary": false
           }
         }
@@ -606,9 +610,35 @@
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
         "section_color_scheme": "",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
+      }
+    },
+    "portfolio-teaser": {
+      "type": "portfolio-gallery",
+      "blocks": {
+        "vlx_led": { "type": "project", "settings": { "image_filename": "vlx-led-strip.jpg", "image_width": "2204", "image_height": "1200", "name": "LED Strip Detail" } },
+        "vlx_cove": { "type": "project", "settings": { "image_filename": "vlx-cove-lighting-1.jpg", "image_width": "1376", "image_height": "1566", "name": "Cove Lighting" } },
+        "vlx_bedroom": { "type": "project", "settings": { "image_filename": "vlx-bedroom-1-wide.jpg", "image_width": "1244", "image_height": "830", "name": "Ambient Bedroom Lighting" } },
+        "vlx_stairs": { "type": "project", "settings": { "image_filename": "vlx-stairs-3.jpg", "image_width": "796", "image_height": "1368", "name": "Staircase LED Lighting" } },
+        "vlx_undercab": { "type": "project", "settings": { "image_filename": "vlx-under-cab-2.jpg", "image_width": "1546", "image_height": "900", "name": "Under-Cabinet Lighting" } },
+        "vlx_bathroom": { "type": "project", "settings": { "image_filename": "vlx-bathroom-lighting-1.jpg", "image_width": "528", "image_height": "528", "name": "Bathroom Vanity Lighting" } }
+      },
+      "block_order": [
+        "vlx_led",
+        "vlx_cove",
+        "vlx_bedroom",
+        "vlx_stairs",
+        "vlx_undercab",
+        "vlx_bathroom"
+      ],
+      "settings": {
+        "dark_mode": true,
+        "eyebrow": "Inspiration",
+        "heading": "Lighting excellence",
+        "intro": "<p>From architectural LED strips to precision downlights — see the products and installations that define our portfolio.</p>",
+        "attribution": "<p>Projects designed and installed by <a href=\"https://vividlightworx.co.uk\">Vivid LightWorX</a>, our sister company.</p>"
       }
     },
     "portfolio-cta": {
@@ -647,7 +677,7 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-5",
+        "color_scheme": "scheme-4",
         "full_width": false,
         "padding_top": 60,
         "padding_bottom": 60
@@ -676,7 +706,6 @@
         "text"
       ],
       "settings": {
-        "image": "shopify://shop_images/Kitchen-Pantry-Kit-1-e1760645270386-692x1024.jpg",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "text_first",
@@ -685,8 +714,8 @@
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-4",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 80
       }
@@ -702,6 +731,7 @@
     "help-advice",
     "customer_reviews_yJc9hA",
     "trade",
+    "portfolio-teaser",
     "portfolio-cta",
     "about"
   ]

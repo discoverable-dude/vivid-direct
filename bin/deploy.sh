@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# deploy.sh — Reliable Morghew theme deploy.
+# deploy.sh — Reliable Vivid Direct theme deploy.
 #
 # WHY THIS EXISTS:
 #   The theme uses Shopify's two-way GitHub integration. That sync is
@@ -22,8 +22,8 @@
 #
 set -euo pipefail
 
-STORE="morghew.myshopify.com"
-THEME="186901365031"   # morghew/dev  (role: live) — the GitHub-connected theme
+STORE="vivid-direct-uuha9esw.myshopify.com"
+THEME="204153880924"   # setup/vivid-direct-base  (role: live) — the GitHub-connected theme
 
 cd "$(dirname "$0")/.."
 
@@ -33,7 +33,7 @@ if [[ "${1:-}" != "--no-git" ]]; then
   if ! git diff --quiet || ! git diff --cached --quiet; then
     git stash push --include-untracked -m "deploy.sh autostash" && STASHED=1
   fi
-  git pull --rebase origin dev
+  git pull --rebase origin setup/vivid-direct-base
   if [[ "$STASHED" == "1" ]]; then git stash pop; fi
 fi
 
