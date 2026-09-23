@@ -71,6 +71,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "promo_interval": 8,
         "products_per_page": 16,
         "columns_desktop": 4,
         "columns_mobile": "2",

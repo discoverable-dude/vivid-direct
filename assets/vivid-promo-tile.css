@@ -1,0 +1,36 @@
+/* Promo tiles — promotional boxes dropped into the collection product grid
+   at intervals, driven by collection metafields (custom.promo_images/
+   promo_headings/promo_links). See main-collection-product-grid.liquid. */
+.promo-tile-item { display: flex; }
+.promo-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--paper-2);
+  text-decoration: none;
+}
+.promo-tile--nolink { cursor: default; }
+.promo-tile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.promo-tile:hover .promo-tile__img { transform: scale(1.04); }
+.promo-tile__heading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 20px;
+  background: linear-gradient(to top, rgba(8, 42, 56, 0.85), transparent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.25;
+}

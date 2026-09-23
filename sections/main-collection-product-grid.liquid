@@ -1,6 +1,26 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-promo-tile.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Promo tiles — up to 3 promotional boxes dropped into the grid at a set
+  interval, driven by three list-type collection metafields:
+    custom.promo_images   (List of files)         — background image
+    custom.promo_headings (List of single line text) — optional overlay text
+    custom.promo_links    (List of URLs)           — optional destination
+  Arrays are index-aligned; a blank heading/link for a given index is fine.
+  Nothing renders if custom.promo_images is empty or unset.
+{%- endcomment -%}
+{%- liquid
+  assign promo_files = collection.metafields.custom.promo_images.value
+  assign promo_headings = collection.metafields.custom.promo_headings.value
+  assign promo_links = collection.metafields.custom.promo_links.value
+  assign promo_count = 0
+  if promo_files != blank
+    assign promo_count = promo_files.size
+  endif
+-%}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -179,6 +199,31 @@
                   %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
+                {%- if promo_count > 0 and section.settings.promo_interval > 0 and forloop.index0 > 0 -%}
+                  {%- assign _is_promo_slot = forloop.index0 | modulo: section.settings.promo_interval -%}
+                  {%- if _is_promo_slot == 0 and forloop.last == false -%}
+                    {%- assign _promo_slot = forloop.index0 | divided_by: section.settings.promo_interval | minus: 1 -%}
+                    {%- assign _promo_index = _promo_slot | modulo: promo_count -%}
+                    {%- assign _promo_file = promo_files[_promo_index] -%}
+                    {%- if _promo_file != blank -%}
+                      <li class="grid__item promo-tile-item">
+                        <a class="promo-tile{% if promo_links[_promo_index] == blank %} promo-tile--nolink{% endif %}"
+                           {% if promo_links[_promo_index] != blank %}href="{{ promo_links[_promo_index] }}"{% endif %}>
+                          <img
+                            class="promo-tile__img"
+                            src="{{ _promo_file.preview_image | image_url: width: 600 }}"
+                            alt="{{ promo_headings[_promo_index] | default: '' | escape }}"
+                            width="600"
+                            height="{{ 600 | divided_by: _promo_file.preview_image.aspect_ratio | default: 600 | round }}"
+                            loading="lazy">
+                          {%- if promo_headings[_promo_index] != blank -%}
+                            <span class="promo-tile__heading">{{ promo_headings[_promo_index] }}</span>
+                          {%- endif -%}
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endif -%}
               {%- endfor -%}
             </ul>
 
@@ -200,6 +245,24 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Promo tiles"
+    },
+    {
+      "type": "paragraph",
+      "content": "Powered by three collection metafields (custom.promo_images, custom.promo_headings, custom.promo_links) — set them per collection in Shopify admin under the collection's Metafields section."
+    },
+    {
+      "type": "range",
+      "id": "promo_interval",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 8,
+      "label": "Insert a promo tile every N products",
+      "info": "0 turns promo tiles off. Requires custom.promo_images to be set on the collection."
+    },
     {
       "type": "range",
       "id": "products_per_page",

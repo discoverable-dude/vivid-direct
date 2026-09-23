@@ -1,15 +1,23 @@
 {%- comment -%}
-  Collection cross-nav tabs — a row of pill links at the top of a collection
+  Collection cross-nav tabs — a row of tab pills at the top of a collection
   page for cross-selling into other collections (e.g. show "Neon Flex" and
   "LED Strip" as tabs on the Downlights collection). Ported from the old
   Morghew theme's cook-method variety tabs, rebuilt with lighting-relevant
   icons and no flesh/dietary filtering — those never applied here.
+
+  The wrapper always renders (rather than being conditional on block count)
+  so the section stays selectable/editable in the theme editor even before
+  a tab block has been added — a section whose root markup disappears based
+  on block count can make the editor lose track of it entirely.
 {%- endcomment -%}
 
 {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
 
 {%- assign nav_tabs = section.blocks | where: 'type', 'tab' -%}
-{%- if nav_tabs.size > 0 -%}
+{%- assign has_content = false -%}
+{%- if section.settings.show_current or nav_tabs.size > 0 -%}{%- assign has_content = true -%}{%- endif -%}
+
+{%- if has_content or request.design_mode -%}
 
 {%- capture scheme_vars -%}
   --paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
@@ -39,6 +47,9 @@
           <span class="xnav-tab__label">{{ block.settings.label | escape }}</span>
         </a>
       {%- endfor -%}
+      {%- if nav_tabs.size == 0 and request.design_mode -%}
+        <span class="xnav-tab__hint">Add a "Cross-sell tab" block to link to another collection.</span>
+      {%- endif -%}
     </nav>
   </div>
 </div>
@@ -67,8 +78,15 @@
         { "value": "leaf", "label": "Leaf" },
         { "value": "camera", "label": "Camera" },
         { "value": "truck", "label": "Delivery truck" },
+        { "value": "pin", "label": "Pin" },
+        { "value": "search", "label": "Search" },
+        { "value": "phone", "label": "Phone" },
+        { "value": "mail", "label": "Mail" },
+        { "value": "clock", "label": "Clock" },
         { "value": "check", "label": "Check" },
         { "value": "package", "label": "Package" },
+        { "value": "plus", "label": "Plus" },
+        { "value": "users", "label": "Users" },
         { "value": "star", "label": "Star" }
       ]
     },
@@ -96,8 +114,15 @@
             { "value": "leaf", "label": "Leaf" },
             { "value": "camera", "label": "Camera" },
             { "value": "truck", "label": "Delivery truck" },
+            { "value": "pin", "label": "Pin" },
+            { "value": "search", "label": "Search" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "mail", "label": "Mail" },
+            { "value": "clock", "label": "Clock" },
             { "value": "check", "label": "Check" },
             { "value": "package", "label": "Package" },
+            { "value": "plus", "label": "Plus" },
+            { "value": "users", "label": "Users" },
             { "value": "star", "label": "Star" }
           ]
         },
