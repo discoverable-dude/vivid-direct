@@ -9,111 +9,13 @@
     custom.origin_copy      — multi-line body paragraphs for About section
     (variant) custom.note   — note per variant, e.g. "IP65 rated"
 
-  Category (Shopify taxonomy) + custom metafields drive everything — no tags:
-    shopify.dietary-preferences → "Good to know" cards (leave unused for lighting products)
-    custom.product_attributes_1 → "Good to know" cards (bespoke, see lookup below)
-
   Section blocks (configure per product in Online Store customizer):
-    related_product  → "Pairs well with" product cards
+    stat              → spec pills in the info panel (IP65 Rated, Dimmable, etc.)
+    related_product   → "Pairs well with" product cards
     faq               → "Care & keeping" accordion items
 {%- endcomment -%}
 
-{%- comment -%}
-  "Good to know" descriptions — lowercased label | description.
-  Covers dietary taxonomy values + custom.product_attributes_1 values.
-  Add rows to give any attribute a description; unmatched labels still show as a bare card.
-{%- endcomment -%}
-{%- assign pp_attr_meta = "floury|Light and fluffy — perfect for roasting,waxy|Holds its shape when boiled or steamed,waxy texture|Holds its shape when boiled or steamed,holds its colour|Flesh stays true when cooked,anthocyanin-rich|The antioxidant behind the red,high in vitamin c|A naturally nutritious variety,low gi|Slower to digest — steady energy,heritage variety|Centuries-old genetics still worth growing,in season|At their peak right now,gluten-free|Naturally gluten-free,vegan|Suitable for a vegan diet,organic|Certified organic,low fat|Very low in sugar & salt" | split: "," -%}
-
-{%- comment -%}
-  ── Data sources (category + custom metafields — no tags) ──────────────
-  Cook methods    → shopify.cooking-method
-  Flesh / variety → shopify.potato-variety
-  Dietary         → shopify.dietary-preferences
-  Bespoke attrs   → custom.product_attributes_1 (list of text)
-{%- endcomment -%}
-
-{%- comment -%}
-  Flesh colour — dedicated custom.flesh_colour field (choices: White/Cream/Yellow/Red/Blue).
-  Falls back to shopify.potato-variety ONLY when that value is itself a valid flesh colour,
-  so inconsistent variety data (e.g. "Golden Wonder") never produces a broken label/dot.
-{%- endcomment -%}
-{%- assign pp_flesh = "" -%}
-{%- assign pp_flesh_label = "" -%}
-{%- assign _fc = product.metafields.custom.flesh_colour -%}
-{%- assign _flesh_raw = _fc.value -%}
-{%- if _fc.type contains "list" -%}{%- assign _flesh_raw = _fc.value | first -%}{%- endif -%}
-{%- if _flesh_raw == blank -%}
-  {%- assign _tax_variety = product.metafields.shopify.potato-variety.value -%}
-  {%- if _tax_variety != blank -%}
-    {%- assign _v = _tax_variety | first -%}
-    {%- assign _v_label = _v.label | default: _v -%}
-    {%- assign _v_low = _v_label | downcase -%}
-    {%- if _v_low == "white" or _v_low == "cream" or _v_low == "yellow" or _v_low == "red" or _v_low == "blue" -%}
-      {%- assign _flesh_raw = _v_label -%}
-    {%- endif -%}
-  {%- endif -%}
-{%- endif -%}
-{%- if _flesh_raw != blank -%}
-  {%- assign pp_flesh = _flesh_raw | downcase -%}
-  {%- assign pp_flesh_label = _flesh_raw | capitalize | append: " Flesh" -%}
-{%- endif -%}
-
-{%- comment -%} Variety type (e.g. "Heritage Variety") — per-product via custom.variety_type, not hardcoded {%- endcomment -%}
-{%- assign _vt = product.metafields.custom.variety_type -%}
-{%- assign pp_variety_label = _vt.value -%}
-{%- if _vt.type contains "list" -%}{%- assign pp_variety_label = _vt.value | first -%}{%- endif -%}
-
-{%- comment -%} Badge text: flesh + variety type, joined by " · " when both present {%- endcomment -%}
-{%- assign pp_badge_txt = "" -%}
-{%- if pp_flesh_label != "" -%}{%- assign pp_badge_txt = pp_flesh_label -%}{%- endif -%}
-{%- if pp_variety_label != blank -%}
-  {%- if pp_badge_txt != "" -%}{%- assign pp_badge_txt = pp_badge_txt | append: " · " -%}{%- endif -%}
-  {%- assign pp_badge_txt = pp_badge_txt | append: pp_variety_label -%}
-{%- endif -%}
-
-{%- comment -%} Cook methods from "Cooking method" category metafield {%- endcomment -%}
-{%- assign pp_cook_raw = "" -%}
-{%- assign _tax_cooking = product.metafields.shopify.cooking-method.value -%}
-{%- for _m in _tax_cooking -%}
-  {%- assign _m_str = _m.label | default: _m | downcase -%}
-  {%- case _m_str -%}
-    {%- when "boiling"          -%}{%- assign pp_cook_raw = pp_cook_raw | append: "boil,"   -%}
-    {%- when "steaming"         -%}{%- assign pp_cook_raw = pp_cook_raw | append: "steam,"  -%}
-    {%- when "roasting"         -%}{%- assign pp_cook_raw = pp_cook_raw | append: "roast,"  -%}
-    {%- when "mashing"          -%}{%- assign pp_cook_raw = pp_cook_raw | append: "mash,"   -%}
-    {%- when "chips", "frying"  -%}{%- assign pp_cook_raw = pp_cook_raw | append: "chip,"   -%}
-    {%- when "jacket", "baking" -%}{%- assign pp_cook_raw = pp_cook_raw | append: "jacket," -%}
-  {%- endcase -%}
-{%- endfor -%}
-
-{%- comment -%} "Good to know": dietary preferences (taxonomy) + bespoke custom attributes {%- endcomment -%}
-{%- assign pp_attr_raw = "" -%}
-{%- assign _tax_dietary = product.metafields.shopify.dietary-preferences.value -%}
-{%- for _d in _tax_dietary -%}
-  {%- assign _d_label = _d.label | default: _d -%}
-  {%- assign pp_attr_raw = pp_attr_raw | append: _d_label | append: "~" -%}
-{%- endfor -%}
-{%- assign _custom_attrs = product.metafields.custom.product_attributes_1.value -%}
-{%- if _custom_attrs != blank -%}
-  {%- if _custom_attrs.first -%}
-    {%- comment -%} list of values {%- endcomment -%}
-    {%- for _a in _custom_attrs -%}
-      {%- assign pp_attr_raw = pp_attr_raw | append: _a | append: "~" -%}
-    {%- endfor -%}
-  {%- else -%}
-    {%- comment -%} single value (metafield created as single-line text) {%- endcomment -%}
-    {%- assign pp_attr_raw = pp_attr_raw | append: _custom_attrs | append: "~" -%}
-  {%- endif -%}
-{%- endif -%}
-
-{%- assign pp_cook_list = pp_cook_raw | split: "," -%}
-{%- assign pp_attr_list = pp_attr_raw | split: "~" -%}
 {%- assign pp_variant = product.selected_or_first_available_variant -%}
-
-{%- comment -%} Cook method lookup: tag|description|css-colour {%- endcomment -%}
-{%- assign pp_cook_meta = "roast|Drama on the plate|#B43C18,mash|Vivid & buttery|#C9761C,chip|Friday night chip|#C9761C,jacket|Crinkly skin|#8F3415,boil|Holds its shape|#0A5A4C,steam|Keeps its colour|#4E7A5E" | split: "," -%}
-
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
@@ -138,12 +40,6 @@
                width="{{ product.featured_image.width }}"
                height="{{ product.featured_image.height }}"
                data-zoomable>
-          {%- if pp_badge_txt != "" -%}
-            <span class="pp-gallery__badge">
-              {%- if pp_flesh != "" -%}<span class="pshop-flesh-dot pshop-flesh-dot--{{ pp_flesh }}"></span>{%- endif -%}
-              {{ pp_badge_txt }}
-            </span>
-          {%- endif -%}
         </div>
 
         {%- if product.images.size > 1 -%}
@@ -182,13 +78,6 @@
           {%- endif -%}
           <span>{{ product.title }}</span>
         </nav>
-
-        {%- if pp_badge_txt != "" -%}
-          <div class="pp-badge-strip">
-            {%- if pp_flesh != "" -%}<span class="pp-badge-dot pp-badge-dot--{{ pp_flesh }}"></span>{%- endif -%}
-            <span class="pp-badge-txt">{{ pp_badge_txt }}</span>
-          </div>
-        {%- endif -%}
 
         <h1 class="pp-title">{{ product.title }}</h1>
 
@@ -329,7 +218,7 @@
   <div class="pp-about__overlay"></div>
   <div class="wrap pp-about__inner">
     <div class="pp-about__left">
-      <p class="pp-about__eyebrow">About this variety</p>
+      <p class="pp-about__eyebrow">About this product</p>
       {%- if pp_headline != blank -%}
         <h2 class="pp-about__headline">{{ pp_headline }}</h2>
       {%- endif -%}
@@ -354,78 +243,6 @@
     {%- elsif pp_copy != blank -%}
       <div class="pp-about__copy">{{ pp_copy | newline_to_br }}</div>
     {%- endif -%}
-  </div>
-</div>
-{%- endif -%}
-
-
-<!-- ═══════════════════════════════════════════════
-     COOK METHODS — from shopify.cooking-method category metafield
-     ═══════════════════════════════════════════════ -->
-{%- assign pp_cook_filtered = pp_cook_list | compact -%}
-{%- if pp_cook_filtered.size > 0 -%}
-<div class="pp-cook color-{{ section.settings.cook_scheme }} gradient" style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
-  <div class="wrap">
-    <p class="pp-eyebrow">Best for</p>
-    <h2 class="pp-cook__heading">How to cook it</h2>
-    <div class="pp-cook__grid">
-      {%- for cook_tag in pp_cook_filtered -%}
-        {%- if cook_tag != "" -%}
-          {%- assign c_desc = "" -%}
-          {%- assign c_color = "var(--moss)" -%}
-          {%- for cd in pp_cook_meta -%}
-            {%- assign cm = cd | split: "|" -%}
-            {%- if cm[0] == cook_tag -%}
-              {%- assign c_desc = cm[1] -%}
-              {%- assign c_color = cm[2] -%}
-            {%- endif -%}
-          {%- endfor -%}
-          <div class="pp-cook-card" style="--cook-c: {{ c_color }}">
-            <div class="pp-cook-card__icon">{%- render 'vivid-icon', icon: cook_tag, size: 28 -%}</div>
-            <p class="pp-cook-card__name">{{ cook_tag | capitalize }}</p>
-            {%- if c_desc != "" -%}
-              <p class="pp-cook-card__desc">{{ c_desc }}</p>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  </div>
-</div>
-{%- endif -%}
-
-
-<!-- ═══════════════════════════════════════════════
-     GOOD TO KNOW — dietary (taxonomy) + custom.product_attributes_1
-     ═══════════════════════════════════════════════ -->
-{%- assign pp_attr_filtered = pp_attr_list | compact -%}
-{%- if pp_attr_filtered.size > 0 -%}
-<div class="pp-attrs color-{{ section.settings.attrs_scheme }} gradient" style="--paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
-  <div class="wrap">
-    <p class="pp-eyebrow">Good to know</p>
-    <h2 class="pp-attrs__heading">{{ section.settings.attrs_heading }}</h2>
-    <div class="pp-attrs__grid">
-      {%- for attr_tag in pp_attr_filtered -%}
-        {%- if attr_tag != "" -%}
-          {%- assign a_title = attr_tag -%}
-          {%- assign a_desc = "" -%}
-          {%- assign a_key = attr_tag | downcase -%}
-          {%- for am in pp_attr_meta -%}
-            {%- assign a = am | split: "|" -%}
-            {%- if a[0] == a_key -%}
-              {%- assign a_desc = a[1] -%}
-            {%- endif -%}
-          {%- endfor -%}
-          <div class="pp-attr-card">
-            <div class="pp-attr-card__icon">{%- render 'vivid-icon', icon: 'leaf', size: 22 -%}</div>
-            <p class="pp-attr-card__title">{{ a_title }}</p>
-            {%- if a_desc != "" -%}
-              <p class="pp-attr-card__desc">{{ a_desc }}</p>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
   </div>
 </div>
 {%- endif -%}
@@ -461,7 +278,7 @@
             <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" width="700" height="{{ 700 | divided_by: art.image.aspect_ratio | default: 700 | round }}" loading="lazy">
           {%- else -%}
             <div class="pp-recipe-card__placeholder">
-              {%- render 'vivid-icon', icon: 'roast', size: 36 -%}
+              {%- render 'vivid-icon', icon: 'lightbulb', size: 36 -%}
               <span>Article photo coming soon</span>
             </div>
           {%- endif -%}
@@ -594,8 +411,6 @@
     { "type": "header", "content": "Section colours" },
     { "type": "color_scheme", "id": "hero_scheme", "label": "Hero colour scheme", "default": "scheme-1" },
     { "type": "color_scheme", "id": "about_scheme", "label": "About colour scheme", "default": "scheme-4" },
-    { "type": "color_scheme", "id": "cook_scheme", "label": "How to cook it colour scheme", "default": "scheme-1" },
-    { "type": "color_scheme", "id": "attrs_scheme", "label": "Good to know colour scheme", "default": "scheme-1" },
     { "type": "color_scheme", "id": "recipes_scheme", "label": "Design articles colour scheme", "default": "scheme-1" },
     { "type": "color_scheme", "id": "related_scheme", "label": "Pairs well with colour scheme", "default": "scheme-1" },
     { "type": "header", "content": "Buy-box trust row" },
@@ -617,12 +432,6 @@
       "step": 5,
       "unit": "%",
       "default": 55
-    },
-    {
-      "type": "text",
-      "id": "attrs_heading",
-      "label": "Attributes section heading",
-      "default": "Product specification"
     },
     {
       "type": "text",

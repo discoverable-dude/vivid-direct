@@ -6,6 +6,7 @@
 
 {%- capture scheme_vars -%}
   --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
 {%- endcapture -%}
 
 <section class="esec elede color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" data-reveal>
@@ -28,7 +29,10 @@
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why we do this" },
     { "type": "textarea", "id": "body", "label": "Lede paragraph", "default": "A short, confident paragraph set large, that frames the whole page." },
     { "type": "header", "content": "Colour" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
   ],
   "presets": [ { "name": "Lede" } ]
 }

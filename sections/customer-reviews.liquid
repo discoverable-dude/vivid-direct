@@ -1,6 +1,7 @@
 {{ 'vivid-social-proof.css' | asset_url | stylesheet_tag }}
 {%- capture msp_style -%}
   --msp-bg: rgb(var(--color-background)); --sec-ink: rgb(var(--color-foreground)); --sec-ink-soft: rgba(var(--color-foreground), 0.72); --sec-line: rgba(var(--color-foreground), 0.18); --msp-accent: var(--cta);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
 {%- endcapture -%}
 <section class="msp msp--reviews color-{{ section.settings.color_scheme }} gradient" style="{{ msp_style }}"{% if section.settings.texture %} data-texture="true"{% endif %}>
   <div class="msp__wrap">
@@ -52,7 +53,10 @@
     { "type": "text", "id": "aggregate_text", "label": "Summary text", "default": "Based on 120+ reviews" },
     { "type": "header", "content": "Colour" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-4" },
-    { "type": "checkbox", "id": "texture", "label": "Hessian texture overlay", "default": false }
+    { "type": "checkbox", "id": "texture", "label": "Hessian texture overlay", "default": false },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
   ],
   "blocks": [
     {

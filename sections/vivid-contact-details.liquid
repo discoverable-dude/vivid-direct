@@ -18,6 +18,7 @@
   {%- if section.settings.button_text != blank -%}
     --btn-text: {{ section.settings.button_text }};
   {%- endif -%}
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
 {%- endcapture -%}
 
 <section class="mcd color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
@@ -240,7 +241,10 @@
     { "type": "header", "content": "Colour" },
     { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
     { "type": "color", "id": "button_bg", "label": "\"Get directions\" button background", "info": "Optional. Leave blank to use the theme's default button colour." },
-    { "type": "color", "id": "button_text", "label": "\"Get directions\" button text colour", "info": "Optional." }
+    { "type": "color", "id": "button_text", "label": "\"Get directions\" button text colour", "info": "Optional." },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
   ],
   "presets": [{ "name": "Contact details + map" }]
 }
