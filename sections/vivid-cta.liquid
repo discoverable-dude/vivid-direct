@@ -5,7 +5,16 @@
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="esec ecta" data-reveal>
+{%- capture scheme_vars -%}
+  {%- if section.settings.button_bg != blank -%}
+    --btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};
+  {%- endif -%}
+  {%- if section.settings.button_text != blank -%}
+    --btn-text: {{ section.settings.button_text }};
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="esec ecta"{% if scheme_vars != blank %} style="{{ scheme_vars }}"{% endif %} data-reveal>
   {%- if section.settings.image != blank -%}
     <img
       class="ecta__bg"
@@ -51,7 +60,9 @@
     { "type": "text", "id": "button_1_label", "label": "Primary button label", "default": "Shop now" },
     { "type": "url", "id": "button_1_url", "label": "Primary button link" },
     { "type": "text", "id": "button_2_label", "label": "Ghost button label" },
-    { "type": "url", "id": "button_2_url", "label": "Ghost button link" }
+    { "type": "url", "id": "button_2_url", "label": "Ghost button link" },
+    { "type": "color", "id": "button_bg", "label": "Primary button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "Primary button text colour", "info": "Optional." }
   ],
   "presets": [ { "name": "CTA banner" } ]
 }

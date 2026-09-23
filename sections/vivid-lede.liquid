@@ -4,7 +4,11 @@
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="esec elede" data-reveal>
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+{%- endcapture -%}
+
+<section class="esec elede color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" data-reveal>
   <div class="wrap elede__wrap">
     {%- if section.settings.kicker != blank -%}
       <p class="elede__kicker">{{ section.settings.kicker }}</p>
@@ -22,7 +26,9 @@
   "class": "m-section",
   "settings": [
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why we do this" },
-    { "type": "textarea", "id": "body", "label": "Lede paragraph", "default": "A short, confident paragraph set large, that frames the whole page." }
+    { "type": "textarea", "id": "body", "label": "Lede paragraph", "default": "A short, confident paragraph set large, that frames the whole page." },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
   ],
   "presets": [ { "name": "Lede" } ]
 }

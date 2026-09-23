@@ -5,7 +5,11 @@
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="esec estrands" data-reveal>
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+{%- endcapture -%}
+
+<section class="esec estrands color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" data-reveal>
   <div class="wrap">
     {%- if section.settings.eyebrow != blank -%}<p class="eyebrow estrands__eb">{{ section.settings.eyebrow }}</p>{%- endif -%}
     {%- if section.settings.heading != blank -%}<h2 class="esec__h esec__h--center">{{ section.settings.heading }}</h2>{%- endif -%}
@@ -48,7 +52,9 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How we can help" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "One estate, many strands" },
-    { "type": "textarea", "id": "intro", "label": "Intro" }
+    { "type": "textarea", "id": "intro", "label": "Intro" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
   ],
   "blocks": [
     {

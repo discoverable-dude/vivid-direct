@@ -1,16 +1,30 @@
 {%- comment -%}
   Vivid Custom Form — configurable contact form.
-  Fields are blocks (text / email / phone / textarea). Submissions email the
-  store's contact address via Shopify's {% form 'contact' %}. An "email" field
-  becomes the reply-to; every other field is included in the message body.
+  Fields are blocks (text / email / phone / textarea / select / checkbox / file).
+  Submissions email the store's contact address via Shopify's {% form 'contact' %}.
+  An "email" field becomes the reply-to; every other field is included in the
+  message body.
+
+  Optional multi-step mode: turn on "Split into multiple steps" and tick
+  "Start a new step before this field" on any field block to break it there.
+  Steps are a front-end-only wizard — the form still posts as a single
+  submission when the last step's button is pressed.
 {%- endcomment -%}
 
 {{ 'vivid-page.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.multi_step -%}
+  <script src="{{ 'vivid-form-steps.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
-<section class="m-sec m-form m-sec--{{ section.settings.bg }}">
+{%- capture form_style -%}
+  {%- if section.settings.button_bg != blank -%}--btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};{%- endif -%}
+  {%- if section.settings.button_text != blank -%}--btn-text: {{ section.settings.button_text }};{%- endif -%}
+{%- endcapture -%}
+
+<section class="m-sec m-form m-sec--{{ section.settings.bg }}"{% if form_style != blank %} style="{{ form_style }}"{% endif %}>
   <div class="m-sec__wrap">
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank -%}
-      <div class="m-form__head">
+      <div class="m-form__head{% if section.settings.content_align == 'center' %} m-form__head--center{% endif %}">
         {%- if section.settings.eyebrow != blank -%}<p class="m-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2 class="m-heading">{{ section.settings.heading }}</h2>{%- endif -%}
         {%- if section.settings.intro != blank -%}<div class="m-intro">{{ section.settings.intro }}</div>{%- endif -%}
@@ -18,83 +32,107 @@
     {%- endif -%}
 
     {%- form 'contact', class: 'm-form__form', enctype: 'multipart/form-data' -%}
+      {%- if section.settings.multi_step -%}<input type="hidden" data-form-multi-step value="1">{%- endif -%}
       {%- if form.posted_successfully? -%}
         <p class="m-form__note m-form__note--success">{{ section.settings.success_message }}</p>
       {%- elsif form.errors -%}
         <p class="m-form__note m-form__note--error">{{ form.errors | default_errors }}</p>
       {%- endif -%}
 
-      <div class="m-form__grid">
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign f_label = block.settings.label
-            assign f_name = 'contact[' | append: f_label | append: ']'
-            if block.settings.type == 'email'
-              assign f_name = 'contact[email]'
-            endif
-            assign f_id = 'MForm-' | append: section.id | append: '-' | append: forloop.index
-          -%}
-          {%- if block.settings.type == 'checkbox' -%}
-            <div class="m-form__field m-form__field--full m-form__field--checkbox" {{ block.shopify_attributes }}>
-              <label class="m-form__checkbox-label">
-                <input
-                  type="checkbox"
+      {%- assign current_step = 1 -%}
+      <div class="m-form__grid m-form__step is-active" data-step="1">
+      {%- for block in section.blocks -%}
+        {%- unless forloop.first -%}
+          {%- if section.settings.multi_step and block.settings.new_step -%}
+            </div>
+            {%- assign current_step = current_step | plus: 1 -%}
+            <div class="m-form__grid m-form__step" data-step="{{ current_step }}">
+          {%- endif -%}
+        {%- endunless -%}
+        {%- liquid
+          assign f_label = block.settings.label
+          assign f_name = 'contact[' | append: f_label | append: ']'
+          if block.settings.type == 'email'
+            assign f_name = 'contact[email]'
+          endif
+          assign f_id = 'MForm-' | append: section.id | append: '-' | append: forloop.index
+        -%}
+        {%- if block.settings.type == 'checkbox' -%}
+          <div class="m-form__field m-form__field--full m-form__field--checkbox" {{ block.shopify_attributes }}>
+            <label class="m-form__checkbox-label">
+              <input
+                type="checkbox"
+                name="{{ f_name }}"
+                value="Yes"
+                {% if block.settings.required %}required{% endif %}
+              >
+              <span>{{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}</span>
+            </label>
+          </div>
+        {%- else -%}
+          <div class="m-form__field{% if block.settings.type == 'textarea' or block.settings.width == 'full' %} m-form__field--full{% endif %}" {{ block.shopify_attributes }}>
+            <label class="m-form__label" for="{{ f_id }}">
+              {{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}
+            </label>
+            {%- case block.settings.type -%}
+              {%- when 'textarea' -%}
+                <textarea
+                  id="{{ f_id }}"
+                  class="m-form__textarea"
                   name="{{ f_name }}"
-                  value="Yes"
+                  placeholder="{{ block.settings.placeholder }}"
+                  {% if block.settings.required %}required{% endif %}
+                ></textarea>
+              {%- when 'select' -%}
+                <select id="{{ f_id }}" class="m-form__input m-form__select" name="{{ f_name }}" {% if block.settings.required %}required{% endif %}>
+                  {%- if block.settings.placeholder != blank -%}<option value="" disabled selected>{{ block.settings.placeholder }}</option>{%- endif -%}
+                  {%- assign f_options = block.settings.options | split: "," -%}
+                  {%- for opt in f_options -%}
+                    {%- assign opt_trimmed = opt | strip -%}
+                    <option value="{{ opt_trimmed }}">{{ opt_trimmed }}</option>
+                  {%- endfor -%}
+                </select>
+              {%- when 'file' -%}
+                <input
+                  id="{{ f_id }}"
+                  class="m-form__input m-form__file"
+                  type="file"
+                  name="{{ f_name }}[]"
+                  accept=".pdf,.jpg,.jpeg,.png"
                   {% if block.settings.required %}required{% endif %}
                 >
-                <span>{{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}</span>
-              </label>
-            </div>
-          {%- else -%}
-            <div class="m-form__field{% if block.settings.type == 'textarea' or block.settings.width == 'full' %} m-form__field--full{% endif %}" {{ block.shopify_attributes }}>
-              <label class="m-form__label" for="{{ f_id }}">
-                {{ f_label }}{% if block.settings.required %}<span class="m-req"> *</span>{% endif %}
-              </label>
-              {%- case block.settings.type -%}
-                {%- when 'textarea' -%}
-                  <textarea
-                    id="{{ f_id }}"
-                    class="m-form__textarea"
-                    name="{{ f_name }}"
-                    placeholder="{{ block.settings.placeholder }}"
-                    {% if block.settings.required %}required{% endif %}
-                  ></textarea>
-                {%- when 'select' -%}
-                  <select id="{{ f_id }}" class="m-form__input m-form__select" name="{{ f_name }}" {% if block.settings.required %}required{% endif %}>
-                    {%- if block.settings.placeholder != blank -%}<option value="" disabled selected>{{ block.settings.placeholder }}</option>{%- endif -%}
-                    {%- assign f_options = block.settings.options | split: "," -%}
-                    {%- for opt in f_options -%}
-                      {%- assign opt_trimmed = opt | strip -%}
-                      <option value="{{ opt_trimmed }}">{{ opt_trimmed }}</option>
-                    {%- endfor -%}
-                  </select>
-                {%- when 'file' -%}
-                  <input
-                    id="{{ f_id }}"
-                    class="m-form__input m-form__file"
-                    type="file"
-                    name="{{ f_name }}[]"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    {% if block.settings.required %}required{% endif %}
-                  >
-                {%- else -%}
-                  <input
-                    id="{{ f_id }}"
-                    class="m-form__input"
-                    type="{{ block.settings.type }}"
-                    name="{{ f_name }}"
-                    placeholder="{{ block.settings.placeholder }}"
-                    {% if block.settings.type == 'email' %}autocomplete="email"{% endif %}
-                    {% if block.settings.required %}required{% endif %}
-                  >
-              {%- endcase -%}
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+              {%- else -%}
+                <input
+                  id="{{ f_id }}"
+                  class="m-form__input"
+                  type="{{ block.settings.type }}"
+                  name="{{ f_name }}"
+                  placeholder="{{ block.settings.placeholder }}"
+                  {% if block.settings.type == 'email' %}autocomplete="email"{% endif %}
+                  {% if block.settings.required %}required{% endif %}
+                >
+            {%- endcase -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
       </div>
 
-      <button type="submit" class="m-btn m-btn--primary m-form__submit">{{ section.settings.submit_label }}</button>
+      {%- if section.settings.multi_step -%}
+        <div class="m-form__stepnav" data-form-stepnav data-total-steps="{{ current_step }}">
+          <div class="m-form__stepdots" aria-hidden="true">
+            {%- for i in (1..current_step) -%}
+              <span class="m-form__stepdot{% if forloop.first %} is-active{% endif %}" data-dot="{{ i }}"></span>
+            {%- endfor -%}
+          </div>
+          <div class="m-form__stepbtns">
+            <button type="button" class="m-btn m-form__back" data-form-back hidden>Back</button>
+            <button type="button" class="m-btn m-btn--primary m-form__next" data-form-next>Next</button>
+            <button type="submit" class="m-btn m-btn--primary m-form__submit" data-form-submit hidden>{{ section.settings.submit_label }}</button>
+          </div>
+        </div>
+      {%- else -%}
+        <button type="submit" class="m-btn m-btn--primary m-form__submit">{{ section.settings.submit_label }}</button>
+      {%- endif -%}
     {%- endform -%}
   </div>
 </section>
@@ -105,14 +143,18 @@
   "tag": "section",
   "class": "m-section",
   "settings": [
-    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" } ], "default": "paper" },
+    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" }, { "value": "dark", "label": "Dark" } ], "default": "paper" },
     { "type": "header", "content": "Header (optional)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Get in touch" },
     { "type": "richtext", "id": "intro", "label": "Intro text", "default": "<p>Fill in the form below and we'll get back to you within one working day.</p>" },
+    { "type": "select", "id": "content_align", "label": "Header alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ], "default": "left" },
     { "type": "header", "content": "Form" },
     { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send enquiry" },
-    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — we've got your message and will be in touch shortly." }
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — we've got your message and will be in touch shortly." },
+    { "type": "checkbox", "id": "multi_step", "label": "Split into multiple steps (wizard)", "default": false, "info": "Use the \"Start a new step before this field\" toggle on a field block to choose where each step begins." },
+    { "type": "color", "id": "button_bg", "label": "Button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "Button text colour", "info": "Optional." }
   ],
   "blocks": [
     {
@@ -124,7 +166,8 @@
         { "type": "text", "id": "placeholder", "label": "Placeholder", "info": "For a dropdown, this is used as the first, unselectable option." },
         { "type": "text", "id": "options", "label": "Dropdown options", "info": "Dropdown fields only. Comma-separated, e.g. Standard, Trade, VIP." },
         { "type": "checkbox", "id": "required", "label": "Required", "default": false },
-        { "type": "select", "id": "width", "label": "Width", "options": [ { "value": "half", "label": "Half" }, { "value": "full", "label": "Full" } ], "default": "half", "info": "Message fields are always full width." }
+        { "type": "select", "id": "width", "label": "Width", "options": [ { "value": "half", "label": "Half" }, { "value": "full", "label": "Full" } ], "default": "half", "info": "Message fields are always full width." },
+        { "type": "checkbox", "id": "new_step", "label": "Start a new step before this field", "default": false, "info": "Only used when \"Split into multiple steps\" is turned on above." }
       ]
     }
   ],

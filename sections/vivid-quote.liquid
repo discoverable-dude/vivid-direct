@@ -4,7 +4,11 @@
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="esec equote" data-reveal>
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+{%- endcapture -%}
+
+<section class="esec equote color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" data-reveal>
   <div class="wrap equote__wrap">
     {% render 'vivid-icon', icon: 'leaf', size: 30 %}
     <blockquote class="equote__q">{{ section.settings.quote }}</blockquote>
@@ -25,7 +29,9 @@
   "settings": [
     { "type": "textarea", "id": "quote", "label": "Quote", "default": "Replace this with a real client quote." },
     { "type": "text", "id": "author", "label": "Attribution", "default": "Your name here" },
-    { "type": "text", "id": "role", "label": "Role / place", "default": "Tenterden, Kent" }
+    { "type": "text", "id": "role", "label": "Role / place", "default": "Tenterden, Kent" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
   ],
   "presets": [ { "name": "Pull quote" } ]
 }

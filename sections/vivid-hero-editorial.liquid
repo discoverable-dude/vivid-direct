@@ -10,7 +10,11 @@
 {%- assign has_image = false -%}
 {%- if section.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}
 
-<section class="ehero{% if has_image %} ehero--img{% endif %}">
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+{%- endcapture -%}
+
+<section class="ehero{% if has_image %} ehero--img{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
   {%- if section.settings.crumb != blank -%}
     <div class="wrap ehero-crumb-strip">
       <nav class="ehero-crumb" aria-label="Breadcrumb">
@@ -68,7 +72,9 @@
     { "type": "text", "id": "crumb", "label": "Breadcrumb label", "info": "Optional. Shows Home › {label} above the hero." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About us" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "A headline worth talking about." },
-    { "type": "textarea", "id": "lede", "label": "Lede", "default": "One or two sentences that set the scene for the page." }
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "One or two sentences that set the scene for the page." },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
   ],
   "blocks": [
     {

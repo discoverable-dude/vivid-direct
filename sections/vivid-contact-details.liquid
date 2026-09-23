@@ -10,7 +10,17 @@
   {%- assign _tel = _tel | slice: 1, 19 | prepend: '+44' -%}
 {%- endif -%}
 
-<section class="mcd">
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  {%- if section.settings.button_bg != blank -%}
+    --btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};
+  {%- endif -%}
+  {%- if section.settings.button_text != blank -%}
+    --btn-text: {{ section.settings.button_text }};
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="mcd color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
   <div class="wrap">
     <div class="mcd__grid">
 
@@ -186,8 +196,8 @@
     text-decoration: none;
     transition: background 0.2s, color 0.2s, border-color 0.2s;
   }
-  .mcd__btn--solid { background: var(--field); color: var(--paper); }
-  .mcd__btn--solid:hover { background: var(--footer-bg); }
+  .mcd__btn--solid { background: var(--btn-bg, var(--field)); color: var(--btn-text, var(--paper)); }
+  .mcd__btn--solid:hover { background: var(--btn-bg-hover, var(--footer-bg)); }
   .mcd__btn--ghost { border: 1.5px solid var(--ink); color: var(--ink); }
   .mcd__btn--ghost:hover { background: var(--paper); color: var(--white); }
   .mcd__btn:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }
@@ -226,7 +236,11 @@
     { "type": "range", "id": "map_zoom", "label": "Map zoom", "min": 10, "max": 18, "step": 1, "default": 14 },
     { "type": "header", "content": "Second button (optional)" },
     { "type": "text", "id": "secondary_label", "label": "Label", "default": "Plan a visit" },
-    { "type": "url", "id": "secondary_url", "label": "Link" }
+    { "type": "url", "id": "secondary_url", "label": "Link" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "color", "id": "button_bg", "label": "\"Get directions\" button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "\"Get directions\" button text colour", "info": "Optional." }
   ],
   "presets": [{ "name": "Contact details + map" }]
 }

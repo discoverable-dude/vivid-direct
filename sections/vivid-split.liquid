@@ -5,7 +5,17 @@
 
 {{ 'vivid-editorial.css' | asset_url | stylesheet_tag }}
 
-<section class="esec esplit{% if section.settings.flip %} esplit--flip{% endif %}" data-reveal>
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --card: rgb(var(--color-background)); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  {%- if section.settings.button_bg != blank -%}
+    --btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};
+  {%- endif -%}
+  {%- if section.settings.button_text != blank -%}
+    --btn-text: {{ section.settings.button_text }};
+  {%- endif -%}
+{%- endcapture -%}
+
+<section class="esec esplit{% if section.settings.flip %} esplit--flip{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" data-reveal>
   <div class="wrap esplit__grid">
     {%- if section.settings.image != blank -%}
       <div class="esplit__media">
@@ -84,7 +94,11 @@
     { "type": "header", "content": "Button (optional)" },
     { "type": "text", "id": "cta_label", "label": "Button label" },
     { "type": "url", "id": "cta_url", "label": "Button link" },
-    { "type": "select", "id": "cta_style", "label": "Button style", "options": [ { "value": "solid", "label": "Solid" }, { "value": "ghost", "label": "Outline" } ], "default": "solid" }
+    { "type": "select", "id": "cta_style", "label": "Button style", "options": [ { "value": "solid", "label": "Solid" }, { "value": "ghost", "label": "Outline" } ], "default": "solid" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "Button text colour", "info": "Optional." },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" }
   ],
   "blocks": [
     {

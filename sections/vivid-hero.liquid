@@ -13,9 +13,15 @@
   assign opacity = section.settings.image_opacity | divided_by: 100.0
 -%}
 
+{%- capture hero_style -%}
+  {%- if section.settings.bg_color != blank -%}--hero-bg: {{ section.settings.bg_color }};{%- endif -%}
+  {%- if section.settings.button_bg != blank -%}--btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};{%- endif -%}
+  {%- if section.settings.button_text != blank -%}--btn-text: {{ section.settings.button_text }};{%- endif -%}
+{%- endcapture -%}
+
 <section
   class="m-hero m-hero--{{ section.settings.height }} m-hero--{{ section.settings.alignment }}{% unless has_image %} m-hero--no-image{% endunless %}"
-  {% if section.settings.bg_color != blank %}style="--hero-bg: {{ section.settings.bg_color }};"{% endif %}
+  {% if hero_style != blank %}style="{{ hero_style }}"{% endif %}
 >
   {%- if has_image -%}
     <img
@@ -73,7 +79,7 @@
     { "type": "image_picker", "id": "bg_image", "label": "Background image", "info": "Optional. Leave empty for a solid colour background." },
     { "type": "range", "id": "image_opacity", "label": "Image opacity", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 100 },
     { "type": "checkbox", "id": "show_overlay", "label": "Dark overlay (improves text legibility over image)", "default": true },
-    { "type": "text", "id": "bg_color", "label": "Solid background colour (CSS value)", "info": "Used when no image, or shows through image opacity. e.g. #141a16", "default": "#141a16" },
+    { "type": "color", "id": "bg_color", "label": "Solid background colour", "info": "Used when no image, or shows through image opacity.", "default": "#141a16" },
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Section eyebrow" },
     { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "A bold headline goes here" },
@@ -85,7 +91,9 @@
     { "type": "text", "id": "button_1_label", "label": "Primary button label" },
     { "type": "url", "id": "button_1_url", "label": "Primary button link" },
     { "type": "text", "id": "button_2_label", "label": "Secondary button label" },
-    { "type": "url", "id": "button_2_url", "label": "Secondary button link" }
+    { "type": "url", "id": "button_2_url", "label": "Secondary button link" },
+    { "type": "color", "id": "button_bg", "label": "Primary button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "Primary button text colour", "info": "Optional." }
   ],
   "presets": [ { "name": "Hero" } ]
 }
