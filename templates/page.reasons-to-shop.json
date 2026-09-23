@@ -22,7 +22,9 @@
       "settings": {
         "kicker": "Reasons to Shop With Us",
         "body": "We're here for all your lighting supplies.",
-        "color_scheme": ""
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "row_range": {
@@ -42,7 +44,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": ""
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "row_delivery": {
@@ -62,7 +66,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": "scheme-5"
+        "color_scheme": "scheme-5",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "row_bespoke": {
@@ -82,7 +88,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "row_service": {
@@ -102,7 +110,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": ""
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "row_brands": {
@@ -122,7 +132,9 @@
         "cta_style": "solid",
         "button_bg": "",
         "button_text": "",
-        "color_scheme": ""
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "contact_strip": {
