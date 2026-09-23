@@ -12,6 +12,13 @@
     "potato-product": {
       "type": "product-lighting",
       "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "none"
+          }
+        },
         "stat_1": {
           "type": "stat",
           "settings": {
@@ -67,6 +74,7 @@
         }
       },
       "block_order": [
+        "variant_picker",
         "stat_1",
         "stat_2",
         "stat_3",
