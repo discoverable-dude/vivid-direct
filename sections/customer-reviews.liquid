@@ -1,5 +1,8 @@
 {{ 'vivid-social-proof.css' | asset_url | stylesheet_tag }}
-<section class="msp msp--reviews" data-surface="{{ section.settings.surface }}"{% if section.settings.texture %} data-texture="true"{% endif %}>
+{%- capture msp_style -%}
+  --msp-bg: rgb(var(--color-background)); --sec-ink: rgb(var(--color-foreground)); --sec-ink-soft: rgba(var(--color-foreground), 0.72); --sec-line: rgba(var(--color-foreground), 0.18); --msp-accent: var(--cta);
+{%- endcapture -%}
+<section class="msp msp--reviews color-{{ section.settings.color_scheme }} gradient" style="{{ msp_style }}"{% if section.settings.texture %} data-texture="true"{% endif %}>
   <div class="msp__wrap">
     <div class="msp-reviews__head">
       <div class="msp-reviews__intro">
@@ -47,14 +50,8 @@
     { "type": "text", "id": "aggregate_score", "label": "Score", "default": "5.0" },
     { "type": "range", "id": "aggregate_stars", "label": "Aggregate stars", "min": 0, "max": 5, "step": 1, "default": 5 },
     { "type": "text", "id": "aggregate_text", "label": "Summary text", "default": "Based on 120+ reviews" },
-    { "type": "header", "content": "Background" },
-    { "type": "select", "id": "surface", "label": "Background surface", "default": "paper",
-      "options": [
-        { "value": "paper", "label": "Paper (light)" }, { "value": "cream", "label": "Warm cream" },
-        { "value": "bark", "label": "Dark brown" }, { "value": "ink", "label": "Near-black" },
-        { "value": "wheat", "label": "Wheat wash" }, { "value": "sage", "label": "Sage wash" },
-        { "value": "clay", "label": "Clay wash" }, { "value": "soil", "label": "Soil wash" }
-      ] },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-4" },
     { "type": "checkbox", "id": "texture", "label": "Hessian texture overlay", "default": false }
   ],
   "blocks": [
@@ -74,10 +71,10 @@
     {
       "name": "Customer reviews",
       "blocks": [
-        { "type": "review", "settings": { "quote": "Genuinely the best roasting potatoes I've ever bought. Won't go back to supermarket spuds.", "name": "Catherine B.", "meta": "Heide Red 2kg · Website" } },
-        { "type": "review", "settings": { "quote": "Ordered the mixed heritage box — incredible variety. The Pink Fir Apple is nutty and waxy, perfect with just butter and salt.", "name": "Tom W.", "meta": "Heritage Mixed Box · Website" } },
-        { "type": "review", "settings": { "quote": "Fast delivery, beautifully packed. The potatoes actually taste like potatoes. We've signed up for the seasonal box.", "name": "Janet M.", "meta": "Seasonal Box · Facebook" } },
-        { "type": "review", "settings": { "quote": "Bought a 10kg sack of Kerr's Pink. Brilliant for mash, made the most incredible shepherd's pie.", "name": "Richard S.", "meta": "Kerr's Pink 10kg · Facebook" } }
+        { "type": "review", "settings": { "quote": "EXAMPLE — Replace with a real client quote. Great range and the team were really helpful sourcing exactly what we needed.", "name": "EXAMPLE — Customer name", "meta": "Trade customer · Website" } },
+        { "type": "review", "settings": { "quote": "EXAMPLE — Replace with a real client quote. Fast delivery and the LED strip quality is excellent.", "name": "EXAMPLE — Customer name", "meta": "Retail customer · Website" } },
+        { "type": "review", "settings": { "quote": "EXAMPLE — Replace with a real client quote. Clear communication throughout the project, delivered on time.", "name": "EXAMPLE — Customer name", "meta": "Trade customer · Google" } },
+        { "type": "review", "settings": { "quote": "EXAMPLE — Replace with a real client quote. Would recommend to anyone looking for reliable lighting suppliers.", "name": "EXAMPLE — Customer name", "meta": "Retail customer · Google" } }
       ]
     }
   ]

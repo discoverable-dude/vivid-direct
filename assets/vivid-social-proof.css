@@ -1,23 +1,11 @@
-/* vivid-social-proof.css — shared styles for the three social-proof sections
-   (customer-reviews, chef-testimonials, people-we-supply). Loaded per-section.
-   [data-surface] maps to the theme's existing tokens; text colour auto-flips on dark surfaces. */
+/* vivid-social-proof.css — shared styles for customer-reviews.
+   Colour comes from the section's colour scheme picker: customer-reviews.liquid
+   sets --msp-bg/--sec-ink/--sec-ink-soft/--sec-line/--msp-accent inline from
+   the chosen scheme (same color-{scheme} + custom-property remap pattern used
+   elsewhere), so no per-surface CSS is needed here. */
 
 .msp { padding-block: var(--sec-pad); background: var(--msp-bg); color: var(--sec-ink); }
 .msp__wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--page-pad); }
-
-/* Surface mapping — light surfaces keep ink text; dark surfaces flip to paper. */
-.msp[data-surface="paper"] { --msp-bg: var(--paper);   --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="cream"] { --msp-bg: var(--paper-2); --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="wheat"] { --msp-bg: var(--wash-wheat); --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="sage"]  { --msp-bg: var(--wash-sage);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="clay"]  { --msp-bg: var(--wash-clay);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="soil"]  { --msp-bg: var(--wash-soil);  --sec-ink: var(--ink); --sec-ink-soft: var(--ink-soft); --sec-line: var(--line); }
-.msp[data-surface="bark"]  { --msp-bg: var(--bark); --sec-ink: var(--ink); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
-.msp[data-surface="ink"]   { --msp-bg: var(--bark); --sec-ink: var(--ink); --sec-ink-soft: rgba(246,240,234,0.72); --sec-line: rgba(246,240,234,0.18); }
-
-/* Gold accent — darker gold on light surfaces (AA-safe for text), bright wheat on dark surfaces. */
-.msp { --msp-accent: var(--hessian-text); }
-.msp[data-surface="bark"], .msp[data-surface="ink"] { --msp-accent: var(--straw); }
 
 /* Texture overlay — layer the existing hessian weave on top of the surface colour. */
 .msp[data-texture="true"] { background: var(--hessian-weave), var(--msp-bg); }
@@ -37,8 +25,6 @@
 .msp-reviews__agg-text { font-family: var(--font-body); font-size: 13px; color: var(--sec-ink-soft); }
 .msp-reviews__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .msp-review { background: color-mix(in srgb, var(--sec-ink) 4%, transparent); border: 1px solid var(--sec-line); border-radius: var(--radius); padding: 26px 24px; display: flex; flex-direction: column; gap: 16px; }
-.msp[data-surface="paper"] .msp-review,
-.msp[data-surface="cream"] .msp-review { background: #fff; }
 .msp-review__quote { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--sec-ink); margin: 0; flex: 1; }
 .msp-review__foot { border-top: 1px solid var(--sec-line); padding-top: 14px; }
 .msp-review__name { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--sec-ink); margin: 0 0 2px; }

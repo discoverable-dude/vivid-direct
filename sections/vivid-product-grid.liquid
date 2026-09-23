@@ -19,7 +19,7 @@
   {%- endif -%}
 {%- else -%}
 
-<div class="mpg" data-bg="{{ section.settings.background }}">
+<div class="mpg color-{{ section.settings.color_scheme }} gradient" style="background: rgb(var(--color-background)); color: rgb(var(--color-foreground));">
   <div class="wrap">
 
     {%- if section.settings.eyebrow != blank -%}
@@ -103,15 +103,10 @@
       "default": "View all"
     },
     {
-      "type": "select",
-      "id": "background",
-      "label": "Background",
-      "options": [
-        { "value": "paper", "label": "Paper (cream)" },
-        { "value": "paper-2", "label": "Paper 2 (warm linen)" },
-        { "value": "bark", "label": "Bark (dark)" }
-      ],
-      "default": "paper-2"
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-4"
     }
   ],
   "presets": [

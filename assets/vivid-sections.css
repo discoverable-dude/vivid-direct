@@ -932,9 +932,6 @@
 .mpg {
   padding: clamp(56px, 7vw, 96px) 0;
 }
-.mpg[data-bg="paper"]   { background: var(--hessian-weave), var(--paper); }
-.mpg[data-bg="paper-2"] { background: var(--hessian-weave), var(--paper-2); }
-.mpg[data-bg="bark"]    { background: var(--hessian-weave), var(--bark); color: var(--white); }
 .mpg__heading {
   font-family: var(--font-head);
   font-weight: 800;

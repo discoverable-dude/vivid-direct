@@ -17,11 +17,12 @@
 {%- endif -%}
 
 {%- capture form_style -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
   {%- if section.settings.button_bg != blank -%}--btn-bg: {{ section.settings.button_bg }}; --btn-bg-hover: {{ section.settings.button_bg | color_darken: 12 }};{%- endif -%}
   {%- if section.settings.button_text != blank -%}--btn-text: {{ section.settings.button_text }};{%- endif -%}
 {%- endcapture -%}
 
-<section class="m-sec m-form m-sec--{{ section.settings.bg }}"{% if form_style != blank %} style="{{ form_style }}"{% endif %}>
+<section class="m-sec m-form color-{{ section.settings.color_scheme }} gradient" style="{{ form_style }}">
   <div class="m-sec__wrap">
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank -%}
       <div class="m-form__head{% if section.settings.content_align == 'center' %} m-form__head--center{% endif %}">
@@ -143,7 +144,10 @@
   "tag": "section",
   "class": "m-section",
   "settings": [
-    { "type": "select", "id": "bg", "label": "Background", "options": [ { "value": "paper", "label": "Paper" }, { "value": "paper2", "label": "Paper (deeper)" }, { "value": "cream", "label": "Cream (textured)" }, { "value": "dark", "label": "Dark" } ], "default": "paper" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "info": "Optional. Leave blank to use the theme's default button colour." },
+    { "type": "color", "id": "button_text", "label": "Button text colour", "info": "Optional." },
     { "type": "header", "content": "Header (optional)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Get in touch" },
@@ -152,9 +156,7 @@
     { "type": "header", "content": "Form" },
     { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send enquiry" },
     { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — we've got your message and will be in touch shortly." },
-    { "type": "checkbox", "id": "multi_step", "label": "Split into multiple steps (wizard)", "default": false, "info": "Use the \"Start a new step before this field\" toggle on a field block to choose where each step begins." },
-    { "type": "color", "id": "button_bg", "label": "Button background", "info": "Optional. Leave blank to use the theme's default button colour." },
-    { "type": "color", "id": "button_text", "label": "Button text colour", "info": "Optional." }
+    { "type": "checkbox", "id": "multi_step", "label": "Split into multiple steps (wizard)", "default": false, "info": "Use the \"Start a new step before this field\" toggle on a field block to choose where each step begins." }
   ],
   "blocks": [
     {

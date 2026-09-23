@@ -13,10 +13,12 @@
    width (.wrap uses --page) instead of the 940px page-builder default */
 .m-season .m-sec__wrap,
 .m-txacc .m-sec__wrap { max-width: var(--page); padding-inline: var(--page-pad); }
+/* .m-sec--paper / .m-sec--paper2 are fixed (non-configurable) backgrounds used
+   by vivid-search.liquid. Sections with their own colour picker (e.g. the
+   custom form) apply a Dawn colour scheme instead — see the color-{scheme}
+   class + custom-property remap pattern used there. */
 .m-sec--paper { background: var(--hessian-weave), var(--paper); }
 .m-sec--paper2 { background: var(--hessian-weave), var(--paper-2); }
-.m-sec--cream { background: var(--hessian-weave), var(--paper); }
-.m-sec--dark { background: var(--hessian-weave), var(--footer-bg); }
 
 .m-eyebrow {
   font-family: var(--font-body);
@@ -24,10 +26,9 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--cta);
   margin: 0 0 14px;
 }
-.m-sec--dark .m-eyebrow { color: var(--straw-light); }
 
 .m-heading {
   font-family: var(--font-head);
@@ -38,7 +39,6 @@
   color: var(--ink);
   margin: 0;
 }
-.m-sec--dark .m-heading { color: var(--white); }
 
 .m-intro {
   font-family: var(--font-body);
@@ -48,7 +48,6 @@
   margin: 16px 0 0;
   max-width: 60ch;
 }
-.m-sec--dark .m-intro { color: rgba(246, 240, 234, 0.85); }
 
 /* ================================================
    HERO
@@ -219,7 +218,6 @@
   color: var(--ink);
   margin-bottom: 7px;
 }
-.m-sec--dark .m-form__label { color: var(--white); }
 .m-form__label .m-req { color: var(--cta); }
 .m-form__input,
 .m-form__textarea {
@@ -284,7 +282,6 @@
   color: var(--ink);
   cursor: pointer;
 }
-.m-sec--dark .m-form__checkbox-label { color: var(--white); }
 .m-form__checkbox-label input[type="checkbox"] {
   margin-top: 3px;
   width: 17px;
@@ -335,9 +332,6 @@
   border-color: var(--line-strong);
 }
 .m-form__back:hover { background: var(--paper); border-color: var(--ink-soft); }
-.m-sec--dark .m-form__back { color: var(--white); border-color: rgba(246, 240, 234, 0.5); }
-.m-sec--dark .m-form__stepdot { background: rgba(246, 240, 234, 0.35); }
-.m-sec--dark .m-form__stepdot.is-done { background: rgba(246, 240, 234, 0.7); }
 
 /* ================================================
    FAQ ACCORDION
