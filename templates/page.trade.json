@@ -24,14 +24,16 @@
         "crumb": "Trade",
         "eyebrow": "Trade & wholesale",
         "headline": "Wholesale lighting, by the pallet.",
-        "lede": "We supply electricians, contractors and businesses across the UK with trade pricing on our full range of LED, neon and decorative lighting. Tell us what you need and we'll help you find the right products."
+        "lede": "We supply electricians, contractors and businesses across the UK with trade pricing on our full range of LED, neon and decorative lighting. Tell us what you need and we'll help you find the right products.",
+        "color_scheme": ""
       }
     },
     "lede": {
       "type": "vivid-lede",
       "settings": {
         "kicker": "Trade customers",
-        "body": "Whatever the job, there's a Vivid Direct product to suit it — from everyday LED essentials to bespoke neon and smart lighting."
+        "body": "Whatever the job, there's a Vivid Direct product to suit it — from everyday LED essentials to bespoke neon and smart lighting.",
+        "color_scheme": "scheme-5"
       }
     },
     "split_how": {
@@ -81,7 +83,10 @@
         "body": "<p>If you're looking for reliable lighting products for your business, get in touch and we'll be happy to discuss your requirements. We can guide you on the right products for your project, from a single room to a full commercial fit-out.</p><p>We also offer wholesale pricing for bulk orders. Contact us for trade rates.</p>",
         "cta_label": "",
         "cta_url": "",
-        "cta_style": "solid"
+        "cta_style": "solid",
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": ""
       }
     },
     "vivid_form_f3CEt8": {
@@ -95,7 +100,8 @@
             "placeholder": "Jane Smith",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_role": {
@@ -106,7 +112,8 @@
             "placeholder": "Purchasing manager",
             "options": "",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_XhEKzK": {
@@ -117,7 +124,8 @@
             "placeholder": "Your company name",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_business_type": {
@@ -128,7 +136,8 @@
             "placeholder": "Select business type",
             "options": "Electrician, Contractor, Interior designer, Retailer, Developer, Other",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_company_number": {
@@ -151,7 +160,8 @@
             "placeholder": "e.g. GB123456789",
             "options": "",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_EKcBC9": {
@@ -162,7 +172,8 @@
             "placeholder": "jane@example.com",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_zxExLW": {
@@ -173,7 +184,8 @@
             "placeholder": "+44 7700 000000",
             "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_address": {
@@ -184,7 +196,8 @@
             "placeholder": "Street address, city, postcode",
             "options": "",
             "required": true,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         },
         "field_spend": {
@@ -195,7 +208,8 @@
             "placeholder": "Select a range",
             "options": "Under £500, £500 - £2,000, £2,000 - £10,000, £10,000+",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_yeVDTC": {
@@ -218,7 +232,8 @@
             "placeholder": "",
             "options": "",
             "required": false,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         },
         "field_terms": {
@@ -229,7 +244,8 @@
             "placeholder": "",
             "options": "",
             "required": true,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         }
       },
@@ -250,10 +266,13 @@
       ],
       "name": "Vivid Direct Custom Form",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "button_bg": "",
+        "button_text": "",
         "eyebrow": "",
         "heading": "Apply for a trade account",
         "intro": "<p>A few quick steps and we'll get back to you within one working day. Uploading your VAT certificate or trade documentation now can speed up approval, but it's not required to apply.</p>",
+        "content_align": "left",
         "submit_label": "Apply for trade account",
         "success_message": "Thanks, we've got your application and will be in touch shortly.",
         "multi_step": true
@@ -268,7 +287,9 @@
         "button_1_label": "Shop now",
         "button_1_url": "/collections/all",
         "button_2_label": "Contact us",
-        "button_2_url": "/pages/contact"
+        "button_2_url": "/pages/contact",
+        "button_bg": "",
+        "button_text": ""
       }
     }
   },
