@@ -21,7 +21,8 @@
       "type": "vivid-lede",
       "settings": {
         "kicker": "Reasons to Shop With Us",
-        "body": "We're here for all your lighting supplies."
+        "body": "We're here for all your lighting supplies.",
+        "color_scheme": ""
       }
     },
     "row_range": {
@@ -29,6 +30,9 @@
       "settings": {
         "flip": false,
         "asset_image": "vlx-neon-banner.jpg",
+        "asset_image_width": "2560",
+        "asset_image_height": "1338",
+        "tag": "",
         "ratio": "4 / 3",
         "eyebrow": "Range & Pricing",
         "heading": "Huge range and trade discounts",
@@ -36,8 +40,9 @@
         "cta_label": "Sign up to a trade account",
         "cta_url": "shopify://pages/trade-account",
         "cta_style": "solid",
-        "asset_image_width": "2560",
-        "asset_image_height": "1338"
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": ""
       }
     },
     "row_delivery": {
@@ -45,6 +50,9 @@
       "settings": {
         "flip": true,
         "asset_image": "vlx-light-skirting-1.jpg",
+        "asset_image_width": "920",
+        "asset_image_height": "664",
+        "tag": "",
         "ratio": "4 / 3",
         "eyebrow": "Delivery",
         "heading": "Free next-day delivery",
@@ -52,8 +60,9 @@
         "cta_label": "",
         "cta_url": "",
         "cta_style": "solid",
-        "asset_image_width": "920",
-        "asset_image_height": "664"
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": "scheme-5"
       }
     },
     "row_bespoke": {
@@ -61,6 +70,9 @@
       "settings": {
         "flip": false,
         "asset_image": "vlx-plaster-in-1.jpg",
+        "asset_image_width": "788",
+        "asset_image_height": "1178",
+        "tag": "",
         "ratio": "4 / 3",
         "eyebrow": "Bespoke",
         "heading": "Bespoke lighting",
@@ -68,8 +80,9 @@
         "cta_label": "Get in touch",
         "cta_url": "shopify://pages/contact",
         "cta_style": "solid",
-        "asset_image_width": "788",
-        "asset_image_height": "1178"
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": "scheme-2"
       }
     },
     "row_service": {
@@ -77,6 +90,9 @@
       "settings": {
         "flip": true,
         "asset_image": "vlx-stairs-commercial.jpg",
+        "asset_image_width": "877",
+        "asset_image_height": "880",
+        "tag": "",
         "ratio": "4 / 3",
         "eyebrow": "Service",
         "heading": "Knowledgeable customer service",
@@ -84,8 +100,9 @@
         "cta_label": "Get in touch",
         "cta_url": "shopify://pages/contact",
         "cta_style": "solid",
-        "asset_image_width": "877",
-        "asset_image_height": "880"
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": ""
       }
     },
     "row_brands": {
@@ -93,6 +110,9 @@
       "settings": {
         "flip": false,
         "asset_image": "vlx-aluminium-profiles.jpg",
+        "asset_image_width": "2204",
+        "asset_image_height": "1200",
+        "tag": "",
         "ratio": "4 / 3",
         "eyebrow": "Brands",
         "heading": "The best electrical brands",
@@ -100,8 +120,9 @@
         "cta_label": "Shop all products",
         "cta_url": "shopify://collections/all",
         "cta_style": "solid",
-        "asset_image_width": "2204",
-        "asset_image_height": "1200"
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": ""
       }
     },
     "contact_strip": {
