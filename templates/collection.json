@@ -12,6 +12,7 @@
     "banner": {
       "type": "collection-hero-banner",
       "settings": {
+        "image": "shopify://shop_images/bell-lighting-collection-banner.png",
         "heading": "",
         "description": ""
       }
@@ -22,9 +23,9 @@
         "tab_YGHiEY": {
           "type": "tab",
           "settings": {
-            "label": "{{ collection.title }}",
-            "icon": "none",
-            "link": "shopify://collections/bell-lighting"
+            "label": "Ground Lights",
+            "icon": "camera",
+            "link": "shopify://collections/ground-lights"
           }
         },
         "tab_ypbb64": {
@@ -51,7 +52,7 @@
       ],
       "settings": {
         "show_current": true,
-        "current_label": "Browse Our Collections",
+        "current_label": "",
         "current_icon": "none",
         "aria_label": "Shop other collections",
         "color_scheme": "scheme-2",
