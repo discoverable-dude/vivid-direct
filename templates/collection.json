@@ -23,15 +23,15 @@
           "type": "tab",
           "settings": {
             "label": "Ground Lights",
-            "icon": "camera",
+            "icon": "garden-light",
             "link": "shopify://collections/ground-lights"
           }
         },
         "tab_ypbb64": {
           "type": "tab",
           "settings": {
-            "label": "{{ collection.title }}",
-            "icon": "package",
+            "label": "",
+            "icon": "kitchen",
             "link": "shopify://collections/kitchen-dining-decorative-lighting"
           }
         },
@@ -62,6 +62,7 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "promo_interval": 8,
         "products_per_page": 16,
         "columns_desktop": 4,
         "columns_mobile": "2",
