@@ -22,41 +22,32 @@
         "tab_YGHiEY": {
           "type": "tab",
           "settings": {
-            "label": "Neon Flex",
+            "label": "{{ collection.title }}",
             "icon": "none",
-            "link": ""
+            "link": "shopify://collections/bell-lighting"
           }
         },
-        "tab_3p6ygK": {
+        "tab_ypbb64": {
           "type": "tab",
           "settings": {
-            "label": "Neon Flex",
-            "icon": "eye",
-            "link": "shopify://collections/beam-corner-lighting"
+            "label": "{{ collection.title }}",
+            "icon": "package",
+            "link": "shopify://collections/kitchen-dining-decorative-lighting"
           }
         },
-        "tab_tT3cFi": {
+        "tab_P786wL": {
           "type": "tab",
           "settings": {
-            "label": "Neon Flex",
-            "icon": "none",
-            "link": ""
-          }
-        },
-        "tab_tTPmXn": {
-          "type": "tab",
-          "settings": {
-            "label": "Neon Flex",
-            "icon": "house",
-            "link": ""
+            "label": "{{ collection.title }}",
+            "icon": "pin",
+            "link": "shopify://collections/downlights"
           }
         }
       },
       "block_order": [
         "tab_YGHiEY",
-        "tab_3p6ygK",
-        "tab_tT3cFi",
-        "tab_tTPmXn"
+        "tab_ypbb64",
+        "tab_P786wL"
       ],
       "settings": {
         "show_current": true,
@@ -71,7 +62,6 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "promo_interval": 8,
         "products_per_page": 16,
         "columns_desktop": 4,
         "columns_mobile": "2",
