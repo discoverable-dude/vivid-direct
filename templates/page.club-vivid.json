@@ -215,7 +215,7 @@
       ],
       "name": "Members registration",
       "settings": {
-        "bg": "paper",
+        "color_scheme": "scheme-1",
         "eyebrow": "Members Registration",
         "heading": "Join Club VIVID",
         "intro": "<p>Register for Club VIVID and we'll be in touch to confirm your account. Trade applicants will be contacted to complete account approval.</p>",

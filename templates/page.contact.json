@@ -126,7 +126,7 @@
       ],
       "name": "Vivid Custom Form",
       "settings": {
-        "bg": "paper",
+        "color_scheme": "scheme-1",
         "eyebrow": "",
         "heading": "Get in touch",
         "intro": "<p>Fill in the form below and we'll normally get back to you within two working days.</p>",

@@ -250,7 +250,7 @@
       ],
       "name": "Vivid Direct Custom Form",
       "settings": {
-        "bg": "cream",
+        "color_scheme": "scheme-1",
         "eyebrow": "",
         "heading": "Apply for a trade account",
         "intro": "<p>A few quick steps and we'll get back to you within one working day. Uploading your VAT certificate or trade documentation now can speed up approval, but it's not required to apply.</p>",

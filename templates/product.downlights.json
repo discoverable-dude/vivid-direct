@@ -96,7 +96,7 @@
         "heading": "recommended products",
         "show_view_all": false,
         "view_all_label": "View all",
-        "background": "paper-2"
+        "color_scheme": "scheme-4"
       }
     },
     "vivid_product_grid_katCah": {
@@ -109,7 +109,7 @@
         "heading": "Pairs well with",
         "show_view_all": true,
         "view_all_label": "View all",
-        "background": "paper-2"
+        "color_scheme": "scheme-4"
       }
     }
   },
