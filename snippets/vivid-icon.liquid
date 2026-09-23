@@ -395,4 +395,79 @@
     <circle cx="17" cy="12" r="0.9" fill="currentColor" stroke="none"/>
   </svg>
 
+  {%- when 'spotlight' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="3" y1="4" x2="21" y2="4"/>
+    <line x1="7" y1="4" x2="7" y2="7"/>
+    <circle cx="7" cy="9" r="2"/>
+    <line x1="17" y1="4" x2="17" y2="7"/>
+    <circle cx="17" cy="9" r="2"/>
+    <path d="M6 11.5 5 15M8 11.5l1 3.5"/>
+  </svg>
+
+  {%- when 'pendant' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="12" y1="2" x2="12" y2="8"/>
+    <path d="M7 8h10l2 8H5l2-8Z"/>
+    <line x1="9" y1="20" x2="15" y2="20"/>
+  </svg>
+
+  {%- when 'wall-light' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="2" y1="4" x2="2" y2="20"/>
+    <line x1="2" y1="12" x2="6" y2="12"/>
+    <rect x="6" y="7" width="10" height="10" rx="2"/>
+    <circle cx="11" cy="12" r="2"/>
+  </svg>
+
+  {%- when 'ceiling-light' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="4" y1="5" x2="20" y2="5"/>
+    <path d="M7 5a5 3 0 0 0 10 0"/>
+  </svg>
+
+  {%- when 'bollard' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M9 8a3 3 0 0 1 6 0"/>
+    <rect x="9" y="8" width="6" height="12" rx="1"/>
+    <line x1="6" y1="20" x2="18" y2="20"/>
+  </svg>
+
+  {%- when 'power-supply' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M9 2v4M15 2v4"/>
+    <path d="M6 6h12v5a6 6 0 0 1-12 0V6Z"/>
+    <path d="M12 17v5"/>
+  </svg>
+
+  {%- when 'dimmer' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 12l4-4"/>
+  </svg>
+
+  {%- when 'profile' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M4 18V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10"/>
+    <line x1="4" y1="18" x2="20" y2="18"/>
+    <line x1="8" y1="18" x2="8" y2="10"/>
+    <line x1="16" y1="18" x2="16" y2="10"/>
+  </svg>
+
+  {%- when 'neon' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M3 12c1.5-4 3.5-4 5 0s3.5 4 5 0 3.5-4 5 0 3.5 4 3 0"/>
+  </svg>
+
+  {%- when 'sale-tag' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/>
+    <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+  </svg>
+
+  {%- when 'waterproof' -%}
+  <svg width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 22c4.2 0 7-2.7 7-6.5C19 11.5 12 2 12 2S5 11.5 5 15.5C5 19.3 7.8 22 12 22Z"/>
+  </svg>
+
 {%- endcase -%}
