@@ -206,7 +206,14 @@
 {%- assign pp_headline = product.metafields.custom.origin_headline -%}
 {%- assign pp_copy = product.metafields.custom.origin_copy -%}
 {%- assign pp_faqs = section.blocks | where: "type", "faq" -%}
-{%- if pp_headline != blank or pp_copy != blank or pp_faqs.size > 0 -%}
+{%- comment -%}
+  Downloads — custom.spec_sheets is a "List of files" product metafield
+  (set per product in Shopify admin → product → Metafields). Each file's
+  admin-set alt text becomes its label; falls back to a cleaned-up filename
+  when no alt text is set.
+{%- endcomment -%}
+{%- assign pp_spec_sheets = product.metafields.custom.spec_sheets.value -%}
+{%- if pp_headline != blank or pp_copy != blank or pp_faqs.size > 0 or pp_spec_sheets.size > 0 -%}
 <div class="pp-about color-{{ section.settings.about_scheme }} gradient" style="--bark: rgb(var(--color-background)); --white: rgb(var(--color-foreground));">
   {%- if section.settings.about_image != blank -%}
     <img class="pp-about__bg"
@@ -226,13 +233,38 @@
         <h2 class="pp-about__headline">{{ pp_headline }}</h2>
       {%- endif -%}
     </div>
-    {%- if pp_faqs.size > 0 -%}
+    {%- if pp_faqs.size > 0 or pp_spec_sheets.size > 0 -%}
       {%- comment -%}
         Care & keeping accordion lives here on the image band (faq blocks),
         replacing the origin_copy text that duplicated the old standalone
         accordion section.
       {%- endcomment -%}
       <div class="pp-about__acc">
+        {%- if pp_spec_sheets.size > 0 -%}
+          <details class="pp-acc__item">
+            <summary class="pp-acc__q">
+              <span>Downloads</span>
+              {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
+            </summary>
+            <div class="pp-acc__a">
+              <ul class="pp-acc__files">
+                {%- for file in pp_spec_sheets -%}
+                  {%- assign _file_label = file.alt -%}
+                  {%- if _file_label == blank -%}
+                    {%- assign _file_label = file.url | split: '/' | last | split: '?' | first | replace: '-', ' ' | replace: '_', ' ' | capitalize -%}
+                  {%- endif -%}
+                  <li>
+                    <a href="{{ file.url }}" download class="pp-acc__file">
+                      {%- render 'vivid-icon', icon: 'document', size: 18 -%}
+                      <span>{{ _file_label }}</span>
+                      {%- render 'vivid-icon', icon: 'download', size: 16 -%}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        {%- endif -%}
         {%- for block in pp_faqs -%}
           <details class="pp-acc__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
             <summary class="pp-acc__q">

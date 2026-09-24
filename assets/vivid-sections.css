@@ -699,6 +699,25 @@
 .pp-acc__a { padding: 0 0 18px; font-size: 15px; line-height: 1.7; color: rgba(246, 240, 234, 0.88); }
 .pp-acc__a p { margin: 0 0 12px; }
 .pp-acc__a p:last-child { margin-bottom: 0; }
+.pp-acc__files { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pp-acc__file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  color: rgba(246, 240, 234, 0.92);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.2s, background 0.2s;
+}
+.pp-acc__file:hover { border-color: var(--straw-light); background: rgba(255, 255, 255, 0.05); }
+.pp-acc__file svg { flex-shrink: 0; }
+.pp-acc__file span { flex: 1; }
+.pp-acc__file svg:first-child { color: var(--straw-light); }
+.pp-acc__file svg:last-child { color: rgba(246, 240, 234, 0.55); }
 
 /* ── Estate collection hero: collection-image background ──
    The image sits under a deep-field scrim so the existing light-on-green
