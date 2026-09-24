@@ -439,6 +439,7 @@
     },
     "help-advice": {
       "type": "featured-blog",
+      "disabled": true,
       "settings": {
         "blog": "news",
         "post_limit": 4,
@@ -497,7 +498,7 @@
         "aggregate_score": "5.0",
         "aggregate_stars": 5,
         "aggregate_text": "Reviews from real Vivid Direct clients",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "texture": false,
         "padding_top": 80,
         "padding_bottom": 80
