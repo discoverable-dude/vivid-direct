@@ -24,6 +24,28 @@
         "body": "Free UK delivery on orders over £150 net. Here's exactly how shipping, next-day delivery and lead times work."
       }
     },
+    "intro_split": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": true,
+        "asset_image": "vlx-stairs-3.jpg",
+        "asset_image_width": "796",
+        "asset_image_height": "1368",
+        "tag": "",
+        "ratio": "4 / 3",
+        "eyebrow": "The headlines",
+        "heading": "Free next-day delivery, UK-wide",
+        "body": "<p>Order over £150 net and delivery is free, anywhere in the UK. Order by 1pm and it's with you the very next working day. Need it faster still? We can sometimes offer a same-day service — contact us for a quote.</p><p>Full terms, courier details and Highlands &amp; Islands rates are below.</p>",
+        "cta_label": "Get in touch",
+        "cta_url": "shopify://pages/contact",
+        "cta_style": "solid",
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
     "body": {
       "type": "rich-text",
       "blocks": {
@@ -98,6 +120,7 @@
   "order": [
     "main",
     "lede",
+    "intro_split",
     "body",
     "contact_strip"
   ]

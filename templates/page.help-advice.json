@@ -20,22 +20,22 @@
     "lede": {
       "type": "vivid-lede",
       "settings": {
-        "kicker": "FAQs",
-        "body": "Answers to some of our most common questions. Can't find what you need? Get in touch and we'll help directly."
+        "kicker": "Help & Advice",
+        "body": "Practical guidance for choosing, sizing and installing the right lighting. Can't find what you need? Get in touch and we'll help directly."
       }
     },
     "intro_split": {
       "type": "vivid-split",
       "settings": {
-        "flip": true,
-        "asset_image": "vlx-controllers-decoders.jpg",
-        "asset_image_width": "1546",
-        "asset_image_height": "900",
+        "flip": false,
+        "asset_image": "vlx-led-strip.jpg",
+        "asset_image_width": "2204",
+        "asset_image_height": "1200",
         "tag": "",
         "ratio": "4 / 3",
-        "eyebrow": "Here to help",
-        "heading": "Get the right answer, fast",
-        "body": "<p>From choosing the right driver for an LED strip run to trade account terms and our returns process, these are the questions we're asked most. Can't find what you need below? Get in touch and we'll help directly.</p>",
+        "eyebrow": "Before you order",
+        "heading": "Get it right first time",
+        "body": "<p>Sizing a driver, picking the right cut-to-length product, or working out trade account terms — a few minutes here can save a wasted order or a return. Below are the questions our team is asked most.</p>",
         "cta_label": "Get in touch",
         "cta_url": "shopify://pages/contact",
         "cta_style": "solid",
@@ -62,7 +62,7 @@
         "row_1"
       ],
       "settings": {
-        "caption": "Our Products",
+        "caption": "Choosing Products",
         "heading": "",
         "heading_size": "h2",
         "heading_alignment": "left",
@@ -92,37 +92,7 @@
         "row_1"
       ],
       "settings": {
-        "caption": "My Trade Account",
-        "heading": "",
-        "heading_size": "h2",
-        "heading_alignment": "left",
-        "layout": "none",
-        "container_color_scheme": "scheme-1",
-        "color_scheme": "scheme-1",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "desktop_layout": "left",
-        "padding_top": 12,
-        "padding_bottom": 12
-      }
-    },
-    "faq_payment": {
-      "type": "collapsible-content",
-      "blocks": {
-        "row_1": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Can we pay via bank transfer?",
-            "icon": "none",
-            "row_content": "<p>Yes. We'll issue a pro-forma invoice with our bank details — once funds have cleared, your order is released. To speed this up, send your remittance to <a href=\"mailto:sales@vivid-direct.co.uk\">sales@vivid-direct.co.uk</a> with your order number clearly shown in the payment reference and email subject.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "row_1"
-      ],
-      "settings": {
-        "caption": "Payment",
+        "caption": "Trade Accounts",
         "heading": "",
         "heading_size": "h2",
         "heading_alignment": "left",
@@ -189,21 +159,21 @@
             "link": "shopify://pages/contact"
           }
         },
-        "box_help": {
+        "box_faqs": {
           "type": "box",
           "settings": {
-            "icon": "lightbulb",
-            "heading": "Help & Advice",
-            "detail": "Buying guides",
-            "caption": "Practical guidance for choosing and installing the right lighting.",
-            "link": "shopify://pages/help-advice"
+            "icon": "check",
+            "heading": "FAQs",
+            "detail": "All FAQs",
+            "caption": "Quick answers to common questions about ordering and delivery.",
+            "link": "shopify://pages/faqs"
           }
         }
       },
       "block_order": [
         "box_call",
         "box_email",
-        "box_help"
+        "box_faqs"
       ],
       "settings": {}
     }
@@ -214,7 +184,6 @@
     "intro_split",
     "faq_products",
     "faq_trade",
-    "faq_payment",
     "faq_delivery",
     "contact_strip"
   ]

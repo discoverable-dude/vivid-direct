@@ -24,6 +24,28 @@
         "body": "Not right for the job? You have 30 days from the date of purchase to return it, as long as it's unused and in its original packaging."
       }
     },
+    "intro_split": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": false,
+        "asset_image": "vlx-bathroom-lighting-2.jpg",
+        "asset_image_width": "528",
+        "asset_image_height": "528",
+        "tag": "",
+        "ratio": "4 / 3",
+        "eyebrow": "The headlines",
+        "heading": "30 days to change your mind",
+        "body": "<p>Not right for the job? Return it within 30 days of purchase, as long as it's unused and in its original packaging. A 15% restocking fee applies, and you'll need a Return Merchandise Authorisation (RMA) from us before sending anything back.</p><p>Full policy, including faulty items and where to send returns, is below.</p>",
+        "cta_label": "Get in touch",
+        "cta_url": "shopify://pages/contact",
+        "cta_style": "solid",
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
     "body": {
       "type": "rich-text",
       "blocks": {
@@ -91,6 +113,7 @@
   "order": [
     "main",
     "lede",
+    "intro_split",
     "body",
     "contact_strip"
   ]

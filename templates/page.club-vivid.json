@@ -24,6 +24,28 @@
         "body": "Two ways to join. Standard membership is free for anyone who wants early access, seasonal promotions and our technical library. Trade membership is for approved trade accounts and adds discount pricing, 30-day net terms and a 5-year guarantee as standard."
       }
     },
+    "intro_split": {
+      "type": "vivid-split",
+      "settings": {
+        "flip": false,
+        "asset_image": "vlx-bedroom-1-wide.jpg",
+        "asset_image_width": "1244",
+        "asset_image_height": "830",
+        "tag": "",
+        "ratio": "4 / 3",
+        "eyebrow": "Membership",
+        "heading": "Built for regular buyers",
+        "body": "<p>Whether you're kitting out your own home or ordering on behalf of clients, Club VIVID gets you access to our Members Zone, technical library and manufacturers' support services, plus first look at seasonal promotions — free, for anyone who shops with us regularly.</p><p>Approved trade accounts get more on top: trade pricing on every order, 30-day net terms, and a 5-year guarantee as standard.</p>",
+        "cta_label": "",
+        "cta_url": "",
+        "cta_style": "solid",
+        "button_bg": "",
+        "button_text": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
     "standard_benefits": {
       "type": "contact-info-strip",
       "blocks": {
@@ -213,6 +235,7 @@
   "order": [
     "main",
     "lede",
+    "intro_split",
     "standard_benefits",
     "trade_benefits",
     "registration_form"
