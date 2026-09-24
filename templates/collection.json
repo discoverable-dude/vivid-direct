@@ -21,33 +21,56 @@
       "blocks": {
         "tab_YGHiEY": {
           "type": "tab",
+          "name": "LED Strip",
           "settings": {
-            "label": "Ground Lights",
-            "icon": "garden-light",
-            "link": "shopify://collections/ground-lights"
-          }
-        },
-        "tab_ypbb64": {
-          "type": "tab",
-          "settings": {
-            "label": "",
-            "icon": "kitchen",
-            "link": "shopify://collections/kitchen-dining-decorative-lighting"
+            "label": "LED Strip",
+            "icon": "led-strip",
+            "link": "shopify://collections/led-strip"
           }
         },
         "tab_P786wL": {
           "type": "tab",
+          "name": "Downlights",
           "settings": {
             "label": "Downlights",
-            "icon": "pin",
+            "icon": "downlight",
             "link": "shopify://collections/downlights"
+          }
+        },
+        "tab_ypbb64": {
+          "type": "tab",
+          "name": "Table & Floor Lamps",
+          "settings": {
+            "label": "Table & Floor Lamps",
+            "icon": "lamp",
+            "link": "shopify://collections/table-and-floor-lamps"
+          }
+        },
+        "tab_NMHWkR": {
+          "type": "tab",
+          "name": "Kitchen Lighting",
+          "settings": {
+            "label": "Kitchen Lighting",
+            "icon": "kitchen",
+            "link": "shopify://collections/kitchen-dining-decorative-lighting"
+          }
+        },
+        "tab_WTejmk": {
+          "type": "tab",
+          "name": "Outdoor Lighting",
+          "settings": {
+            "label": "Outdoor Lighting",
+            "icon": "leaf",
+            "link": "shopify://collections/outdoor-lighting"
           }
         }
       },
       "block_order": [
         "tab_YGHiEY",
+        "tab_P786wL",
         "tab_ypbb64",
-        "tab_P786wL"
+        "tab_NMHWkR",
+        "tab_WTejmk"
       ],
       "settings": {
         "show_current": true,
