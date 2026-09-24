@@ -40,14 +40,6 @@
             "icon": "package"
           }
         },
-        "faq_zdy8jt": {
-          "type": "faq",
-          "settings": {
-            "title": "Downloads",
-            "body": "{{ product.description }}",
-            "open_by_default": false
-          }
-        },
         "faq_1": {
           "type": "faq",
           "settings": {
@@ -78,7 +70,6 @@
         "stat_1",
         "stat_2",
         "stat_3",
-        "faq_zdy8jt",
         "faq_1",
         "faq_2",
         "faq_3"
