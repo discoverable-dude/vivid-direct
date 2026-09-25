@@ -319,12 +319,14 @@
         },
         "cat_controls": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "name": "Controls"
           }
         },
         "b_flux": {
           "type": "brand",
+          "disabled": true,
           "settings": {
             "name": "FLUX",
             "text": "Strategic partner for custom, high-performance smart functionality.",
@@ -333,6 +335,7 @@
         },
         "b_lutron": {
           "type": "brand",
+          "disabled": true,
           "settings": {
             "name": "Lutron",
             "text": "Pioneers in intuitive lighting control and shading systems.",
@@ -341,6 +344,7 @@
         },
         "b_crestron": {
           "type": "brand",
+          "disabled": true,
           "settings": {
             "name": "Crestron",
             "text": "Advanced smart home and automation.",
@@ -349,6 +353,7 @@
         },
         "b_control4": {
           "type": "brand",
+          "disabled": true,
           "settings": {
             "name": "Control4",
             "text": "Effortless, robust smart lighting and total home control.",
