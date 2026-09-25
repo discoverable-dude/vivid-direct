@@ -39,7 +39,8 @@
           "type": "stat",
           "name": "Lumens",
           "settings": {
-            "label": "{{ product.metafields.custom.lumens.value }} (Lumens)",
+            "label": "Lumens",
+            "value": "{{ product.metafields.custom.lumens.value }}",
             "icon": "lightbulb"
           }
         },
