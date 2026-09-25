@@ -1,0 +1,117 @@
+{%- comment -%}
+  Product downloads — a standalone, reusable "Downloads" band for spec
+  sheets, installation manuals, IES/LDT files etc.
+
+  Each block's "File or link" setting is a plain URL field, but it's meant
+  to be used with Shopify's Dynamic Sources: click the connector icon next
+  to the field in the theme editor and bind it to ANY File or URL metafield
+  you create on the product (Settings > Custom data > Products), for that
+  one block. No theme edit needed to add a new document type — create the
+  metafield, add a block here, connect it, done. A block with nothing
+  connected simply doesn't render, so unused slots are silent.
+{%- endcomment -%}
+
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+
+{%- assign pdl_items = section.blocks | where: 'type', 'download' -%}
+{%- assign pdl_visible = 0 -%}
+{%- for block in pdl_items -%}
+  {%- if block.settings.file != blank -%}{%- assign pdl_visible = pdl_visible | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
+{%- if pdl_visible > 0 or request.design_mode -%}
+
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+{%- endcapture -%}
+
+<section class="pdl color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}">
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="pdl__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="pp-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="pdl__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="pdl__grid">
+      {%- for block in pdl_items -%}
+        {%- if block.settings.file != blank -%}
+          <a href="{{ block.settings.file }}" download class="pdl__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}
+              <span class="pdl__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 20 -%}</span>
+            {%- endif -%}
+            <span class="pdl__label">{{ block.settings.label | default: 'Download' }}</span>
+            <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+          </a>
+        {%- elsif request.design_mode -%}
+          <div class="pdl__item pdl__item--empty" {{ block.shopify_attributes }}>
+            <span class="pdl__icon">{%- render 'vivid-icon', icon: 'document', size: 20 -%}</span>
+            <span class="pdl__label">{{ block.settings.label | default: 'Download' }} — connect a file or URL metafield</span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if pdl_items.size == 0 and request.design_mode -%}
+        <p class="pdl__hint">Add a "Download" block, then connect its "File or link" setting to a metafield on this product.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product downloads",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Technical documents" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Downloads" },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "download",
+      "name": "Download",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Spec sheet" },
+        {
+          "type": "url",
+          "id": "file",
+          "label": "File or link",
+          "info": "Paste a link directly, or click the connector icon to bind this to a File or URL metafield you've created for this product."
+        },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "document",
+          "options": [
+            { "value": "none", "label": "No icon" },
+            { "value": "document", "label": "Document" },
+            { "value": "download", "label": "Download arrow" },
+            { "value": "check", "label": "Check" },
+            { "value": "package", "label": "Package" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product downloads",
+      "blocks": [
+        { "type": "download", "settings": { "label": "Spec sheet" } },
+        { "type": "download", "settings": { "label": "Installation manual" } },
+        { "type": "download", "settings": { "label": "IES/LDT file" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

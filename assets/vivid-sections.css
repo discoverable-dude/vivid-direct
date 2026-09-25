@@ -719,6 +719,38 @@
 .pp-acc__file svg:first-child { color: var(--straw-light); }
 .pp-acc__file svg:last-child { color: rgba(246, 240, 234, 0.55); }
 
+/* ── Product downloads (standalone section) ── */
+.pdl__head { margin-bottom: 24px; }
+.pdl__heading {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(24px, 2.8vw, 32px);
+  color: var(--ink);
+  margin: 4px 0 0;
+}
+.pdl__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.pdl__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius, 8px);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.pdl__item:hover { border-color: var(--cta); background: color-mix(in srgb, var(--ink) 4%, transparent); transform: translateY(-2px); }
+.pdl__item--empty { opacity: 0.5; cursor: default; }
+.pdl__item--empty:hover { transform: none; }
+.pdl__icon { flex-shrink: 0; display: flex; color: var(--cta); }
+.pdl__label { flex: 1; }
+.pdl__action { flex-shrink: 0; display: flex; color: var(--ink-soft); }
+.pdl__hint { font-size: 14px; color: var(--ink-soft); font-style: italic; }
+
 /* ── Estate collection hero: collection-image background ──
    The image sits under a deep-field scrim so the existing light-on-green
    text needs no changes; opacity comes inline from the section setting. */
