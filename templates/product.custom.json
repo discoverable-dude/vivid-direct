@@ -23,7 +23,7 @@
           "type": "stat",
           "name": "Vendor",
           "settings": {
-            "label": "{{ product.vendor }}",
+            "label": "Made by {{ product.vendor }}",
             "icon": "check"
           }
         },
@@ -31,7 +31,7 @@
           "type": "stat",
           "name": "IP Rating",
           "settings": {
-            "label": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "label": "{{ product.metafields.custom.ip_rating | metafield_text }} Rated",
             "icon": "check"
           }
         },
@@ -39,7 +39,7 @@
           "type": "stat",
           "name": "Lumens",
           "settings": {
-            "label": "{{ product.metafields.custom.lumens.value }}",
+            "label": "{{ product.metafields.custom.lumens.value }} (Lumens)",
             "icon": "lightbulb"
           }
         },
