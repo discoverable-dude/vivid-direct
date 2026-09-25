@@ -47,7 +47,7 @@
         ".banner::after {background: linear-gradient( 90deg, rgba(11, 28, 41, 0.95) 0%, rgba(11, 28, 41, 0.65) 35%, rgba(11, 28, 41, 0.15) 65%, rgba(11, 28, 41, 0) 85% );}"
       ],
       "settings": {
-        "image": "shopify://shop_images/vd-neon-hero.jpg",
+        "image": "shopify://shop_images/electrical-trade-counter-showroom.png",
         "enable_video_bg": true,
         "image_overlay_opacity": 20,
         "image_height": "large",
@@ -187,7 +187,7 @@
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
-        "collection": "neon-flex-by-foss-led",
+        "collection": "homepage-bestseller",
         "products_to_show": 10,
         "title": "Our Bestsellers",
         "heading_size": "h1",
