@@ -79,9 +79,10 @@
   gap: clamp(36px, 5vw, 64px);
   align-items: start;
 }
-.pp-info {
+.pp-gallery {
   position: sticky;
   top: 24px;
+  align-self: start;
 }
 
 /* ── Gallery ── */
@@ -639,7 +640,7 @@
 }
 @media (max-width: 860px) {
   .pp-hero__grid { grid-template-columns: 1fr; gap: 36px; }
-  .pp-info { position: static; }
+  .pp-gallery { position: static; }
   .pp-gallery__main { aspect-ratio: 16 / 10; }
   .pp-about__inner { grid-template-columns: 1fr; }
   .pp-cook__grid  { grid-template-columns: repeat(2, 1fr); }

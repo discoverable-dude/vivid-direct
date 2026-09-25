@@ -81,8 +81,6 @@
           <span>{{ product.title }}</span>
         </nav>
 
-        <h1 class="pp-title">{{ product.title }}</h1>
-
         {%- assign pp_stats = section.blocks | where: "type", "stat" -%}
         {%- if pp_stats.size > 0 -%}
           <ul class="pp-stats">
@@ -98,6 +96,8 @@
             {%- endfor -%}
           </ul>
         {%- endif -%}
+
+        <h1 class="pp-title">{{ product.title }}</h1>
 
         <div class="pp-price" id="pp-price-{{ section.id }}">
           {%- if product.price_varies -%}
