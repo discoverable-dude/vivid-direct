@@ -22,30 +22,22 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "label": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "label": "EXAMPLE — IP65 Rated",
             "icon": "check"
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "label": "{{ product.metafields.custom.dimmable.value }}",
+            "label": "EXAMPLE — Dimmable",
             "icon": "lightbulb"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "label": "{{ product.metafields.custom.warranty.value }}",
+            "label": "EXAMPLE — 5 Yr Warranty",
             "icon": "package"
-          }
-        },
-        "faq_AwTerd": {
-          "type": "faq",
-          "settings": {
-            "title": "Technical Downloads",
-            "body": "<p>Spec Sheet:&nbsp;</p>{{ product.metafields.custom.ip_rating | metafield_tag }}<p>Installation Manual:</p><p>{{ product.title }}</p><p>IES/LDT File:&nbsp;</p>",
-            "open_by_default": false
           }
         },
         "faq_1": {
@@ -59,8 +51,8 @@
         "faq_2": {
           "type": "faq",
           "settings": {
-            "title": "Warranty",
-            "body": "<p>{{ product.metafields.custom.warranty.value }}</p>",
+            "title": "EXAMPLE — Warranty",
+            "body": "<p>Replace with your real warranty terms for this product line.</p>",
             "open_by_default": false
           }
         },
@@ -78,7 +70,6 @@
         "stat_1",
         "stat_2",
         "stat_3",
-        "faq_AwTerd",
         "faq_1",
         "faq_2",
         "faq_3"
@@ -95,6 +86,22 @@
         "about_image_opacity": 30,
         "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "design_articles_url": "#"
+      }
+    },
+    "downloads": {
+      "type": "product-downloads",
+      "blocks": {
+        "d1": { "type": "download", "settings": { "label": "Spec sheet", "file": "", "icon": "document" } },
+        "d2": { "type": "download", "settings": { "label": "Installation manual", "file": "", "icon": "document" } },
+        "d3": { "type": "download", "settings": { "label": "IES/LDT file", "file": "", "icon": "document" } }
+      },
+      "block_order": ["d1", "d2", "d3"],
+      "settings": {
+        "eyebrow": "Technical documents",
+        "heading": "Downloads",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "vivid_product_grid_DMbQyj": {
@@ -115,6 +122,7 @@
   },
   "order": [
     "potato-product",
+    "downloads",
     "vivid_product_grid_DMbQyj"
   ]
 }
