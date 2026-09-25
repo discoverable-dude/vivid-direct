@@ -29,24 +29,18 @@
   }
 
   #Banner-{{ section.id }} .banner__video-bg {
-    display: none;
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
   }
 
-  @media screen and (min-width: 750px) {
-    #Banner-{{ section.id }} .banner__video-bg {
-      display: block;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-    }
-
-    #Banner-{{ section.id }} .banner__media img {
-      position: relative;
-      z-index: 0;
-    }
+  #Banner-{{ section.id }} .banner__media img {
+    position: relative;
+    z-index: 0;
   }
 {%- endstyle -%}
 
@@ -222,8 +216,8 @@
     {
       "type": "checkbox",
       "id": "enable_video_bg",
-      "label": "Play background video over image (desktop)",
-      "info": "Uses assets/vd-hero-video.mp4. The image above is still used as the poster frame and as the mobile background.",
+      "label": "Play background video over image",
+      "info": "Uses assets/vd-hero-video.mp4, autoplaying muted on all devices including mobile. The image above is still used as the poster frame while the video loads.",
       "default": false
     },
     {
