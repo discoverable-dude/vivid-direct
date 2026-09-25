@@ -22,22 +22,30 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "label": "IP65 Rated",
+            "label": "{{ product.metafields.custom.ip_rating | metafield_text }}",
             "icon": "check"
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "label": "Dimmable",
+            "label": "{{ product.metafields.custom.dimmable.value }}",
             "icon": "lightbulb"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "label": "5 Yr Warranty",
+            "label": "{{ product.metafields.custom.warranty.value }}",
             "icon": "package"
+          }
+        },
+        "faq_AwTerd": {
+          "type": "faq",
+          "settings": {
+            "title": "Technical Downloads",
+            "body": "<p>Spec Sheet:&nbsp;</p>{{ product.metafields.custom.ip_rating | metafield_tag }}<p>Installation Manual:</p><p>{{ product.title }}</p><p>IES/LDT File:&nbsp;</p>",
+            "open_by_default": false
           }
         },
         "faq_1": {
@@ -52,7 +60,7 @@
           "type": "faq",
           "settings": {
             "title": "Warranty",
-            "body": "<p>Replace with your real warranty terms for this product line.</p>",
+            "body": "<p>{{ product.metafields.custom.warranty.value }}</p>",
             "open_by_default": false
           }
         },
@@ -70,6 +78,7 @@
         "stat_1",
         "stat_2",
         "stat_3",
+        "faq_AwTerd",
         "faq_1",
         "faq_2",
         "faq_3"

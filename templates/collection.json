@@ -63,6 +63,15 @@
             "icon": "leaf",
             "link": "shopify://collections/outdoor-lighting"
           }
+        },
+        "tab_KmYmj4": {
+          "type": "tab",
+          "name": "LED Profile",
+          "settings": {
+            "label": "LED Profile by Foss",
+            "icon": "profile",
+            "link": "shopify://collections/led-profile-by-fossled"
+          }
         }
       },
       "block_order": [
@@ -70,7 +79,8 @@
         "tab_P786wL",
         "tab_ypbb64",
         "tab_NMHWkR",
-        "tab_WTejmk"
+        "tab_WTejmk",
+        "tab_KmYmj4"
       ],
       "settings": {
         "show_current": true,
