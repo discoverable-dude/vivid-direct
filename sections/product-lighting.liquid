@@ -81,11 +81,28 @@
           <span>{{ product.title }}</span>
         </nav>
 
+        {%- comment -%}
+          Two ways to fill a stat pill:
+          - Value set: this is the metafield-connected pill. The pill only
+            shows when the connected metafield actually has data — a static
+            prefix in Label never forces it to show on its own, so a pill
+            never renders half-empty (e.g. "Lumens" with nothing after it).
+          - Value blank, Label set: legacy/simple pill — Label holds the
+            whole pill's text (including older blocks with a metafield
+            connected directly to Label).
+        {%- endcomment -%}
         {%- assign pp_stats = section.blocks | where: "type", "stat" -%}
         {%- if pp_stats.size > 0 -%}
           <ul class="pp-stats">
             {%- for block in pp_stats -%}
-              {%- if block.settings.label != blank -%}
+              {%- if block.settings.value != blank -%}
+                <li class="pp-stat" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != "none" -%}
+                    <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
+                  {%- endif -%}
+                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }}: {%- endif -%}{{ block.settings.value }}</span>
+                </li>
+              {%- elsif block.settings.label != blank -%}
                 <li class="pp-stat" {{ block.shopify_attributes }}>
                   {%- if block.settings.icon != "none" -%}
                     <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
@@ -346,22 +363,44 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     PAIRS WELL WITH — section blocks
+     PAIRS WELL WITH — manually picked blocks, topped
+     up from a fallback collection if one is set
      ═══════════════════════════════════════════════ -->
 {%- assign pp_related = section.blocks | where: "type", "related_product" -%}
-{%- if pp_related.size > 0 -%}
+{%- assign pp_related_limit = section.settings.related_limit | default: 4 -%}
+{%- assign pp_related_count = 0 -%}
+{%- assign pp_related_ids = "," -%}
+{%- capture pp_related_cards -%}
+  {%- for block in pp_related -%}
+    {%- assign rp = block.settings.product -%}
+    {%- if rp != blank and pp_related_count < pp_related_limit and rp.id != product.id -%}
+      <div {{ block.shopify_attributes }}>{%- render 'product-card', product: rp -%}</div>
+      {%- assign pp_related_ids = pp_related_ids | append: rp.id | append: ',' -%}
+      {%- assign pp_related_count = pp_related_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if section.settings.related_collection != blank -%}
+    {%- for cp in section.settings.related_collection.products -%}
+      {%- if pp_related_count >= pp_related_limit -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- assign cp_marker = "," | append: cp.id | append: "," -%}
+      {%- unless pp_related_ids contains cp_marker -%}
+        {%- if cp.id != product.id -%}
+          <div>{%- render 'product-card', product: cp -%}</div>
+          {%- assign pp_related_ids = pp_related_ids | append: cp.id | append: ',' -%}
+          {%- assign pp_related_count = pp_related_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- if pp_related_cards != blank -%}
 <div class="pp-related color-{{ section.settings.related_scheme }} gradient" style="--paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <p class="pp-eyebrow">You may also like</p>
     <h2 class="pp-related__heading">Pairs well with</h2>
-    <div class="pp-related__grid">
-      {%- for block in pp_related -%}
-        {%- assign rp = block.settings.product -%}
-        {%- if rp != blank -%}
-          <div {{ block.shopify_attributes }}>{%- render 'product-card', product: rp -%}</div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+    <div class="pp-related__grid">{{ pp_related_cards }}</div>
   </div>
 </div>
 {%- endif -%}
@@ -492,6 +531,22 @@
     { "type": "color_scheme", "id": "about_scheme", "label": "About colour scheme", "default": "scheme-4" },
     { "type": "color_scheme", "id": "recipes_scheme", "label": "Design articles colour scheme", "default": "scheme-1" },
     { "type": "color_scheme", "id": "related_scheme", "label": "Pairs well with colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Pairs well with" },
+    {
+      "type": "collection",
+      "id": "related_collection",
+      "label": "Fallback collection",
+      "info": "Used to fill any empty slots below (or all of them, if no products are picked below). Skips this product and any duplicates automatically."
+    },
+    {
+      "type": "range",
+      "id": "related_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
     { "type": "header", "content": "Buy-box trust row" },
     { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
     { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },
@@ -558,7 +613,8 @@
       "type": "stat",
       "name": "Stat pill",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "info": "e.g. IP65 Rated, 24V, 3000K", "default": "IP65 Rated" },
+        { "type": "text", "id": "label", "label": "Static prefix (optional)", "info": "Plain text only, e.g. 'IP Rating'. Leave blank to show just the value. Don't connect this one to a metafield — use the Value field below for that." },
+        { "type": "text", "id": "value", "label": "Value", "info": "The pill's content, e.g. IP65 Rated, 24V, 3000K. Click the connector icon to bind this to a metafield (Lumens, Voltage, Wattage, Warranty, etc.) — the whole pill hides automatically if that metafield is empty." },
         { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
           { "value": "none", "label": "No icon" },
           { "value": "check", "label": "Check" },
@@ -568,19 +624,27 @@
           { "value": "building", "label": "Building" },
           { "value": "truck", "label": "Delivery truck" },
           { "value": "clock", "label": "Clock" },
-          { "value": "package", "label": "Package" }
+          { "value": "package", "label": "Package" },
+          { "value": "waterproof", "label": "Droplet (IP rating)" },
+          { "value": "sun", "label": "Sun (lumens)" },
+          { "value": "zap", "label": "Bolt (voltage)" },
+          { "value": "power", "label": "Power (wattage)" },
+          { "value": "shield-check", "label": "Shield check (warranty)" },
+          { "value": "dimmer", "label": "Dimmer" },
+          { "value": "sale-tag", "label": "Tag (vendor/brand)" }
         ] }
       ]
     },
     {
       "type": "related_product",
       "name": "Paired product",
-      "limit": 4,
+      "limit": 8,
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "Product",
+          "info": "Optional — manually pick specific products to feature first. Leave unused and set a fallback collection above instead if you'd rather it fill in automatically."
         }
       ]
     },
