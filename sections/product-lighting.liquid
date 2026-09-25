@@ -82,14 +82,12 @@
         </nav>
 
         {%- comment -%}
-          Two ways to fill a stat pill:
-          - Value set: this is the metafield-connected pill. The pill only
-            shows when the connected metafield actually has data — a static
-            prefix in Label never forces it to show on its own, so a pill
-            never renders half-empty (e.g. "Lumens" with nothing after it).
-          - Value blank, Label set: legacy/simple pill — Label holds the
-            whole pill's text (including older blocks with a metafield
-            connected directly to Label).
+          A stat pill only ever shows when Value has content. Label (prefix)
+          and Suffix are always plain static text set directly in the theme
+          editor, never connected to a metafield — that's what keeps a pill
+          from ever rendering half-empty (e.g. "Lumens" with nothing after
+          it): the metafield connection lives ONLY in Value, so a blank
+          metafield always means a blank Value, which always hides the pill.
         {%- endcomment -%}
         {%- assign pp_stats = section.blocks | where: "type", "stat" -%}
         {%- if pp_stats.size > 0 -%}
@@ -100,14 +98,7 @@
                   {%- if block.settings.icon != "none" -%}
                     <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
                   {%- endif -%}
-                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }}: {%- endif -%}{{ block.settings.value }}</span>
-                </li>
-              {%- elsif block.settings.label != blank -%}
-                <li class="pp-stat" {{ block.shopify_attributes }}>
-                  {%- if block.settings.icon != "none" -%}
-                    <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
-                  {%- endif -%}
-                  <span>{{ block.settings.label }}</span>
+                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }} {%- endif -%}{{ block.settings.value }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix }}{%- endif -%}</span>
                 </li>
               {%- endif -%}
             {%- endfor -%}
@@ -613,8 +604,9 @@
       "type": "stat",
       "name": "Stat pill",
       "settings": [
-        { "type": "text", "id": "label", "label": "Static prefix (optional)", "info": "Plain text only, e.g. 'IP Rating'. Leave blank to show just the value. Don't connect this one to a metafield — use the Value field below for that." },
-        { "type": "text", "id": "value", "label": "Value", "info": "The pill's content, e.g. IP65 Rated, 24V, 3000K. Click the connector icon to bind this to a metafield (Lumens, Voltage, Wattage, Warranty, etc.) — the whole pill hides automatically if that metafield is empty." },
+        { "type": "text", "id": "label", "label": "Static prefix (optional)", "info": "Plain text only, e.g. 'Made by'. Leave blank to show just the value. Never connect this to a metafield — the pill only hides itself correctly if the metafield lives ONLY in Value, with no static text mixed in." },
+        { "type": "text", "id": "value", "label": "Value", "info": "The pill's dynamic content. Click the connector icon to bind this to a metafield (Lumens, Voltage, Wattage, Warranty, etc.) — the whole pill hides automatically whenever that metafield is empty. Don't add any of your own text here, even a space — put that in Prefix or Suffix instead." },
+        { "type": "text", "id": "suffix", "label": "Static suffix (optional)", "info": "Plain text only, e.g. 'Rated', 'Lumens', 'V'. Also never connect this to a metafield." },
         { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
           { "value": "none", "label": "No icon" },
           { "value": "check", "label": "Check" },

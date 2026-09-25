@@ -23,49 +23,51 @@
           "type": "stat",
           "name": "Vendor",
           "settings": {
-            "label": "Made by {{ product.vendor }}",
-            "icon": "check"
+            "label": "Made by",
+            "value": "{{ product.vendor }}",
+            "icon": "sale-tag"
           }
         },
         "stat_n3REBY": {
           "type": "stat",
           "name": "IP Rating",
           "settings": {
-            "label": "{{ product.metafields.custom.ip_rating | metafield_text }} Rated",
-            "icon": "check"
+            "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "suffix": " Rated",
+            "icon": "waterproof"
           }
         },
         "stat_2": {
           "type": "stat",
           "name": "Lumens",
           "settings": {
-            "label": "Lumens",
             "value": "{{ product.metafields.custom.lumens.value }}",
-            "icon": "lightbulb"
+            "suffix": " Lumens",
+            "icon": "sun"
           }
         },
         "stat_L9CYUW": {
           "type": "stat",
           "name": "Voltage",
           "settings": {
-            "label": "{{ product.metafields.custom.voltage.value }}",
-            "icon": "lightbulb"
+            "value": "{{ product.metafields.custom.voltage.value }}",
+            "icon": "zap"
           }
         },
         "stat_ywMxeM": {
           "type": "stat",
           "name": "Wattage",
           "settings": {
-            "label": "{{ product.metafields.custom.wattage.value }}",
-            "icon": "lightbulb"
+            "value": "{{ product.metafields.custom.wattage.value }}",
+            "icon": "power"
           }
         },
         "stat_3": {
           "type": "stat",
           "name": "Warranty",
           "settings": {
-            "label": "{{ product.metafields.custom.warranty.value }}",
-            "icon": "package"
+            "value": "{{ product.metafields.custom.warranty.value }}",
+            "icon": "shield-check"
           }
         },
         "faq_1": {
