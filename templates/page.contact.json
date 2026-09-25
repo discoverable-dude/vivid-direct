@@ -54,7 +54,7 @@
         "hours_label": "Office opening times",
         "hours": "Monday – Friday, 9am – 5pm",
         "hours_note": "Saturday – Sunday: Closed",
-        "address_label": "Find us",
+        "address_label": "Our address",
         "address": "<p><strong>Kent:</strong><br/>Ascot Barn, Court Lodge Farm<br/>Hinxhill, Ashford, Kent TN25 5NR</p><p><strong>London:</strong><br/>1 Regent Terrace, Rita Rd<br/>London SW8 1AW</p>",
         "directions": "",
         "map_query": "TN25 5NR",
