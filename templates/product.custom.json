@@ -25,6 +25,7 @@
           "settings": {
             "label": "Made by",
             "value": "{{ product.vendor }}",
+            "suffix": "",
             "icon": "sale-tag"
           }
         },
@@ -32,8 +33,9 @@
           "type": "stat",
           "name": "IP Rating",
           "settings": {
+            "label": "",
             "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
-            "suffix": " Rated",
+            "suffix": "Rated",
             "icon": "waterproof"
           }
         },
@@ -41,8 +43,9 @@
           "type": "stat",
           "name": "Lumens",
           "settings": {
+            "label": "",
             "value": "{{ product.metafields.custom.lumens.value }}",
-            "suffix": " Lumens",
+            "suffix": "Lumens",
             "icon": "sun"
           }
         },
@@ -50,7 +53,9 @@
           "type": "stat",
           "name": "Voltage",
           "settings": {
+            "label": "",
             "value": "{{ product.metafields.custom.voltage.value }}",
+            "suffix": "",
             "icon": "zap"
           }
         },
@@ -58,7 +63,9 @@
           "type": "stat",
           "name": "Wattage",
           "settings": {
+            "label": "",
             "value": "{{ product.metafields.custom.wattage.value }}",
+            "suffix": "",
             "icon": "power"
           }
         },
@@ -66,7 +73,9 @@
           "type": "stat",
           "name": "Warranty",
           "settings": {
+            "label": "",
             "value": "{{ product.metafields.custom.warranty.value }}",
+            "suffix": "",
             "icon": "shield-check"
           }
         },
@@ -113,6 +122,8 @@
         "about_scheme": "scheme-1",
         "recipes_scheme": "",
         "related_scheme": "",
+        "related_collection": "",
+        "related_limit": 4,
         "trust_1": "Trade pricing available",
         "trust_2": "In stock, ships fast",
         "trust_3": "2 year warranty",
@@ -166,7 +177,7 @@
       "type": "vivid-product-grid",
       "name": "Product grid",
       "settings": {
-        "collection": "",
+        "collection": "homepage-bestseller",
         "products_to_show": 4,
         "eyebrow": "You may also like",
         "heading": "Recommended Products",
@@ -176,11 +187,81 @@
         "padding_top": 76,
         "padding_bottom": 76
       }
+    },
+    "collection_cross_sell_mW4hGi": {
+      "type": "collection-cross-sell",
+      "name": "Cross-sell rail",
+      "settings": {
+        "eyebrow": "You might also need",
+        "title": "Explore our range",
+        "collection": "",
+        "products_to_show": 8,
+        "view_all_label": "See all",
+        "view_all_url": "",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "split_icon_grid_jfxeBp": {
+      "type": "split-icon-grid",
+      "blocks": {
+        "feature_XdjdVk": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Free next-day delivery over £150, order by 1pm."
+          }
+        },
+        "feature_pdmDDU": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "heading": "Trade Accounts",
+            "text": "Dedicated pricing for electricians and businesses."
+          }
+        },
+        "feature_qcif6k": {
+          "type": "feature",
+          "settings": {
+            "icon": "phone",
+            "heading": "Expert Support",
+            "text": "Real advice from people who know the products."
+          }
+        },
+        "feature_fawWWe": {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "heading": "Huge Range",
+            "text": "LED, neon, smart lighting and accessories, always in stock."
+          }
+        }
+      },
+      "block_order": [
+        "feature_XdjdVk",
+        "feature_pdmDDU",
+        "feature_qcif6k",
+        "feature_fawWWe"
+      ],
+      "name": "Split icon grid",
+      "settings": {
+        "eyebrow": "How We Help",
+        "heading": "A Partner, Not Just a Supplier",
+        "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
+        "image_position": "left",
+        "color_scheme": "scheme-4",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "potato-product",
     "downloads",
-    "vivid_product_grid_DMbQyj"
+    "vivid_product_grid_DMbQyj",
+    "collection_cross_sell_mW4hGi",
+    "split_icon_grid_jfxeBp"
   ]
 }
