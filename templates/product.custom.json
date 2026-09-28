@@ -35,7 +35,7 @@
           "settings": {
             "label": "",
             "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
-            "suffix": "Rated",
+            "suffix": "",
             "icon": "waterproof"
           }
         },
@@ -57,16 +57,6 @@
             "value": "{{ product.metafields.custom.voltage.value }}",
             "suffix": "",
             "icon": "zap"
-          }
-        },
-        "stat_ywMxeM": {
-          "type": "stat",
-          "name": "Wattage",
-          "settings": {
-            "label": "",
-            "value": "{{ product.metafields.custom.wattage.value }}",
-            "suffix": "",
-            "icon": "power"
           }
         },
         "stat_3": {
@@ -110,7 +100,6 @@
         "stat_n3REBY",
         "stat_2",
         "stat_L9CYUW",
-        "stat_ywMxeM",
         "stat_3",
         "faq_1",
         "faq_2",
