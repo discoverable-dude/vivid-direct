@@ -21,7 +21,10 @@
       "type": "vivid-lede",
       "settings": {
         "kicker": "Club VIVID",
-        "body": "Two ways to join. Standard membership is free for anyone who wants early access, seasonal promotions and our technical library. Trade membership is for approved trade accounts and adds discount pricing, 30-day net terms and a 5-year guarantee as standard."
+        "body": "Two ways to join. Standard membership is free for anyone who wants early access, seasonal promotions and our technical library. Trade membership is for approved trade accounts and adds discount pricing, 30-day net terms and a 5-year guarantee as standard.",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "intro_split": {
@@ -114,22 +117,11 @@
             "caption": "Trade account with 30 days net facilities, upon approval.",
             "link": ""
           }
-        },
-        "t3": {
-          "type": "box",
-          "settings": {
-            "icon": "package",
-            "heading": "",
-            "detail": "Click & collect",
-            "caption": "Collect from our Sevenoaks showroom, out of hours, upon request.",
-            "link": ""
-          }
         }
       },
       "block_order": [
         "t1",
-        "t2",
-        "t3"
+        "t2"
       ],
       "settings": {
         "title": "Trade membership — for approved trade accounts",
@@ -149,7 +141,8 @@
             "placeholder": "Select membership type",
             "options": "Standard membership, Trade membership",
             "required": true,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         },
         "field_2": {
@@ -158,8 +151,10 @@
             "type": "text",
             "label": "Main contact name",
             "placeholder": "Jane Smith",
+            "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_3": {
@@ -168,8 +163,10 @@
             "type": "tel",
             "label": "Main contact number",
             "placeholder": "+44 7700 000000",
+            "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_4": {
@@ -178,8 +175,10 @@
             "type": "email",
             "label": "Main contact email address",
             "placeholder": "jane@example.com",
+            "options": "",
             "required": true,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_5": {
@@ -188,8 +187,10 @@
             "type": "text",
             "label": "Business name (trade applicants)",
             "placeholder": "Sparks Electrical Ltd",
+            "options": "",
             "required": false,
-            "width": "half"
+            "width": "half",
+            "new_step": false
           }
         },
         "field_6": {
@@ -198,8 +199,10 @@
             "type": "textarea",
             "label": "Address",
             "placeholder": "Street address, city, postcode",
+            "options": "",
             "required": true,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         },
         "field_7": {
@@ -207,8 +210,11 @@
           "settings": {
             "type": "checkbox",
             "label": "I agree to VIVID Direct's terms of membership",
+            "placeholder": "",
+            "options": "",
             "required": true,
-            "width": "full"
+            "width": "full",
+            "new_step": false
           }
         }
       },
@@ -224,11 +230,17 @@
       "name": "Members registration",
       "settings": {
         "color_scheme": "scheme-1",
+        "button_bg": "",
+        "button_text": "",
         "eyebrow": "Members Registration",
         "heading": "Join Club VIVID",
         "intro": "<p>Register for Club VIVID and we'll be in touch to confirm your account. Trade applicants will be contacted to complete account approval.</p>",
+        "content_align": "left",
         "submit_label": "Register",
-        "success_message": "Thanks — we've got your registration and will be in touch shortly."
+        "success_message": "Thanks — we've got your registration and will be in touch shortly.",
+        "multi_step": false,
+        "padding_top": 68,
+        "padding_bottom": 68
       }
     }
   },
