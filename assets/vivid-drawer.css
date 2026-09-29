@@ -6,6 +6,19 @@
    component-cart-drawer.css — we only restyle visuals.
    ================================================ */
 
+/* The closed drawer is translateX(100%)'d off past the right edge of the
+   viewport rather than being removed from flow, and Dawn's base .drawer
+   (the outer cart-drawer element, position:fixed, width:100vw) has no
+   overflow clipping of its own — so that off-screen geometry was still
+   inflating <html>'s scrollable width site-wide, cutting content off on
+   mobile. Clip it right here instead of on html/body: overflow-x:hidden
+   on html/body "fixes" the same symptom but also breaks position:sticky
+   for the whole page (the browser treats an overflow-clipped html/body as
+   the sticky containing block, which killed the PDP's sticky gallery). */
+cart-drawer.drawer {
+  overflow: hidden;
+}
+
 /* ── Panel ── */
 .cart-drawer .drawer__inner {
   width: 42rem;

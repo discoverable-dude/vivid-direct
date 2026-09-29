@@ -166,8 +166,8 @@
 .pp-title {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: 0.97;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 0 14px;
