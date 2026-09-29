@@ -251,6 +251,14 @@
 .cart-drawer .cart__view-crate-button,
 .cart-drawer .cart__checkout-button {
   width: 100%;
+  /* minmax(0, …) on the track (above) only caps the TRACK's minimum size —
+     the grid ITEM still has its own implicit min-width: auto, which floors
+     it at its content's min-content width (icon + longest word + padding).
+     That was still wider than the 0.85fr track got once "View Basket"'s
+     "BASKET" word + icon didn't fit, so the button grew into the gap and
+     touched Checkout. min-width: 0 here is what actually lets it shrink to
+     the track's allocation. */
+  min-width: 0;
   margin: 0;
   display: flex;
   align-items: center;
