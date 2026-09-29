@@ -144,6 +144,11 @@
   overflow: visible;
 }
 .cart-drawer .quantity.cart-quantity::after { display: none; box-shadow: none; }
+/* Dawn's base .quantity::before paints an opaque panel behind the stepper
+   using the theme's global --color-background, which doesn't match this
+   drawer's own navy palette — kill it the same way ::after is killed above,
+   or it shows up as a mismatched box around the stepper. */
+.cart-drawer .quantity.cart-quantity::before { display: none; }
 .cart-drawer .quantity__button {
   width: 28px;
   height: 28px;
@@ -324,7 +329,11 @@
   /* Enlarge the stepper and remove hit areas (icon glyphs stay their size) */
   .cart-drawer .quantity__button { width: 44px; height: 44px; }
   .cart-drawer .cart-item .cart-remove-button { width: 44px; height: 44px; }
-  /* Let a long checkout total wrap rather than clip on a narrow drawer */
-  .cart-drawer .cart__checkout-button { white-space: normal; }
+  /* Let a long checkout total wrap rather than clip on a narrow drawer.
+     Same fix applies to View Basket — on a genuinely narrow phone (~320px)
+     its label was staying on one line, overflowing its grid track, and
+     visually sitting on top of the checkout button next to it. */
+  .cart-drawer .cart__checkout-button,
+  .cart-drawer .cart__view-crate-button { white-space: normal; }
 }
 
