@@ -115,6 +115,8 @@
           {%- endif -%}
         </div>
 
+        <p class="pp-sku" id="pp-sku-{{ section.id }}"{% if pp_variant.sku == blank %} hidden{% endif %}>SKU: {{ pp_variant.sku }}</p>
+
         {%- if product.description != blank -%}
           <div class="pp-desc">{{ product.description }}</div>
         {%- endif -%}
@@ -420,6 +422,7 @@
   var vidInput   = document.getElementById('pp-vid-' + sid);
   var atcBtn     = document.getElementById('pp-atc-' + sid);
   var priceLine  = document.getElementById('pp-price-' + sid);
+  var skuLine    = document.getElementById('pp-sku-' + sid);
   var variantsEl = document.getElementById('pp-variants-' + sid);
   var picker     = document.getElementById('variant-selects-' + sid);
 
@@ -455,6 +458,10 @@
       if (vidInput) vidInput.value = variant.id;
       var priceStr = moneyFormat(variant.price);
       if (priceLine) priceLine.textContent = priceStr;
+      if (skuLine) {
+        if (variant.sku) { skuLine.textContent = 'SKU: ' + variant.sku; skuLine.hidden = false; }
+        else { skuLine.hidden = true; }
+      }
       if (atcBtn) {
         var priceEl = atcBtn.querySelector('.pp-atc__price');
         var labelEl = atcBtn.querySelector('span');

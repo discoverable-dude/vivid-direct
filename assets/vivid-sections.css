@@ -96,7 +96,14 @@
 .pp-gallery__main img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* cover forced every photo into a square crop, chopping the ends off
+     anything not shot square (e.g. a tall spike light photographed at an
+     angle). contain always shows the whole photo — for a photo that's
+     already square it renders identically, so this only changes anything
+     for the ones that were actually being cropped. The background behind
+     it (--hessian-weave/--paper-2, set on .pp-gallery__main) already
+     handles the letterbox space that appears around a non-square image. */
+  object-fit: contain;
   display: block;
 }
 .pp-gallery__badge {
@@ -208,6 +215,11 @@
   font-weight: 700;
   color: var(--ink);
   margin: 0 0 18px;
+}
+.pp-sku {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin: -12px 0 18px;
 }
 .pp-desc {
   font-size: 15px;

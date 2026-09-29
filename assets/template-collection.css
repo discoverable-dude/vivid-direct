@@ -57,6 +57,20 @@
   margin-bottom: 15rem;
 }
 
+/* The empty state still sits next to the (now pointless, nothing-to-filter)
+   sidebar <aside class="facets-wrapper">, a flex sibling of
+   .product-grid-container inside .facets-vertical — .title-wrapper's own
+   text-align: center only centers within product-grid-container's own
+   narrower flex share, not the actual page, so "No products found" reads
+   as off-centre. Hide the sidebar and let the grid container take the
+   full row whenever it holds the empty state. */
+.facets-vertical:has(.collection--empty) .facets-wrapper {
+  display: none;
+}
+.facets-vertical:has(.collection--empty) .product-grid-container {
+  flex: 1;
+}
+
 @media screen and (max-width: 989px) {
   .collection .slider--tablet.product-grid {
     scroll-padding-left: 1.5rem;

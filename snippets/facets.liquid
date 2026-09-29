@@ -193,6 +193,20 @@
                           role="list"
                         >
                           {%- for value in sorted_values -%}
+                            {%- comment -%}
+                              A handful of imported products ended up with a
+                              literal "null" or "N/A..." string as their tag
+                              value instead of the tag being left off, so
+                              Shopify's filter aggregation surfaces it as a
+                              real, selectable (but meaningless) option.
+                              Skip rendering those rather than showing
+                              customers a "null" checkbox — the underlying
+                              tags still need cleaning up in the catalog.
+                            {%- endcomment -%}
+                            {%- assign value_label_downcase = value.label | strip | downcase -%}
+                            {%- if value_label_downcase == blank or value_label_downcase == 'null' or value_label_downcase contains 'n/a' -%}
+                              {%- continue -%}
+                            {%- endif -%}
                             {% liquid
                               assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
                               assign is_disabled = false
@@ -561,6 +575,10 @@
                               endif
                             -%}
                             {%- for value in sorted_values -%}
+                              {%- assign value_label_downcase = value.label | strip | downcase -%}
+                              {%- if value_label_downcase == blank or value_label_downcase == 'null' or value_label_downcase contains 'n/a' -%}
+                                {%- continue -%}
+                              {%- endif -%}
                               {% liquid
                                 assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
                                 assign is_disabled = false
