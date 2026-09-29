@@ -45,7 +45,7 @@
           "settings": {
             "label": "",
             "value": "{{ product.metafields.custom.lumens.value }}",
-            "suffix": "Lumens",
+            "suffix": "",
             "icon": "sun"
           }
         },
