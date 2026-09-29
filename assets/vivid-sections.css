@@ -192,8 +192,15 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--ink);
-  white-space: nowrap;
+  /* short pills (e.g. "IP65 Rated") stay on one line naturally; a long
+     metafield value (e.g. a full warranty sentence) wraps inside the pill
+     instead of overflowing the viewport — max-width/min-width let it
+     actually shrink within the flex row rather than forcing its full
+     nowrap width. */
+  max-width: 100%;
+  min-width: 0;
 }
+.pp-stat > span:last-child { overflow-wrap: break-word; }
 .pp-stat__icon { display: inline-flex; color: var(--cta); flex-shrink: 0; }
 .pp-stat__icon svg { width: 15px; height: 15px; }
 .pp-price {
