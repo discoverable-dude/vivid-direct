@@ -14,6 +14,16 @@
   background: var(--hessian-weave), var(--paper);
   box-shadow: -10px 0 44px rgba(0, 0, 0, 0.20);
   display: grid;
+  /* height:auto + max-height caps the panel to the viewport without forcing
+     it to always fill it — a 1fr row only stretches to fill a *definite*
+     height, so on an intrinsic (auto) height it behaves like content-sized
+     instead, closing the dead gap between a short cart and the footer.
+     overflow:hidden keeps the panel itself from growing past max-height;
+     the middle row (cart-drawer-items) scrolls internally once it's tall
+     enough to need it. */
+  height: auto;
+  max-height: 100%;
+  overflow: hidden;
   grid-template-rows: auto 1fr auto;
   /* the implicit column must be allowed to shrink below the widest child's
      min-content, or every row lays out wider than the drawer and clips off
