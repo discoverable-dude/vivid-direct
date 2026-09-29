@@ -73,7 +73,7 @@
           "type": "faq",
           "settings": {
             "title": "Installation",
-            "body": "<p>Replace with real fitting/installation guidance for this product, or delete this FAQ block.</p>",
+            "body": "<p>Follow manufacturers intstructions inside your product once it arrives. Installation should only be carried out by trained professionals when dealing with wiring and electrical units.</p>",
             "open_by_default": true
           }
         },
