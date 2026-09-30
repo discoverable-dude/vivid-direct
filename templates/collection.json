@@ -12,6 +12,7 @@
     "banner": {
       "type": "collection-hero-banner",
       "settings": {
+        "image": "shopify://shop_images/Downlight-Living-Space_652f6311-161d-40a2-b758-b93f50953c56.jpg",
         "heading": "",
         "description": ""
       }
