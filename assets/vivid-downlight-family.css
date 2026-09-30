@@ -1,0 +1,46 @@
+/* ================================================
+   DOWNLIGHT FAMILY PSEUDO-SELECTORS
+   Finish / Dimming Protocol pills on product-downlight-family.liquid —
+   these are real links to sibling products, not native variant options
+   (the underlying family has 5 real axes, Shopify options cap at 3), styled
+   to match .pp-vtile so they read as part of the same selector group.
+   ================================================ */
+.pp-pseudo-option {
+  margin: 0 0 18px;
+}
+.pp-pseudo-option__label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.pp-pseudo-option__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pp-pseudo-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+.pp-pseudo-pill:hover {
+  border-color: var(--ink);
+}
+.pp-pseudo-pill.is-active {
+  border-color: var(--footer-bg);
+  background: var(--footer-bg);
+  color: var(--white);
+}
