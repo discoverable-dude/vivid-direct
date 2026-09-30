@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "downlight-family-product": {
+      "type": "product-downlight-family",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "none"
+          }
+        }
+      },
+      "block_order": ["variant_picker"],
+      "name": "Downlight family product",
+      "settings": {
+        "hero_scheme": "scheme-2",
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "trust_1": "Trade pricing available",
+        "trust_2": "In stock, ships fast",
+        "trust_3": "2 year warranty"
+      }
+    }
+  },
+  "order": ["downlight-family-product"]
+}

@@ -5,7 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
+    {%- comment -%}
+      Non-primary downlight-family products (custom.downlight_finish /
+      _dimming_protocol / _family) are real, independently buyable products
+      but exist mainly so their family's selector can link between them —
+      indexing all of them under their own URL would just compete with the
+      family's one "primary" product in search. custom.canonical_override_url
+      is set on every sibling except the primary itself (see
+      build_downlight_custom.py) and points at the primary's URL.
+    {%- endcomment -%}
+    {%- if template contains 'product' and product.metafields.custom.canonical_override_url != blank -%}
+      <link rel="canonical" href="{{ product.metafields.custom.canonical_override_url.value }}">
+    {%- else -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">

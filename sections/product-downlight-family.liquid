@@ -1,0 +1,339 @@
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+{{ 'vivid-downlight-family.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  product-downlight-family.liquid
+
+  PDP for the custom (non-Combined-Listings) downlight family build: each
+  product only has 3 native Shopify options (Colour Temperature x Watts x
+  Beam Angle — the real per-SKU axes Shopify's option cap allows), but the
+  underlying WooCommerce range actually has 5. The other two (Finish and
+  Dimming Protocol) are exposed here as extra pill-selector rows that
+  navigate between this family's separate sibling products rather than
+  switching a native variant — see custom.downlight_family /
+  custom.downlight_finish / custom.downlight_dimming_protocol on the
+  product, and build_downlight_custom.py for how the family metaobject and
+  these products were built.
+{%- endcomment -%}
+
+{%- assign pp_variant = product.selected_or_first_available_variant -%}
+{%- assign pp_form_id = 'pp-form-' | append: section.id -%}
+{%- assign family = product.metafields.custom.downlight_family.value -%}
+{%- assign current_finish = product.metafields.custom.downlight_finish.value -%}
+{%- assign current_protocol = product.metafields.custom.downlight_dimming_protocol.value -%}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+<div class="pp-root pp-root--dark">
+
+<div class="pp-hero color-{{ section.settings.hero_scheme }} gradient" style="--paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --bark: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
+  <div class="wrap">
+    <div class="pp-hero__grid">
+
+      <!-- Gallery -->
+      <div class="pp-gallery">
+        <div class="pp-gallery__main">
+          <img id="pp-main-img-{{ section.id }}"
+               src="{{ product.featured_image | image_url: width: 1400 }}"
+               alt="{{ product.featured_image.alt | default: product.title | escape }}"
+               loading="eager"
+               fetchpriority="high"
+               width="{{ product.featured_image.width }}"
+               height="{{ product.featured_image.height }}"
+               data-zoomable>
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="pp-gallery__thumbs">
+            {%- for img in product.images limit: 5 -%}
+              <button class="pp-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                      data-src="{{ img | image_url: width: 1400 }}"
+                      data-alt="{{ img.alt | default: product.title | escape }}"
+                      type="button"
+                      aria-label="Product image {{ forloop.index }}">
+                <img src="{{ img | image_url: width: 280 }}"
+                     alt="{{ img.alt | default: product.title | escape }}"
+                     width="280"
+                     height="{{ 280 | divided_by: img.aspect_ratio | default: 280 | round }}"
+                     loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info panel -->
+      <div class="pp-info">
+
+        <nav class="pp-crumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span aria-hidden="true">›</span>
+          {%- if product.collections.size > 0 -%}
+            <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+            <span aria-hidden="true">›</span>
+          {%- endif -%}
+          <span>{{ product.title }}</span>
+        </nav>
+
+        <h1 class="pp-title">{{ product.title }}</h1>
+
+        <div class="pp-price" id="pp-price-{{ section.id }}">
+          {%- if product.price_varies -%}
+            {{ product.price_min | money }} – {{ product.price_max | money }}
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </div>
+
+        <p class="pp-sku" id="pp-sku-{{ section.id }}"{% if pp_variant.sku == blank %} hidden{% endif %}>SKU: {{ pp_variant.sku }}</p>
+
+        {%- if product.description != blank -%}
+          <div class="pp-desc">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- comment -%}
+          Finish / Dimming Protocol pseudo-selectors — real links to sibling
+          products, not variant options. For each pill, pick whichever
+          sibling matches BOTH this pill's value and the current selection
+          on the other pseudo-axis, so switching one preserves the other
+          wherever that combination actually exists; fall back to any
+          sibling with the target value if that exact combo doesn't exist.
+        {%- endcomment -%}
+        {%- if family -%}
+          {%- assign members = family.members.value -%}
+
+          <div class="pp-pseudo-option">
+            <p class="pp-pseudo-option__label">Finish</p>
+            <div class="pp-pseudo-option__pills">
+              {%- assign finish_seen = '' -%}
+              {%- for m in members -%}
+                {%- assign m_finish = m.metafields.custom.downlight_finish.value -%}
+                {%- assign marker = m_finish | append: '|' -%}
+                {%- unless finish_seen contains marker -%}
+                  {%- assign finish_seen = finish_seen | append: marker -%}
+                  {%- assign target = null -%}
+                  {%- for m2 in members -%}
+                    {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
+                      {%- assign target = m2 -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- unless target -%}
+                    {%- for m2 in members -%}
+                      {%- if m2.metafields.custom.downlight_finish.value == m_finish -%}
+                        {%- assign target = m2 -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endunless -%}
+                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}">{{ m_finish }}</a>
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="pp-pseudo-option">
+            <p class="pp-pseudo-option__label">Dimming Protocol</p>
+            <div class="pp-pseudo-option__pills">
+              {%- assign protocol_seen = '' -%}
+              {%- for m in members -%}
+                {%- assign m_protocol = m.metafields.custom.downlight_dimming_protocol.value -%}
+                {%- assign marker = m_protocol | append: '|' -%}
+                {%- unless protocol_seen contains marker -%}
+                  {%- assign protocol_seen = protocol_seen | append: marker -%}
+                  {%- assign target = null -%}
+                  {%- for m2 in members -%}
+                    {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
+                      {%- assign target = m2 -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- unless target -%}
+                    {%- for m2 in members -%}
+                      {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol -%}
+                        {%- assign target = m2 -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endunless -%}
+                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <div class="pp-buy-box">
+          {%- assign pp_variant_picker_block = section.blocks | where: "type", "variant_picker" | first -%}
+          {%- if pp_variant_picker_block -%}
+            {%- render 'product-variant-picker', product: product, block: pp_variant_picker_block, product_form_id: pp_form_id -%}
+          {%- endif -%}
+
+          <product-form class="product-form pp-product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+            <div class="product-form__error-message-wrapper pp-atc-error" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+            <form action="{{ routes.cart_add_url }}" method="post" id="pp-form-{{ section.id }}">
+              <input type="hidden" name="id" id="pp-vid-{{ section.id }}" value="{{ pp_variant.id }}">
+              {%- if pp_variant_picker_block -%}
+                <script type="application/json" id="pp-variants-{{ section.id }}">{{ product.variants | json }}</script>
+              {%- endif -%}
+              <div class="pp-atc-row">
+                <div class="pp-qty" aria-label="Quantity">
+                  <button type="button" class="pp-qty__btn pp-qty__btn--minus" aria-label="Decrease">−</button>
+                  <input class="pp-qty__n" type="number" name="quantity" id="pp-qty-{{ section.id }}" value="1" min="1" aria-label="Quantity">
+                  <button type="button" class="pp-qty__btn pp-qty__btn--plus" aria-label="Increase">+</button>
+                </div>
+                <button type="submit" name="add"
+                        class="pp-atc{% unless pp_variant.available %} pp-atc--sold{% endunless %}"
+                        id="pp-atc-{{ section.id }}"
+                        {% unless pp_variant.available %}disabled{% endunless %}>
+                  <span>
+                    {%- if pp_variant.available -%}
+                      Add to Basket · <span class="pp-atc__price">{{ pp_variant.price | money }}</span>
+                    {%- else -%}
+                      Sold Out
+                    {%- endif -%}
+                  </span>
+                  {%- render 'loading-spinner' -%}
+                </button>
+              </div>
+            </form>
+          </product-form>
+
+          <p class="pp-delivery">
+            {%- render 'vivid-icon', icon: 'truck', size: 16 -%}
+            {{ section.settings.delivery_note }}
+          </p>
+
+          {%- render 'product-trust', t1: section.settings.trust_1, t2: section.settings.trust_2, t3: section.settings.trust_3 -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  var sid = '{{ section.id }}';
+
+  var mainImg = document.getElementById('pp-main-img-' + sid);
+  document.querySelectorAll('.pp-gallery__thumb').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.pp-gallery__thumb').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt || ''; }
+    });
+  });
+
+  var vidInput   = document.getElementById('pp-vid-' + sid);
+  var atcBtn     = document.getElementById('pp-atc-' + sid);
+  var priceLine  = document.getElementById('pp-price-' + sid);
+  var skuLine    = document.getElementById('pp-sku-' + sid);
+  var variantsEl = document.getElementById('pp-variants-' + sid);
+  var picker     = document.getElementById('variant-selects-' + sid);
+
+  if (variantsEl && picker) {
+    var variants = JSON.parse(variantsEl.textContent);
+
+    var moneyFormat = function (cents) {
+      return (cents / 100).toLocaleString('en-GB', { style: 'currency', currency: '{{ cart.currency.iso_code | default: shop.currency }}' });
+    };
+
+    var currentSelection = function () {
+      var values = [];
+      picker.querySelectorAll('fieldset, .product-form__input--dropdown').forEach(function (group) {
+        var checked = group.querySelector('input:checked');
+        var select  = group.querySelector('select');
+        if (checked) values.push(checked.value);
+        else if (select) values.push(select.value);
+      });
+      return values;
+    };
+
+    var findVariant = function (values) {
+      return variants.filter(function (v) {
+        return v.options.length === values.length && v.options.every(function (opt, i) { return opt === values[i]; });
+      })[0];
+    };
+
+    var applyVariant = function (variant) {
+      if (!variant) {
+        if (atcBtn) { atcBtn.disabled = true; atcBtn.classList.add('pp-atc--sold'); atcBtn.querySelector('span').textContent = 'Unavailable'; }
+        return;
+      }
+      if (vidInput) vidInput.value = variant.id;
+      var priceStr = moneyFormat(variant.price);
+      if (priceLine) priceLine.textContent = priceStr;
+      if (skuLine) {
+        if (variant.sku) { skuLine.textContent = 'SKU: ' + variant.sku; skuLine.hidden = false; }
+        else { skuLine.hidden = true; }
+      }
+      if (atcBtn) {
+        var priceEl = atcBtn.querySelector('.pp-atc__price');
+        var labelEl = atcBtn.querySelector('span');
+        atcBtn.disabled = !variant.available;
+        atcBtn.classList.toggle('pp-atc--sold', !variant.available);
+        if (!variant.available) {
+          labelEl.textContent = 'Sold Out';
+        } else if (priceEl) {
+          priceEl.textContent = priceStr;
+        } else {
+          labelEl.innerHTML = 'Add to Basket · <span class="pp-atc__price">' + priceStr + '</span>';
+        }
+      }
+    };
+
+    picker.addEventListener('change', function () {
+      applyVariant(findVariant(currentSelection()));
+    });
+  }
+
+  var qtyInput = document.getElementById('pp-qty-' + sid);
+  if (qtyInput) {
+    document.querySelectorAll('#pp-form-' + sid + ' .pp-qty__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var v = parseInt(qtyInput.value, 10) || 1;
+        qtyInput.value = btn.classList.contains('pp-qty__btn--minus') ? Math.max(1, v - 1) : v + 1;
+      });
+    });
+    qtyInput.addEventListener('change', function () {
+      qtyInput.value = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+    });
+  }
+}());
+</script>
+
+{% schema %}
+{
+  "name": "Downlight family product",
+  "tag": "div",
+  "class": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "color_scheme", "id": "hero_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "text", "id": "delivery_note", "label": "Delivery note", "default": "Free next day delivery over £150 · order by 1pm" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },
+    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" }
+  ],
+  "blocks": [
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        { "type": "select", "id": "picker_type", "label": "Picker type", "default": "button",
+          "options": [ { "value": "button", "label": "Pills" }, { "value": "dropdown", "label": "Dropdowns" } ] },
+        { "type": "select", "id": "swatch_shape", "label": "Swatch shape", "default": "none",
+          "options": [ { "value": "circle", "label": "Circle" }, { "value": "square", "label": "Square" }, { "value": "none", "label": "No swatch — text only" } ] }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Downlight family product", "blocks": [ { "type": "variant_picker" } ] }
+  ]
+}
+{% endschema %}
