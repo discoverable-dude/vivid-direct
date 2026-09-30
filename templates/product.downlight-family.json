@@ -20,20 +20,21 @@
           }
         }
       },
-      "block_order": [
-        "variant_picker"
-      ],
+      "block_order": ["variant_picker"],
       "name": "Downlight family product",
       "settings": {
-        "hero_scheme": "",
-        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "hero_scheme": "scheme-2",
+        "about_scheme": "scheme-4",
+        "recipes_scheme": "scheme-1",
+        "related_scheme": "scheme-1",
         "trust_1": "Trade pricing available",
         "trust_2": "In stock, ships fast",
-        "trust_3": "Manufacturer warranty"
+        "trust_3": "Manufacturer warranty",
+        "about_image_opacity": 30,
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "design_articles_url": "#"
       }
     }
   },
-  "order": [
-    "downlight-family-product"
-  ]
+  "order": ["downlight-family-product"]
 }
