@@ -1,19 +1,17 @@
 {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
 {{ 'vivid-downlight-family.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vivid-lightbox.js' | asset_url }}" defer="defer"></script>
 {%- comment -%}
   product-downlight-family.liquid
 
-  PDP for the custom (non-Combined-Listings) downlight family build: each
-  product only has 3 native Shopify options (Colour Temperature x Watts x
-  Beam Angle — the real per-SKU axes Shopify's option cap allows), but the
-  underlying WooCommerce range actually has 5. The other two (Finish and
-  Dimming Protocol) are exposed here as extra pill-selector rows that
-  navigate between this family's separate sibling products rather than
-  switching a native variant — see custom.downlight_family /
-  custom.downlight_finish / custom.downlight_dimming_protocol on the
-  product, and build_downlight_custom.py for how the family metaobject and
-  these products were built.
+  Same layout/content structure as product-lighting.liquid (the main PDP)
+  — stat pills, About/FAQ/Downloads band, design articles, Pairs well
+  with — plus two extra pseudo-selector rows (Finish, Dimming Protocol)
+  in the buy box for families whose real variant axes exceed Shopify's
+  3-native-option cap. See custom.downlight_family / _finish /
+  _dimming_protocol on the product, and build_downlight_custom.py for how
+  the family metaobject and these products were built.
 {%- endcomment -%}
 
 {%- assign pp_variant = product.selected_or_first_available_variant -%}
@@ -26,6 +24,9 @@
 
 <div class="pp-root pp-root--dark">
 
+<!-- ═══════════════════════════════════════════════
+     HERO — gallery + info
+     ═══════════════════════════════════════════════ -->
 <div class="pp-hero color-{{ section.settings.hero_scheme }} gradient" style="--paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --bark: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
   <div class="wrap">
     <div class="pp-hero__grid">
@@ -74,6 +75,30 @@
           <span>{{ product.title }}</span>
         </nav>
 
+        {%- comment -%}
+          A stat pill only ever shows when Value has content. Label (prefix)
+          and Suffix are always plain static text set directly in the theme
+          editor, never connected to a metafield — that's what keeps a pill
+          from ever rendering half-empty: the metafield connection lives
+          ONLY in Value, so a blank metafield always means a blank Value,
+          which always hides the pill.
+        {%- endcomment -%}
+        {%- assign pp_stats = section.blocks | where: "type", "stat" -%}
+        {%- if pp_stats.size > 0 -%}
+          <ul class="pp-stats">
+            {%- for block in pp_stats -%}
+              {%- if block.settings.value != blank -%}
+                <li class="pp-stat" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != "none" -%}
+                    <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
+                  {%- endif -%}
+                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }} {%- endif -%}{{ block.settings.value }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix }}{%- endif -%}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
         <h1 class="pp-title">{{ product.title }}</h1>
 
         <div class="pp-price" id="pp-price-{{ section.id }}">
@@ -105,19 +130,6 @@
           {%- if family -%}
             {%- assign members = family.members.value -%}
 
-            {%- comment -%}
-              Same fieldset/legend/pill markup + classes as Dawn's native
-              product-form__input--pill picker (product-variant-options.liquid)
-              so these read as part of the same selector group as Colour
-              Temperature/Watts/Beam Angle below — just <a> links instead of
-              radio+label, since these navigate to a different product rather
-              than switch a variant. .pp-pseudo-pill in
-              vivid-downlight-family.css reuses the exact same
-              --variant-pills-* custom properties the native pills use, so it
-              automatically matches whatever the theme's Variant Pills design
-              settings are (border width/radius/opacity, shadow), not a
-              hardcoded approximation of them.
-            {%- endcomment -%}
             <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
               <legend class="form__label">Finish</legend>
               {%- assign finish_seen = '' -%}
@@ -217,7 +229,22 @@
             {{ section.settings.delivery_note }}
           </p>
 
-          {%- render 'product-trust', t1: section.settings.trust_1, t2: section.settings.trust_2, t3: section.settings.trust_3 -%}
+          {%- liquid
+            assign _t1 = product.metafields.custom.trust_1.value | default: section.settings.trust_1
+            assign _t2 = product.metafields.custom.trust_2.value | default: section.settings.trust_2
+            assign _t3 = product.metafields.custom.trust_3.value | default: section.settings.trust_3
+            if _t1 == '-'
+              assign _t1 = ''
+            endif
+            if _t2 == '-'
+              assign _t2 = ''
+            endif
+            if _t3 == '-'
+              assign _t3 = ''
+            endif
+          -%}
+          {%- render 'product-trust', t1: _t1, t2: _t2, t3: _t3 -%}
+
         </div>
 
       </div>
@@ -225,7 +252,190 @@
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT — farm image + origin story
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_headline = product.metafields.custom.origin_headline -%}
+{%- assign pp_copy = product.metafields.custom.origin_copy -%}
+{%- assign pp_faqs = section.blocks | where: "type", "faq" -%}
+{%- comment -%}
+  Downloads — custom.spec_sheets is a "List of files" product metafield
+  (set per product in Shopify admin → product → Metafields). Each file's
+  admin-set alt text becomes its label; falls back to a cleaned-up filename
+  when no alt text is set.
+{%- endcomment -%}
+{%- assign pp_spec_sheets = product.metafields.custom.spec_sheets.value -%}
+{%- if pp_headline != blank or pp_copy != blank or pp_faqs.size > 0 or pp_spec_sheets.size > 0 -%}
+<div class="pp-about color-{{ section.settings.about_scheme }} gradient" style="--bark: rgb(var(--color-background)); --white: rgb(var(--color-foreground));">
+  {%- if section.settings.about_image != blank -%}
+    <img class="pp-about__bg"
+         src="{{ section.settings.about_image | image_url: width: 2400 }}"
+         alt=""
+         width="2400"
+         height="{{ 2400 | divided_by: section.settings.about_image.aspect_ratio | default: 2400 | round }}"
+         loading="lazy"
+         aria-hidden="true"
+         style="opacity: {{ section.settings.about_image_opacity | divided_by: 100.0 }}">
+  {%- endif -%}
+  <div class="pp-about__overlay"></div>
+  <div class="wrap pp-about__inner">
+    <div class="pp-about__left">
+      <p class="pp-about__eyebrow">About this product</p>
+      {%- if pp_headline != blank -%}
+        <h2 class="pp-about__headline">{{ pp_headline }}</h2>
+      {%- endif -%}
+    </div>
+    {%- if pp_faqs.size > 0 or pp_spec_sheets.size > 0 -%}
+      <div class="pp-about__acc">
+        {%- if pp_spec_sheets.size > 0 -%}
+          <details class="pp-acc__item">
+            <summary class="pp-acc__q">
+              <span>Downloads</span>
+              {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
+            </summary>
+            <div class="pp-acc__a">
+              <ul class="pp-acc__files">
+                {%- for file in pp_spec_sheets -%}
+                  {%- assign _file_label = file.alt -%}
+                  {%- if _file_label == blank -%}
+                    {%- assign _file_label = file.url | split: '/' | last | split: '?' | first | replace: '-', ' ' | replace: '_', ' ' | capitalize -%}
+                  {%- endif -%}
+                  <li>
+                    <a href="{{ file.url }}" download class="pp-acc__file">
+                      {%- render 'vivid-icon', icon: 'document', size: 18 -%}
+                      <span>{{ _file_label }}</span>
+                      {%- render 'vivid-icon', icon: 'download', size: 16 -%}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        {%- endif -%}
+        {%- for block in pp_faqs -%}
+          <details class="pp-acc__item" {% if block.settings.open_by_default %}open{% endif %} {{ block.shopify_attributes }}>
+            <summary class="pp-acc__q">
+              <span>{{ block.settings.title }}</span>
+              {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
+            </summary>
+            <div class="pp-acc__a">{{ block.settings.body }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- elsif pp_copy != blank -%}
+      <div class="pp-about__copy">{{ pp_copy | newline_to_br }}</div>
+    {%- endif -%}
+  </div>
 </div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     DESIGN ARTICLES — section blocks
+     ═══════════════════════════════════════════════ -->
+{%- capture pp_design_cards -%}
+  {%- assign _rc = 0 -%}
+  {%- for art in blogs.design.articles -%}
+    {%- if _rc >= 3 -%}{%- break -%}{%- endif -%}
+    {%- assign _match = false -%}
+    {%- assign _feat = art.metafields.custom.design_featured_product.value -%}
+    {%- if _feat and _feat.id == product.id -%}{%- assign _match = true -%}{%- endif -%}
+    {%- unless _match -%}
+      {%- for _v in art.metafields.custom.design_shop_items.value -%}
+        {%- if _v.product.id == product.id -%}{%- assign _match = true -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endunless -%}
+    {%- if _match -%}
+      {%- assign _rc = _rc | plus: 1 -%}
+      {%- assign _sub = art.metafields.descriptors.subtitle.value -%}
+      <a href="{{ art.url }}" class="pp-recipe-card">
+        <div class="pp-recipe-card__img">
+          {%- if art.image != blank -%}
+            <img src="{{ art.image | image_url: width: 700 }}" alt="{{ art.title | escape }}" width="700" height="{{ 700 | divided_by: art.image.aspect_ratio | default: 700 | round }}" loading="lazy">
+          {%- else -%}
+            <div class="pp-recipe-card__placeholder">
+              {%- render 'vivid-icon', icon: 'lightbulb', size: 36 -%}
+              <span>Article photo coming soon</span>
+            </div>
+          {%- endif -%}
+        </div>
+        <p class="pp-recipe-card__name">{{ art.title }}</p>
+        {%- if _sub != blank -%}<p class="pp-recipe-card__sub">{{ _sub }}</p>{%- endif -%}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if pp_design_cards != blank -%}
+<div class="pp-recipes color-{{ section.settings.recipes_scheme }} gradient" style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
+  <div class="wrap">
+    <div class="pp-recipes__head">
+      <div>
+        <p class="pp-eyebrow">See it installed</p>
+        <h2 class="pp-recipes__heading">Design articles featuring {{ product.title }}</h2>
+      </div>
+      {%- if section.settings.design_articles_url != blank -%}
+        <a href="{{ section.settings.design_articles_url }}" class="pp-viewall">
+          All design articles
+          {%- render 'vivid-icon', icon: 'chevron', size: 18 -%}
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="pp-recipes__grid">{{ pp_design_cards }}</div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
+     PAIRS WELL WITH — manually picked blocks, topped
+     up from a fallback collection if one is set
+     ═══════════════════════════════════════════════ -->
+{%- assign pp_related = section.blocks | where: "type", "related_product" -%}
+{%- assign pp_related_limit = section.settings.related_limit | default: 4 -%}
+{%- assign pp_related_count = 0 -%}
+{%- assign pp_related_ids = "," -%}
+{%- capture pp_related_cards -%}
+  {%- for block in pp_related -%}
+    {%- assign rp = block.settings.product -%}
+    {%- if rp != blank and pp_related_count < pp_related_limit and rp.id != product.id -%}
+      <div {{ block.shopify_attributes }}>{%- render 'product-card', product: rp -%}</div>
+      {%- assign pp_related_ids = pp_related_ids | append: rp.id | append: ',' -%}
+      {%- assign pp_related_count = pp_related_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if section.settings.related_collection != blank -%}
+    {%- for cp in section.settings.related_collection.products -%}
+      {%- if pp_related_count >= pp_related_limit -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- assign cp_marker = "," | append: cp.id | append: "," -%}
+      {%- unless pp_related_ids contains cp_marker -%}
+        {%- if cp.id != product.id -%}
+          <div>{%- render 'product-card', product: cp -%}</div>
+          {%- assign pp_related_ids = pp_related_ids | append: cp.id | append: ',' -%}
+          {%- assign pp_related_count = pp_related_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- if pp_related_cards != blank -%}
+<div class="pp-related color-{{ section.settings.related_scheme }} gradient" style="--paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);">
+  <div class="wrap">
+    <p class="pp-eyebrow">You may also like</p>
+    <h2 class="pp-related__heading">Pairs well with</h2>
+    <div class="pp-related__grid">{{ pp_related_cards }}</div>
+  </div>
+</div>
+{%- endif -%}
+
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+</div><!-- /.pp-root -->
 
 <script>
 (function () {
@@ -318,6 +528,17 @@
 }());
 </script>
 
+{%- style -%}
+  .pp-root--dark {
+    --paper: #082A38;
+    --card: #0D4761;
+    --ink: #F6F0EA;
+    --ink-soft: rgba(246, 240, 234, 0.68);
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.26);
+  }
+{%- endstyle -%}
+
 {% schema %}
 {
   "name": "Downlight family product",
@@ -325,11 +546,58 @@
   "class": "section",
   "enabled_on": { "templates": ["product"] },
   "settings": [
-    { "type": "color_scheme", "id": "hero_scheme", "label": "Colour scheme", "default": "scheme-1" },
-    { "type": "text", "id": "delivery_note", "label": "Delivery note", "default": "Free next day delivery over £150 · order by 1pm" },
+    { "type": "header", "content": "Section colours" },
+    { "type": "color_scheme", "id": "hero_scheme", "label": "Hero colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "about_scheme", "label": "About colour scheme", "default": "scheme-4" },
+    { "type": "color_scheme", "id": "recipes_scheme", "label": "Design articles colour scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "related_scheme", "label": "Pairs well with colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Pairs well with" },
+    {
+      "type": "collection",
+      "id": "related_collection",
+      "label": "Fallback collection",
+      "info": "Used to fill any empty slots below (or all of them, if no products are picked below). Skips this product and any duplicates automatically."
+    },
+    {
+      "type": "range",
+      "id": "related_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    { "type": "header", "content": "Buy-box trust row" },
     { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
     { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },
-    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" }
+    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "Packed & shipped within 1 working day" },
+    {
+      "type": "image_picker",
+      "id": "about_image",
+      "label": "About section background image",
+      "info": "Set once; applies to all products using this template."
+    },
+    {
+      "type": "range",
+      "id": "about_image_opacity",
+      "label": "Image opacity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "text",
+      "id": "delivery_note",
+      "label": "Delivery note",
+      "default": "Free next day delivery over £150 · order by 1pm"
+    },
+    {
+      "type": "url",
+      "id": "design_articles_url",
+      "label": "Design articles link URL"
+    }
   ],
   "blocks": [
     {
@@ -341,6 +609,51 @@
           "options": [ { "value": "button", "label": "Pills" }, { "value": "dropdown", "label": "Dropdowns" } ] },
         { "type": "select", "id": "swatch_shape", "label": "Swatch shape", "default": "none",
           "options": [ { "value": "circle", "label": "Circle" }, { "value": "square", "label": "Square" }, { "value": "none", "label": "No swatch — text only" } ] }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Static prefix (optional)", "info": "Plain text only, e.g. 'Made by'. Leave blank to show just the value. Never connect this to a metafield — the pill only hides itself correctly if the metafield lives ONLY in Value, with no static text mixed in." },
+        { "type": "text", "id": "value", "label": "Value", "info": "The pill's dynamic content. Click the connector icon to bind this to a metafield (Lumens, Voltage, Wattage, Warranty, etc.) — the whole pill hides automatically whenever that metafield is empty. Don't add any of your own text here, even a space — put that in Prefix or Suffix instead." },
+        { "type": "text", "id": "suffix", "label": "Static suffix (optional)", "info": "Plain text only, e.g. 'Rated', 'Lumens', 'V'. Also never connect this to a metafield." },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [
+          { "value": "none", "label": "No icon" },
+          { "value": "check", "label": "Check" },
+          { "value": "lightbulb", "label": "Lightbulb" },
+          { "value": "eye", "label": "Eye" },
+          { "value": "house", "label": "House" },
+          { "value": "building", "label": "Building" },
+          { "value": "truck", "label": "Delivery truck" },
+          { "value": "clock", "label": "Clock" },
+          { "value": "package", "label": "Package" },
+          { "value": "waterproof", "label": "Droplet (IP rating)" },
+          { "value": "sun", "label": "Sun (lumens)" },
+          { "value": "zap", "label": "Bolt (voltage)" },
+          { "value": "power", "label": "Power (wattage)" },
+          { "value": "shield-check", "label": "Shield check (warranty)" },
+          { "value": "dimmer", "label": "Dimmer" },
+          { "value": "sale-tag", "label": "Tag (vendor/brand)" }
+        ] }
+      ]
+    },
+    {
+      "type": "related_product",
+      "name": "Paired product",
+      "limit": 8,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Optional — manually pick specific products to feature first. Leave unused and set a fallback collection above instead if you'd rather it fill in automatically." }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Care & keeping item",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Care & keeping" },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
       ]
     }
   ],

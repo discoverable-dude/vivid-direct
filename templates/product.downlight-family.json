@@ -20,16 +20,20 @@
           }
         }
       },
-      "block_order": ["variant_picker"],
+      "block_order": [
+        "variant_picker"
+      ],
       "name": "Downlight family product",
       "settings": {
-        "hero_scheme": "scheme-2",
+        "hero_scheme": "",
         "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "trust_1": "Trade pricing available",
         "trust_2": "In stock, ships fast",
-        "trust_3": "2 year warranty"
+        "trust_3": "Manufacturer warranty"
       }
     }
   },
-  "order": ["downlight-family-product"]
+  "order": [
+    "downlight-family-product"
+  ]
 }
