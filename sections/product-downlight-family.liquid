@@ -101,65 +101,74 @@
         {%- if family -%}
           {%- assign members = family.members.value -%}
 
-          <div class="pp-pseudo-option">
-            <p class="pp-pseudo-option__label">Finish</p>
-            <div class="pp-pseudo-option__pills">
-              {%- assign finish_seen = '' -%}
-              {%- for m in members -%}
-                {%- assign m_finish = m.metafields.custom.downlight_finish.value -%}
-                {%- assign marker = m_finish | append: '|' -%}
-                {%- unless finish_seen contains marker -%}
-                  {%- assign finish_seen = finish_seen | append: marker -%}
-                  {%- assign target = null -%}
+          {%- comment -%}
+            Same fieldset/legend/pill markup + classes as Dawn's native
+            product-form__input--pill picker (product-variant-options.liquid)
+            so these read as part of the same selector group as Colour
+            Temperature/Watts/Beam Angle below — just <a> links instead of
+            radio+label, since these navigate to a different product rather
+            than switch a variant. .pp-pseudo-pill in
+            vivid-downlight-family.css reuses the exact same
+            --variant-pills-* custom properties the native pills use, so it
+            automatically matches whatever the theme's Variant Pills design
+            settings are (border width/radius/opacity, shadow), not a
+            hardcoded approximation of them.
+          {%- endcomment -%}
+          <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
+            <legend class="form__label">Finish</legend>
+            {%- assign finish_seen = '' -%}
+            {%- for m in members -%}
+              {%- assign m_finish = m.metafields.custom.downlight_finish.value -%}
+              {%- assign marker = m_finish | append: '|' -%}
+              {%- unless finish_seen contains marker -%}
+                {%- assign finish_seen = finish_seen | append: marker -%}
+                {%- assign target = null -%}
+                {%- for m2 in members -%}
+                  {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
+                    {%- assign target = m2 -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- unless target -%}
                   {%- for m2 in members -%}
-                    {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
+                    {%- if m2.metafields.custom.downlight_finish.value == m_finish -%}
                       {%- assign target = m2 -%}
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  {%- unless target -%}
-                    {%- for m2 in members -%}
-                      {%- if m2.metafields.custom.downlight_finish.value == m_finish -%}
-                        {%- assign target = m2 -%}
-                        {%- break -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endunless -%}
-                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}">{{ m_finish }}</a>
                 {%- endunless -%}
-              {%- endfor -%}
-            </div>
-          </div>
+                <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}">{{ m_finish }}</a>
+              {%- endunless -%}
+            {%- endfor -%}
+          </fieldset>
 
-          <div class="pp-pseudo-option">
-            <p class="pp-pseudo-option__label">Dimming Protocol</p>
-            <div class="pp-pseudo-option__pills">
-              {%- assign protocol_seen = '' -%}
-              {%- for m in members -%}
-                {%- assign m_protocol = m.metafields.custom.downlight_dimming_protocol.value -%}
-                {%- assign marker = m_protocol | append: '|' -%}
-                {%- unless protocol_seen contains marker -%}
-                  {%- assign protocol_seen = protocol_seen | append: marker -%}
-                  {%- assign target = null -%}
+          <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
+            <legend class="form__label">Dimming Protocol</legend>
+            {%- assign protocol_seen = '' -%}
+            {%- for m in members -%}
+              {%- assign m_protocol = m.metafields.custom.downlight_dimming_protocol.value -%}
+              {%- assign marker = m_protocol | append: '|' -%}
+              {%- unless protocol_seen contains marker -%}
+                {%- assign protocol_seen = protocol_seen | append: marker -%}
+                {%- assign target = null -%}
+                {%- for m2 in members -%}
+                  {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
+                    {%- assign target = m2 -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- unless target -%}
                   {%- for m2 in members -%}
-                    {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
+                    {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol -%}
                       {%- assign target = m2 -%}
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  {%- unless target -%}
-                    {%- for m2 in members -%}
-                      {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol -%}
-                        {%- assign target = m2 -%}
-                        {%- break -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endunless -%}
-                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
                 {%- endunless -%}
-              {%- endfor -%}
-            </div>
-          </div>
+                <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
+              {%- endunless -%}
+            {%- endfor -%}
+          </fieldset>
         {%- endif -%}
 
         <div class="pp-buy-box">
