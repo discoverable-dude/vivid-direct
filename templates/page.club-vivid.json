@@ -89,7 +89,7 @@
         "s3"
       ],
       "settings": {
-        "title": "Standard membership — free for everyone",
+        "title": "Club VIVID — free for everyone",
         "color_scheme": "scheme-1",
         "padding_top": 20,
         "padding_bottom": 20
@@ -117,14 +117,25 @@
             "caption": "Trade account with 30 days net facilities, upon approval.",
             "link": ""
           }
+        },
+        "box_YEPqNQ": {
+          "type": "box",
+          "settings": {
+            "icon": "phone",
+            "heading": "",
+            "detail": "Design service",
+            "caption": "Access to Vivid lightworx Design portal and Technical support",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "t1",
-        "t2"
+        "t2",
+        "box_YEPqNQ"
       ],
       "settings": {
-        "title": "Trade membership — for approved trade accounts",
+        "title": "Trade account — for approved trade accounts",
         "color_scheme": "scheme-4",
         "padding_top": 20,
         "padding_bottom": 40

@@ -278,7 +278,7 @@
         "button_text": "",
         "eyebrow": "",
         "heading": "Apply for a trade account",
-        "intro": "<p>A few quick steps and we'll get back to you within one working day. Uploading your VAT certificate or trade documentation now can speed up approval, but it's not required to apply.</p>",
+        "intro": "<p>A few quick steps and we'll get back to you within one working day. Uploading your VAT certificate or trade documentation now can speed up approval, but it's not required in order to apply.</p>",
         "content_align": "left",
         "submit_label": "Apply for trade account",
         "success_message": "Thanks, we've got your application and will be in touch shortly.",
