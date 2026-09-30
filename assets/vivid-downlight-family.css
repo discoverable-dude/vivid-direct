@@ -9,10 +9,27 @@
    fixed values — so if the theme's Variant Pills design settings change,
    these stay in sync automatically instead of drifting out of match again.
    ================================================ */
+/* The boxed-with-notched-legend look on Colour Temperature/Watts/Beam
+   Angle below isn't deliberate theme styling — it's the browser's
+   unstyled default <fieldset>/<legend> rendering, showing through because
+   this template doesn't load section-main-product.css (which resets it
+   to border:none on every other PDP). Making it a real, explicit rule
+   here instead of relying on that accident: applies to every fieldset in
+   the buy box, native pill/dropdown/swatch pickers and these pseudo ones
+   alike, so all five rows read as one consistent set on purpose, not by
+   coincidence of which stylesheet happens to be loaded. */
+.pp-buy-box fieldset {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.6rem 1rem;
+  margin: 0 0 1.6rem;
+}
+.pp-buy-box fieldset legend {
+  padding: 0 0.6rem;
+  margin-left: 0.6rem;
+}
+
 .pp-pseudo-fieldset {
-  border: none;
-  padding: 0;
-  margin: 0 0 1.2rem 0;
   max-width: 44rem;
 }
 
