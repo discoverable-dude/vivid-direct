@@ -70,6 +70,50 @@
       padding-top: 0.5rem;
     }
   }
+
+  /* Flyout submenu for third-level dropdown items (added for category restructure) */
+  .header__submenu.m-mega {
+    overflow: visible;
+  }
+
+  .m-mega__col {
+    position: relative;
+  }
+
+  .m-mega__sublist {
+    display: none;
+    position: absolute;
+    top: -0.5rem;
+    left: 100%;
+    margin-left: 0.5rem;
+    min-width: 22rem;
+    background: rgb(var(--color-background));
+    border: 1px solid rgba(var(--color-foreground), 0.12);
+    border-radius: var(--radius-lg, 8px);
+    padding: 0.8rem 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 30;
+  }
+
+  .m-mega__col:hover .m-mega__sublist,
+  .m-mega__col:focus-within .m-mega__sublist {
+    display: block;
+  }
+
+  .m-mega__sublist li {
+    padding: 0;
+  }
+
+  .m-mega__sublink {
+    display: block;
+    padding: 0.7rem 1.6rem;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .m-mega__sublink:hover {
+    text-decoration: underline;
+  }
 </style>
 
 {%- style -%}
