@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 12
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "cat_0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-controls"
+          }
+        },
+        "cat_1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-power-supplies"
+          }
+        },
+        "cat_2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-profiles"
+          }
+        },
+        "cat_3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-strip"
+          }
+        },
+        "cat_4": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "neon-flex-by-foss-led"
+          }
+        },
+        "cat_5": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-strip-accessories-by-fossled"
+          }
+        },
+        "cat_6": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "led-strip-connectors-by-sensio"
+          }
+        }
+      },
+      "block_order": [
+        "cat_0",
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5",
+        "cat_6"
+      ],
+      "settings": {
+        "title": "Shop by Category",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "padding_top": 12,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "categories"
+  ]
+}
