@@ -17,7 +17,7 @@
         "mode": "all",
         "interval": 5,
         "left_text": "Huge range of lighting",
-        "mid_text": "Free next day delivery over £150 — order by 1pm",
+        "mid_text": "Free next day delivery over \u00a3150 \u2014 order by 1pm",
         "right_text": "Trade accounts available"
       }
     },
@@ -57,7 +57,7 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "always",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
