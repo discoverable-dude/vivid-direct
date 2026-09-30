@@ -1,0 +1,80 @@
+{{ 'vivid-page.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Vivid Category Grid — branded replacement for Dawn's stock
+  collection-list section (used on category-hub pages like
+  /pages/led-strip-lighting). Each block just picks a collection;
+  title/image pull from the collection automatically unless overridden.
+  Eyebrow and heading are both optional — leave the heading blank to drop
+  it entirely (e.g. when the hero above already says "browse by category
+  below" and a second "Shop by Category" heading is redundant).
+{%- endcomment -%}
+
+{%- assign cat_blocks = section.blocks | where: "type", "category" -%}
+
+<section class="m-sec color-{{ section.settings.color_scheme }} gradient" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="m-sec__wrap m-sec__wrap--wide">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="m-catgrid__head">
+        {%- if section.settings.eyebrow != blank -%}<p class="m-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2 class="m-heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="m-catgrid" style="--m-catgrid-cols: {{ section.settings.columns_desktop }};">
+      {%- for block in cat_blocks -%}
+        {%- assign coll = block.settings.collection -%}
+        {%- assign card_title = block.settings.title | default: coll.title -%}
+        {%- assign card_image = block.settings.image | default: coll.featured_image -%}
+        {%- assign card_url = coll.url | default: '#' -%}
+        <a href="{{ card_url }}" class="m-catgrid__card" {{ block.shopify_attributes }}>
+          <span class="m-catgrid__img">
+            {%- if card_image != blank -%}
+              <img src="{{ card_image | image_url: width: 600 }}"
+                   alt="{{ card_title | escape }}"
+                   width="600"
+                   height="{{ 600 | divided_by: card_image.aspect_ratio | default: 600 | round }}"
+                   loading="lazy">
+            {%- else -%}
+              <span class="m-catgrid__placeholder">{%- render 'vivid-icon', icon: 'package', size: 32 -%}</span>
+            {%- endif -%}
+          </span>
+          <span class="m-catgrid__title">
+            {{ card_title }}
+            {%- render 'vivid-icon', icon: 'arrow', size: 16 -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vivid category grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "Leave blank to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave blank to drop the heading entirely." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "range", "id": "columns_desktop", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title override", "info": "Leave blank to use the collection's own title." },
+        { "type": "image_picker", "id": "image", "label": "Image override", "info": "Leave blank to use the collection's featured image." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Vivid category grid", "blocks": [ { "type": "category" }, { "type": "category" }, { "type": "category" }, { "type": "category" } ] }
+  ]
+}
+{% endschema %}
