@@ -153,7 +153,7 @@
                       {%- endif -%}
                     {%- endfor -%}
                   {%- endunless -%}
-                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}">{{ m_finish }}</a>
+                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}" data-swap-image="{{ target.featured_image | image_url: width: 1400 }}" data-swap-alt="{{ target.featured_image.alt | default: target.title | escape }}">{{ m_finish }}</a>
                 {%- endunless -%}
               {%- endfor -%}
             </fieldset>
@@ -514,6 +514,28 @@
       document.querySelectorAll('.pp-gallery__thumb').forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
       if (mainImg) { mainImg.src = btn.dataset.src; mainImg.alt = btn.dataset.alt || ''; }
+    });
+  });
+
+  // Finish pills link to a different product (each finish is its own Shopify
+  // product under the hood), so picking one normally means an instant page
+  // reload with no visual feedback. Swap the hero photo to the target
+  // finish's image first, then navigate shortly after — gives a visible
+  // "the image just changed" moment before the new page loads.
+  document.querySelectorAll('.pp-pseudo-pill[data-swap-image]').forEach(function (pill) {
+    pill.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let open-in-new-tab work normally
+      e.preventDefault();
+      var href = pill.getAttribute('href');
+      if (mainImg) {
+        mainImg.src = pill.dataset.swapImage;
+        mainImg.alt = pill.dataset.swapAlt || '';
+      }
+      document.querySelectorAll('.pp-pseudo-fieldset .pp-pseudo-pill').forEach(function (p) {
+        if (p.closest('.pp-pseudo-fieldset') === pill.closest('.pp-pseudo-fieldset')) p.classList.remove('is-active');
+      });
+      pill.classList.add('is-active');
+      window.setTimeout(function () { window.location.href = href; }, 220);
     });
   });
 
