@@ -332,6 +332,65 @@
 
 
 <!-- ═══════════════════════════════════════════════
+     DOWNLOADS — product-level file, falling back to
+     the shared family document when this specific SKU
+     doesn't have its own (the normal case: one spec
+     sheet covers every finish/protocol combo in the
+     family). Template JSON "Dynamic Source" connectors
+     can't take filter arguments like `default:`, so this
+     fallback has to live here in real Liquid instead of
+     in templates/product.downlight-family.json.
+     ═══════════════════════════════════════════════ -->
+{%- liquid
+  assign dl_datasheet = product.metafields.custom.datasheet_url.value | default: family.datasheet_url
+  assign dl_manual = product.metafields.custom.installation_manual_url.value | default: family.installation_manual_url
+  assign dl_ies = product.metafields.custom.ies_ldt_url.value | default: family.ies_ldt_url
+  assign dl_line = product.metafields.custom.line_drawing_url.value | default: family.line_drawing_url
+-%}
+{%- capture pp_download_items -%}
+  {%- if dl_datasheet != blank -%}
+    <a href="{{ dl_datasheet }}" download class="pdl__item">
+      <span class="pdl__icon">{%- render 'vivid-icon', icon: 'document', size: 20 -%}</span>
+      <span class="pdl__label">Spec sheet</span>
+      <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+    </a>
+  {%- endif -%}
+  {%- if dl_manual != blank -%}
+    <a href="{{ dl_manual }}" download class="pdl__item">
+      <span class="pdl__icon">{%- render 'vivid-icon', icon: 'download', size: 20 -%}</span>
+      <span class="pdl__label">Installation manual</span>
+      <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+    </a>
+  {%- endif -%}
+  {%- if dl_ies != blank -%}
+    <a href="{{ dl_ies }}" download class="pdl__item">
+      <span class="pdl__icon">{%- render 'vivid-icon', icon: 'package', size: 20 -%}</span>
+      <span class="pdl__label">IES/LDT file</span>
+      <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+    </a>
+  {%- endif -%}
+  {%- if dl_line != blank -%}
+    <a href="{{ dl_line }}" download class="pdl__item">
+      <span class="pdl__icon">{%- render 'vivid-icon', icon: 'package', size: 20 -%}</span>
+      <span class="pdl__label">Line Drawing</span>
+      <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+    </a>
+  {%- endif -%}
+{%- endcapture -%}
+{%- if pp_download_items != blank -%}
+<section class="pdl color-scheme-1 gradient" style="--paper: rgb(var(--color-background)); --paper-2: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); --line: rgba(var(--color-foreground), 0.14); --line-strong: rgba(var(--color-foreground), 0.28); padding-top: 48px; padding-bottom: 48px;">
+  <div class="wrap">
+    <div class="pdl__head">
+      <p class="pp-eyebrow">Technical documents</p>
+      <h2 class="pdl__heading">Downloads</h2>
+    </div>
+    <div class="pdl__grid">{{ pp_download_items }}</div>
+  </div>
+</section>
+{%- endif -%}
+
+
+<!-- ═══════════════════════════════════════════════
      DESIGN ARTICLES — section blocks
      ═══════════════════════════════════════════════ -->
 {%- capture pp_design_cards -%}
