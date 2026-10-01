@@ -158,14 +158,25 @@
               {%- endfor -%}
             </fieldset>
 
-            <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
-              <legend class="form__label">Dimming Protocol</legend>
-              {%- assign protocol_seen = '' -%}
+            {%- comment -%}
+              Some families (e.g. IRIS 40, which already handles Dimming
+              Protocol as a real native Shopify option) only vary across
+              this second pseudo-axis by install style (Standard/Trimless),
+              not electrical protocol — and some have only one value here
+              at all, in which case there's nothing to pick and the whole
+              fieldset is skipped. Build the pills first so we know the
+              distinct count and can choose the right legend before
+              deciding whether to print the wrapper at all.
+            {%- endcomment -%}
+            {%- assign protocol_seen = '' -%}
+            {%- assign protocol_distinct_count = 0 -%}
+            {%- capture protocol_pills -%}
               {%- for m in members -%}
                 {%- assign m_protocol = m.metafields.custom.downlight_dimming_protocol.value -%}
                 {%- assign marker = m_protocol | append: '|' -%}
                 {%- unless protocol_seen contains marker -%}
                   {%- assign protocol_seen = protocol_seen | append: marker -%}
+                  {%- assign protocol_distinct_count = protocol_distinct_count | plus: 1 -%}
                   {%- assign target = null -%}
                   {%- for m2 in members -%}
                     {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
@@ -184,7 +195,17 @@
                   <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
                 {%- endunless -%}
               {%- endfor -%}
-            </fieldset>
+            {%- endcapture -%}
+            {%- if protocol_distinct_count > 1 -%}
+              {%- assign protocol_legend = 'Dimming Protocol' -%}
+              {%- if current_protocol == 'Standard' or current_protocol == 'Trimless' -%}
+                {%- assign protocol_legend = 'Style' -%}
+              {%- endif -%}
+              <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
+                <legend class="form__label">{{ protocol_legend }}</legend>
+                {{ protocol_pills }}
+              </fieldset>
+            {%- endif -%}
           {%- endif -%}
 
           {%- assign pp_variant_picker_block = section.blocks | where: "type", "variant_picker" | first -%}
