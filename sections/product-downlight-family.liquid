@@ -130,31 +130,32 @@
           {%- if family -%}
             {%- assign members = family.members.value -%}
 
+            {%- comment -%}
+              Deduplicate by exact value using | uniq on a mapped array, not
+              string-concatenation + `contains` — a substring check falsely
+              treats "Black" as already-seen once "White on Black" has been
+              processed, since "White on Black" literally ends in "Black".
+            {%- endcomment -%}
             <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
               <legend class="form__label">Finish</legend>
-              {%- assign finish_seen = '' -%}
-              {%- for m in members -%}
-                {%- assign m_finish = m.metafields.custom.downlight_finish.value -%}
-                {%- assign marker = m_finish | append: '|' -%}
-                {%- unless finish_seen contains marker -%}
-                  {%- assign finish_seen = finish_seen | append: marker -%}
-                  {%- assign target = null -%}
+              {%- assign all_finishes = members | map: 'metafields.custom.downlight_finish.value' | uniq -%}
+              {%- for m_finish in all_finishes -%}
+                {%- assign target = null -%}
+                {%- for m2 in members -%}
+                  {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
+                    {%- assign target = m2 -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- unless target -%}
                   {%- for m2 in members -%}
-                    {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
+                    {%- if m2.metafields.custom.downlight_finish.value == m_finish -%}
                       {%- assign target = m2 -%}
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  {%- unless target -%}
-                    {%- for m2 in members -%}
-                      {%- if m2.metafields.custom.downlight_finish.value == m_finish -%}
-                        {%- assign target = m2 -%}
-                        {%- break -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endunless -%}
-                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}" data-swap-image="{{ target.featured_image | image_url: width: 1400 }}" data-swap-alt="{{ target.featured_image.alt | default: target.title | escape }}">{{ m_finish }}</a>
                 {%- endunless -%}
+                <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}" data-swap-image="{{ target.featured_image | image_url: width: 1400 }}" data-swap-alt="{{ target.featured_image.alt | default: target.title | escape }}">{{ m_finish }}</a>
               {%- endfor -%}
             </fieldset>
 
@@ -168,32 +169,26 @@
               distinct count and can choose the right legend before
               deciding whether to print the wrapper at all.
             {%- endcomment -%}
-            {%- assign protocol_seen = '' -%}
-            {%- assign protocol_distinct_count = 0 -%}
+            {%- assign all_protocols = members | map: 'metafields.custom.downlight_dimming_protocol.value' | uniq -%}
+            {%- assign protocol_distinct_count = all_protocols.size -%}
             {%- capture protocol_pills -%}
-              {%- for m in members -%}
-                {%- assign m_protocol = m.metafields.custom.downlight_dimming_protocol.value -%}
-                {%- assign marker = m_protocol | append: '|' -%}
-                {%- unless protocol_seen contains marker -%}
-                  {%- assign protocol_seen = protocol_seen | append: marker -%}
-                  {%- assign protocol_distinct_count = protocol_distinct_count | plus: 1 -%}
-                  {%- assign target = null -%}
+              {%- for m_protocol in all_protocols -%}
+                {%- assign target = null -%}
+                {%- for m2 in members -%}
+                  {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
+                    {%- assign target = m2 -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- unless target -%}
                   {%- for m2 in members -%}
-                    {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
+                    {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol -%}
                       {%- assign target = m2 -%}
                       {%- break -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  {%- unless target -%}
-                    {%- for m2 in members -%}
-                      {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol -%}
-                        {%- assign target = m2 -%}
-                        {%- break -%}
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endunless -%}
-                  <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
                 {%- endunless -%}
+                <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
               {%- endfor -%}
             {%- endcapture -%}
             {%- if protocol_distinct_count > 1 -%}
