@@ -346,6 +346,7 @@
   assign dl_manual = product.metafields.custom.installation_manual_url.value | default: family.installation_manual_url
   assign dl_ies = product.metafields.custom.ies_ldt_url.value | default: family.ies_ldt_url
   assign dl_line = product.metafields.custom.line_drawing_url.value | default: family.line_drawing_url
+  assign dl_doc = product.metafields.custom.declaration_of_conformity_url.value | default: family.declaration_of_conformity_url
 -%}
 {%- capture pp_download_items -%}
   {%- if dl_datasheet != blank -%}
@@ -373,6 +374,13 @@
     <a href="{{ dl_line }}" download class="pdl__item">
       <span class="pdl__icon">{%- render 'vivid-icon', icon: 'package', size: 20 -%}</span>
       <span class="pdl__label">Line Drawing</span>
+      <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
+    </a>
+  {%- endif -%}
+  {%- if dl_doc != blank -%}
+    <a href="{{ dl_doc }}" download class="pdl__item">
+      <span class="pdl__icon">{%- render 'vivid-icon', icon: 'check', size: 20 -%}</span>
+      <span class="pdl__label">Declaration of Conformity</span>
       <span class="pdl__action">{%- render 'vivid-icon', icon: 'download', size: 16 -%}</span>
     </a>
   {%- endif -%}
