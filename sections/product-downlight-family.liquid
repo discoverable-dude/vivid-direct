@@ -138,7 +138,9 @@
             {%- endcomment -%}
             <fieldset class="product-form__input product-form__input--pill pp-pseudo-fieldset">
               <legend class="form__label">Finish</legend>
-              {%- assign all_finishes = members | map: 'metafields.custom.downlight_finish.value' | uniq -%}
+              {%- comment -%} map: doesn't support dotted/nested paths, so build the list manually {%- endcomment -%}
+              {%- capture finish_list_raw -%}{%- for m in members -%}{{ m.metafields.custom.downlight_finish.value }}|{%- endfor -%}{%- endcapture -%}
+              {%- assign all_finishes = finish_list_raw | split: '|' | uniq -%}
               {%- for m_finish in all_finishes -%}
                 {%- assign target = null -%}
                 {%- for m2 in members -%}
@@ -169,7 +171,8 @@
               distinct count and can choose the right legend before
               deciding whether to print the wrapper at all.
             {%- endcomment -%}
-            {%- assign all_protocols = members | map: 'metafields.custom.downlight_dimming_protocol.value' | uniq -%}
+            {%- capture protocol_list_raw -%}{%- for m in members -%}{{ m.metafields.custom.downlight_dimming_protocol.value }}|{%- endfor -%}{%- endcapture -%}
+            {%- assign all_protocols = protocol_list_raw | split: '|' | uniq -%}
             {%- assign protocol_distinct_count = all_protocols.size -%}
             {%- capture protocol_pills -%}
               {%- for m_protocol in all_protocols -%}
