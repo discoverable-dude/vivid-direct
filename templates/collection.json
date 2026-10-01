@@ -13,7 +13,7 @@
       "type": "collection-hero-banner",
       "settings": {
         "image": "{{ collection.image }}",
-        "heading": "",
+        "heading": "Decorative Pendants, Chandeliers & Ceiling Lighting",
         "description": ""
       }
     },
