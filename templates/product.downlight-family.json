@@ -18,15 +18,101 @@
             "picker_type": "button",
             "swatch_shape": "none"
           }
+        },
+        "stat_1": {
+          "type": "stat",
+          "name": "Vendor",
+          "settings": {
+            "label": "Made by",
+            "value": "{{ product.vendor }}",
+            "suffix": "",
+            "icon": "sale-tag"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "name": "IP Rating",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "suffix": "",
+            "icon": "waterproof"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "name": "Lumens",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.lumens.value }}",
+            "suffix": "",
+            "icon": "sun"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "name": "Voltage",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.voltage.value }}",
+            "suffix": "",
+            "icon": "zap"
+          }
+        },
+        "stat_5": {
+          "type": "stat",
+          "name": "Warranty",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.warranty.value }}",
+            "suffix": "",
+            "icon": "shield-check"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "title": "Installation",
+            "body": "<p>Follow manufacturers intstructions inside your product once it arrives. Installation should only be carried out by trained professionals when dealing with wiring and electrical units.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "title": "Warranty",
+            "body": "<p>{{ product.metafields.custom.warranty.value }}</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "title": "Delivery information",
+            "body": "<p>{{ product.metafields.custom.delivery_notes | metafield_tag }}</p>",
+            "open_by_default": false
+          }
         }
       },
-      "block_order": ["variant_picker"],
+      "block_order": [
+        "variant_picker",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "stat_5",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
       "name": "Downlight family product",
       "settings": {
         "hero_scheme": "scheme-2",
-        "about_scheme": "scheme-4",
-        "recipes_scheme": "scheme-1",
-        "related_scheme": "scheme-1",
+        "about_scheme": "scheme-1",
+        "recipes_scheme": "",
+        "related_scheme": "",
+        "related_collection": "",
+        "related_limit": 4,
         "trust_1": "Trade pricing available",
         "trust_2": "In stock, ships fast",
         "trust_3": "Manufacturer warranty",
@@ -34,7 +120,150 @@
         "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "design_articles_url": "#"
       }
+    },
+    "downloads": {
+      "type": "product-downloads",
+      "blocks": {
+        "d1": {
+          "type": "download",
+          "name": "Spec Sheet",
+          "settings": {
+            "label": "Spec sheet",
+            "file": "{{ product.metafields.custom.datasheet_url.value }}",
+            "icon": "document"
+          }
+        },
+        "d2": {
+          "type": "download",
+          "name": "Installation Manual",
+          "settings": {
+            "label": "Installation manual",
+            "file": "{{ product.metafields.custom.installation_manual_url.value }}",
+            "icon": "download"
+          }
+        },
+        "d3": {
+          "type": "download",
+          "name": "IES/LDT File",
+          "settings": {
+            "label": "IES/LDT file",
+            "file": "{{ product.metafields.custom.ies_ldt_url.value }}",
+            "icon": "package"
+          }
+        },
+        "d4": {
+          "type": "download",
+          "name": "Line Drawing",
+          "settings": {
+            "label": "Line Drawing",
+            "file": "{{ product.metafields.custom.line_drawing_url.value }}",
+            "icon": "package"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "settings": {
+        "eyebrow": "Technical documents",
+        "heading": "Downloads",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "vivid_product_grid": {
+      "type": "vivid-product-grid",
+      "name": "Product grid",
+      "settings": {
+        "collection": "downlights",
+        "products_to_show": 4,
+        "eyebrow": "You may also like",
+        "heading": "Recommended Products",
+        "show_view_all": false,
+        "view_all_label": "View all",
+        "color_scheme": "scheme-2",
+        "padding_top": 76,
+        "padding_bottom": 76
+      }
+    },
+    "collection_cross_sell": {
+      "type": "collection-cross-sell",
+      "name": "Cross-sell rail",
+      "settings": {
+        "eyebrow": "You might also need",
+        "title": "Explore our range",
+        "collection": "",
+        "products_to_show": 8,
+        "view_all_label": "See all",
+        "view_all_url": "",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "split_icon_grid": {
+      "type": "split-icon-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Free next-day delivery over £150, order by 1pm."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "heading": "Trade Accounts",
+            "text": "Dedicated pricing for electricians and businesses."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "phone",
+            "heading": "Expert Support",
+            "text": "Real advice from people who know the products."
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "heading": "Huge Range",
+            "text": "LED, neon, smart lighting and accessories, always in stock."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "name": "Split icon grid",
+      "settings": {
+        "eyebrow": "How We Help",
+        "heading": "A Partner, Not Just a Supplier",
+        "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
+        "image_position": "left",
+        "color_scheme": "scheme-4",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
     }
   },
-  "order": ["downlight-family-product"]
+  "order": [
+    "downlight-family-product",
+    "downloads",
+    "vivid_product_grid",
+    "collection_cross_sell",
+    "split_icon_grid"
+  ]
 }
