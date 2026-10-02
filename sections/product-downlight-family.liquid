@@ -595,6 +595,10 @@
         return;
       }
       if (vidInput) vidInput.value = variant.id;
+      if (mainImg && variant.featured_image && variant.featured_image.src) {
+        var vSrc = variant.featured_image.src + (variant.featured_image.src.indexOf('?') > -1 ? '&' : '?') + 'width=1400';
+        if (mainImg.src !== vSrc) { mainImg.src = vSrc; mainImg.alt = variant.featured_image.alt || ''; }
+      }
       var priceStr = moneyFormat(variant.price);
       if (priceLine) priceLine.textContent = priceStr;
       if (skuLine) {
