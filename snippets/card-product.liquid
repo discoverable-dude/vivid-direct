@@ -83,24 +83,42 @@
               >
               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
 
-              {%- if card_product.media[1] != null and show_secondary_image -%}
+              {%- comment -%}
+                Downlight families split each finish into its own product, so a
+                family card only has one image of its own. Fall back to another
+                finish's photo in the family so the hover change still works.
+              {%- endcomment -%}
+              {%- assign hover_media = card_product.media[1] -%}
+              {%- if hover_media == blank -%}
+                {%- assign card_family = card_product.metafields.custom.downlight_family.value -%}
+                {%- if card_family -%}
+                  {%- assign card_finish = card_product.metafields.custom.downlight_finish.value -%}
+                  {%- for fm in card_family.members.value -%}
+                    {%- if fm.metafields.custom.downlight_finish.value != card_finish and fm.featured_media != blank -%}
+                      {%- assign hover_media = fm.featured_media -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if hover_media != blank and show_secondary_image -%}
                 <img
                   srcset="
-                    {%- if card_product.media[1].width >= 165 -%}{{ card_product.media[1] | image_url: width: 165 }} 165w,{%- endif -%}
-                    {%- if card_product.media[1].width >= 360 -%}{{ card_product.media[1] | image_url: width: 360 }} 360w,{%- endif -%}
-                    {%- if card_product.media[1].width >= 533 -%}{{ card_product.media[1] | image_url: width: 533 }} 533w,{%- endif -%}
-                    {%- if card_product.media[1].width >= 720 -%}{{ card_product.media[1] | image_url: width: 720 }} 720w,{%- endif -%}
-                    {%- if card_product.media[1].width >= 940 -%}{{ card_product.media[1] | image_url: width: 940 }} 940w,{%- endif -%}
-                    {%- if card_product.media[1].width >= 1066 -%}{{ card_product.media[1] | image_url: width: 1066 }} 1066w,{%- endif -%}
-                    {{ card_product.media[1] | image_url }} {{ card_product.media[1].width }}w
+                    {%- if hover_media.width >= 165 -%}{{ hover_media | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if hover_media.width >= 360 -%}{{ hover_media | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if hover_media.width >= 533 -%}{{ hover_media | image_url: width: 533 }} 533w,{%- endif -%}
+                    {%- if hover_media.width >= 720 -%}{{ hover_media | image_url: width: 720 }} 720w,{%- endif -%}
+                    {%- if hover_media.width >= 940 -%}{{ hover_media | image_url: width: 940 }} 940w,{%- endif -%}
+                    {%- if hover_media.width >= 1066 -%}{{ hover_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                    {{ hover_media | image_url }} {{ hover_media.width }}w
                   "
-                  src="{{ card_product.media[1] | image_url: width: 533 }}"
+                  src="{{ hover_media | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                  alt="{{ card_product.media[1].alt | escape }}"
+                  alt="{{ hover_media.alt | escape }}"
                   class="motion-reduce"
                   loading="lazy"
-                  width="{{ card_product.media[1].width }}"
-                  height="{{ card_product.media[1].height }}"
+                  width="{{ hover_media.width }}"
+                  height="{{ hover_media.height }}"
                 >
               {%- endif -%}
             </div>
