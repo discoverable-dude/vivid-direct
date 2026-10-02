@@ -43,7 +43,37 @@
                height="{{ product.featured_image.height }}"
                data-zoomable>
         </div>
-        {%- if product.images.size > 1 -%}
+        {%- comment -%}
+          Gallery = this product's own images, then one image for every OTHER
+          finish in the family (each finish is its own product, so its photo
+          lives on a sibling). Clicking a thumbnail only swaps the hero; the
+          Finish pills are still what navigates to that finish's product.
+          `seen` is an array so the finish check is an exact match
+          (a string `contains` would treat "Black" as seen after "White on Black").
+        {%- endcomment -%}
+        {%- assign seen_finishes = current_finish | split: '|' -%}
+        {%- capture family_thumbs -%}
+          {%- if family -%}
+            {%- for fm in family.members.value -%}
+              {%- assign fm_finish = fm.metafields.custom.downlight_finish.value -%}
+              {%- unless seen_finishes contains fm_finish or fm.featured_image == blank -%}
+                {%- assign fm_finish_arr = fm_finish | split: '|' -%}
+                {%- assign seen_finishes = seen_finishes | concat: fm_finish_arr -%}
+                <button class="pp-gallery__thumb" type="button"
+                        data-src="{{ fm.featured_image | image_url: width: 1400 }}"
+                        data-alt="{{ fm.featured_image.alt | default: fm.title | escape }}"
+                        aria-label="{{ fm_finish | escape }} finish">
+                  <img src="{{ fm.featured_image | image_url: width: 280 }}"
+                       alt="{{ fm_finish | escape }}"
+                       width="280"
+                       height="{{ 280 | divided_by: fm.featured_image.aspect_ratio | default: 280 | round }}"
+                       loading="lazy">
+                </button>
+              {%- endunless -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endcapture -%}
+        {%- if product.images.size > 1 or family_thumbs != blank -%}
           <div class="pp-gallery__thumbs">
             {%- for img in product.images limit: 5 -%}
               <button class="pp-gallery__thumb{% if forloop.first %} is-active{% endif %}"
@@ -58,6 +88,7 @@
                      loading="lazy">
               </button>
             {%- endfor -%}
+            {{ family_thumbs }}
           </div>
         {%- endif -%}
       </div>
