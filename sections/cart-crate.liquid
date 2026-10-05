@@ -56,6 +56,22 @@
                   <div class="crate-row__body">
                     <a href="{{ item.url }}" class="crate-row__name">{{ item.product.title }}</a>
 
+                    {%- comment -%}
+                      Downlight families keep Finish and Dimming Protocol on the
+                      product itself rather than as variant options, so they'd
+                      otherwise be missing from the basket line.
+                    {%- endcomment -%}
+                    {%- assign cart_finish = item.product.metafields.custom.downlight_finish.value -%}
+                    {%- assign cart_protocol = item.product.metafields.custom.downlight_dimming_protocol.value -%}
+                    {%- if cart_finish != blank -%}
+                      <p class="crate-row__variant">
+                        <span>Finish: <strong>{{ cart_finish }}</strong></span>
+                        {%- if cart_protocol != blank and cart_protocol != 'Standard' and cart_protocol != 'Trimless' and cart_protocol != 'Fixed' -%}
+                          <span>Dimming: <strong>{{ cart_protocol }}</strong></span>
+                        {%- endif -%}
+                      </p>
+                    {%- endif -%}
+
                     {%- if item.product.has_only_default_variant == false -%}
                       {%- comment -%}
                         Variant switcher tiles only make sense for a handful of
