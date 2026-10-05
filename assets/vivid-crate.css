@@ -123,6 +123,17 @@
 }
 .crate-row__name:hover { color: var(--hessian-text); }
 
+/* Chosen options as text, for products with too many variants for tiles */
+.crate-row__variant {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.crate-row__variant strong { color: var(--ink); font-weight: 600; }
+
 /* Variant pills in cart */
 .crate-vtiles {
   display: flex;

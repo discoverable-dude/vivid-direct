@@ -57,6 +57,12 @@
                     <a href="{{ item.url }}" class="crate-row__name">{{ item.product.title }}</a>
 
                     {%- if item.product.has_only_default_variant == false -%}
+                      {%- comment -%}
+                        Variant switcher tiles only make sense for a handful of
+                        variants. Downlight families have 12-32 and LED strips 150,
+                        so past 8 just show the chosen options as plain text.
+                      {%- endcomment -%}
+                      {%- if item.product.variants.size <= 8 -%}
                       <div class="crate-vtiles"
                         data-vid="{{ item.variant.id }}"
                         data-qty="{{ item.quantity }}"
@@ -70,6 +76,13 @@
                           >{{ v.title }}</button>
                         {%- endfor -%}
                       </div>
+                      {%- else -%}
+                        <p class="crate-row__variant">
+                          {%- for opt in item.options_with_values -%}
+                            <span>{{ opt.name | replace: ' (K)', '' | replace: ' (W)', '' }}: <strong>{{ opt.value }}</strong></span>
+                          {%- endfor -%}
+                        </p>
+                      {%- endif -%}
                     {%- endif -%}
 
                     <div class="crate-row__foot">
