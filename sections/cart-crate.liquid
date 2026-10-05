@@ -72,33 +72,16 @@
                       </p>
                     {%- endif -%}
 
+                    {%- comment -%}
+                      Only the chosen variant is shown. Changing it is done on the
+                      product page, so the basket never lists every variant.
+                    {%- endcomment -%}
                     {%- if item.product.has_only_default_variant == false -%}
-                      {%- comment -%}
-                        Variant switcher tiles only make sense for a handful of
-                        variants. Downlight families have 12-32 and LED strips 150,
-                        so past 8 just show the chosen options as plain text.
-                      {%- endcomment -%}
-                      {%- if item.product.variants.size <= 8 -%}
-                      <div class="crate-vtiles"
-                        data-vid="{{ item.variant.id }}"
-                        data-qty="{{ item.quantity }}"
-                      >
-                        {%- for v in item.product.variants -%}
-                          <button
-                            type="button"
-                            class="crate-vtile{% if v.id == item.variant.id %} is-active{% endif %}{% unless v.available %} is-sold-out{% endunless %}"
-                            data-vid="{{ v.id }}"
-                            {% unless v.available %}disabled{% endunless %}
-                          >{{ v.title }}</button>
+                      <p class="crate-row__variant">
+                        {%- for opt in item.options_with_values -%}
+                          <span>{{ opt.name | replace: ' (K)', '' | replace: ' (W)', '' }}: <strong>{{ opt.value }}</strong></span>
                         {%- endfor -%}
-                      </div>
-                      {%- else -%}
-                        <p class="crate-row__variant">
-                          {%- for opt in item.options_with_values -%}
-                            <span>{{ opt.name | replace: ' (K)', '' | replace: ' (W)', '' }}: <strong>{{ opt.value }}</strong></span>
-                          {%- endfor -%}
-                        </p>
-                      {%- endif -%}
+                      </p>
                     {%- endif -%}
 
                     <div class="crate-row__foot">
