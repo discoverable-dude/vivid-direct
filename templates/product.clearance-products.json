@@ -1,0 +1,269 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "potato-product": {
+      "type": "product-lighting",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "none"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "name": "Vendor",
+          "settings": {
+            "label": "Made by",
+            "value": "{{ product.vendor }}",
+            "suffix": "",
+            "icon": "sale-tag"
+          }
+        },
+        "stat_n3REBY": {
+          "type": "stat",
+          "name": "IP Rating",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "suffix": "",
+            "icon": "waterproof"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "name": "Lumens",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.lumens.value }}",
+            "suffix": "",
+            "icon": "sun"
+          }
+        },
+        "stat_L9CYUW": {
+          "type": "stat",
+          "name": "Voltage",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.voltage.value }}",
+            "suffix": "",
+            "icon": "zap"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "name": "Warranty",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.warranty.value }}",
+            "suffix": "",
+            "icon": "shield-check"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "title": "Installation",
+            "body": "<p>Follow manufacturers intstructions inside your product once it arrives. Installation should only be carried out by trained professionals when dealing with wiring and electrical units.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "title": "Warranty",
+            "body": "<p>{{ product.metafields.custom.warranty.value }}</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "title": "Delivery information",
+            "body": "<p>{{ product.metafields.custom.delivery_notes | metafield_tag }}</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "stat_1",
+        "stat_n3REBY",
+        "stat_2",
+        "stat_L9CYUW",
+        "stat_3",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "name": "Product page — page.custom variant",
+      "settings": {
+        "hero_scheme": "scheme-2",
+        "about_scheme": "scheme-1",
+        "recipes_scheme": "",
+        "related_scheme": "",
+        "related_collection": "",
+        "related_limit": 4,
+        "trust_1": "Trade pricing available",
+        "trust_2": "In stock, ships fast",
+        "trust_3": "2 year warranty",
+        "about_image_opacity": 30,
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
+        "design_articles_url": "#"
+      }
+    },
+    "downloads": {
+      "type": "product-downloads",
+      "blocks": {
+        "d1": {
+          "type": "download",
+          "name": "Spec Sheet",
+          "settings": {
+            "label": "Spec sheet",
+            "file": "{{ product.metafields.custom.datasheet_url.value }}",
+            "icon": "document"
+          }
+        },
+        "d2": {
+          "type": "download",
+          "name": "Installation Manual",
+          "settings": {
+            "label": "Installation manual",
+            "file": "{{ product.metafields.custom.installation_manual_url.value }}",
+            "icon": "download"
+          }
+        },
+        "d3": {
+          "type": "download",
+          "name": "IES/LDT File",
+          "settings": {
+            "label": "IES/LDT file",
+            "file": "{{ product.metafields.custom.ies_ldt_url.value }}",
+            "icon": "package"
+          }
+        },
+        "download_pcLzRR": {
+          "type": "download",
+          "name": "Line Drawing",
+          "settings": {
+            "label": "Line Drawing",
+            "file": "{{ product.metafields.custom.line_drawing_url.value }}",
+            "icon": "package"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "download_pcLzRR"
+      ],
+      "settings": {
+        "eyebrow": "Technical documents",
+        "heading": "Downloads",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "vivid_product_grid_DMbQyj": {
+      "type": "vivid-product-grid",
+      "name": "Product grid",
+      "settings": {
+        "collection": "ceiling-lighting",
+        "products_to_show": 4,
+        "eyebrow": "You may also like",
+        "heading": "Recommended Products",
+        "show_view_all": false,
+        "view_all_label": "View all",
+        "color_scheme": "scheme-2",
+        "padding_top": 76,
+        "padding_bottom": 76
+      }
+    },
+    "collection_cross_sell_mW4hGi": {
+      "type": "collection-cross-sell",
+      "name": "Cross-sell rail",
+      "settings": {
+        "eyebrow": "You might also need",
+        "title": "Explore our range",
+        "collection": "",
+        "products_to_show": 8,
+        "view_all_label": "See all",
+        "view_all_url": "",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "split_icon_grid_jfxeBp": {
+      "type": "split-icon-grid",
+      "blocks": {
+        "feature_XdjdVk": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Free next-day delivery over £150, order by 1pm."
+          }
+        },
+        "feature_pdmDDU": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "heading": "Trade Accounts",
+            "text": "Dedicated pricing for electricians and businesses."
+          }
+        },
+        "feature_qcif6k": {
+          "type": "feature",
+          "settings": {
+            "icon": "phone",
+            "heading": "Expert Support",
+            "text": "Real advice from people who know the products."
+          }
+        },
+        "feature_fawWWe": {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "heading": "Huge Range",
+            "text": "LED, neon, smart lighting and accessories, always in stock."
+          }
+        }
+      },
+      "block_order": [
+        "feature_XdjdVk",
+        "feature_pdmDDU",
+        "feature_qcif6k",
+        "feature_fawWWe"
+      ],
+      "name": "Split icon grid",
+      "settings": {
+        "eyebrow": "How We Help",
+        "heading": "A Partner, Not Just a Supplier",
+        "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
+        "image_position": "left",
+        "color_scheme": "scheme-4",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "potato-product",
+    "downloads",
+    "vivid_product_grid_DMbQyj",
+    "collection_cross_sell_mW4hGi",
+    "split_icon_grid_jfxeBp"
+  ]
+}
