@@ -2,7 +2,7 @@
   Specification table built from product metafields (namespace custom).
   Only rows with a value are shown. To add or reorder a row, edit the list below.
 {%- endcomment -%}
-{%- assign spec_keys = 'wattage|Wattage;voltage|Voltage;lumens|Lumens;colour_temperature_k|Colour temperature (K);cri|CRI;beam_angle|Beam angle;ip_rating|IP rating;dimmable|Dimmable;dimming_protocol|Dimming protocol;finish|Finish;diffuser|Diffuser;lampholder|Lampholder;construction|Construction;style|Style;application|Application;pack_size|Pack size;zones_controlled|Zones controlled;diameter|Diameter;height_mm|Height (mm);width_mm|Width (mm);depth_mm|Depth (mm);weight_kg|Weight (kg);warranty|Warranty;product_range|Range' | split: ';' -%}
+{%- assign spec_keys = 'product_series|Series;product_category|Category;fitting_shape|Fitting shape;lights_per_fitting|Lights per fitting;wattage|Wattage;max_wattage|Max. wattage;voltage|Voltage;lumens|Lumens;colour_temperature_k|Colour temperature (K);cri|CRI;beam_angle|Beam angle;ip_rating|IP rating;dimmable|Dimmable;dimming_protocol|Dimming protocol;finish|Finish;adjustable|Adjustable;lamp_included|Lamp included;compatible_with|Compatible with;diffuser|Diffuser;dimensions|Dimensions;cut_out|Cut out;lampholder|Lampholder;construction|Construction;style|Style;application|Application;pack_size|Pack size;zones_controlled|Zones controlled;diameter|Diameter;height_mm|Height (mm);width_mm|Width (mm);depth_mm|Depth (mm);weight_kg|Weight (kg);warranty|Warranty;product_range|Range' | split: ';' -%}
 {%- capture spec_rows -%}
   {%- for pair in spec_keys -%}
     {%- assign parts = pair | split: '|' -%}
