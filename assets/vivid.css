@@ -1050,3 +1050,10 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
 .card-wrapper .card__media img {
   object-fit: contain;
 }
+
+/* Collection card badges driven by product tags: Best Seller, Hot, In Demand, New */
+.vd-badge { color: #fff; border-color: transparent; letter-spacing: .04em; }
+.vd-badge--best { background: #c8102e; }
+.vd-badge--hot { background: #e8590c; }
+.vd-badge--demand { background: #1f6f5c; }
+.vd-badge--new { background: #1b1b1b; }

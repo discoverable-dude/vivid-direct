@@ -590,7 +590,15 @@
             >
               {{- 'products.product.sold_out' | t -}}
             </span>
-          {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+          {%- elsif card_product.tags contains 'Best Seller' -%}
+            <span id="Badge-{{ section_id }}-{{ card_product.id }}" class="badge badge--bottom-left vd-badge vd-badge--best">Best seller</span>
+          {%- elsif card_product.tags contains 'Hot' -%}
+            <span id="Badge-{{ section_id }}-{{ card_product.id }}" class="badge badge--bottom-left vd-badge vd-badge--hot">Hot</span>
+          {%- elsif card_product.tags contains 'In Demand' -%}
+            <span id="Badge-{{ section_id }}-{{ card_product.id }}" class="badge badge--bottom-left vd-badge vd-badge--demand">In demand</span>
+          {%- elsif card_product.tags contains 'New' -%}
+            <span id="Badge-{{ section_id }}-{{ card_product.id }}" class="badge badge--bottom-left vd-badge vd-badge--new">New</span>
+          {%- elsif card_product.tags contains 'Clearance' or card_product.compare_at_price > card_product.price and card_product.available -%}
             <span
               id="Badge-{{ section_id }}-{{ card_product.id }}"
               class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
