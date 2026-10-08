@@ -242,6 +242,7 @@
       {%- if pp_headline != blank -%}
         <h2 class="pp-about__headline">{{ pp_headline }}</h2>
       {%- endif -%}
+      {%- render 'spec-table' -%}
     </div>
     {%- if pp_faqs.size > 0 or pp_spec_sheets.size > 0 -%}
       {%- comment -%}

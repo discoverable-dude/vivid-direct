@@ -793,3 +793,13 @@
 }
 .ecoll-hero > .wrap { position: relative; z-index: 2; }
 .ecoll-hero--img { padding-top: clamp(60px, 8vw, 110px); }
+
+/* ── Spec table (metafields) beside the accordion ── */
+.pp-about__left { align-self: start; }
+.pp-about__inner { align-items: start; }
+.pp-spec { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 14px; text-shadow: none; }
+.pp-spec th, .pp-spec td { text-align: left; padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.22); vertical-align: top; }
+.pp-spec tr:last-child th, .pp-spec tr:last-child td { border-bottom: 1px solid rgba(255,255,255,0.22); }
+.pp-spec th { font-weight: 600; width: 42%; color: var(--white); }
+.pp-spec td { color: rgba(246,240,234,0.88); }
+.pp-spec tr:nth-child(odd) { background: rgba(255,255,255,0.06); }

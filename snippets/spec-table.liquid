@@ -1,0 +1,22 @@
+{%- comment -%}
+  Specification table built from product metafields (namespace custom).
+  Only rows with a value are shown. To add or reorder a row, edit the list below.
+{%- endcomment -%}
+{%- assign spec_keys = 'wattage|Wattage;voltage|Voltage;lumens|Lumens;colour_temperature_k|Colour temperature (K);cri|CRI;beam_angle|Beam angle;ip_rating|IP rating;dimmable|Dimmable;dimming_protocol|Dimming protocol;finish|Finish;diffuser|Diffuser;lampholder|Lampholder;construction|Construction;style|Style;application|Application;pack_size|Pack size;zones_controlled|Zones controlled;diameter|Diameter;height_mm|Height (mm);width_mm|Width (mm);depth_mm|Depth (mm);weight_kg|Weight (kg);warranty|Warranty;product_range|Range' | split: ';' -%}
+{%- capture spec_rows -%}
+  {%- for pair in spec_keys -%}
+    {%- assign parts = pair | split: '|' -%}
+    {%- assign mf = product.metafields.custom[parts[0]] -%}
+    {%- assign mf_val = mf.value -%}
+    {%- if mf.type == 'list.single_line_text_field' -%}{%- assign mf_val = mf_val | join: ', ' -%}{%- endif -%}
+    {%- if mf_val != blank -%}
+      <tr><th scope="row">{{ parts[1] }}</th><td>{{ mf_val }}</td></tr>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if spec_rows contains '<tr>' -%}
+  <table class="pp-spec">
+    <caption class="visually-hidden">Specification</caption>
+    <tbody>{{ spec_rows }}</tbody>
+  </table>
+{%- endif -%}
