@@ -19,63 +19,70 @@
     "categories": {
       "type": "vivid-category-grid",
       "blocks": {
-        "cat_0": {
+        "cat_3": {
           "type": "category",
           "settings": {
-            "collection": "led-controls"
-          }
-        },
-        "cat_1": {
-          "type": "category",
-          "settings": {
-            "collection": "led-power-supplies"
+            "collection": "led-strip",
+            "title": ""
           }
         },
         "cat_2": {
           "type": "category",
           "settings": {
-            "collection": "led-profiles"
-          }
-        },
-        "cat_3": {
-          "type": "category",
-          "settings": {
-            "collection": "led-strip"
+            "collection": "led-profiles",
+            "title": ""
           }
         },
         "cat_4": {
           "type": "category",
           "settings": {
-            "collection": "neon-flex-by-foss-led"
+            "collection": "neon-flex-by-foss-led",
+            "title": ""
+          }
+        },
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "collection": "led-power-supplies",
+            "title": ""
+          }
+        },
+        "cat_0": {
+          "type": "category",
+          "settings": {
+            "collection": "led-controls",
+            "title": ""
           }
         },
         "cat_5": {
           "type": "category",
           "settings": {
-            "collection": "led-strip-accessories-by-fossled"
+            "collection": "led-strip-accessories-by-fossled",
+            "title": ""
           }
         },
         "cat_6": {
           "type": "category",
           "settings": {
-            "collection": "led-strip-connectors-by-sensio"
+            "collection": "led-strip-connectors-by-sensio",
+            "title": ""
           }
         }
       },
       "block_order": [
-        "cat_0",
-        "cat_1",
-        "cat_2",
         "cat_3",
+        "cat_2",
         "cat_4",
+        "cat_1",
+        "cat_0",
         "cat_5",
         "cat_6"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "",
-        "columns_desktop": 4,
         "color_scheme": "scheme-1",
+        "columns_desktop": 4,
         "padding_top": 12,
         "padding_bottom": 64
       }
