@@ -29,12 +29,21 @@
             "link": "shopify://collections/led-strip"
           }
         },
+        "tab_KmYmj4": {
+          "type": "tab",
+          "name": "LED Profile",
+          "settings": {
+            "label": "LED Profile by Foss",
+            "icon": "profile",
+            "link": "shopify://collections/led-profile-by-fossled"
+          }
+        },
         "tab_P786wL": {
           "type": "tab",
           "name": "Downlights",
           "settings": {
             "label": "Downlights",
-            "icon": "downlight",
+            "icon": "ceiling-light",
             "link": "shopify://collections/downlights"
           }
         },
@@ -42,9 +51,9 @@
           "type": "tab",
           "name": "Table & Floor Lamps",
           "settings": {
-            "label": "Table & Floor Lamps",
-            "icon": "lamp",
-            "link": "shopify://collections/table-and-floor-lamps"
+            "label": "Spot & Track Lighting",
+            "icon": "spotlight",
+            "link": "shopify://collections/spot-track-lighting"
           }
         },
         "tab_NMHWkR": {
@@ -60,28 +69,19 @@
           "type": "tab",
           "name": "Outdoor Lighting",
           "settings": {
-            "label": "Outdoor Lighting",
-            "icon": "leaf",
-            "link": "shopify://collections/outdoor-lighting"
-          }
-        },
-        "tab_KmYmj4": {
-          "type": "tab",
-          "name": "LED Profile",
-          "settings": {
-            "label": "LED Profile by Foss",
-            "icon": "profile",
-            "link": "shopify://collections/led-profile-by-fossled"
+            "label": "External & Garden Lighting",
+            "icon": "bollard",
+            "link": "shopify://pages/external-garden-lighting"
           }
         }
       },
       "block_order": [
         "tab_YGHiEY",
+        "tab_KmYmj4",
         "tab_P786wL",
         "tab_ypbb64",
         "tab_NMHWkR",
-        "tab_WTejmk",
-        "tab_KmYmj4"
+        "tab_WTejmk"
       ],
       "settings": {
         "show_current": true,
