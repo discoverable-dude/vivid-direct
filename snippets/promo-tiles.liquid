@@ -32,7 +32,6 @@
         {%- if texts[slot] != blank -%}<span class="promo-tile__text">{{ texts[slot] }}</span>{%- endif -%}
         {%- if links[slot] != blank -%}<span class="promo-tile__cta" aria-hidden="true">Shop now &rarr;</span>{%- endif -%}
       </{% if links[slot] != blank %}a{% else %}div{% endif %}>
-    </li>
     <style>
       .promo-tile-item { display: flex; }
       .promo-tile { display: flex; flex-direction: column; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 1 / 1; padding: 28px; box-sizing: border-box; border-radius: var(--radius, 8px); background: var(--promo-bg); color: var(--promo-fg); text-decoration: none; }
@@ -41,5 +40,6 @@
       .promo-tile__cta { margin-top: 6px; font-weight: 700; font-size: 14px; }
       a.promo-tile:hover .promo-tile__cta { text-decoration: underline; }
     </style>
+    </li>
   {%- endif -%}
 {%- endif -%}
