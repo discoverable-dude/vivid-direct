@@ -2,7 +2,7 @@
   Promo tiles, text + link + colour only. Drop into any Shopify theme.
 
   USAGE inside the product loop of your collection grid (after each product <li>):
-    {% render 'promo-tiles', index0: forloop.index0, last: forloop.last, interval: 8 %}
+    {% render 'ptxs', index0: forloop.index0, last: forloop.last, interval: 8 %}
 
   Collection metafields (namespace custom, all LIST types, index-aligned, up to 3 tiles):
     promo_headings  list.single_line_text_field   required, a tile shows if heading exists
@@ -25,20 +25,20 @@
     {%- assign slot = index0 | divided_by: interval | minus: 1 | modulo: n -%}
     {%- assign bg = bgs[slot] | default: '#082a38' -%}
     {%- assign fg = fgs[slot] | default: '#ffffff' -%}
-    <li class="grid__item promo-tile-item">
+    <li class="grid__item ptx-item">
       <{% if links[slot] != blank %}a href="{{ links[slot] }}"{% else %}div{% endif %}
-        class="promo-tile" style="--promo-bg:{{ bg }};--promo-fg:{{ fg }}">
-        <span class="promo-tile__heading">{{ heads[slot] }}</span>
-        {%- if texts[slot] != blank -%}<span class="promo-tile__text">{{ texts[slot] }}</span>{%- endif -%}
-        {%- if links[slot] != blank -%}<span class="promo-tile__cta" aria-hidden="true">Shop now &rarr;</span>{%- endif -%}
+        class="ptx" style="--promo-bg:{{ bg }};--promo-fg:{{ fg }}">
+        <span class="ptx__heading">{{ heads[slot] }}</span>
+        {%- if texts[slot] != blank -%}<span class="ptx__text">{{ texts[slot] }}</span>{%- endif -%}
+        {%- if links[slot] != blank -%}<span class="ptx__cta" aria-hidden="true">Shop now &rarr;</span>{%- endif -%}
       </{% if links[slot] != blank %}a{% else %}div{% endif %}>
     <style>
-      .promo-tile-item { display: flex; }
-      .promo-tile { display: flex; flex-direction: column; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 1 / 1; padding: 28px; box-sizing: border-box; border-radius: var(--radius, 8px); background: var(--promo-bg); color: var(--promo-fg); text-decoration: none; }
-      .promo-tile__heading { font-weight: 700; font-size: clamp(20px, 2.4vw, 30px); line-height: 1.15; }
-      .promo-tile__text { font-size: 15px; line-height: 1.4; opacity: .9; }
-      .promo-tile__cta { margin-top: 6px; font-weight: 700; font-size: 14px; }
-      a.promo-tile:hover .promo-tile__cta { text-decoration: underline; }
+      .ptx-item { display: flex; }
+      .ptx { display: flex; flex-direction: column; justify-content: center; gap: 10px; width: 100%; aspect-ratio: 1 / 1; padding: 28px; box-sizing: border-box; border-radius: var(--radius, 8px); background: var(--promo-bg); color: var(--promo-fg); text-decoration: none; }
+      .ptx__heading { font-weight: 700; font-size: clamp(20px, 2.4vw, 30px); line-height: 1.15; }
+      .ptx__text { font-size: 15px; line-height: 1.4; opacity: .9; }
+      .ptx__cta { margin-top: 6px; font-weight: 700; font-size: 14px; }
+      a.ptx:hover .ptx__cta { text-decoration: underline; }
     </style>
     </li>
   {%- endif -%}
