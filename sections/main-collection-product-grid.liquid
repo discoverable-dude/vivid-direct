@@ -224,6 +224,10 @@
                     {%- endif -%}
                   {%- endif -%}
                 {%- endif -%}
+                {%- comment -%} Text-only promo tiles (custom.promo_headings/texts/links/bg/fg). Image tiles above take precedence. {%- endcomment -%}
+                {%- if promo_count == 0 -%}
+                  {% render 'promo-tiles', index0: forloop.index0, last: forloop.last, interval: section.settings.promo_interval %}
+                {%- endif -%}
               {%- endfor -%}
             </ul>
 
