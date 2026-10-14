@@ -105,7 +105,7 @@
         "faq_2",
         "faq_3"
       ],
-      "name": "Product page \u2014 page.custom variant",
+      "name": "Product page — page.custom variant",
       "settings": {
         "hero_scheme": "scheme-2",
         "about_scheme": "scheme-1",
@@ -117,7 +117,7 @@
         "trust_2": "In stock, ships fast",
         "trust_3": "2 year warranty",
         "about_image_opacity": 30,
-        "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "design_articles_url": "#"
       }
     },
@@ -198,7 +198,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Fast Delivery",
-            "text": "Free next-day delivery over \u00a3150, order by 1pm."
+            "text": "Free next-day delivery over £150, order by 1pm."
           }
         },
         "feature_pdmDDU": {

@@ -3,12 +3,13 @@
   Desktop: sits under the gallery (left column), 3 across. Mobile: after the trust box, 1 product at a time.
   Products come from the collection that matches the product type (e.g. "LED Profile by FossLED" ->
   led-profile-by-fossled), falling back to the optional `fallback` collection handle.
-  Params: product, fallback (optional collection handle), limit (optional, default 8)
+  Params: product, fallback (collection handle), heading, collection (picker, optional), scheme, hero_scheme,
+  limit, show. All come from the product section's "Recommended products" settings in the theme editor.
 {%- endcomment -%}
 {%- liquid
   assign rc_limit = limit | default: 8
-  assign rc_coll = blank
-  if product.type != blank
+  assign rc_coll = collection
+  if rc_coll == blank and product.type != blank
     assign rc_handle = product.type | handleize
     assign rc_coll = collections[rc_handle]
   endif
@@ -17,11 +18,12 @@
   endif
   assign rc_shown = 0
 -%}
-{%- if rc_coll != blank and rc_coll.products_count > 1 -%}
+{%- if show != false and rc_coll != blank and rc_coll.products_count > 1 -%}
   {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
-  <div class="pp-recs" data-pp-recs>
+  {%- assign rc_scheme = scheme | default: hero_scheme -%}
+  <div class="pp-recs{% if rc_scheme != hero_scheme %} pp-recs--boxed color-{{ rc_scheme }} gradient{% endif %}" data-pp-recs{% if rc_scheme != hero_scheme %} style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); background: rgb(var(--color-background)); color: rgb(var(--color-foreground));"{% endif %}>
     <div class="pp-recs__head">
-      <h2 class="pp-recs__title">You may also like</h2>
+      <h2 class="pp-recs__title">{{ heading | default: "You may also like" }}</h2>
       <div class="pp-recs__nav">
         <button type="button" class="pp-recs__btn" data-recs-prev aria-label="Previous products">&lsaquo;</button>
         <button type="button" class="pp-recs__btn" data-recs-next aria-label="Next products">&rsaquo;</button>
@@ -54,6 +56,25 @@
         window.addEventListener('resize', sync);
         sync();
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      /* Desktop: keep the right-hand column (price, add to basket) in view while the
+         taller left column (gallery + recommended) scrolls. If the column is taller than
+         the screen, it scrolls until its bottom is reached, then sticks. */
+      var info = document.querySelector('.pp-hero__grid .pp-info');
+      if (!info || info.__sticky) return; info.__sticky = true;
+      function place() {
+        if (window.innerWidth <= 860) { info.style.removeProperty('--pp-info-top'); return; }
+        var header = document.querySelector('.header-wrapper');
+        var hh = header ? header.getBoundingClientRect().height : 0;
+        var top = hh + 16;
+        var fit = window.innerHeight - info.offsetHeight - 16;
+        info.style.setProperty('--pp-info-top', Math.min(top, fit) + 'px');
+      }
+      place(); window.addEventListener('resize', place); window.addEventListener('load', place);
+      if (window.ResizeObserver) new ResizeObserver(place).observe(info);
     })();
   </script>
 {%- endif -%}

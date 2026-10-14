@@ -63,7 +63,7 @@
           </div>
         {%- endif -%}
       </div>
-      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'ceiling-lighting' -%}</div>
+      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'ceiling-lighting', heading: section.settings.recs_heading, collection: section.settings.recs_collection, scheme: section.settings.recs_scheme, hero_scheme: section.settings.hero_scheme, limit: section.settings.recs_limit, show: section.settings.recs_show -%}</div>
       </div>
 
       <!-- Info panel -->
@@ -110,13 +110,28 @@
 
         <h1 class="pp-title">{{ product.title }}</h1>
 
+        {%- assign vat_mult = 1.2 -%}
         <div class="pp-price" id="pp-price-{{ section.id }}">
+          <span class="pp-price__val">
           {%- if product.price_varies -%}
             {{ product.price_min | money }} – {{ product.price_max | money }}
           {%- else -%}
             {{ product.price | money }}
           {%- endif -%}
+          </span>
+          <span class="pp-price__tag">ex VAT</span>
         </div>
+        <p class="pp-price-inc" id="pp-price-inc-{{ section.id }}">
+          {%- if product.price_varies -%}
+            {%- assign inc_min = product.price_min | times: vat_mult | round -%}
+            {%- assign inc_max = product.price_max | times: vat_mult | round -%}
+            {{ inc_min | money }} – {{ inc_max | money }}
+          {%- else -%}
+            {%- assign inc_one = product.price | times: vat_mult | round -%}
+            {{ inc_one | money }}
+          {%- endif -%}
+          inc VAT
+        </p>
 
         <p class="pp-sku" id="pp-sku-{{ section.id }}"{% if pp_variant.sku == blank %} hidden{% endif %}>SKU: {{ pp_variant.sku }}</p>
         {%- assign pp_member_id = 'pp-member-' | append: section.id -%}
@@ -463,14 +478,16 @@
       }
       if (vidInput) vidInput.value = variant.id;
       var priceStr = moneyFormat(variant.price);
-      if (priceLine) priceLine.textContent = priceStr;
+      if (priceLine) { var pv = priceLine.querySelector('.pp-price__val'); if (pv) pv.textContent = priceStr; }
+      var incLine = document.getElementById('pp-price-inc-' + sid);
+      if (incLine) incLine.textContent = moneyFormat(Math.round(variant.price * 1.2)) + ' inc VAT';
       var memberLine = document.getElementById('pp-member-' + sid);
       if (memberLine && memberLine.getAttribute('data-member-pct')) {
         if (variant.compare_at_price && variant.compare_at_price > variant.price) { memberLine.hidden = true; }
         else {
           memberLine.hidden = false;
           var pct = parseInt(memberLine.getAttribute('data-member-pct'), 10);
-          memberLine.innerHTML = memberLine.getAttribute('data-member-label') + ' <strong>' + moneyFormat(variant.price - Math.floor(variant.price * pct / 100)) + '</strong>';
+          memberLine.innerHTML = memberLine.getAttribute('data-member-label') + ' <strong>' + moneyFormat(variant.price - Math.floor(variant.price * pct / 100)) + '</strong> <small>ex VAT</small>';
         }
       }
       if (skuLine) {
@@ -539,6 +556,12 @@
     "templates": ["product"]
   },
   "settings": [
+    { "type": "header", "content": "Recommended products" },
+    { "type": "checkbox", "id": "recs_show", "label": "Show recommended products", "default": true },
+    { "type": "text", "id": "recs_heading", "label": "Heading", "default": "You may also like" },
+    { "type": "collection", "id": "recs_collection", "label": "Collection", "info": "Leave empty to use the collection matching each product's type." },
+    { "type": "color_scheme", "id": "recs_scheme", "label": "Colour scheme", "default": "scheme-2" },
+    { "type": "range", "id": "recs_limit", "label": "Products to show", "min": 3, "max": 12, "step": 1, "default": 8 },
     { "type": "header", "content": "Section colours" },
     { "type": "color_scheme", "id": "hero_scheme", "label": "Hero colour scheme", "default": "scheme-1" },
     { "type": "color_scheme", "id": "about_scheme", "label": "About colour scheme", "default": "scheme-4" },

@@ -826,3 +826,15 @@
   .pp-recs-wrap { order: 3; margin-top: 8px; }
   .pp-recs__slide { flex-basis: 100%; }
 }
+
+/* ── PDP price: ex VAT primary, inc VAT secondary ── */
+.pp-price__tag { margin-left: 6px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+.pp-price-inc { margin: -10px 0 14px; font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+.pp-atc__price::after { content: " ex VAT"; font-size: .78em; font-weight: 500; opacity: .85; }
+.vd-member small { font-size: .8em; font-weight: 500; }
+
+/* ── PDP recommended: themed box + sticky right column (desktop) ── */
+.pp-recs--boxed { padding: 18px; border-radius: var(--radius-pill); }
+@media (min-width: 861px) {
+  .pp-hero__grid .pp-info { position: sticky; top: var(--pp-info-top, 96px); align-self: start; }
+}

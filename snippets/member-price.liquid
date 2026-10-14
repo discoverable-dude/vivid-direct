@@ -26,7 +26,7 @@
   {%- assign mp_off = mp_variant.price | times: mp_pct | divided_by: 100 -%}
   {%- assign mp_final = mp_variant.price | minus: mp_off -%}
   <p class="vd-member"{% if dom_id %} id="{{ dom_id }}"{% endif %} data-member-pct="{{ mp_pct }}" data-member-label="{{ mp_label }}">
-    {{ mp_label }}{% if product.price_varies and dom_id == blank %} from{% endif %} <strong>{{ mp_final | money }}</strong>
+    {{ mp_label }}{% if product.price_varies and dom_id == blank %} from{% endif %} <strong>{{ mp_final | money }}</strong> <small>ex VAT</small>
   </p>
 {%- elsif mp_ok and customer == nil and dom_id != blank -%}
   <p class="vd-member vd-member--teaser" id="{{ dom_id }}">

@@ -118,7 +118,8 @@
         "trust_3": "Manufacturer warranty",
         "about_image_opacity": 30,
         "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
-        "design_articles_url": "#"
+        "design_articles_url": "#",
+        "recs_scheme": "scheme-2"
       }
     },
     "collection_cross_sell": {
