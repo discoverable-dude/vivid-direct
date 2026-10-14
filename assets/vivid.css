@@ -1080,3 +1080,4 @@ body { --buttons-radius: var(--radius-pill); --buttons-radius-outset: var(--radi
   border-radius: var(--radius-pill) !important;
 }
 .vd-member { border-radius: var(--radius-pill); }
+.vd-member__inc { margin-left: 2px; }
