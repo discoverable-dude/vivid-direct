@@ -193,6 +193,7 @@
               {%- capture finish_list_raw -%}{%- for m in members -%}{{ m.metafields.custom.downlight_finish.value }}|{%- endfor -%}{%- endcapture -%}
               {%- assign all_finishes = finish_list_raw | split: '|' | uniq -%}
               {%- for m_finish in all_finishes -%}
+                {%- if m_finish == blank -%}{%- continue -%}{%- endif -%}
                 {%- assign target = null -%}
                 {%- for m2 in members -%}
                   {%- if m2.metafields.custom.downlight_finish.value == m_finish and m2.metafields.custom.downlight_dimming_protocol.value == current_protocol -%}
@@ -208,6 +209,7 @@
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endunless -%}
+                {%- if target == blank or target.url == blank -%}{%- continue -%}{%- endif -%}
                 <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_finish == current_finish %} is-active{% endif %}" data-swap-image="{{ target.featured_image | image_url: width: 1400 }}" data-swap-alt="{{ target.featured_image.alt | default: target.title | escape }}">{{ m_finish }}</a>
               {%- endfor -%}
             </fieldset>
@@ -224,9 +226,13 @@
             {%- endcomment -%}
             {%- capture protocol_list_raw -%}{%- for m in members -%}{{ m.metafields.custom.downlight_dimming_protocol.value }}|{%- endfor -%}{%- endcapture -%}
             {%- assign all_protocols = protocol_list_raw | split: '|' | uniq -%}
-            {%- assign protocol_distinct_count = all_protocols.size -%}
+            {%- assign protocol_distinct_count = 0 -%}
+            {%- for pv in all_protocols -%}
+              {%- if pv != blank -%}{%- assign protocol_distinct_count = protocol_distinct_count | plus: 1 -%}{%- endif -%}
+            {%- endfor -%}
             {%- capture protocol_pills -%}
               {%- for m_protocol in all_protocols -%}
+                {%- if m_protocol == blank -%}{%- continue -%}{%- endif -%}
                 {%- assign target = null -%}
                 {%- for m2 in members -%}
                   {%- if m2.metafields.custom.downlight_dimming_protocol.value == m_protocol and m2.metafields.custom.downlight_finish.value == current_finish -%}
@@ -242,6 +248,7 @@
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endunless -%}
+                {%- if target == blank or target.url == blank -%}{%- continue -%}{%- endif -%}
                 <a href="{{ target.url }}" class="pp-pseudo-pill{% if m_protocol == current_protocol %} is-active{% endif %}">{{ m_protocol }}</a>
               {%- endfor -%}
             {%- endcapture -%}
