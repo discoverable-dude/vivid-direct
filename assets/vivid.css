@@ -1077,6 +1077,6 @@ body { --buttons-radius: var(--radius-pill); --buttons-radius-outset: var(--radi
 .m-form__submit, .mft__join,
 .cart__checkout-button, .cart__view-crate-button,
 .m-btn, .m-cta, .quick-add__submit, .shopify-payment-button__button {
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-pill) !important;
 }
 .vd-member { border-radius: var(--radius-pill); }
