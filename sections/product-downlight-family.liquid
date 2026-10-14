@@ -139,10 +139,10 @@
             {{ product.price | money }}
           {%- endif -%}
         </div>
-        {%- assign pp_member_id = 'pp-member-' | append: section.id -%}
-        {%- render 'member-price', product: product, variant: pp_variant, dom_id: pp_member_id -%}
 
         <p class="pp-sku" id="pp-sku-{{ section.id }}"{% if pp_variant.sku == blank %} hidden{% endif %}>SKU: {{ pp_variant.sku }}</p>
+        {%- assign pp_member_id = 'pp-member-' | append: section.id -%}
+        {%- render 'member-price', product: product, variant: pp_variant, dom_id: pp_member_id -%}
 
         {%- if product.description != blank -%}
           <div class="pp-desc">{{ product.description }}</div>
