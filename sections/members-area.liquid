@@ -1,0 +1,104 @@
+{%- comment -%}
+  Branded members area. Shows a signed-in customer their Club VIVID / trade status,
+  savings and quick links, and links through to Shopify's hosted account for orders.
+  Keep the percentages in step with the automatic discounts and snippets/member-price.liquid.
+{%- endcomment -%}
+{%- liquid
+  assign ma_pct = 0
+  assign ma_name = 'Member'
+  if customer
+    if customer.tags contains 'trade' or customer.tags contains 'wp-role:Trade Tier 1' or customer.tags contains 'wp-role:Trade Tier 2'
+      assign ma_pct = 20
+      assign ma_name = 'Trade account'
+    elsif customer.tags contains 'club-vivid'
+      assign ma_pct = 10
+      assign ma_name = 'Club VIVID'
+    endif
+  endif
+-%}
+<div class="ma">
+  <div class="ma__hero">
+    <div class="ma__wrap">
+      <p class="ma__eyebrow">Members area</p>
+      {%- if customer -%}
+        <h1 class="ma__h1">Welcome back{% if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif %}</h1>
+        <p class="ma__sub">Your savings, orders and help in one place.</p>
+      {%- else -%}
+        <h1 class="ma__h1">Sign in to your account</h1>
+        <p class="ma__sub">See your Club VIVID or trade prices, track orders and reorder faster.</p>
+        <a class="ma__btn" href="{{ routes.account_login_url }}">Sign in</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if customer -%}
+    <div class="ma__wrap ma__body">
+      <div class="ma__status">
+        {%- if ma_pct > 0 -%}
+          <p class="ma__label">{{ ma_name }}</p>
+          <p class="ma__big">{{ ma_pct }}% off</p>
+          <p class="ma__note">Applied automatically in your basket when you are signed in. It does not apply to Clearance or already reduced products.</p>
+        {%- else -%}
+          <p class="ma__label">Your membership</p>
+          <p class="ma__big">Join Club VIVID</p>
+          <p class="ma__note">Club VIVID is free and saves you 10% on eligible products. Approved trade accounts save 20%.</p>
+          <a class="ma__link" href="{{ routes.root_url }}pages/club-vivid">About Club VIVID &rarr;</a>
+        {%- endif -%}
+        <div class="ma__actions">
+          <a class="ma__btn" href="{{ routes.account_url }}">View orders and account details</a>
+          <a class="ma__btn ma__btn--ghost" href="{{ routes.account_logout_url }}">Sign out</a>
+        </div>
+      </div>
+
+      <h2 class="ma__h2">Quick links</h2>
+      <div class="ma__grid">
+        <a class="ma__tile" href="{{ routes.root_url }}collections/best-sellers"><strong>Best sellers</strong><span>Our most popular products</span></a>
+        <a class="ma__tile" href="{{ routes.root_url }}collections/all"><strong>Shop all products</strong><span>Browse the full range</span></a>
+        <a class="ma__tile" href="{{ routes.root_url }}pages/help-advice"><strong>Help and advice</strong><span>Guides and technical support</span></a>
+        <a class="ma__tile" href="{{ routes.root_url }}pages/delivery-information"><strong>Delivery information</strong><span>Rates, times and next day options</span></a>
+        <a class="ma__tile" href="{{ routes.root_url }}pages/refunds-returns"><strong>Refunds and returns</strong><span>How to return an item</span></a>
+        <a class="ma__tile" href="mailto:sales@vivid-direct.co.uk"><strong>Contact sales</strong><span>sales@vivid-direct.co.uk, 0203 916 6116</span></a>
+        {%- if ma_pct < 20 -%}
+          <a class="ma__tile ma__tile--accent" href="{{ routes.root_url }}pages/trade-account"><strong>Apply for a trade account</strong><span>20% off for approved businesses</span></a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .ma { background: #f6f9fa; }
+  .ma__wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .ma__hero { background: #082a38; color: #fff; padding: 56px 0 48px; }
+  .ma__eyebrow { margin: 0 0 10px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: #f5c400; }
+  .ma__h1 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; color: #fff; }
+  .ma__sub { margin: 0 0 20px; font-size: 17px; color: #cfdde2; }
+  .ma__body { padding-top: 36px; padding-bottom: 64px; }
+  .ma__status { background: #fff; border: 1px solid #dbe5e9; border-radius: 4px; padding: 28px; margin-bottom: 40px; }
+  .ma__label { margin: 0 0 4px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: #b58900; }
+  .ma__big { margin: 0 0 10px; font-size: 36px; line-height: 1.1; font-weight: 800; color: #082a38; }
+  .ma__note { margin: 0 0 18px; max-width: 640px; font-size: 15px; line-height: 1.6; color: #3d535c; }
+  .ma__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+  .ma__btn { display: inline-block; padding: 13px 24px; border-radius: 4px; background: #f5c400; color: #082a38; font-weight: 700; font-size: 15px; text-decoration: none; }
+  .ma__btn:hover { filter: brightness(0.95); }
+  .ma__btn--ghost { background: transparent; border: 1px solid #082a38; color: #082a38; }
+  .ma__link { display: inline-block; margin-bottom: 18px; font-weight: 700; color: #082a38; }
+  .ma__h2 { margin: 0 0 16px; font-size: 22px; color: #082a38; }
+  .ma__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .ma__tile { display: flex; flex-direction: column; gap: 4px; padding: 20px; background: #fff; border: 1px solid #dbe5e9; border-radius: 4px; text-decoration: none; color: #082a38; transition: border-color .15s, box-shadow .15s; }
+  .ma__tile:hover { border-color: #082a38; box-shadow: 0 6px 18px rgba(8, 42, 56, 0.1); }
+  .ma__tile strong { font-size: 16px; }
+  .ma__tile span { font-size: 14px; color: #5b6f77; }
+  .ma__tile--accent { background: #fff8e1; border-color: #f0d98a; }
+  @media (max-width: 600px) { .ma__hero { padding: 40px 0 36px; } .ma__status { padding: 22px; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Members area",
+  "settings": [],
+  "presets": [
+    { "name": "Members area" }
+  ]
+}
+{% endschema %}
