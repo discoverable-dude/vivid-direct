@@ -803,3 +803,26 @@
 .pp-spec th { font-weight: 600; width: 42%; color: var(--white); }
 .pp-spec td { color: rgba(246,240,234,0.88); }
 .pp-spec tr:nth-child(odd) { background: rgba(255,255,255,0.06); }
+
+/* ── PDP recommended carousel ── */
+.pp-left { min-width: 0; }
+.pp-left .pp-gallery { position: static; }
+.pp-recs-wrap { margin-top: 28px; }
+.pp-recs-wrap:empty { display: none; }
+.pp-recs__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.pp-recs__title { margin: 0; font-size: 18px; color: var(--ink); }
+.pp-recs__nav { display: flex; gap: 8px; }
+.pp-recs__btn { width: 34px; height: 34px; border: 1px solid rgba(var(--color-foreground), 0.25); border-radius: var(--radius-pill); background: transparent; color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.pp-recs__btn:disabled { opacity: .35; cursor: default; }
+.pp-recs__track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.pp-recs__track::-webkit-scrollbar { display: none; }
+.pp-recs__slide { flex: 0 0 calc((100% - 24px) / 3); scroll-snap-align: start; min-width: 0; }
+@media (max-width: 1100px) { .pp-recs__slide { flex-basis: calc((100% - 12px) / 2); } }
+@media (max-width: 860px) {
+  /* mobile: single column, recommended carousel after the trust box, one product at a time */
+  .pp-left { display: contents; }
+  .pp-left .pp-gallery { order: 1; }
+  .pp-hero__grid .pp-info { order: 2; }
+  .pp-recs-wrap { order: 3; margin-top: 8px; }
+  .pp-recs__slide { flex-basis: 100%; }
+}

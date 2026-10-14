@@ -32,6 +32,7 @@
     <div class="pp-hero__grid">
 
       <!-- Gallery -->
+      <div class="pp-left">
       <div class="pp-gallery">
         <div class="pp-gallery__main">
           <img id="pp-main-img-{{ section.id }}"
@@ -91,6 +92,8 @@
             {{ family_thumbs }}
           </div>
         {%- endif -%}
+      </div>
+      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'downlights' -%}</div>
       </div>
 
       <!-- Info panel -->

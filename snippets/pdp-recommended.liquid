@@ -1,0 +1,59 @@
+{%- comment -%}
+  Recommended products carousel for the product page.
+  Desktop: sits under the gallery (left column), 3 across. Mobile: after the trust box, 1 product at a time.
+  Products come from the collection that matches the product type (e.g. "LED Profile by FossLED" ->
+  led-profile-by-fossled), falling back to the optional `fallback` collection handle.
+  Params: product, fallback (optional collection handle), limit (optional, default 8)
+{%- endcomment -%}
+{%- liquid
+  assign rc_limit = limit | default: 8
+  assign rc_coll = blank
+  if product.type != blank
+    assign rc_handle = product.type | handleize
+    assign rc_coll = collections[rc_handle]
+  endif
+  if rc_coll == blank or rc_coll.products_count < 2
+    assign rc_coll = collections[fallback]
+  endif
+  assign rc_shown = 0
+-%}
+{%- if rc_coll != blank and rc_coll.products_count > 1 -%}
+  {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+  <div class="pp-recs" data-pp-recs>
+    <div class="pp-recs__head">
+      <h2 class="pp-recs__title">You may also like</h2>
+      <div class="pp-recs__nav">
+        <button type="button" class="pp-recs__btn" data-recs-prev aria-label="Previous products">&lsaquo;</button>
+        <button type="button" class="pp-recs__btn" data-recs-next aria-label="Next products">&rsaquo;</button>
+      </div>
+    </div>
+    <div class="pp-recs__track" data-recs-track>
+      {%- for p in rc_coll.products -%}
+        {%- if p.id == product.id -%}{%- continue -%}{%- endif -%}
+        {%- if rc_shown >= rc_limit -%}{%- break -%}{%- endif -%}
+        {%- assign rc_shown = rc_shown | plus: 1 -%}
+        <div class="pp-recs__slide">{%- render 'product-card', product: p -%}</div>
+      {%- endfor -%}
+    </div>
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll('[data-pp-recs]').forEach(function (root) {
+        if (root.__ready) return; root.__ready = true;
+        var track = root.querySelector('[data-recs-track]');
+        var prev = root.querySelector('[data-recs-prev]');
+        var next = root.querySelector('[data-recs-next]');
+        function step() { var s = track.querySelector('.pp-recs__slide'); return s ? s.getBoundingClientRect().width + 12 : track.clientWidth; }
+        function sync() {
+          prev.disabled = track.scrollLeft <= 2;
+          next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+        }
+        prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+        next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+        track.addEventListener('scroll', sync, { passive: true });
+        window.addEventListener('resize', sync);
+        sync();
+      });
+    })();
+  </script>
+{%- endif -%}

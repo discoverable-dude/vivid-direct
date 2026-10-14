@@ -32,6 +32,7 @@
     <div class="pp-hero__grid">
 
       <!-- Gallery -->
+      <div class="pp-left">
       <div class="pp-gallery">
         <div class="pp-gallery__main">
           <img id="pp-main-img-{{ section.id }}"
@@ -61,6 +62,8 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
+      </div>
+      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'ceiling-lighting' -%}</div>
       </div>
 
       <!-- Info panel -->
