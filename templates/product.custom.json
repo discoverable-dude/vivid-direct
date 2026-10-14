@@ -179,7 +179,7 @@
       "type": "vivid-product-grid",
       "name": "Product grid",
       "settings": {
-        "collection": "ceiling-lighting",
+        "collection": "best-sellers",
         "products_to_show": 4,
         "eyebrow": "You may also like",
         "heading": "Recommended Products",

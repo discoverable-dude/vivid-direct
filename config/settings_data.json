@@ -49,7 +49,7 @@
     "card_color_scheme": "scheme-4",
     "card_border_thickness": 1,
     "card_border_opacity": 15,
-    "card_corner_radius": 0,
+    "card_corner_radius": 4,
     "card_shadow_opacity": 0,
     "card_shadow_horizontal_offset": 0,
     "card_shadow_vertical_offset": 4,
@@ -191,8 +191,8 @@
           "background_gradient": "",
           "text": "#1a2b30",
           "button": "#1a2b30",
-          "secondary_button_label": "#1a2b30",
           "button_label": "#f5b800",
+          "secondary_button_label": "#1a2b30",
           "shadow": "#000000"
         }
       }
