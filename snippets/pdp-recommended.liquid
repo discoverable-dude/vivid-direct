@@ -63,6 +63,7 @@
       /* Desktop: keep the right-hand column (price, add to basket) in view while the
          taller left column (gallery + recommended) scrolls. If the column is taller than
          the screen, it scrolls until its bottom is reached, then sticks. */
+      function init() {
       var info = document.querySelector('.pp-hero__grid .pp-info');
       if (!info || info.__sticky) return; info.__sticky = true;
       function place() {
@@ -75,6 +76,8 @@
       }
       place(); window.addEventListener('resize', place); window.addEventListener('load', place);
       if (window.ResizeObserver) new ResizeObserver(place).observe(info);
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
     })();
   </script>
 {%- endif -%}
