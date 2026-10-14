@@ -139,6 +139,8 @@
             {{ product.price | money }}
           {%- endif -%}
         </div>
+        {%- assign pp_member_id = 'pp-member-' | append: section.id -%}
+        {%- render 'member-price', product: product, variant: pp_variant, dom_id: pp_member_id -%}
 
         <p class="pp-sku" id="pp-sku-{{ section.id }}"{% if pp_variant.sku == blank %} hidden{% endif %}>SKU: {{ pp_variant.sku }}</p>
 
@@ -633,6 +635,15 @@
       }
       var priceStr = moneyFormat(variant.price);
       if (priceLine) priceLine.textContent = priceStr;
+      var memberLine = document.getElementById('pp-member-' + sid);
+      if (memberLine && memberLine.getAttribute('data-member-pct')) {
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) { memberLine.hidden = true; }
+        else {
+          memberLine.hidden = false;
+          var pct = parseInt(memberLine.getAttribute('data-member-pct'), 10);
+          memberLine.innerHTML = memberLine.getAttribute('data-member-label') + ' <strong>' + moneyFormat(variant.price - Math.floor(variant.price * pct / 100)) + '</strong>';
+        }
+      }
       if (skuLine) {
         if (variant.sku) { skuLine.textContent = 'SKU: ' + variant.sku; skuLine.hidden = false; }
         else { skuLine.hidden = true; }

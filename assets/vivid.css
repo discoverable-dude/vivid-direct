@@ -1057,3 +1057,9 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
 .vd-badge--hot { background: #e8590c; }
 .vd-badge--demand { background: #1f6f5c; }
 .vd-badge--new { background: #1b1b1b; }
+
+/* Member price line (Club VIVID / trade) */
+.vd-member { margin: 4px 0 0; font-size: 14px; color: #1f6f5c; font-weight: 600; }
+.vd-member strong { font-size: 1.1em; }
+.vd-member--teaser { font-weight: 500; color: inherit; opacity: .85; font-size: 13px; }
+.vd-member--teaser a { text-decoration: underline; }
