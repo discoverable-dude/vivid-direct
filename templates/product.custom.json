@@ -107,6 +107,11 @@
       ],
       "name": "Product page — page.custom variant",
       "settings": {
+        "recs_show": true,
+        "recs_heading": "Compatible with",
+        "recs_collection": "",
+        "recs_scheme": "",
+        "recs_limit": 8,
         "hero_scheme": "scheme-2",
         "about_scheme": "scheme-1",
         "recipes_scheme": "",
