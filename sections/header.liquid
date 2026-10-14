@@ -84,8 +84,8 @@
     display: none;
     position: absolute;
     top: -0.5rem;
-    left: 100%;
-    margin-left: 0.5rem;
+    left: calc(100% - 0.4rem);
+    margin-left: 0;
     min-width: 22rem;
     background: rgb(var(--color-background));
     border: 1px solid rgba(var(--color-foreground), 0.12);
@@ -98,6 +98,18 @@
   .m-mega__col:hover .m-mega__sublist,
   .m-mega__col:focus-within .m-mega__sublist {
     display: block;
+  }
+
+  /* Invisible bridge so the pointer never leaves the hover area on its way
+     from a category to its flyout (the flyout used to sit 0.5rem away, so it
+     closed before you could reach it). */
+  .m-mega__sublist::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    bottom: -0.5rem;
+    left: -1.4rem;
+    width: 1.8rem;
   }
 
   .m-mega__sublist li {
