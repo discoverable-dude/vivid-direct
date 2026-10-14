@@ -1066,3 +1066,17 @@ nav[aria-label="Breadcrumb"][aria-label] > span:last-child {
 .vd-member--teaser a:hover { text-decoration-thickness: 2px; }
 .vd-member[hidden] { display: none; }
 .card .vd-member, .card__information .vd-member { padding: 4px 8px; font-size: 12.5px; margin: 6px 0 0; }
+
+/* One corner radius for every button, matching the PDP tags (--radius-pill, 4px).
+   Dawn's .button reads --buttons-radius, set on :root from theme settings (5px);
+   re-declaring on body wins because it is closer to the elements. */
+body { --buttons-radius: var(--radius-pill); --buttons-radius-outset: var(--radius-pill); }
+.button, .button:before, .button:after,
+.pp-atc, .pp-qty,
+.mcard__choose, .mcard__btn,
+.m-form__submit, .mft__join,
+.cart__checkout-button, .cart__view-crate-button,
+.m-btn, .m-cta, .quick-add__submit, .shopify-payment-button__button {
+  border-radius: var(--radius-pill);
+}
+.vd-member { border-radius: var(--radius-pill); }
