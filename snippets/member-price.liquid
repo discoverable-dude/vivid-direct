@@ -1,5 +1,5 @@
 {%- comment -%}
-  Member price line for signed-in customers tagged `trade` (15%) or `club-vivid` (10%).
+  Member price line for signed-in customers tagged `trade` or migrated `wp-role:Trade Tier 1/2` (20%) or `club-vivid` (10%).
   Must match the automatic discounts in Shopify admin (Trade 15% off, Club VIVID 10% off),
   which exclude products tagged Clearance and any product with a compare-at price.
   Params: product, variant (optional, defaults to selected_or_first_available), dom_id (optional, PDP only).
@@ -8,8 +8,8 @@
   assign mp_pct = 0
   assign mp_label = ''
   if customer
-    if customer.tags contains 'trade'
-      assign mp_pct = 15
+    if customer.tags contains 'trade' or customer.tags contains 'wp-role:Trade Tier 1' or customer.tags contains 'wp-role:Trade Tier 2'
+      assign mp_pct = 20
       assign mp_label = 'Trade price'
     elsif customer.tags contains 'club-vivid'
       assign mp_pct = 10
