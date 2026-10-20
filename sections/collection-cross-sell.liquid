@@ -25,7 +25,7 @@
   {%- endif -%}
 {%- else -%}
 
-<section class="xsell-rail color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" id="xsell-rail-{{ section.id }}">
+<section class="xsell-rail{% if section.settings.layout != 'large' %} xsell-rail--compact{% endif %} color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars }}" id="xsell-rail-{{ section.id }}">
   <div class="wrap">
     <div class="xsell-rail__head" data-reveal>
       <div>
@@ -118,9 +118,29 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer", "aside"]
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Style",
+      "default": "compact",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact (matches product page recommendations)"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ]
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -137,7 +157,7 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection to cross-sell",
-      "info": "Pick a different collection to promote here — e.g. show Neon Flex on the Downlights page."
+      "info": "Pick a different collection to promote here \u2014 e.g. show Neon Flex on the Downlights page."
     },
     {
       "type": "range",
@@ -159,11 +179,40 @@
       "id": "view_all_url",
       "label": "View all URL"
     },
-    { "type": "header", "content": "Colour" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
-    { "type": "header", "content": "Padding" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+    {
+      "type": "header",
+      "content": "Colour"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
   ],
   "presets": [
     {
