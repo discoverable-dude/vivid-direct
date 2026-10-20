@@ -544,3 +544,4 @@
   .xsell-rail--compact .xsell-rail__item { flex-basis: min(220px, 62%); }
   .xsell-rail--compact .xsell-rail__head { flex-direction: row; align-items: center; gap: 12px; }
 }
+.xsell-rail--compact .eyebrow { color: rgba(var(--color-foreground), 0.68); }
