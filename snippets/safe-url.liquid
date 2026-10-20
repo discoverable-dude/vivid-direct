@@ -1,0 +1,10 @@
+{%- comment -%}
+  Prints a URL HTML-escaped, and only if it is http(s) or site/protocol-relative.
+  Anything else (javascript:, data:, etc.) prints nothing. Usage:
+  {%- capture safe_href -%}{%- render 'safe-url', url: some_value -%}{%- endcapture -%}
+{%- endcomment -%}
+{%- assign su = url | strip -%}
+{%- assign su_p7 = su | slice: 0, 7 | downcase -%}
+{%- assign su_p8 = su | slice: 0, 8 | downcase -%}
+{%- assign su_p1 = su | slice: 0, 1 -%}
+{%- if su_p7 == 'http://' or su_p8 == 'https://' or su_p1 == '/' -%}{{- su | escape -}}{%- endif -%}

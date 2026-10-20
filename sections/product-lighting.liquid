@@ -101,7 +101,7 @@
                   {%- if block.settings.icon != "none" -%}
                     <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
                   {%- endif -%}
-                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }} {%- endif -%}{{ block.settings.value }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix }}{%- endif -%}</span>
+                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label | escape }} {%- endif -%}{{ block.settings.value | escape }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix | escape }}{%- endif -%}</span>
                 </li>
               {%- endif -%}
             {%- endfor -%}

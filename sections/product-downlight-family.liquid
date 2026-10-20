@@ -126,7 +126,7 @@
                   {%- if block.settings.icon != "none" -%}
                     <span class="pp-stat__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 15 -%}</span>
                   {%- endif -%}
-                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label }} {%- endif -%}{{ block.settings.value }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix }}{%- endif -%}</span>
+                  <span>{%- if block.settings.label != blank -%}{{ block.settings.label | escape }} {%- endif -%}{{ block.settings.value | escape }}{%- if block.settings.suffix != blank -%}{{ block.settings.suffix | escape }}{%- endif -%}</span>
                 </li>
               {%- endif -%}
             {%- endfor -%}
@@ -425,6 +425,18 @@
   assign dl_ies = product.metafields.custom.ies_ldt_url.value | default: family.ies_ldt_url
   assign dl_line = product.metafields.custom.line_drawing_url.value | default: family.line_drawing_url
   assign dl_doc = product.metafields.custom.declaration_of_conformity_url.value | default: family.declaration_of_conformity_url
+-%}
+{%- capture dl_datasheet_safe -%}{%- render 'safe-url', url: dl_datasheet -%}{%- endcapture -%}
+{%- capture dl_manual_safe -%}{%- render 'safe-url', url: dl_manual -%}{%- endcapture -%}
+{%- capture dl_ies_safe -%}{%- render 'safe-url', url: dl_ies -%}{%- endcapture -%}
+{%- capture dl_line_safe -%}{%- render 'safe-url', url: dl_line -%}{%- endcapture -%}
+{%- capture dl_doc_safe -%}{%- render 'safe-url', url: dl_doc -%}{%- endcapture -%}
+{%- liquid
+  assign dl_datasheet = dl_datasheet_safe
+  assign dl_manual = dl_manual_safe
+  assign dl_ies = dl_ies_safe
+  assign dl_line = dl_line_safe
+  assign dl_doc = dl_doc_safe
 -%}
 {%- capture pp_download_items -%}
   {%- if dl_datasheet != blank -%}

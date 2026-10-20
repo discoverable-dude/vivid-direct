@@ -37,8 +37,9 @@
 
     <div class="pdl__grid">
       {%- for block in pdl_items -%}
-        {%- if block.settings.file != blank -%}
-          <a href="{{ block.settings.file }}" download class="pdl__item" {{ block.shopify_attributes }}>
+        {%- capture pdl_safe -%}{%- render 'safe-url', url: block.settings.file -%}{%- endcapture -%}
+        {%- if pdl_safe != blank -%}
+          <a href="{{ pdl_safe }}" download class="pdl__item" {{ block.shopify_attributes }}>
             {%- if block.settings.icon != 'none' -%}
               <span class="pdl__icon">{%- render 'vivid-icon', icon: block.settings.icon, size: 20 -%}</span>
             {%- endif -%}
