@@ -3,11 +3,19 @@
   Desktop: sits under the gallery (left column), 3 across. Mobile: after the trust box, 1 product at a time.
   Products come from the collection that matches the product type (e.g. "LED Profile by FossLED" ->
   led-profile-by-fossled), falling back to the optional `fallback` collection handle.
-  Params: product, fallback (collection handle), heading, collection (picker, optional), scheme, hero_scheme,
-  limit, show. All come from the product section's "Recommended products" settings in the theme editor.
+  Source (setting `recs_source`):
+    search_discovery - Shopify Search & Discovery product recommendations (related or complementary).
+      These are only available through the Section Rendering API, so the page loads first, then this
+      snippet fetches /recommendations/products and swaps the cards in. While that loads the block is hidden;
+      if Shopify returns nothing (or the request fails) the collection below is used instead.
+    collection - the collection picked in the theme editor, else the one matching the product type.
+  Params: product, section_id, fallback (collection handle), heading, collection (picker, optional), scheme,
+  hero_scheme, limit, show, source, intent. All come from the product section's "Recommended products" settings.
 {%- endcomment -%}
 {%- liquid
   assign rc_limit = limit | default: 8
+  assign rc_source = source | default: 'search_discovery'
+  assign rc_intent = intent | default: 'related'
   assign rc_coll = collection
   if rc_coll == blank and product.type != blank
     assign rc_handle = product.type | handleize
@@ -18,10 +26,18 @@
   endif
   assign rc_shown = 0
 -%}
-{%- if show != false and rc_coll != blank and rc_coll.products_count > 1 -%}
+{%- if show != false and rc_source == 'search_discovery' and recommendations.performed -%}
+  {%- comment -%} Section Rendering API response: only this wrapper is read by the page script. {%- endcomment -%}
+  <div data-recs-sd-result>
+    {%- for p in recommendations.products limit: rc_limit -%}
+      {%- if p.id == product.id -%}{%- continue -%}{%- endif -%}
+      <div class="pp-recs__slide">{%- render 'product-card', product: p -%}</div>
+    {%- endfor -%}
+  </div>
+{%- elsif show != false and rc_source == 'search_discovery' or show != false and rc_coll != blank and rc_coll.products_count > 1 -%}
   {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
   {%- assign rc_scheme = scheme | default: hero_scheme -%}
-  <div class="pp-recs{% if rc_scheme != hero_scheme %} pp-recs--boxed color-{{ rc_scheme }} gradient{% endif %}" data-pp-recs{% if rc_scheme != hero_scheme %} style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); background: rgb(var(--color-background)); color: rgb(var(--color-foreground));"{% endif %}>
+  <div class="pp-recs{% if rc_scheme != hero_scheme %} pp-recs--boxed color-{{ rc_scheme }} gradient{% endif %}" data-pp-recs{% if rc_source == 'search_discovery' %} data-recs-pending data-sd-url="{{ routes.product_recommendations_url }}?section_id={{ section_id }}&product_id={{ product.id }}&limit={{ rc_limit }}&intent={{ rc_intent }}"{% endif %}{% if rc_scheme != hero_scheme %} style="--paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68); background: rgb(var(--color-background)); color: rgb(var(--color-foreground));"{% endif %}>
     <div class="pp-recs__head">
       <h2 class="pp-recs__title">{{ heading | default: "You may also like" }}</h2>
       <div class="pp-recs__nav">
@@ -30,12 +46,12 @@
       </div>
     </div>
     <div class="pp-recs__track" data-recs-track>
-      {%- for p in rc_coll.products -%}
+      {%- if rc_coll != blank -%}{%- for p in rc_coll.products -%}
         {%- if p.id == product.id -%}{%- continue -%}{%- endif -%}
         {%- if rc_shown >= rc_limit -%}{%- break -%}{%- endif -%}
         {%- assign rc_shown = rc_shown | plus: 1 -%}
         <div class="pp-recs__slide">{%- render 'product-card', product: p -%}</div>
-      {%- endfor -%}
+      {%- endfor -%}{%- endif -%}
     </div>
   </div>
   <script>
@@ -46,6 +62,26 @@
         var prev = root.querySelector('[data-recs-prev]');
         var next = root.querySelector('[data-recs-next]');
         function step() { var s = track.querySelector('.pp-recs__slide'); return s ? s.getBoundingClientRect().width + 12 : track.clientWidth; }
+        function finish() {
+          root.removeAttribute('data-recs-pending');
+          if (!track.children.length) root.hidden = true;
+          track.scrollLeft = 0; sync();
+        }
+        var sdUrl = root.getAttribute('data-sd-url');
+        if (sdUrl) {
+          var done = false;
+          var timer = setTimeout(function () { if (!done) { done = true; finish(); } }, 3500);
+          fetch(sdUrl, { headers: { Accept: 'text/html' } })
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (html) {
+              if (done) return; done = true; clearTimeout(timer);
+              var doc = new DOMParser().parseFromString(html, 'text/html');
+              var res = doc.querySelector('[data-recs-sd-result]');
+              if (res && res.children.length) track.innerHTML = res.innerHTML;
+              finish();
+            })
+            .catch(function () { if (!done) { done = true; clearTimeout(timer); finish(); } });
+        }
         function sync() {
           prev.disabled = track.scrollLeft <= 2;
           next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;

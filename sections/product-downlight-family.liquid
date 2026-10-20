@@ -93,7 +93,7 @@
           </div>
         {%- endif -%}
       </div>
-      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'downlights', heading: section.settings.recs_heading, collection: section.settings.recs_collection, scheme: section.settings.recs_scheme, hero_scheme: section.settings.hero_scheme, limit: section.settings.recs_limit, show: section.settings.recs_show -%}</div>
+      <div class="pp-recs-wrap">{%- render 'pdp-recommended', product: product, fallback: 'downlights', heading: section.settings.recs_heading, collection: section.settings.recs_collection, scheme: section.settings.recs_scheme, hero_scheme: section.settings.hero_scheme, limit: section.settings.recs_limit, show: section.settings.recs_show, source: section.settings.recs_source, intent: section.settings.recs_intent, section_id: section.id -%}</div>
       </div>
 
       <!-- Info panel -->
@@ -730,8 +730,16 @@
   "settings": [
     { "type": "header", "content": "Recommended products" },
     { "type": "checkbox", "id": "recs_show", "label": "Show recommended products", "default": true },
+    { "type": "select", "id": "recs_source", "label": "Source", "default": "search_discovery", "options": [
+      { "value": "search_discovery", "label": "Shopify recommendations" },
+      { "value": "collection", "label": "A collection" } ],
+      "info": "Shopify recommendations are managed in the Search & Discovery app. If it returns nothing, the collection below is used." },
+    { "type": "select", "id": "recs_intent", "label": "Recommendation type", "default": "related", "options": [
+      { "value": "related", "label": "Related products" },
+      { "value": "complementary", "label": "Complementary products" } ],
+      "info": "Only used for Shopify recommendations. Complementary needs pairings set up in the Search & Discovery app." },
     { "type": "text", "id": "recs_heading", "label": "Heading", "default": "You may also like" },
-    { "type": "collection", "id": "recs_collection", "label": "Collection", "info": "Leave empty to use the collection matching each product's type." },
+    { "type": "collection", "id": "recs_collection", "label": "Collection (fallback)", "info": "Used when Source is a collection, or if Shopify has no recommendations. Leave empty to match each product's type." },
     { "type": "color_scheme", "id": "recs_scheme", "label": "Colour scheme", "default": "scheme-2" },
     { "type": "range", "id": "recs_limit", "label": "Products to show", "min": 3, "max": 12, "step": 1, "default": 8 },
     { "type": "header", "content": "Section colours" },

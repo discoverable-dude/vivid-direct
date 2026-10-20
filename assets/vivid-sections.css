@@ -854,3 +854,4 @@
   .pp-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .pp-recs__slide { flex: 0 0 min(220px, 62%); }
 }
+.pp-recs[data-recs-pending] { visibility: hidden; min-height: 120px; }
