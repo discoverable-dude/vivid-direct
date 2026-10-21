@@ -109,8 +109,8 @@
       "settings": {
         "recs_show": true,
         "recs_source": "search_discovery",
-        "recs_intent": "complementary",
-        "recs_heading": "Compatible with",
+        "recs_intent": "related",
+        "recs_heading": "Recommended",
         "recs_collection": "",
         "recs_scheme": "",
         "recs_limit": 8,
