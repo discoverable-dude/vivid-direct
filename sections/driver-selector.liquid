@@ -57,7 +57,7 @@
       function money(c) { return '£' + (c / 100).toFixed(2); }
       function render() {
         var my = ++token;
-        var w = parseFloat(wpmSel.value), L = Math.max(1, Math.round(parseFloat(lenIn.value) || 1));
+        var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), L = Math.max(1, Math.round(parseFloat(lenIn.value) || 1));
         var bf = blockFor(w), b = bf.b, total = Math.round(w * L * 10) / 10;
         var types = Object.keys(b.cells);
         if (!type || types.indexOf(type) < 0) type = types[0];
