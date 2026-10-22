@@ -1,0 +1,95 @@
+{%- comment -%}
+  Fitting driver selector. Reads product.metafields.custom.fitting_driver (a key in assets/fitting-matrix.js, e.g. Pro40).
+  Uses the quantity box in the product form: enforces min and max, and recommends compatible constant-current drivers.
+  Params: product, uid.
+{%- endcomment -%}
+{%- assign fd_key = product.metafields.custom.fitting_driver.value | default: '' -%}
+{%- if fd_key != blank -%}
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{%- assign fd_has_nodriver = false -%}
+{%- for v in product.variants -%}{%- assign fd_vt = v.title | downcase -%}{%- if fd_vt contains 'no driver' -%}{%- assign fd_has_nodriver = true -%}{%- endif -%}{%- endfor -%}
+<section class="dsel dsel--embedded dsel--fitting" id="fdsel-{{ uid | default: product.id }}" data-fdsel data-fitting="{{ fd_key | escape }}">
+  <div class="wrap">
+    <div class="dsel__card">
+      <h2 class="dsel__title">Do you need a driver?</h2>
+      <p class="dsel__intro">These fittings run from a constant current driver. Change the quantity above and we will show the drivers that suit that many on one circuit.{% if fd_has_nodriver %} Choose a driver option on the fitting if you want it supplied, or pick a No Driver option and buy one here.{% endif %}</p>
+      <p class="dsel__load" data-fdsel-range></p>
+      <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-fdsel-type aria-label="Dimming type"></select></label>
+      <div class="dsel__result" aria-live="polite" data-fdsel-result></div>
+      <p class="dsel__note">Prices shown are ex VAT. Fittings on one driver are wired in series, so keep to one fitting type per driver. If unsure, call us on 0203 916 6116.</p>
+    </div>
+  </div>
+</section>
+<script src="{{ 'fitting-matrix.js' | asset_url }}" defer></script>
+<script src="{{ 'vivid-card.js' | asset_url }}" defer></script>
+<script>
+(function () {
+  function init() {
+    var M = window.VIVID_FITTING_MATRIX; if (!M) return setTimeout(init, 60);
+    document.querySelectorAll('[data-fdsel]').forEach(function (root) {
+      if (root.__ready) return; root.__ready = true;
+      var f = M.fittings[root.getAttribute('data-fitting')];
+      var scope = root.closest('.shopify-section') || document;
+      var qty = scope.querySelector('input[name="quantity"]') || document.querySelector('form[action*="/cart/add"] input[name="quantity"]');
+      if (!f || !qty) { root.style.display = 'none'; return; }
+      var typeSel = root.querySelector('[data-fdsel-type]'), res = root.querySelector('[data-fdsel-result]'), rng = root.querySelector('[data-fdsel-range]');
+      var LABEL = { Standard: 'Non-dimmable', TRIAC: 'TRIAC dimmable', DALI: 'DALI dimmable' };
+      var token = 0, eps = 1e-6;
+      function fits(d, q) {
+        return d.modes.some(function (m) {
+          return f.mA >= m.mA[0] && f.mA <= m.mA[1] && q * f.V >= m.V[0] - eps && q * f.V <= m.V[1] + eps && q * f.W >= m.W[0] - eps && q * f.W <= m.W[1] + eps;
+        });
+      }
+      function matches(q) { return M.drivers.filter(function (d) { return fits(d, q); }); }
+      var min = 0; for (var q = 1; q <= f.max; q++) { if (matches(q).length) { min = q; break; } }
+      if (!min) min = 1;
+      var max = f.max;
+      qty.min = min; qty.max = max;
+      rng.innerHTML = 'Quantity on one driver: <strong>' + min + (max > min ? ' to ' + max : '') + '</strong>' + (max === 1 ? ' (one fitting per driver)' : '');
+      function clamp() {
+        var v = parseInt(qty.value, 10); if (!(v >= min)) v = min; if (v > max) v = max;
+        if (String(v) !== qty.value) qty.value = v;
+        return v;
+      }
+      function money(c) { return '£' + (c / 100).toFixed(2); }
+      function fillTypes(list) {
+        var cur = typeSel.value, types = ['Any'].concat(['Standard', 'TRIAC', 'DALI'].filter(function (t) { return list.some(function (d) { return d.type === t; }); }));
+        typeSel.innerHTML = '';
+        types.forEach(function (t) { var o = document.createElement('option'); o.value = t; o.textContent = t === 'Any' ? 'Any' : LABEL[t]; typeSel.appendChild(o); });
+        if (types.indexOf(cur) > -1) typeSel.value = cur;
+      }
+      function render() {
+        var my = ++token, n = clamp(), all = matches(n); fillTypes(all);
+        var list = typeSel.value === 'Any' ? all : all.filter(function (d) { return d.type === typeSel.value; });
+        var load = Math.round(n * f.W * 100) / 100;
+        var html = '<p class="dsel__load">Total load: <strong>' + load + 'W</strong> (' + n + ' x ' + f.W + 'W at ' + f.mA + 'mA)</p>';
+        if (!list.length) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard driver for ' + n + ' of these' + (typeSel.value !== 'Any' ? ' with that dimming type' : '') + '. Try another quantity or dimming type, or call us on 0203 916 6116.</p>'; return; }
+        html += list.map(function (d) {
+          var btn = d.variantId
+            ? '<button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a>'
+            : '<a class="dsel__view" href="mailto:sales@vivid-direct.co.uk?subject=' + encodeURIComponent(d.code + ' driver') + '">Ask us for this driver</a>';
+          return '<div class="dsel__rec" data-code="' + d.code + '"><div><p class="dsel__recname">' + d.code + '</p><p class="dsel__reccode">' + LABEL[d.type] + '</p><p class="dsel__recprice" data-price>' + (d.variantId ? '&nbsp;' : 'Not yet in our shop') + '</p></div><div class="dsel__recbtns">' + btn + '</div></div>';
+        }).join('');
+        res.innerHTML = html;
+        list.forEach(function (d) {
+          if (!d.variantId) return;
+          fetch('/products/' + d.handle + '.js').then(function (r) { return r.json(); }).then(function (p) {
+            if (my !== token) return;
+            var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0], el = res.querySelector('[data-code="' + d.code + '"] [data-price]');
+            if (v && el) el.innerHTML = money(v.price) + ' <small>ex VAT</small>' + (v.available ? '' : ' &middot; out of stock');
+          }).catch(function () {});
+        });
+      }
+      function later() { setTimeout(render, 0); }
+      ['input', 'change'].forEach(function (e) { qty.addEventListener(e, render); });
+      scope.querySelectorAll('.pp-qty__btn').forEach(function (b) { b.addEventListener('click', later); });
+      var form = qty.closest('form'); if (form) form.addEventListener('submit', clamp, true);
+      typeSel.addEventListener('change', render);
+      if (parseInt(qty.value, 10) < min) qty.value = min;
+      render();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+{%- endif -%}

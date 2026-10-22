@@ -300,6 +300,7 @@
               </div>
             </form>
           </product-form>
+          {%- if section.settings.show_fitting_selector -%}{%- render 'fitting-driver-selector', product: product, uid: section.id -%}{%- endif -%}
 
           <p class="pp-delivery">
             {%- render 'vivid-icon', icon: 'truck', size: 16 -%}
@@ -741,6 +742,7 @@
   "enabled_on": { "templates": ["product"] },
   "settings": [
     { "type": "header", "content": "Recommended products" },
+    { "type": "checkbox", "id": "show_fitting_selector", "label": "Show driver selector on fittings", "default": false, "info": "Adds a driver box and enforces min and max quantity on fittings with a Fitting driver code metafield." },
     { "type": "checkbox", "id": "recs_show", "label": "Show recommended products", "default": true },
     { "type": "select", "id": "recs_source", "label": "Source", "default": "search_discovery", "options": [
       { "value": "search_discovery", "label": "Shopify recommendations" },

@@ -198,6 +198,7 @@
               </div>
             </form>
           </product-form>
+          {%- if section.settings.show_fitting_selector -%}{%- render 'fitting-driver-selector', product: product, uid: section.id -%}{%- endif -%}
 
           {%- if section.settings.show_driver_selector -%}{%- render 'driver-selector', product: product, embedded: true, uid: section.id -%}{%- endif -%}
 
@@ -559,6 +560,7 @@
   },
   "settings": [
     { "type": "header", "content": "Driver selector" },
+    { "type": "checkbox", "id": "show_fitting_selector", "label": "Show driver selector on fittings", "default": false, "info": "Adds a driver box and enforces min and max quantity on fittings with a Fitting driver code metafield." },
     { "type": "checkbox", "id": "show_driver_selector", "label": "Show driver selector on LED strips", "default": false, "info": "Adds a Do you need a driver? box under Add to basket on strips with a watts per metre value." },
     { "type": "header", "content": "Recommended products" },
     { "type": "checkbox", "id": "recs_show", "label": "Show recommended products", "default": true },

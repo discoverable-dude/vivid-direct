@@ -126,7 +126,8 @@
         "about_image_opacity": 30,
         "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
         "design_articles_url": "#",
-        "show_driver_selector": true
+        "show_driver_selector": true,
+        "show_fitting_selector": true
       }
     },
     "downloads": {

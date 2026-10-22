@@ -892,3 +892,7 @@
 .dsel--embedded .dsel__recname { font-size: 14px; }
 .dsel--embedded .dsel__add { min-width: 0; width: 100%; }
 .dsel--embedded .dsel__recbtns { width: 100%; }
+
+.dsel--fitting .dsel__rec { margin-top: 10px; }
+.dsel--fitting .dsel__field--types { max-width: 260px; margin-bottom: 8px; }
+.dsel--fitting .dsel__load strong { white-space: nowrap; }
