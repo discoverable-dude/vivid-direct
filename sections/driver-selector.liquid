@@ -47,7 +47,7 @@
       if (list.length === 1 && !standalone) root.querySelector('[data-dsel-wpm-wrap]').style.display = 'none';
       var TYPE_LABEL = { 'Fixed': 'Non-dimmable', 'Dimmable': 'Dimmable', 'DALI Dimmable': 'DALI dimmable', 'Slim Dimmable': 'Slim dimmable', 'Slim DALI Dimmable': 'Slim DALI' };
       var TYPE_HELP = { 'Fixed': 'Constant brightness, lowest price', 'Dimmable': 'Mains dimmable (wall dimmer)', 'DALI Dimmable': 'For DALI control systems', 'Slim Dimmable': 'Slim IP20 body, mains dimmable', 'Slim DALI Dimmable': 'Slim IP20 body, DALI' };
-      var type = null;
+      var type = null, token = 0;
       function blockFor(w) {
         var exact = M.blocks.filter(function (b) { return b.wpm === w; })[0];
         if (exact) return { b: exact, est: false };
@@ -56,6 +56,7 @@
       }
       function money(c) { return '£' + (c / 100).toFixed(2); }
       function render() {
+        var my = ++token;
         var w = parseFloat(wpmSel.value), L = Math.max(1, Math.round(parseFloat(lenIn.value) || 1));
         var bf = blockFor(w), b = bf.b, total = Math.round(w * L * 10) / 10;
         var types = Object.keys(b.cells);
@@ -75,6 +76,7 @@
         if (!d) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + TYPE_LABEL[type].toLowerCase() + ' driver for this load. Try another driver type, or call us on 0203 916 6116.</p>'; return; }
         res.innerHTML = html + '<div class="dsel__rec"><div><p class="dsel__recname">' + d.product + ' &middot; ' + d.size + '</p><p class="dsel__reccode">' + code + '</p><p class="dsel__recprice" data-price>&nbsp;</p></div><div class="dsel__recbtns"><button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div></div>';
         fetch('/products/' + d.handle + '.js').then(function (r) { return r.json(); }).then(function (p) {
+          if (my !== token) return;
           var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0]; var el = res.querySelector('[data-price]');
           if (v && el) el.innerHTML = money(v.price) + ' <small>ex VAT</small>' + (v.available ? '' : ' &middot; out of stock');
         }).catch(function () {});
