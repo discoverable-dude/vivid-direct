@@ -68,7 +68,7 @@
           var btn = d.variantId
             ? '<button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a>'
             : '<a class="dsel__view" href="mailto:sales@vivid-direct.co.uk?subject=' + encodeURIComponent(d.code + ' driver') + '">Ask us for this driver</a>';
-          return '<div class="dsel__rec" data-code="' + d.code + '"><div><p class="dsel__recname">' + d.code + '</p><p class="dsel__reccode">' + LABEL[d.type] + '</p><p class="dsel__recprice" data-price>' + (d.variantId ? '&nbsp;' : 'Not yet in our shop') + '</p></div><div class="dsel__recbtns">' + btn + '</div></div>';
+          return '<div class="dsel__rec" data-code="' + d.code + '"><div><p class="dsel__recname">' + d.code + '</p><p class="dsel__reccode">' + LABEL[d.type] + '</p><p class="dsel__recprice" data-price>' + (d.variantId ? '&nbsp;' : '<small>Not yet in our shop</small>') + '</p></div><div class="dsel__recbtns">' + btn + '</div></div>';
         }).join('');
         res.innerHTML = html;
         list.forEach(function (d) {
