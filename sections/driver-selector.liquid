@@ -6,10 +6,13 @@
 {{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
 {%- assign ds_wpm_raw = product.metafields.custom.watts_per_metre.value | default: '' -%}
 {%- assign ds_wpm_list = ds_wpm_raw | replace: ' ', '' | split: ',' -%}
+{%- assign ds_title_l = product.title | downcase -%}
+{%- assign ds_dim_only = false -%}
+{%- if ds_title_l contains 'dim to warm' or ds_title_l contains 'dim-to-warm' or ds_title_l contains 'tuneable' or ds_title_l contains 'tunable' or ds_title_l contains 'rgb' -%}{%- assign ds_dim_only = true -%}{%- endif -%}
 {%- if ds_wpm_list.size == 0 and section.settings.standalone == false -%}
   {%- if request.design_mode -%}<div class="wrap" style="padding:16px 0;opacity:.6;">Driver selector: this product has no watts per metre, so nothing shows here.</div>{%- endif -%}
 {%- else -%}
-<section class="dsel color-{{ section.settings.color_scheme }} gradient" id="dsel-{{ section.id }}" data-dsel data-wpm-list="{{ ds_wpm_list | join: ',' }}" data-standalone="{{ section.settings.standalone }}" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;">
+<section class="dsel color-{{ section.settings.color_scheme }} gradient" id="dsel-{{ section.id }}" data-dsel data-wpm-list="{{ ds_wpm_list | join: ',' }}" data-standalone="{{ section.settings.standalone }}" data-dim-only="{{ ds_dim_only }}" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;">
   <div class="wrap">
     <div class="dsel__card">
       <h2 class="dsel__title">{{ section.settings.heading }}</h2>
@@ -60,6 +63,7 @@
         var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), L = Math.max(1, Math.round(parseFloat(lenIn.value) || 1));
         var bf = blockFor(w), b = bf.b, total = Math.round(w * L * 10) / 10;
         var types = Object.keys(b.cells);
+        if (root.getAttribute('data-dim-only') === 'true' && types.length > 1) types = types.filter(function (t) { return t !== 'Fixed'; });
         if (!type || types.indexOf(type) < 0) type = types[0];
         typesEl.innerHTML = '';
         types.forEach(function (t) {
