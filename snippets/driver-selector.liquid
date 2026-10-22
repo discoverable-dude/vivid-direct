@@ -7,7 +7,12 @@
 {%- assign ds_title_l = product.title | downcase -%}
 {%- assign ds_dim_only = false -%}
 {%- if ds_title_l contains 'dim to warm' or ds_title_l contains 'dim-to-warm' -%}{%- assign ds_dim_only = true -%}{%- endif -%}
-{%- if ds_wpm_list.size == 0 and standalone != true or product.vendor != 'FossLED' and standalone != true -%}
+{%- assign ds_hide = false -%}
+{%- unless standalone -%}
+  {%- if ds_wpm_list.size == 0 -%}{%- assign ds_hide = true -%}{%- endif -%}
+  {%- if product.vendor != 'FossLED' -%}{%- assign ds_hide = true -%}{%- endif -%}
+{%- endunless -%}
+{%- if ds_hide -%}
   {%- if request.design_mode -%}<div class="wrap" style="padding:16px 0;opacity:.6;">Driver selector: this product has no watts per metre, so nothing shows here.</div>{%- endif -%}
 {%- else -%}
 <section class="dsel{% if embedded %} dsel--embedded{% else %} color-{{ scheme | default: 'scheme-1' }} gradient{% endif %}" id="dsel-{{ uid | default: product.id }}" data-dsel data-wpm-list="{{ ds_wpm_list | join: ',' }}" data-standalone="{{ standalone }}" data-dim-only="{{ ds_dim_only }}" {% unless embedded %}style="padding: {{ pad_top | default: 16 }}px 0 {{ pad_bottom | default: 16 }}px 0;"{% endunless %}>
