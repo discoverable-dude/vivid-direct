@@ -8,7 +8,7 @@
 {%- assign ds_wpm_list = ds_wpm_raw | replace: ' ', '' | split: ',' -%}
 {%- assign ds_title_l = product.title | downcase -%}
 {%- assign ds_dim_only = false -%}
-{%- if ds_title_l contains 'dim to warm' or ds_title_l contains 'dim-to-warm' or ds_title_l contains 'tuneable' or ds_title_l contains 'tunable' or ds_title_l contains 'rgb' -%}{%- assign ds_dim_only = true -%}{%- endif -%}
+{%- if ds_title_l contains 'dim to warm' or ds_title_l contains 'dim-to-warm' -%}{%- assign ds_dim_only = true -%}{%- endif -%}
 {%- if ds_wpm_list.size == 0 and section.settings.standalone == false -%}
   {%- if request.design_mode -%}<div class="wrap" style="padding:16px 0;opacity:.6;">Driver selector: this product has no watts per metre, so nothing shows here.</div>{%- endif -%}
 {%- else -%}
