@@ -2,7 +2,7 @@
 {{ 'vivid-crate.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'vivid-cart.js' | asset_url }}" defer="defer"></script>
 
-{%- assign _free_threshold = 4000 -%}
+{%- assign _free_threshold = 15000 -%}
 {%- assign _cart_total = cart.total_price -%}
 {%- assign _delivery_free = false -%}
 {%- if _cart_total >= _free_threshold -%}{%- assign _delivery_free = true -%}{%- endif -%}
