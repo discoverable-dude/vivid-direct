@@ -105,7 +105,7 @@
         "faq_2",
         "faq_3"
       ],
-      "name": "Product page — page.custom variant",
+      "name": "Product page \u2014 page.custom variant",
       "settings": {
         "recs_show": true,
         "recs_source": "search_discovery",
@@ -124,8 +124,9 @@
         "trust_2": "In stock, ships fast",
         "trust_3": "2 year warranty",
         "about_image_opacity": 30,
-        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
-        "design_articles_url": "#"
+        "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
+        "design_articles_url": "#",
+        "show_driver_selector": true
       }
     },
     "downloads": {
@@ -206,7 +207,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Fast Delivery",
-            "text": "Free next-day delivery over £150, order by 1pm."
+            "text": "Free next-day delivery over \u00a3150, order by 1pm."
           }
         },
         "feature_pdmDDU": {
@@ -250,22 +251,10 @@
         "padding_top": 60,
         "padding_bottom": 52
       }
-    },
-    "driver_selector": {
-      "type": "driver-selector",
-      "settings": {
-        "heading": "Find the right driver for your strip",
-        "intro": "Tell us how much strip you are using and the kind of control you want. We will recommend the driver.",
-        "standalone": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 16,
-        "padding_bottom": 16
-      }
     }
   },
   "order": [
     "potato-product",
-    "driver_selector",
     "downloads",
     "collection_cross_sell_mW4hGi",
     "split_icon_grid_jfxeBp"

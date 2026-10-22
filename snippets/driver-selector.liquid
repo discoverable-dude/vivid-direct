@@ -1,0 +1,94 @@
+{%- comment -%}
+  Driver selector (see sections/driver-selector.liquid). Params: product, embedded, standalone, heading, intro, scheme, pad_top, pad_bottom, uid.
+{%- endcomment -%}
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{%- assign ds_wpm_raw = product.metafields.custom.watts_per_metre.value | default: '' -%}
+{%- assign ds_wpm_list = ds_wpm_raw | replace: ' ', '' | split: ',' -%}
+{%- assign ds_title_l = product.title | downcase -%}
+{%- assign ds_dim_only = false -%}
+{%- if ds_title_l contains 'dim to warm' or ds_title_l contains 'dim-to-warm' -%}{%- assign ds_dim_only = true -%}{%- endif -%}
+{%- if ds_wpm_list.size == 0 and standalone != true -%}
+  {%- if request.design_mode -%}<div class="wrap" style="padding:16px 0;opacity:.6;">Driver selector: this product has no watts per metre, so nothing shows here.</div>{%- endif -%}
+{%- else -%}
+<section class="dsel{% if embedded %} dsel--embedded{% else %} color-{{ scheme | default: 'scheme-1' }} gradient{% endif %}" id="dsel-{{ uid | default: product.id }}" data-dsel data-wpm-list="{{ ds_wpm_list | join: ',' }}" data-standalone="{{ standalone }}" data-dim-only="{{ ds_dim_only }}" {% unless embedded %}style="padding: {{ pad_top | default: 16 }}px 0 {{ pad_bottom | default: 16 }}px 0;"{% endunless %}>
+  <div class="wrap">
+    <div class="dsel__card">
+      <h2 class="dsel__title">{{ heading | default: "Do you need a driver?" }}</h2>
+      <p class="dsel__intro">{{ intro | default: "Tell us the length of strip and the type of control, and we will recommend the driver." }}</p>
+      <label class="dsel__field dsel__field--wpm" data-dsel-wpm-wrap>
+        <span>Strip power</span>
+        <select data-dsel-wpm></select>
+      </label>
+      <div class="dsel__grid">
+        <label class="dsel__field">
+          <span>Length (m)</span>
+          <select data-dsel-length aria-label="Length of strip in metres"></select>
+        </label>
+        <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-dsel-type></select></label>
+      </div>
+      <div class="dsel__result" aria-live="polite" data-dsel-result></div>
+      <p class="dsel__note">Prices shown are ex VAT. Always check the driver suits your controls and the strip's voltage (24V). If unsure, call us on 0203 916 6116.</p>
+    </div>
+  </div>
+</section>
+<script src="{{ 'driver-matrix.js' | asset_url }}" defer></script>
+<script src="{{ 'vivid-card.js' | asset_url }}" defer></script>
+<script>
+(function () {
+  function init() {
+    var M = window.VIVID_DRIVER_MATRIX; if (!M) return setTimeout(init, 60);
+    document.querySelectorAll('[data-dsel]').forEach(function (root) {
+      if (root.__ready) return; root.__ready = true;
+      var wpmSel = root.querySelector('[data-dsel-wpm]'), lenSel = root.querySelector('[data-dsel-length]');
+      var typeSel = root.querySelector('[data-dsel-type]'), res = root.querySelector('[data-dsel-result]');
+      var standalone = root.getAttribute('data-standalone') === 'true';
+      var list = (root.getAttribute('data-wpm-list') || '').split(',').map(function (s) { return parseFloat(s); }).filter(function (n) { return n > 0; });
+      if (!list.length) list = M.blocks.map(function (b) { return b.wpm; });
+      list.forEach(function (w) { var o = document.createElement('option'); o.value = w; o.textContent = w + ' W per metre'; wpmSel.appendChild(o); });
+      if (list.length === 1 && !standalone) root.querySelector('[data-dsel-wpm-wrap]').style.display = 'none';
+      var TYPE_LABEL = { 'Fixed': 'Fixed (non-dimmable)', 'Dimmable': 'Dimmable', 'DALI Dimmable': 'DALI dimmable', 'Slim Dimmable': 'Slim dimmable', 'Slim DALI Dimmable': 'Slim DALI dimmable' };
+      var token = 0;
+      function blockFor(w) {
+        var exact = M.blocks.filter(function (b) { return b.wpm === w; })[0];
+        if (exact) return { b: exact, est: false };
+        var up = M.blocks.filter(function (b) { return b.wpm > w; }).sort(function (a, b) { return a.wpm - b.wpm; })[0];
+        return { b: up || M.blocks[M.blocks.length - 1], est: true };
+      }
+      function money(c) { return '£' + (c / 100).toFixed(2); }
+      function fill(sel, items, keep) {
+        var cur = sel.value; sel.innerHTML = '';
+        items.forEach(function (it) { var o = document.createElement('option'); o.value = it.v; o.textContent = it.t; sel.appendChild(o); });
+        if (keep && items.some(function (it) { return String(it.v) === cur; })) sel.value = cur;
+      }
+      function rebuild() {
+        var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), bf = blockFor(w), b = bf.b;
+        var lens = []; for (var i = 1; i <= b.maxLength; i++) lens.push({ v: i, t: i + (i === 1 ? ' metre' : ' metres') });
+        var hadLen = lenSel.value; fill(lenSel, lens, true); if (!hadLen) lenSel.value = Math.min(5, b.maxLength);
+        var types = Object.keys(b.cells);
+        if (root.getAttribute('data-dim-only') === 'true' && types.length > 1) types = types.filter(function (t) { return t !== 'Fixed'; });
+        fill(typeSel, types.map(function (t) { return { v: t, t: TYPE_LABEL[t] }; }), true);
+      }
+      function render() {
+        var my = ++token;
+        var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), L = parseInt(lenSel.value, 10) || 1;
+        var bf = blockFor(w), b = bf.b, total = Math.round(w * L * 10) / 10, type = typeSel.value;
+        var html = '<p class="dsel__load">Total load: <strong>' + total + 'W</strong> (' + w + 'W/m x ' + L + 'm)' + (bf.est ? ' <em>Estimate, based on the ' + b.wpm + 'W/m guide</em>' : '') + '</p>';
+        var code = b.cells[type] && b.cells[type][L - 1], d = code && M.drivers[code];
+        if (!d) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + (TYPE_LABEL[type] || '').toLowerCase() + ' driver for this length. Try another type, or call us on 0203 916 6116.</p>'; return; }
+        res.innerHTML = html + '<div class="dsel__rec"><div><p class="dsel__recname">' + d.product + ' &middot; ' + d.size + '</p><p class="dsel__reccode">' + code + '</p><p class="dsel__recprice" data-price>&nbsp;</p></div><div class="dsel__recbtns"><button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div></div>';
+        fetch('/products/' + d.handle + '.js').then(function (r) { return r.json(); }).then(function (p) {
+          if (my !== token) return;
+          var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0]; var el = res.querySelector('[data-price]');
+          if (v && el) el.innerHTML = money(v.price) + ' <small>ex VAT</small>' + (v.available ? '' : ' &middot; out of stock');
+        }).catch(function () {});
+      }
+      wpmSel.addEventListener('change', function () { rebuild(); render(); });
+      lenSel.addEventListener('change', render); typeSel.addEventListener('change', render);
+      rebuild(); render();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+{%- endif -%}
+

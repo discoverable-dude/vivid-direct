@@ -199,6 +199,8 @@
             </form>
           </product-form>
 
+          {%- if section.settings.show_driver_selector -%}{%- render 'driver-selector', product: product, embedded: true, uid: section.id -%}{%- endif -%}
+
           <p class="pp-delivery">
             {%- render 'vivid-icon', icon: 'truck', size: 16 -%}
             {{ section.settings.delivery_note }}
@@ -556,6 +558,8 @@
     "templates": ["product"]
   },
   "settings": [
+    { "type": "header", "content": "Driver selector" },
+    { "type": "checkbox", "id": "show_driver_selector", "label": "Show driver selector on LED strips", "default": false, "info": "Adds a Do you need a driver? box under Add to basket on strips with a watts per metre value." },
     { "type": "header", "content": "Recommended products" },
     { "type": "checkbox", "id": "recs_show", "label": "Show recommended products", "default": true },
     { "type": "select", "id": "recs_source", "label": "Source", "default": "search_discovery", "options": [
