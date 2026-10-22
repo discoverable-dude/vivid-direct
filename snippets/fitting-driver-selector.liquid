@@ -33,7 +33,7 @@
       var qty = scope.querySelector('input[name="quantity"]') || document.querySelector('form[action*="/cart/add"] input[name="quantity"]');
       if (!f || !qty) { root.style.display = 'none'; return; }
       var typeSel = root.querySelector('[data-fdsel-type]'), res = root.querySelector('[data-fdsel-result]'), rng = root.querySelector('[data-fdsel-range]');
-      var LABEL = { Standard: 'Non-dimmable', TRIAC: 'TRIAC dimmable', DALI: 'DALI dimmable' };
+      var LABEL = { TRIAC: 'TRIAC dimmable', DALI: 'DALI dimmable' };
       var token = 0, eps = 1e-6;
       function fits(d, q) {
         return d.modes.some(function (m) {
@@ -53,7 +53,7 @@
       }
       function money(c) { return '£' + (c / 100).toFixed(2); }
       function fillTypes(list) {
-        var cur = typeSel.value, types = ['Any'].concat(['Standard', 'TRIAC', 'DALI'].filter(function (t) { return list.some(function (d) { return d.type === t; }); }));
+        var cur = typeSel.value, types = ['Any'].concat(['TRIAC', 'DALI'].filter(function (t) { return list.some(function (d) { return d.type === t; }); }));
         typeSel.innerHTML = '';
         types.forEach(function (t) { var o = document.createElement('option'); o.value = t; o.textContent = t === 'Any' ? 'Any' : LABEL[t]; typeSel.appendChild(o); });
         if (types.indexOf(cur) > -1) typeSel.value = cur;
