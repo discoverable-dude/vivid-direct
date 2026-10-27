@@ -12,7 +12,7 @@
     "cart-crate": {
       "type": "cart-crate",
       "settings": {
-        "dark_mode": true,
+        "dark_mode": false,
         "rec_collection": "neon-flex-by-foss-led",
         "rec_heading": "Add to your basket"
       }
