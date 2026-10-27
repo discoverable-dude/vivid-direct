@@ -14,7 +14,7 @@
       <h2 class="dsel__title">Do you need a driver?</h2>
       <p class="dsel__intro">These fittings run from a constant current driver. Change the quantity above and we will show the drivers that suit that many on one circuit.{% if fd_has_nodriver %} Choose a driver option on the fitting if you want it supplied, or pick a No Driver option and buy one here.{% endif %}</p>
       <p class="dsel__load" data-fdsel-range></p>
-      <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-fdsel-type aria-label="Dimming type"></select></label>
+      <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-fdsel-type data-vselect aria-label="Dimming type"></select></label>
       <div class="dsel__result" aria-live="polite" data-fdsel-result></div>
       <p class="dsel__note">Prices shown are ex VAT. Fittings on one driver are wired in series, so keep to one fitting type per driver. If unsure, call us on 0203 916 6116.</p>
     </div>
@@ -22,6 +22,7 @@
 </section>
 <script src="{{ 'fitting-matrix.js' | asset_url }}" defer></script>
 <script src="{{ 'vivid-card.js' | asset_url }}" defer></script>
+<script src="{{ 'vivid-select.js' | asset_url }}" defer></script>
 <script>
 (function () {
   function init() {
@@ -66,17 +67,19 @@
         if (!list.length) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard driver for ' + n + ' of these' + (typeSel.value !== 'Any' ? ' with that dimming type' : '') + '. Try another quantity or dimming type, or call us on 0203 916 6116.</p>'; return; }
         html += list.map(function (d) {
           var btn = d.variantId
-            ? '<button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a>'
+            ? '<button type="button" class="mcard__btn dsel__add" data-card-both="' + d.variantId + '"><span class="mcard__btn-label">Add fitting and driver to basket</span><span class="loading__spinner hidden"></span></button><div class="dsel__sub"><button type="button" class="dsel__alt" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver only</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div>'
             : '<a class="dsel__view" href="mailto:sales@vivid-direct.co.uk?subject=' + encodeURIComponent(d.code + ' driver') + '">Ask us for this driver</a>';
-          return '<div class="dsel__rec" data-code="' + d.code + '"><div><p class="dsel__recname">' + d.code + '</p><p class="dsel__reccode">' + LABEL[d.type] + '</p><p class="dsel__recprice" data-price>' + (d.variantId ? '&nbsp;' : '<small>Not yet in our shop</small>') + '</p></div><div class="dsel__recbtns">' + btn + '</div></div>';
+          return '<div class="dsel__rec" data-code="' + d.code + '"><div class="dsel__rechead"><span class="dsel__thumb" data-thumb></span><div><p class="dsel__recname">' + d.code + '</p><p class="dsel__reccode">' + LABEL[d.type] + '</p><p class="dsel__recprice" data-price>' + (d.variantId ? '&nbsp;' : '<small>Not yet in our shop</small>') + '</p></div></div><div class="dsel__recbtns">' + btn + '</div></div>';
         }).join('');
         res.innerHTML = html;
         list.forEach(function (d) {
           if (!d.variantId) return;
           fetch('/products/' + d.handle + '.js').then(function (r) { return r.json(); }).then(function (p) {
             if (my !== token) return;
-            var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0], el = res.querySelector('[data-code="' + d.code + '"] [data-price]');
+            var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0], row = res.querySelector('[data-code="' + d.code + '"]'), el = row && row.querySelector('[data-price]');
             if (v && el) el.innerHTML = money(v.price) + ' <small>ex VAT</small>' + (v.available ? '' : ' &middot; out of stock');
+            var src = (v && v.featured_image && v.featured_image.src) || p.featured_image, th = row && row.querySelector('[data-thumb]');
+            if (src && th) th.innerHTML = '<img alt="" width="64" height="64" src="' + src + (src.indexOf('?') > -1 ? '&' : '?') + 'width=160">';
           }).catch(function () {});
         });
       }

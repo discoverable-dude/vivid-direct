@@ -22,14 +22,14 @@
       <p class="dsel__intro">{{ intro | default: "Tell us the length of strip and the type of control, and we will recommend the driver." }}</p>
       <label class="dsel__field dsel__field--wpm" data-dsel-wpm-wrap>
         <span>Strip power</span>
-        <select data-dsel-wpm></select>
+        <select data-dsel-wpm data-vselect></select>
       </label>
       <div class="dsel__grid">
         <label class="dsel__field">
           <span>Length (m)</span>
-          <select data-dsel-length aria-label="Length of strip in metres"></select>
+          <select data-dsel-length aria-label="Length of strip in metres" data-vselect></select>
         </label>
-        <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-dsel-type></select></label>
+        <label class="dsel__field dsel__field--types"><span>Dimming</span><select data-dsel-type data-vselect></select></label>
       </div>
       <div class="dsel__result" aria-live="polite" data-dsel-result></div>
       <p class="dsel__note">Prices shown are ex VAT. Always check the driver suits your controls and the strip's voltage (24V). If unsure, call us on 0203 916 6116.</p>
@@ -38,6 +38,7 @@
 </section>
 <script src="{{ 'driver-matrix.js' | asset_url }}" defer></script>
 <script src="{{ 'vivid-card.js' | asset_url }}" defer></script>
+<script src="{{ 'vivid-select.js' | asset_url }}" defer></script>
 <script>
 (function () {
   function init() {
@@ -81,11 +82,15 @@
         var html = '<p class="dsel__load">Total load: <strong>' + total + 'W</strong> (' + w + 'W/m x ' + L + 'm)' + (bf.est ? ' <em>Estimate, based on the ' + b.wpm + 'W/m guide</em>' : '') + '</p>';
         var code = b.cells[type] && b.cells[type][L - 1], d = code && M.drivers[code];
         if (!d) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + (TYPE_LABEL[type] || '').toLowerCase() + ' driver for this length. Try another type, or call us on 0203 916 6116.</p>'; return; }
-        res.innerHTML = html + '<div class="dsel__rec"><div><p class="dsel__recname">' + d.product + ' &middot; ' + d.size + '</p><p class="dsel__reccode">' + code + '</p><p class="dsel__recprice" data-price>&nbsp;</p></div><div class="dsel__recbtns"><button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div></div>';
+        var both = standalone ? '' : '<button type="button" class="mcard__btn dsel__add" data-card-both="' + d.variantId + '"><span class="mcard__btn-label">Add strip and driver to basket</span><span class="loading__spinner hidden"></span></button><div class="dsel__sub"><button type="button" class="dsel__alt" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver only</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div>';
+        if (!both) both = '<button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"><span class="mcard__btn-label">Add driver to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a>';
+        res.innerHTML = html + '<div class="dsel__rec"><div class="dsel__rechead"><span class="dsel__thumb" data-thumb></span><div><p class="dsel__recname">' + d.product + ' &middot; ' + d.size + '</p><p class="dsel__reccode">' + code + '</p><p class="dsel__recprice" data-price>&nbsp;</p></div></div><div class="dsel__recbtns">' + both + '</div></div>';
         fetch('/products/' + d.handle + '.js').then(function (r) { return r.json(); }).then(function (p) {
           if (my !== token) return;
           var v = p.variants.filter(function (x) { return x.id === d.variantId; })[0]; var el = res.querySelector('[data-price]');
           if (v && el) el.innerHTML = money(v.price) + ' <small>ex VAT</small>' + (v.available ? '' : ' &middot; out of stock');
+          var src = (v && v.featured_image && v.featured_image.src) || p.featured_image, th = res.querySelector('[data-thumb]');
+          if (src && th) th.innerHTML = '<img alt="" width="64" height="64" src="' + src + (src.indexOf('?') > -1 ? '&' : '?') + 'width=160">';
         }).catch(function () {});
       }
       wpmSel.addEventListener('change', function () { rebuild(); render(); });
