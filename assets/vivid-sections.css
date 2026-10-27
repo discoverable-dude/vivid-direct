@@ -896,3 +896,14 @@
 .dsel--fitting .dsel__rec { margin-top: 10px; }
 .dsel--fitting .dsel__field--types { max-width: 260px; margin-bottom: 8px; }
 .dsel--fitting .dsel__load strong { white-space: nowrap; }
+
+/* Driver compatibility */
+.dcomp { color: rgb(var(--color-foreground)); }
+.dcomp__eyebrow { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+.dcomp__title { margin: 0 0 8px; font-size: 26px; }
+.dcomp__intro { margin: 0 0 20px; max-width: 640px; color: rgba(var(--color-foreground), .7); }
+.dcomp__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.dcomp__row { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: 1px solid rgba(var(--color-foreground), .15); border-radius: var(--radius-pill); text-decoration: none; color: inherit; background: rgba(var(--color-foreground), .04); }
+.dcomp__row:hover { border-color: rgba(var(--color-foreground), .45); }
+.dcomp__name { font-weight: 700; }
+.dcomp__qty { font-size: 14px; opacity: .75; }

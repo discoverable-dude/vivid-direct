@@ -1,0 +1,65 @@
+{%- comment -%}
+  Driver compatibility: on a constant current driver product, lists the fittings it suits and how many of each
+  it can run. Reads product.metafields.custom.driver_code (a code in assets/fitting-matrix.js, e.g. PowerBank700.M).
+  Hides itself when the product has no driver code.
+{%- endcomment -%}
+{%- assign dc_code = product.metafields.custom.driver_code.value | default: '' -%}
+{%- if dc_code != blank -%}
+{{ 'vivid-sections.css' | asset_url | stylesheet_tag }}
+{%- capture scheme_vars -%}
+  --paper: rgb(var(--color-background)); --ink: rgb(var(--color-foreground)); --ink-soft: rgba(var(--color-foreground), 0.68);
+  padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;
+{%- endcapture -%}
+<section class="dcomp color-{{ section.settings.color_scheme }} gradient" style="{{ scheme_vars | strip_newlines }}" data-dcomp data-code="{{ dc_code | escape }}">
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank -%}<p class="dcomp__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2 class="dcomp__title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.intro != blank -%}<p class="dcomp__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    <div class="dcomp__list" data-dcomp-list></div>
+  </div>
+</section>
+<script src="{{ 'fitting-matrix.js' | asset_url }}" defer></script>
+<script>
+(function () {
+  function init() {
+    var M = window.VIVID_FITTING_MATRIX; if (!M) return setTimeout(init, 60);
+    document.querySelectorAll('[data-dcomp]').forEach(function (root) {
+      if (root.__ready) return; root.__ready = true;
+      var d = M.drivers.filter(function (x) { return x.code === root.getAttribute('data-code'); })[0], list = root.querySelector('[data-dcomp-list]');
+      if (!d) { root.style.display = 'none'; return; }
+      var eps = 1e-6, rows = [];
+      Object.keys(M.links || {}).forEach(function (key) {
+        var f = M.fittings[key]; if (!f) return; var ok = [];
+        for (var q = 1; q <= f.max; q++) {
+          if (d.modes.some(function (m) { return f.mA >= m.mA[0] && f.mA <= m.mA[1] && q * f.V >= m.V[0] - eps && q * f.V <= m.V[1] + eps && q * f.W >= m.W[0] - eps && q * f.W <= m.W[1] + eps; })) ok.push(q);
+        }
+        if (!ok.length) return;
+        var ranges = [], s = ok[0], p = ok[0];
+        for (var i = 1; i <= ok.length; i++) { if (ok[i] !== p + 1) { ranges.push(s === p ? '' + s : s + ' to ' + p); s = ok[i]; } p = ok[i]; }
+        M.links[key].forEach(function (l) { rows.push('<a class="dcomp__row" href="/products/' + l.handle + '"><span class="dcomp__name">' + l.label + '</span><span class="dcomp__qty">' + ranges.join(', ') + (ok[ok.length - 1] === 1 ? ' fitting' : ' fittings') + ' per driver</span></a>'); });
+      });
+      if (!rows.length) { root.style.display = 'none'; return; }
+      list.innerHTML = rows.join('');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Driver compatibility",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compatibility" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fittings this driver suits" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "How many of each fitting you can run on this driver. Keep to one fitting type per driver." },
+    { "type": "header", "content": "Colour" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "Driver compatibility" }]
+}
+{% endschema %}
