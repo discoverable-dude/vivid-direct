@@ -105,8 +105,10 @@
         "faq_2",
         "faq_3"
       ],
-      "name": "Product page \u2014 page.custom variant",
+      "name": "Product page — page.custom variant",
       "settings": {
+        "show_fitting_selector": true,
+        "show_driver_selector": true,
         "recs_show": true,
         "recs_source": "search_discovery",
         "recs_intent": "complementary",
@@ -124,8 +126,19 @@
         "trust_2": "In stock, ships fast",
         "trust_3": "2 year warranty",
         "about_image_opacity": 30,
-        "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
+        "delivery_note": "Free next day delivery over £150. Order by 1pm.",
         "design_articles_url": "#"
+      }
+    },
+    "driver_compat": {
+      "type": "driver-compatibility",
+      "settings": {
+        "eyebrow": "Compatibility",
+        "heading": "Fittings this driver suits",
+        "intro": "How many of each fitting you can run on this driver. Keep to one fitting type per driver.",
+        "color_scheme": "scheme-2",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "downloads": {
@@ -206,7 +219,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Fast Delivery",
-            "text": "Free next-day delivery over \u00a3150, order by 1pm."
+            "text": "Free next-day delivery over £150, order by 1pm."
           }
         },
         "feature_pdmDDU": {
@@ -249,16 +262,6 @@
         "color_scheme": "scheme-4",
         "padding_top": 60,
         "padding_bottom": 52
-      }
-    },
-    "driver_compat": {
-      "type": "driver-compatibility",
-      "settings": {
-        "eyebrow": "Compatibility",
-        "heading": "Fittings this driver suits",
-        "color_scheme": "scheme-2",
-        "padding_top": 48,
-        "padding_bottom": 48
       }
     }
   },

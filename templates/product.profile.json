@@ -107,6 +107,8 @@
       ],
       "name": "Product page — page.custom variant",
       "settings": {
+        "show_fitting_selector": true,
+        "show_driver_selector": true,
         "recs_show": true,
         "recs_source": "search_discovery",
         "recs_intent": "related",
