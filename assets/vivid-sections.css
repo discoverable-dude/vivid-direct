@@ -907,3 +907,6 @@
 .dcomp__row:hover { border-color: rgba(var(--color-foreground), .45); }
 .dcomp__name { font-weight: 700; }
 .dcomp__qty { font-size: 14px; opacity: .75; }
+
+.dsel--embedded .wrap { padding-left: 0; padding-right: 0; max-width: none; }
+.dsel--embedded .dsel__card { max-width: none; width: 100%; margin: 0; }
