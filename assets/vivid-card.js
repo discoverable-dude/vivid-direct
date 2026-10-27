@@ -75,7 +75,7 @@
       var qty = Math.max(1, parseInt(q && q.value, 10) || 1);
       if (!mainId) return;
       var items = [{ id: mainId, quantity: qty }];
-      var dq = driverId === mainId ? 0 : 1;
+      var dq = driverId === mainId ? 0 : Math.max(1, parseInt(btn.dataset.qty, 10) || 1);
       if (dq) items.push({ id: driverId, quantity: dq });
       addItems(btn, items);
       return;
@@ -83,6 +83,6 @@
 
     var id = parseInt(btn.dataset.cardAdd, 10);
     if (!id) return;
-    addItems(btn, [{ id: id, quantity: 1 }]);
+    addItems(btn, [{ id: id, quantity: Math.max(1, parseInt(btn.dataset.qty, 10) || 1) }]);
   });
 })();

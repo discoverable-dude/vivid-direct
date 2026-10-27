@@ -943,3 +943,7 @@
 .vselect__opt.is-on::after { content: ""; width: 5px; height: 10px; border-right: 2px solid #f5c400; border-bottom: 2px solid #f5c400; transform: rotate(45deg); margin-right: 4px; }
 .vselect__opt.is-on.is-active { background: #0b3a4d; }
 .dsel--fitting .dsel__field--types { max-width: 300px; }
+
+.dsel__grid--runs { grid-template-columns: 1fr 1fr; }
+.dsel__grid--runs .dsel__field--types { grid-column: 1 / -1; }
+.dsel__none--info { margin-bottom: 10px; background: #fff8e1; border-color: #f0d98a; }
