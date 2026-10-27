@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "downlight-family-product": {
+      "type": "product-downlight-family",
+      "blocks": {
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "none"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "name": "Vendor",
+          "settings": {
+            "label": "Made by",
+            "value": "{{ product.vendor }}",
+            "suffix": "",
+            "icon": "sale-tag"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "name": "IP Rating",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.ip_rating | metafield_text }}",
+            "suffix": "",
+            "icon": "waterproof"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "name": "Lumens",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.lumens.value }}",
+            "suffix": "",
+            "icon": "sun"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "name": "Voltage",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.voltage.value }}",
+            "suffix": "",
+            "icon": "zap"
+          }
+        },
+        "stat_5": {
+          "type": "stat",
+          "name": "Warranty",
+          "settings": {
+            "label": "",
+            "value": "{{ product.metafields.custom.warranty.value }}",
+            "suffix": "",
+            "icon": "shield-check"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "title": "Installation",
+            "body": "<p>Follow manufacturers intstructions inside your product once it arrives. Installation should only be carried out by trained professionals when dealing with wiring and electrical units.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "title": "Warranty",
+            "body": "<p>{{ product.metafields.custom.warranty.value }}</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "title": "Delivery information",
+            "body": "<p>{{ product.metafields.custom.delivery_notes | metafield_tag }}</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "variant_picker",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4",
+        "stat_5",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "name": "Downlight family product",
+      "settings": {
+        "hero_scheme": "scheme-2",
+        "about_scheme": "scheme-1",
+        "recipes_scheme": "",
+        "related_scheme": "",
+        "related_collection": "",
+        "related_limit": 4,
+        "trust_1": "Trade pricing available",
+        "trust_2": "In stock, ships fast",
+        "trust_3": "Manufacturer warranty",
+        "about_image_opacity": 30,
+        "delivery_note": "Free next day delivery over \u00a3150. Order by 1pm.",
+        "design_articles_url": "#",
+        "recs_scheme": "scheme-2",
+        "show_fitting_selector": true
+      }
+    },
+    "collection_cross_sell": {
+      "type": "collection-cross-sell",
+      "name": "Cross-sell rail",
+      "settings": {
+        "eyebrow": "You might also need",
+        "title": "Explore our range",
+        "collection": "best-sellers",
+        "products_to_show": 6,
+        "view_all_label": "See all",
+        "view_all_url": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "split_icon_grid": {
+      "type": "split-icon-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "heading": "Fast Delivery",
+            "text": "Free next-day delivery over \u00a3150, order by 1pm."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "heading": "Trade Accounts",
+            "text": "Dedicated pricing for electricians and businesses."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "phone",
+            "heading": "Expert Support",
+            "text": "Real advice from people who know the products."
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "package",
+            "heading": "Huge Range",
+            "text": "LED, neon, smart lighting and accessories, always in stock."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "name": "Split icon grid",
+      "settings": {
+        "eyebrow": "How We Help",
+        "heading": "A Partner, Not Just a Supplier",
+        "image": "shopify://shop_images/Twin-Cove-system-LED.jpg",
+        "image_position": "left",
+        "color_scheme": "scheme-4",
+        "padding_top": 60,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "downlight-family-product",
+    "collection_cross_sell",
+    "split_icon_grid"
+  ]
+}
