@@ -947,3 +947,17 @@
 .dsel__grid--runs { grid-template-columns: 1fr 1fr; }
 .dsel__grid--runs .dsel__field--types { grid-column: 1 / -1; }
 .dsel__none--info { margin-bottom: 10px; background: #fff8e1; border-color: #f0d98a; }
+
+/* Calculator mobile polish */
+.dsel__grid--runs { align-items: end; }
+.dsel__field > span { line-height: 1.25; }
+.dsel__alt { white-space: nowrap; }
+@media (max-width: 640px) {
+  .dsel__grid--runs { gap: 10px; }
+  .dsel__sub { flex-direction: column; align-items: stretch; gap: 10px; }
+  .dsel__sub .dsel__alt { width: 100%; }
+  .dsel__sub .dsel__view { text-align: center; padding: 4px 0; }
+  .dsel--embedded .dsel__card { padding: 14px; }
+  .dsel__rechead { align-items: flex-start; }
+  .dsel__recname { overflow-wrap: anywhere; }
+}

@@ -69,6 +69,16 @@
         var up = M.blocks.filter(function (b) { return b.wpm > w && (dimOnly || b.note !== 'Dim to Warm'); }).sort(function (a, b) { return a.wpm - b.wpm; })[0];
         return { b: up || M.blocks[M.blocks.length - 1], est: true };
       }
+      function sizeOf(c) { var d = M.drivers[c]; return d ? parseFloat(String(d.size).replace(/[^0-9.]/g, '')) || 0 : 0; }
+      // Never recommend a driver smaller than the load: if the matrix cell is undersized, step up to the next size in the same driver type.
+      function fit(code, load, type) {
+        if (!code || !M.drivers[code]) return null;
+        if (sizeOf(code) >= load) return code;
+        var seen = {}, pool = [];
+        M.blocks.forEach(function (bl) { (bl.cells[type] || []).forEach(function (c) { if (c && M.drivers[c] && !seen[c]) { seen[c] = 1; pool.push(c); } }); });
+        pool = pool.filter(function (c) { return sizeOf(c) >= load; }).sort(function (a, b) { return sizeOf(a) - sizeOf(b); });
+        return pool[0] || null;
+      }
       function money(c) { return '£' + (c / 100).toFixed(2); }
       function fill(sel, items, keep) {
         var cur = sel.value; sel.innerHTML = '';
@@ -90,8 +100,8 @@
         var cells = b.cells[type] || [];
         var load = total + 'W</strong> (' + w + 'W/m x ' + L + 'm' + (R > 1 ? ' x ' + R + ' runs' : '') + ')';
         var html = '<p class="dsel__load">Total load: <strong>' + load + (bf.est ? ' <em>Estimate, based on the ' + b.wpm + 'W/m guide</em>' : '') + '</p>';
-        var code = cells[L * R - 1], qty = 1, perRun = false;
-        if (!code && R > 1) { code = cells[L - 1]; qty = R; perRun = true; }
+        var code = fit(cells[L * R - 1], total, type), qty = 1, perRun = false;
+        if (!code && R > 1) { code = fit(cells[L - 1], Math.round(w * L * 10) / 10, type); qty = R; perRun = true; }
         var d = code && M.drivers[code];
         if (!d) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + (TYPE_LABEL[type] || type || '').toLowerCase() + ' driver for ' + (R > 1 ? 'this much strip' : 'this length') + '. Try another type, or call us on 0203 916 6116.</p>'; return; }
         if (perRun) html += '<p class="dsel__none dsel__none--info">' + total + 'W is more than one standard driver covers here, so we suggest one driver for each ' + L + 'm run (' + R + ' drivers).</p>';
