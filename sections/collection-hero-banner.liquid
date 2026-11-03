@@ -31,7 +31,14 @@
         <span aria-hidden="true">&rsaquo;</span>
         <span>{{ collection.title }}</span>
       </nav>
-      <h1 class="colhero__title">{{ section.settings.heading | default: collection.title }}</h1>
+      {%- assign brand_logo = collection.metafields.custom.brand_logo.value -%}
+      {%- if brand_logo != blank and section.settings.heading == blank -%}
+        <h1 class="colhero__title colhero__title--logo">
+          <img class="colhero__logo" src="{{ brand_logo | image_url: width: 600 }}" alt="{{ collection.title | escape }}" width="{{ brand_logo.width }}" height="{{ brand_logo.height }}" loading="eager">
+        </h1>
+      {%- else -%}
+        <h1 class="colhero__title">{{ section.settings.heading | default: collection.title }}</h1>
+      {%- endif -%}
       {%- if section.settings.description != blank -%}
         <div class="colhero__desc">{{ section.settings.description }}</div>
       {%- elsif collection.description != blank -%}
@@ -88,6 +95,8 @@
     color: var(--ink);
     margin: 0 0 16px;
   }
+  .colhero__title--logo { margin: 0 0 20px; line-height: 0; }
+  .colhero__logo { display: block; height: auto; width: auto; max-width: min(300px, 100%); max-height: 72px; object-fit: contain; }
   .colhero__desc {
     font-family: var(--font-body);
     font-size: 16px;

@@ -11,8 +11,13 @@
   # Products with multiple options (firewood: Load × Log Size) OR many variants (>4) can't be
   # quick-added cleanly from a card — one button per variant overflows. Send them to the PDP to
   # choose. Single-option products with a few variants (potatoes by weight) keep quick-add.
+  # Pass quick_variants: true where per-variant buttons are wanted (cart upsell, design articles).
+  # Everywhere else (PDP "Compatible with" etc) any product with more than one variant links to the PDP.
   assign _multi = false
   if product.options_with_values.size > 1 or product.variants.size > 4
+    assign _multi = true
+  endif
+  if quick_variants != true and product.variants.size > 1
     assign _multi = true
   endif
 -%}
@@ -34,7 +39,7 @@
     </p>
 
     {%- if _multi -%}
-      <a href="{{ product.url }}" class="mcard__choose">Choose options <span aria-hidden="true">&rarr;</span></a>
+      <a href="{{ product.url }}" class="mcard__choose">View options <span aria-hidden="true">&rarr;</span></a>
     {%- else -%}
       {%- render 'card-add-buttons', product: product -%}
     {%- endif -%}

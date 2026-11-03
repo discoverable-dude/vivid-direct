@@ -215,7 +215,7 @@
         {%- if _shown >= 4 -%}{%- break -%}{%- endif -%}
         {%- unless _cart_pids contains _p.id -%}
           {%- assign _shown = _shown | plus: 1 -%}
-          {%- render 'product-card', product: _p -%}
+          {%- render 'product-card', product: _p, quick_variants: true -%}
         {%- endunless -%}
       {%- endfor -%}
     {%- endcapture -%}
