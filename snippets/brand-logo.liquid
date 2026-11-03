@@ -1,0 +1,20 @@
+{%- comment -%}
+  Brand logo above the product title. Uses the first collection the product is in that has
+  a Brand logo (collection metafield custom.brand_logo), and links to that brand page.
+  Usage: {% render 'brand-logo', product: product %}
+{%- endcomment -%}
+{%- liquid
+  assign _bl_coll = null
+  for c in product.collections
+    if c.metafields.custom.brand_logo.value != blank
+      assign _bl_coll = c
+      break
+    endif
+  endfor
+-%}
+{%- if _bl_coll -%}
+  {%- assign _bl = _bl_coll.metafields.custom.brand_logo.value -%}
+  <a class="pp-brand" href="{{ _bl_coll.url }}" aria-label="{{ _bl_coll.title | escape }}">
+    <img src="{{ _bl | image_url: width: 400 }}" alt="{{ _bl_coll.title | escape }}" width="{{ _bl.width }}" height="{{ _bl.height }}" loading="eager">
+  </a>
+{%- endif -%}

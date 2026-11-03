@@ -961,3 +961,7 @@
   .dsel__rechead { align-items: flex-start; }
   .dsel__recname { overflow-wrap: anywhere; }
 }
+
+/* Brand logo above the product title */
+.pp-brand { display: inline-block; margin: 0 0 14px; line-height: 0; background: #0B1C29; padding: 10px 16px; border-radius: 6px; }
+.pp-brand img { display: block; width: auto; height: auto; max-height: 36px; max-width: 160px; object-fit: contain; }
