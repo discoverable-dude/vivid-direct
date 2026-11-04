@@ -23,7 +23,7 @@
 -%}
 
 <div class="mcard">
-  <a href="{{ product.url }}" class="mcard__media" aria-label="{{ product.title | escape }}">
+  <a href="{{ product.url }}" class="mcard__media{% if product.metafields.custom.image_fit.value == 'cover' %} mcard__media--cover{% endif %}" aria-label="{{ product.title | escape }}">
     {%- if product.featured_image -%}
       <img
         src="{{ product.featured_image | image_url: width: 600 }}"

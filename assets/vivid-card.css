@@ -85,3 +85,6 @@
 .mcard__choose { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; background: var(--cta); color: var(--white); border-radius: var(--radius); font-family: var(--font-body); font-size: 13px; font-weight: 700; text-decoration: none; transition: background 0.18s; }
 .mcard__choose:hover { background: var(--cta-dark); }
 .mcard__choose:focus-visible { outline: 3px solid var(--wheat); outline-offset: 2px; }
+
+/* Photos with a full background (product metafield custom.image_fit = cover): crop to fill the square, no white strips */
+.mcard__media--cover img { object-fit: cover; }
