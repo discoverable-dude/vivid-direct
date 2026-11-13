@@ -66,17 +66,29 @@
     if (!btn || btn.disabled || btn.classList.contains('is-loading')) return;
     e.preventDefault();
 
+    var multi = null;
+    if (btn.dataset.items) {
+      try { multi = JSON.parse(btn.dataset.items).filter(function (i) { return i && i.id; }); } catch (err) { multi = null; }
+      if (multi && !multi.length) multi = null;
+    }
+
+    if (multi && !btn.hasAttribute('data-card-both')) { addItems(btn, multi); return; }
+
     if (btn.hasAttribute('data-card-both')) {
       var driverId = parseInt(btn.dataset.cardBoth, 10);
       var form = mainForm(btn);
-      if (!driverId || !form) return;
+      if ((!driverId && !multi) || !form) return;
       var mainId = parseInt(form.querySelector('[name="id"]').value, 10);
       var q = form.querySelector('[name="quantity"]');
       var qty = Math.max(1, parseInt(q && q.value, 10) || 1);
       if (!mainId) return;
       var items = [{ id: mainId, quantity: qty }];
-      var dq = driverId === mainId ? 0 : Math.max(1, parseInt(btn.dataset.qty, 10) || 1);
-      if (dq) items.push({ id: driverId, quantity: dq });
+      if (multi) {
+        multi.forEach(function (m) { if (m.id !== mainId) items.push({ id: m.id, quantity: Math.max(1, parseInt(m.quantity, 10) || 1) }); });
+      } else {
+        var dq = driverId === mainId ? 0 : Math.max(1, parseInt(btn.dataset.qty, 10) || 1);
+        if (dq) items.push({ id: driverId, quantity: dq });
+      }
       addItems(btn, items);
       return;
     }

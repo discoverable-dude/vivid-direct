@@ -36,8 +36,10 @@
           <span>Number of runs</span>
           <select data-dsel-runs aria-label="Number of runs" data-vselect></select>
         </label>
-        <label class="dsel__field dsel__field--types"><span>Driver type</span><select data-dsel-type data-vselect></select></label>
       </div>
+      <div class="dsel__extra" data-dsel-extra></div>
+      <button type="button" class="dsel__addline" data-dsel-addline>+ Add another length</button>
+      <label class="dsel__field dsel__field--types dsel__field--typeonly"><span>Driver type</span><select data-dsel-type data-vselect></select></label>
       <div class="dsel__result" aria-live="polite" data-dsel-result></div>
       <p class="dsel__note">Prices shown are ex VAT. Always check the driver suits your controls and the strip's voltage (24V). If unsure, call us on 0203 916 6116.</p>
     </div>
@@ -92,19 +94,68 @@
         var types = Object.keys(b.cells);
         if (root.getAttribute('data-dim-only') === 'true' && types.length > 1) types = types.filter(function (t) { return t !== 'Fixed'; });
         fill(typeSel, types.map(function (t) { return { v: t, t: TYPE_LABEL[t] || t }; }), true);
+        root.querySelectorAll('[data-row-length]').forEach(function (sel) { fill(sel, lens, true); });
+      }
+      function lines() {
+        var out = [{ L: parseInt(lenSel.value, 10) || 1, R: parseInt(runsSel.value, 10) || 1 }];
+        root.querySelectorAll('[data-dsel-row]').forEach(function (row) {
+          out.push({ L: parseInt(row.querySelector('[data-row-length]').value, 10) || 1, R: parseInt(row.querySelector('[data-row-runs]').value, 10) || 1 });
+        });
+        return out;
+      }
+      function addRow() {
+        var extra = root.querySelector('[data-dsel-extra]');
+        if (extra.children.length >= 5) return;
+        var row = document.createElement('div'); row.className = 'dsel__row'; row.setAttribute('data-dsel-row', '');
+        row.innerHTML = '<div class="dsel__grid dsel__grid--runs"><label class="dsel__field"><span>Length of each run (m)</span><select data-row-length aria-label="Length of each run in metres"></select></label><label class="dsel__field"><span>Number of runs</span><select data-row-runs aria-label="Number of runs"></select></label></div><button type="button" class="dsel__remove" data-row-remove>Remove this length</button>';
+        extra.appendChild(row);
+        var ls = row.querySelector('[data-row-length]'), rs = row.querySelector('[data-row-runs]');
+        for (var ri2 = 1; ri2 <= 10; ri2++) { var ro2 = document.createElement('option'); ro2.value = ri2; ro2.textContent = ri2 + (ri2 === 1 ? ' run' : ' runs'); rs.appendChild(ro2); }
+        var b0 = blockFor(parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value)).b, lens2 = [];
+        for (var li = 1; li <= b0.maxLength; li++) lens2.push({ v: li, t: li + (li === 1 ? ' metre' : ' metres') });
+        fill(ls, lens2, false); ls.value = Math.min(2, b0.maxLength);
+        ls.addEventListener('change', render); rs.addEventListener('change', render);
+        row.querySelector('[data-row-remove]').addEventListener('click', function () { extra.removeChild(row); root.querySelector('[data-dsel-addline]').style.display = ''; render(); });
+        if (extra.children.length >= 5) root.querySelector('[data-dsel-addline]').style.display = 'none';
+        render();
       }
       function render() {
         var my = ++token;
-        var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), L = parseInt(lenSel.value, 10) || 1, R = parseInt(runsSel.value, 10) || 1;
-        var bf = blockFor(w), b = bf.b, total = Math.round(w * L * R * 10) / 10, type = typeSel.value;
-        var cells = b.cells[type] || [];
-        var load = total + 'W</strong> (' + w + 'W/m x ' + L + 'm' + (R > 1 ? ' x ' + R + ' runs' : '') + ')';
+        var w = parseFloat(wpmSel.value) || parseFloat(wpmSel.options[0].value), ln = lines();
+        var bf = blockFor(w), b = bf.b, type = typeSel.value, cells = b.cells[type] || [];
+        var T = ln.reduce(function (n, x) { return n + x.L * x.R; }, 0), total = Math.round(w * T * 10) / 10;
+        var multiLine = ln.length > 1, anyRuns = ln.some(function (x) { return x.R > 1; });
+        var load = multiLine ? total + 'W</strong> (' + w + 'W/m x ' + T + 'm in total)' : total + 'W</strong> (' + w + 'W/m x ' + ln[0].L + 'm' + (ln[0].R > 1 ? ' x ' + ln[0].R + ' runs' : '') + ')';
         var html = '<p class="dsel__load">Total load: <strong>' + load + (bf.est ? ' <em>Estimate, based on the ' + b.wpm + 'W/m guide</em>' : '') + '</p>';
-        var code = fit(cells[L * R - 1], total, type), qty = 1, perRun = false;
-        if (!code && R > 1) { code = fit(cells[L - 1], Math.round(w * L * 10) / 10, type); qty = R; perRun = true; }
-        var d = code && M.drivers[code];
-        if (!d) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + (TYPE_LABEL[type] || type || '').toLowerCase() + ' driver for ' + (R > 1 ? 'this much strip' : 'this length') + '. Try another type, or call us on 0203 916 6116.</p>'; return; }
-        if (perRun) html += '<p class="dsel__none dsel__none--info">' + total + 'W is more than one standard driver covers here, so we suggest one driver for each ' + L + 'm run (' + R + ' drivers).</p>';
+        var picks = [], perRun = false, one = fit(cells[T - 1], total, type);
+        if (one) picks = [{ code: one, qty: 1 }];
+        else if (anyRuns || multiLine) {
+          var map = {}, ok = true;
+          ln.forEach(function (x) { var c = fit(cells[x.L - 1], Math.round(w * x.L * 10) / 10, type); if (!c) { ok = false; return; } map[c] = (map[c] || 0) + x.R; });
+          if (ok) { Object.keys(map).forEach(function (c) { picks.push({ code: c, qty: map[c] }); }); perRun = true; }
+        }
+        if (!picks.length) { res.innerHTML = html + '<p class="dsel__none">We do not have a standard ' + (TYPE_LABEL[type] || type || '').toLowerCase() + ' driver for ' + (multiLine || anyRuns ? 'this much strip' : 'this length') + '. Try another type, or call us on 0203 916 6116.</p>'; return; }
+        var nDrivers = picks.reduce(function (n, p) { return n + p.qty; }, 0);
+        if (perRun) html += '<p class="dsel__none dsel__none--info">' + total + 'W is more than one standard driver covers here, so we suggest a separate driver for each run (' + nDrivers + ' drivers in all).</p>';
+        if (picks.length > 1) {
+          var items = picks.map(function (p) { return { id: M.drivers[p.code].variantId, quantity: p.qty }; });
+          var ia = " data-items='" + JSON.stringify(items) + "'";
+          var rows = picks.map(function (p, i) { var dd = M.drivers[p.code]; return '<div class="dsel__multi"><span class="dsel__thumb" data-thumb="' + i + '"></span><div><p class="dsel__recname">' + p.qty + ' x ' + dd.product + (dd.size ? ' &middot; ' + dd.size : '') + '</p><p class="dsel__reccode">' + p.code + '</p><p class="dsel__recprice" data-price="' + i + '">&nbsp;</p></div></div>'; }).join('');
+          var mb = standalone ? '<button type="button" class="mcard__btn dsel__add" data-card-add="0"' + ia + '><span class="mcard__btn-label">Add all ' + nDrivers + ' drivers to basket</span><span class="loading__spinner hidden"></span></button>' : '<button type="button" class="mcard__btn dsel__add" data-card-both="0"' + ia + '><span class="mcard__btn-label">Add strip and ' + nDrivers + ' drivers to basket</span><span class="loading__spinner hidden"></span></button><div class="dsel__sub"><button type="button" class="dsel__alt" data-card-add="0"' + ia + '><span class="mcard__btn-label">Add drivers only</span><span class="loading__spinner hidden"></span></button></div>';
+          res.innerHTML = html + '<div class="dsel__rec">' + rows + '<div class="dsel__recbtns">' + mb + '</div></div>';
+          picks.forEach(function (p, i) {
+            var dd = M.drivers[p.code];
+            fetch('/products/' + dd.handle + '.js').then(function (r) { return r.json(); }).then(function (pr) {
+              if (my !== token) return;
+              var v = pr.variants.filter(function (x) { return x.id === dd.variantId; })[0], el = res.querySelector('[data-price="' + i + '"]');
+              if (v && el) el.innerHTML = p.qty + ' x ' + money(v.price) + ' <small>ex VAT each</small>' + (v.available ? '' : ' &middot; out of stock');
+              var src = (v && v.featured_image && v.featured_image.src) || pr.featured_image, th = res.querySelector('[data-thumb="' + i + '"]');
+              if (src && th) th.innerHTML = '<img alt="" width="64" height="64" src="' + src + (src.indexOf('?') > -1 ? '&' : '?') + 'width=160">';
+            }).catch(function () {});
+          });
+          return;
+        }
+        var code = picks[0].code, qty = picks[0].qty, d = M.drivers[code];
         var q = qty > 1 ? ' data-qty="' + qty + '"' : '', lab = qty > 1 ? qty + ' drivers' : 'driver';
         var both = standalone ? '<button type="button" class="mcard__btn dsel__add" data-card-add="' + d.variantId + '"' + q + '><span class="mcard__btn-label">Add ' + lab + ' to basket</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a>' : '<button type="button" class="mcard__btn dsel__add" data-card-both="' + d.variantId + '"' + q + '><span class="mcard__btn-label">Add strip and ' + lab + ' to basket</span><span class="loading__spinner hidden"></span></button><div class="dsel__sub"><button type="button" class="dsel__alt" data-card-add="' + d.variantId + '"' + q + '><span class="mcard__btn-label">Add ' + lab + ' only</span><span class="loading__spinner hidden"></span></button><a class="dsel__view" href="/products/' + d.handle + '?variant=' + d.variantId + '">View driver</a></div>';
         res.innerHTML = html + '<div class="dsel__rec"><div class="dsel__rechead"><span class="dsel__thumb" data-thumb></span><div><p class="dsel__recname">' + d.product + (d.size ? ' &middot; ' + d.size : '') + '</p><p class="dsel__reccode">' + code + '</p><p class="dsel__recprice" data-price>&nbsp;</p></div></div><div class="dsel__recbtns">' + both + '</div></div>';
@@ -118,6 +169,7 @@
       }
       wpmSel.addEventListener('change', function () { rebuild(); render(); });
       lenSel.addEventListener('change', render); runsSel.addEventListener('change', render); typeSel.addEventListener('change', render);
+      root.querySelector('[data-dsel-addline]').addEventListener('click', addRow);
       rebuild(); render();
     });
   }
