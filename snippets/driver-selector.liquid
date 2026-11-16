@@ -81,6 +81,14 @@
         pool = pool.filter(function (c) { return sizeOf(c) >= load; }).sort(function (a, b) { return sizeOf(a) - sizeOf(b); });
         return pool[0] || null;
       }
+      // Treat the whole job as one power point: smallest driver of this type that covers the load with
+      // 10% headroom (a 200W driver covers up to 180W, then step up). Used when the length table runs out.
+      function bySize(load, type) {
+        var seen = {}, pool = [];
+        M.blocks.forEach(function (bl) { (bl.cells[type] || []).forEach(function (c) { if (c && M.drivers[c] && !seen[c]) { seen[c] = 1; pool.push(c); } }); });
+        pool = pool.filter(function (c) { return sizeOf(c) * 0.9 >= load; }).sort(function (a, b) { return sizeOf(a) - sizeOf(b); });
+        return pool[0] || null;
+      }
       function money(c) { return '£' + (c / 100).toFixed(2); }
       function fill(sel, items, keep) {
         var cur = sel.value; sel.innerHTML = '';
@@ -127,7 +135,7 @@
         var multiLine = ln.length > 1, anyRuns = ln.some(function (x) { return x.R > 1; });
         var load = multiLine ? total + 'W</strong> (' + w + 'W/m x ' + T + 'm in total)' : total + 'W</strong> (' + w + 'W/m x ' + ln[0].L + 'm' + (ln[0].R > 1 ? ' x ' + ln[0].R + ' runs' : '') + ')';
         var html = '<p class="dsel__load">Total load: <strong>' + load + (bf.est ? ' <em>Estimate, based on the ' + b.wpm + 'W/m guide</em>' : '') + '</p>';
-        var picks = [], perRun = false, one = fit(cells[T - 1], total, type);
+        var picks = [], perRun = false, one = fit(cells[T - 1], total, type) || bySize(total, type);
         if (one) picks = [{ code: one, qty: 1 }];
         else if (anyRuns || multiLine) {
           var map = {}, ok = true;
