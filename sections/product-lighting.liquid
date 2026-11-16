@@ -47,7 +47,7 @@
 
         {%- if product.images.size > 1 -%}
           <div class="pp-gallery__thumbs">
-            {%- for img in product.images limit: 5 -%}
+            {%- for img in product.images limit: 20 -%}
               <button class="pp-gallery__thumb{% if forloop.first %} is-active{% endif %}"
                       data-src="{{ img | image_url: width: 1400 }}"
                       data-alt="{{ img.alt | default: product.title | escape }}"
