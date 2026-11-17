@@ -107,8 +107,6 @@
       ],
       "name": "Product page — page.custom variant",
       "settings": {
-        "show_fitting_selector": false,
-        "show_driver_selector": false,
         "recs_show": true,
         "recs_source": "search_discovery",
         "recs_intent": "related",
@@ -127,7 +125,10 @@
         "trust_3": "Trade pricing available",
         "about_image_opacity": 30,
         "delivery_note": "Lead time and delivery confirmed with your quote",
-        "design_articles_url": "#"
+        "design_articles_url": "#",
+        "quote_mode": true,
+        "show_driver_selector": false,
+        "show_fitting_selector": false
       }
     },
     "downloads": {
