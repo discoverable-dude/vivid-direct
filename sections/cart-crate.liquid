@@ -173,7 +173,13 @@
             </button>
 
             <p class="crate-trust-copy">Free returns &middot; 48hr tracked delivery</p>
-            <p class="crate-trust-copy">Order by 1pm for next-day delivery</p>
+            {%- assign _cart_ext = false -%}
+            {%- for _ci in cart.items -%}{%- if _ci.product.tags contains 'Extended Delivery' -%}{%- assign _cart_ext = true -%}{%- endif -%}{%- endfor -%}
+            {%- if _cart_ext -%}
+              <p class="crate-trust-copy">Some items have extended delivery, so no next-day. Your delivery date is shown at checkout.</p>
+            {%- else -%}
+              <p class="crate-trust-copy">Order by 1pm for next-day delivery</p>
+            {%- endif -%}
 
             <ul class="crate-trust-list">
               <li>

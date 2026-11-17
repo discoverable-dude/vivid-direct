@@ -305,13 +305,17 @@
 
           <p class="pp-delivery">
             {%- render 'vivid-icon', icon: 'truck', size: 16 -%}
-            {{ section.settings.delivery_note }}
+            {%- if product.tags contains 'Extended Delivery' -%}Extended delivery item. This takes longer than our usual next day service, and your estimated delivery date is shown at checkout.{%- else -%}{{ section.settings.delivery_note }}{%- endif -%}
           </p>
 
           {%- liquid
             assign _t1 = product.metafields.custom.trust_1.value | default: section.settings.trust_1
             assign _t2 = product.metafields.custom.trust_2.value | default: section.settings.trust_2
             assign _t3 = product.metafields.custom.trust_3.value | default: section.settings.trust_3
+            if product.tags contains 'Extended Delivery'
+              assign _t2 = 'Extended delivery item'
+              assign _t3 = '-'
+            endif
             if _t1 == '-'
               assign _t1 = ''
             endif
