@@ -989,3 +989,7 @@
 .pp-quote__ok { margin: 0; padding: 12px 14px; border-radius: 8px; background: rgba(31,138,76,.18); font-weight: 600; }
 .pp-quote__err { margin: 0 0 12px; padding: 10px 12px; border-radius: 8px; background: rgba(179,38,30,.18); font-size: 14px; }
 @media (max-width: 640px) { .pp-quote__row { grid-template-columns: 1fr; } }
+.pp-quote { box-sizing: border-box; max-width: 100%; }
+.pp-quote__row > * { min-width: 0; }
+.pp-quote__field { min-width: 0; }
+.pp-quote__field input, .pp-quote__field textarea { width: 100%; box-sizing: border-box; min-width: 0; }
