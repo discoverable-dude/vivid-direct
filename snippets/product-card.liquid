@@ -35,10 +35,13 @@
   <div class="mcard__body">
     <h3 class="mcard__title"><a href="{{ product.url }}" class="mcard__name">{{ product.title }}</a></h3>
     <p class="mcard__sub">
-      {%- if _multi -%}From {{ _min | money }}{%- elsif _vcount > 1 -%}{{ _vcount }} options from {{ _min | money }}{%- else -%}{{ _min | money }}{%- endif -%}
+      {%- if product.template_suffix == 'price-on-request' -%}Price on request
+      {%- elsif _multi -%}From {{ _min | money }}{%- elsif _vcount > 1 -%}{{ _vcount }} options from {{ _min | money }}{%- else -%}{{ _min | money }}{%- endif -%}
     </p>
 
-    {%- if _multi -%}
+    {%- if product.template_suffix == 'price-on-request' -%}
+      <a href="{{ product.url }}" class="mcard__choose">Request a quote <span aria-hidden="true">&rarr;</span></a>
+    {%- elsif _multi -%}
       <a href="{{ product.url }}" class="mcard__choose">View options <span aria-hidden="true">&rarr;</span></a>
     {%- else -%}
       {%- render 'card-add-buttons', product: product -%}

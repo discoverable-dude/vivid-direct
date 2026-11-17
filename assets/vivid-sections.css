@@ -975,3 +975,17 @@
 .dsel__field--typeonly { margin-bottom: 14px; }
 .dsel__multi { display: flex; align-items: center; gap: 14px; padding: 8px 0; border-bottom: 1px solid rgba(8,42,56,.1); }
 .dsel__multi:last-of-type { margin-bottom: 12px; }
+
+/* Price on request template */
+.pp-info--quote .pp-price, .pp-info--quote .pp-price-inc, .pp-info--quote .vd-member, .pp-info--quote .pp-product-form { display: none !important; }
+.pp-quote { margin: 8px 0 16px; padding: 20px; border: 1px solid var(--line-strong, rgba(255,255,255,.18)); border-radius: 10px; background: rgba(255,255,255,.03); }
+.pp-quote__title { margin: 0 0 6px; font-size: 22px; line-height: 1.2; }
+.pp-quote__intro { margin: 0 0 16px; opacity: .8; font-size: 15px; line-height: 1.5; }
+.pp-quote__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pp-quote__field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; font-size: 13px; font-weight: 600; }
+.pp-quote__field input, .pp-quote__field textarea { padding: 10px 12px; border: 1px solid #b8c7cd; border-radius: 8px; font: inherit; font-size: 15px; background: #fff; color: #082a38; }
+.pp-quote__field textarea { resize: vertical; min-height: 96px; }
+.pp-quote__btn { width: 100%; }
+.pp-quote__ok { margin: 0; padding: 12px 14px; border-radius: 8px; background: rgba(31,138,76,.18); font-weight: 600; }
+.pp-quote__err { margin: 0 0 12px; padding: 10px 12px; border-radius: 8px; background: rgba(179,38,30,.18); font-size: 14px; }
+@media (max-width: 640px) { .pp-quote__row { grid-template-columns: 1fr; } }

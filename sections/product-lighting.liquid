@@ -67,7 +67,7 @@
       </div>
 
       <!-- Info panel -->
-      <div class="pp-info">
+      <div class="pp-info{% if section.settings.quote_mode %} pp-info--quote{% endif %}">
 
         {%- comment -%} Breadcrumb — inside info panel, right-column position matches design {%- endcomment -%}
         {%- assign crumb_coll = collection -%}
@@ -160,6 +160,38 @@
           {%- assign pp_variant_picker_block = section.blocks | where: "type", "variant_picker" | first -%}
           {%- if pp_variant_picker_block -%}
             {%- render 'product-variant-picker', product: product, block: pp_variant_picker_block, product_form_id: pp_form_id -%}
+          {%- endif -%}
+
+          {%- if section.settings.quote_mode -%}
+            {%- assign quote_id = 'quote-' | append: section.id -%}
+            {%- assign quote_form_id = quote_id | append: '-form' -%}
+            <div class="pp-quote" id="{{ quote_id }}">
+              <h2 class="pp-quote__title">{{ section.settings.quote_heading }}</h2>
+              <p class="pp-quote__intro">{{ section.settings.quote_intro }}</p>
+              {%- form 'contact', id: quote_form_id, class: 'pp-quote__form' -%}
+                {%- if form.posted_successfully? -%}
+                  <p class="pp-quote__ok" role="status">{{ section.settings.quote_success }}</p>
+                {%- else -%}
+                  {%- if form.errors -%}
+                    <div class="pp-quote__err" role="alert">{{ form.errors | default_errors }}</div>
+                  {%- endif -%}
+                  <input type="hidden" name="contact[Enquiry type]" value="Price on request">
+                  <input type="hidden" name="contact[Product]" value="{{ product.title | escape }}">
+                  <input type="hidden" name="contact[SKU]" value="{{ pp_variant.sku | escape }}">
+                  <input type="hidden" name="contact[Product URL]" value="{{ shop.url }}{{ product.url }}">
+                  <div class="pp-quote__row">
+                    <label class="pp-quote__field"><span>Name</span><input type="text" name="contact[name]" autocomplete="name" required value="{{ form.name }}"></label>
+                    <label class="pp-quote__field"><span>Email</span><input type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}"></label>
+                  </div>
+                  <div class="pp-quote__row">
+                    <label class="pp-quote__field"><span>Phone</span><input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}"></label>
+                    <label class="pp-quote__field"><span>Company (optional)</span><input type="text" name="contact[Company]" autocomplete="organization"></label>
+                  </div>
+                  <label class="pp-quote__field"><span>What do you need? Sizes, finish, quantity, timescale</span><textarea name="contact[body]" rows="4" required>{{ form.body }}</textarea></label>
+                  <button type="submit" class="pp-atc pp-quote__btn"><span>{{ section.settings.quote_button }}</span></button>
+                {%- endif -%}
+              {%- endform -%}
+            </div>
           {%- endif -%}
 
           {%- comment -%} ATC form — wrapped in <product-form> so add-to-cart is AJAX and opens the drawer {%- endcomment -%}
@@ -602,6 +634,12 @@
       "step": 1,
       "default": 4
     },
+    { "type": "header", "content": "Price on request" },
+    { "type": "checkbox", "id": "quote_mode", "label": "Price on request mode", "info": "Hides the price and Add to basket, and shows an enquiry form instead. Used by the price-on-request template.", "default": false },
+    { "type": "text", "id": "quote_heading", "label": "Enquiry heading", "default": "Request a quote" },
+    { "type": "textarea", "id": "quote_intro", "label": "Enquiry intro", "default": "This one is made or priced to order. Tell us what you need and we will come back with a price and lead time." },
+    { "type": "text", "id": "quote_button", "label": "Button label", "default": "Request a quote" },
+    { "type": "text", "id": "quote_success", "label": "Thank you message", "default": "Thanks, we have your enquiry and will be in touch with a price." },
     { "type": "header", "content": "Buy-box trust row" },
     { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Trade pricing available" },
     { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Free next day delivery over £150" },
