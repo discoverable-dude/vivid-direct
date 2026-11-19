@@ -110,7 +110,7 @@
         "recs_show": true,
         "recs_source": "search_discovery",
         "recs_intent": "related",
-        "recs_heading": "Compatible with",
+        "recs_heading": "You may also like",
         "recs_collection": "",
         "recs_scheme": "",
         "recs_limit": 8,
