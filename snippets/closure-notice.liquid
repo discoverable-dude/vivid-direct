@@ -1,14 +1,18 @@
 {%- comment -%}
   Christmas closure notice. Shows automatically and stops showing on 4 January 2027.
-  Usage: {% render 'closure-notice' %}  (or {% render 'closure-notice', compact: true %})
+  Usage: {% render 'closure-notice' %}  (or compact: true for the slide-out basket, bar: true for the strip under the announcement bar)
   Edit the dates or wording below.
 {%- endcomment -%}
 {%- assign cn_now = 'now' | date: '%s' | plus: 0 -%}
 {%- assign cn_end = '2027-01-04 00:00:00 +0000' | date: '%s' | plus: 0 -%}
 {%- if cn_now < cn_end -%}
   {{ 'closure-notice.css' | asset_url | stylesheet_tag }}
+  {%- if bar -%}
+    <div class="closure-bar" role="note"><p class="closure-bar__text"><strong>Christmas:</strong> we close 24 Dec and re-open 4 Jan. Non-fabricated orders arrive by 21 Dec. Fabricated orders, order by 14 Dec.</p></div>
+  {%- else -%}
   <div class="closure-notice{% if compact %} closure-notice--compact{% endif %}" role="note">
     <p class="closure-notice__title">Christmas opening</p>
     <p class="closure-notice__text">We close on 24 December and re-open on 4 January 2027. The last day for non-fabricated orders to arrive before Christmas is 21 December. For fabricated orders, please order before 14 December to be certain of delivery before Christmas.</p>
   </div>
+  {%- endif -%}
 {%- endif -%}

@@ -17,9 +17,13 @@
         "mode": "all",
         "interval": 5,
         "left_text": "Huge range of lighting",
-        "mid_text": "Free next day delivery over \u00a3150 \u2014 order by 1pm",
+        "mid_text": "Free next day delivery over £150 — order by 1pm",
         "right_text": "Trade accounts available"
       }
+    },
+    "closure-bar": {
+      "type": "closure-bar",
+      "settings": {}
     },
     "header": {
       "type": "header",
@@ -81,6 +85,7 @@
   },
   "order": [
     "announcement-bar",
+    "closure-bar",
     "header",
     "search-bar"
   ]

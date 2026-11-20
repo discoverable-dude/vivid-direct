@@ -6,3 +6,8 @@
 .closure-notice--compact .closure-notice__text { font-size: 13px; }
 @media (max-width: 749px) { .closure-notice { margin: 10px 16px; } .closure-notice--compact { margin: 8px 0; } }
 
+
+/* Strip under the announcement bar */
+.closure-bar { background: #f5b82e; color: #1b1400; text-align: center; padding: 7px 16px; }
+.closure-bar__text { margin: 0; font-size: 13px; line-height: 1.4; }
+@media (max-width: 749px) { .closure-bar { padding: 6px 12px; } .closure-bar__text { font-size: 12px; } }
