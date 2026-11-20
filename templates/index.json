@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "closure-notice": {
+      "type": "closure-notice",
+      "settings": {}
+    },
     "hero": {
       "type": "image-banner",
       "blocks": {
@@ -718,6 +722,7 @@
     }
   },
   "order": [
+    "closure-notice",
     "hero",
     "how-we-help",
     "shop-by-category",

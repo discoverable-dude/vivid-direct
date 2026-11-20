@@ -76,6 +76,7 @@
           </span>
         </button>
       </div>
+      {%- render 'closure-notice', compact: true -%}
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"

@@ -993,3 +993,17 @@
 .pp-quote__row > * { min-width: 0; }
 .pp-quote__field { min-width: 0; }
 .pp-quote__field input, .pp-quote__field textarea { width: 100%; box-sizing: border-box; min-width: 0; }
+
+/* Christmas closure notice */
+.closure-notice { max-width: 1100px; margin: 12px auto; padding: 14px 18px; border-radius: 10px; background: #fbf3d9; color: #3a2c00; border: 1px solid #e8d48a; }
+.closure-notice__title { margin: 0 0 4px; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
+.closure-notice__text { margin: 0; font-size: 14px; line-height: 1.5; }
+.closure-notice--compact { margin: 8px 0; padding: 10px 12px; max-width: none; }
+.closure-notice--compact .closure-notice__text { font-size: 13px; }
+@media (max-width: 749px) { .closure-notice { margin: 10px 16px; } .closure-notice--compact { margin: 8px 0; } }
+
+/* Price on request: option tick boxes */
+.pp-quote__group { margin: 0 0 14px; padding: 0; border: 0; min-width: 0; }
+.pp-quote__group legend { padding: 0; margin: 0 0 6px; font-size: 13px; font-weight: 700; }
+.pp-quote__check { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 6px; font-size: 14px; line-height: 1.35; cursor: pointer; }
+.pp-quote__check input { margin-top: 3px; flex: 0 0 auto; width: 16px; height: 16px; }

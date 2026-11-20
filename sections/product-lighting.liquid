@@ -187,10 +187,44 @@
                     <label class="pp-quote__field"><span>Phone</span><input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}"></label>
                     <label class="pp-quote__field"><span>Company (optional)</span><input type="text" name="contact[Company]" autocomplete="organization"></label>
                   </div>
-                  <label class="pp-quote__field"><span>What do you need? Sizes, finish, quantity, timescale</span><textarea name="contact[body]" rows="4" required>{{ form.body }}</textarea></label>
+                  <label class="pp-quote__field"><span>Quantity</span><input type="number" name="contact[Quantity]" min="1" inputmode="numeric" placeholder="1"></label>
+                  <div class="pp-quote__opts" data-quote-opts></div>
+                  <input type="hidden" name="contact[Selected options]" data-quote-summary value="">
+                  <label class="pp-quote__field"><span>Anything else? Sizes, finish, timescale</span><textarea name="contact[body]" rows="4" required>{{ form.body }}</textarea></label>
                   <button type="submit" class="pp-atc pp-quote__btn"><span>{{ section.settings.quote_button }}</span></button>
                 {%- endif -%}
               {%- endform -%}
+              <script>
+                (function () {
+                  var form = document.getElementById({{ quote_form_id | json }});
+                  if (!form) return;
+                  var holder = form.querySelector('[data-quote-opts]'), sum = form.querySelector('[data-quote-summary]');
+                  if (!holder || !sum) return;
+                  var groups = [];
+                  document.querySelectorAll('.pp-desc details').forEach(function (d) {
+                    var s = d.querySelector('summary'), lis = d.querySelectorAll('li');
+                    if (!s || !lis.length) return;
+                    groups.push({ d: d, title: s.textContent.trim(), items: [].map.call(lis, function (li) { return li.textContent.trim(); }) });
+                  });
+                  groups.forEach(function (g) {
+                    var fs = document.createElement('fieldset'); fs.className = 'pp-quote__group';
+                    var lg = document.createElement('legend'); lg.textContent = g.title; fs.appendChild(lg);
+                    g.items.forEach(function (t) {
+                      var lab = document.createElement('label'); lab.className = 'pp-quote__check';
+                      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = t; cb.setAttribute('data-group', g.title);
+                      var sp = document.createElement('span'); sp.textContent = t;
+                      lab.appendChild(cb); lab.appendChild(sp); fs.appendChild(lab);
+                    });
+                    holder.appendChild(fs); g.d.style.display = 'none';
+                  });
+                  function upd() {
+                    var by = {}, order = [];
+                    holder.querySelectorAll('input:checked').forEach(function (c) { var k = c.getAttribute('data-group'); if (!by[k]) { by[k] = []; order.push(k); } by[k].push(c.value); });
+                    sum.value = order.map(function (k) { return k + ': ' + by[k].join('; '); }).join('\n');
+                  }
+                  holder.addEventListener('change', upd); form.addEventListener('submit', upd);
+                })();
+              </script>
             </div>
           {%- endif -%}
 
