@@ -11,8 +11,15 @@
     <div class="closure-bar" role="note"><p class="closure-bar__text"><strong>Christmas:</strong> we close 24 Dec and re-open 4 Jan. Non-fabricated orders arrive by 21 Dec. Fabricated orders, order by 14 Dec.</p></div>
   {%- else -%}
   <div class="closure-notice{% if compact %} closure-notice--compact{% endif %}" role="note">
-    <p class="closure-notice__title">Christmas opening</p>
-    <p class="closure-notice__text">We close on 24 December and re-open on 4 January 2027. The last day for non-fabricated orders to arrive before Christmas is 21 December. For fabricated orders, please order before 14 December to be certain of delivery before Christmas.</p>
+    <p class="closure-notice__title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Christmas opening
+    </p>
+    <ul class="closure-notice__list">
+      <li><span class="closure-notice__date">14 Dec</span><span>Last day to order fabricated items for delivery before Christmas</span></li>
+      <li><span class="closure-notice__date">21 Dec</span><span>Last day for non-fabricated orders to arrive before Christmas</span></li>
+      <li><span class="closure-notice__date">24 Dec</span><span>We close, and re-open on 4 January 2027</span></li>
+    </ul>
   </div>
   {%- endif -%}
 {%- endif -%}

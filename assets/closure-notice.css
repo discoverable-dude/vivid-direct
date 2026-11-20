@@ -1,11 +1,15 @@
-/* Christmas closure notice */
-.closure-notice { max-width: 1100px; margin: 12px auto; padding: 14px 18px; border-radius: 10px; background: #fbf3d9; color: #3a2c00; border: 1px solid #e8d48a; }
-.closure-notice__title { margin: 0 0 4px; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
-.closure-notice__text { margin: 0; font-size: 14px; line-height: 1.5; }
-.closure-notice--compact { margin: 8px 0; padding: 10px 12px; max-width: none; }
-.closure-notice--compact .closure-notice__text { font-size: 13px; }
-@media (max-width: 749px) { .closure-notice { margin: 10px 16px; } .closure-notice--compact { margin: 8px 0; } }
-
+/* Christmas closure notice (basket page and slide-out basket) */
+.closure-notice { box-sizing: border-box; max-width: 100%; margin: 14px 0; padding: 16px 18px; border-radius: 12px; background: #0B1C29; color: #fff; border: 1px solid rgba(245,184,46,.45); border-left: 4px solid #f5b82e; }
+.closure-notice__title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 15px; font-weight: 800; letter-spacing: .02em; color: #f5b82e; }
+.closure-notice__title svg { flex: 0 0 auto; }
+.closure-notice__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.closure-notice__list li { display: flex; align-items: baseline; gap: 12px; font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.92); }
+.closure-notice__date { flex: 0 0 auto; min-width: 54px; text-align: center; padding: 2px 8px; border-radius: 999px; background: #f5b82e; color: #1b1400; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+.closure-notice--compact { margin: 10px 0; padding: 12px 14px; }
+.closure-notice--compact .closure-notice__title { font-size: 14px; margin-bottom: 8px; }
+.closure-notice--compact .closure-notice__list { gap: 6px; }
+.closure-notice--compact .closure-notice__list li { font-size: 13px; gap: 10px; }
+.closure-notice--compact .closure-notice__date { min-width: 48px; font-size: 11px; }
 
 /* Strip under the announcement bar */
 .closure-bar { background: #f5b82e; color: #1b1400; text-align: center; padding: 7px 16px; }
