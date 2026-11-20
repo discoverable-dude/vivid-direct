@@ -1,0 +1,8 @@
+/* Christmas closure notice */
+.closure-notice { max-width: 1100px; margin: 12px auto; padding: 14px 18px; border-radius: 10px; background: #fbf3d9; color: #3a2c00; border: 1px solid #e8d48a; }
+.closure-notice__title { margin: 0 0 4px; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
+.closure-notice__text { margin: 0; font-size: 14px; line-height: 1.5; }
+.closure-notice--compact { margin: 8px 0; padding: 10px 12px; max-width: none; }
+.closure-notice--compact .closure-notice__text { font-size: 13px; }
+@media (max-width: 749px) { .closure-notice { margin: 10px 16px; } .closure-notice--compact { margin: 8px 0; } }
+
