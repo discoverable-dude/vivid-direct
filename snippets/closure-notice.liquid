@@ -1,6 +1,6 @@
 {%- comment -%}
   Christmas closure notice. Shows automatically and stops showing on 4 January 2027.
-  Usage: {% render 'closure-notice' %}  (or compact: true for the slide-out basket, bar: true for the strip under the announcement bar)
+  Usage: {% render 'closure-notice' %}  (or compact: true for the slide-out basket, bar: true, message: '...' for the strip under the announcement bar; the strip's wording is editable in the theme editor)
   Edit the dates or wording below.
 {%- endcomment -%}
 {%- assign cn_now = 'now' | date: '%s' | plus: 0 -%}
@@ -8,7 +8,7 @@
 {%- if cn_now < cn_end -%}
   {{ 'closure-notice.css' | asset_url | stylesheet_tag }}
   {%- if bar -%}
-    <div class="closure-bar" role="note"><p class="closure-bar__text"><strong>Christmas:</strong> we close 24 Dec and re-open 4 Jan. Non-fabricated orders arrive by 21 Dec. Fabricated orders, order by 14 Dec.</p></div>
+    <div class="closure-bar" role="note"><p class="closure-bar__text">{%- if message != blank -%}{{ message }}{%- else -%}<strong>Christmas:</strong> we close at noon on 24 Dec and re-open 4 Jan. Non-fabricated orders arrive by 21 Dec. Fabricated orders, order by 14 Dec.{%- endif -%}</p></div>
   {%- else -%}
   <div class="closure-notice{% if compact %} closure-notice--compact{% endif %}" role="note">
     <p class="closure-notice__title">
@@ -18,7 +18,7 @@
     <ul class="closure-notice__list">
       <li><span class="closure-notice__date">14 Dec</span><span>Last day to order fabricated items for delivery before Christmas</span></li>
       <li><span class="closure-notice__date">21 Dec</span><span>Last day for non-fabricated orders to arrive before Christmas</span></li>
-      <li><span class="closure-notice__date">24 Dec</span><span>We close, and re-open on 4 January 2027</span></li>
+      <li><span class="closure-notice__date">24 Dec</span><span>We close at noon, and re-open on 4 January 2027</span></li>
     </ul>
   </div>
   {%- endif -%}

@@ -1,10 +1,16 @@
-{%- render 'closure-notice', bar: true -%}
+{%- render 'closure-notice', bar: true, message: section.settings.message -%}
 
 {% schema %}
 {
   "name": "Closure bar",
   "settings": [
-    { "type": "paragraph", "content": "Christmas closure strip under the announcement bar. Hides itself on 4 January 2027. Edit the wording in snippets/closure-notice.liquid." }
+    { "type": "paragraph", "content": "Christmas closure strip under the announcement bar. It hides itself on 4 January 2027." },
+    {
+      "type": "inline_richtext",
+      "id": "message",
+      "label": "Message",
+      "default": "<strong>Christmas:</strong> we close at noon on 24 Dec and re-open 4 Jan. Non-fabricated orders arrive by 21 Dec. Fabricated orders, order by 14 Dec."
+    }
   ]
 }
 {% endschema %}
