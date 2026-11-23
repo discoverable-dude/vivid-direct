@@ -1494,5 +1494,66 @@
         "info": "Shown in the basket drawer and on the basket page as one-tap add-ons (tote bag etc.). Products already in the basket are hidden automatically."
       }
     ]
+  },
+  {
+    "name": "Christmas closure panel",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The panel shown in the basket page and the slide-out basket. It hides itself on 4 January 2027. The strip under the announcement bar is edited separately, in the header area of the theme editor (Closure bar)."
+      },
+      {
+        "type": "checkbox",
+        "id": "closure_panel_show",
+        "label": "Show the panel",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "closure_panel_title",
+        "label": "Title",
+        "default": "Christmas opening"
+      },
+      {
+        "type": "header",
+        "content": "Lines (shown in this order)"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_1_date",
+        "label": "Line 1 date",
+        "default": "14 Dec"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_1_text",
+        "label": "Line 1 text",
+        "default": "Last day to order fabricated items for delivery before Christmas"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_2_date",
+        "label": "Line 2 date",
+        "default": "21 Dec"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_2_text",
+        "label": "Line 2 text",
+        "default": "Last day for non-fabricated orders to arrive before Christmas"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_3_date",
+        "label": "Line 3 date",
+        "default": "24 Dec"
+      },
+      {
+        "type": "text",
+        "id": "closure_line_3_text",
+        "label": "Line 3 text",
+        "default": "We close at noon, and re-open on 4 January 2027"
+      }
+    ]
   }
 ]
